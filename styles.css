@@ -1,0 +1,39 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+}
+
+.navbar-nav .nav-link {
+    font-weight: 500;
+    color: #000;
+}
+
+.navbar-nav .nav-link.active {
+    color: #000;
+}
+
+.hero-section img {
+    max-width: 400px;
+}
+
+.features img {
+    width: 80px;
+    height: 80px;
+}
+
+footer {
+    color: #333;
+}
+
+footer .form-control {
+    display: inline-block;
+    width: 300px;
+    border: 1px solid #ddd;
+}
+
+footer .btn {
+    vertical-align: middle;
+}
