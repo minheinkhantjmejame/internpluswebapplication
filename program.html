@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programs - InternPlus</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">INTERNPLUS</a>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="./index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="./program.html">Program</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Internship</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./register.html">Register</a></li>
+                    <li class="nav-item"><a class="btn btn-dark ms-2" href="./login.html">Log In</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Program Page Section -->
+    <section class="program-page bg-white py-5">
+        <div class="container">
+            <h2 class="text-center fw-bold mb-4">INTERNSHIP PROGRAM</h2>
+            <p class="text-center">Shape the Future with a Paid Internship at Vanness Plus Consulting Co. Ltd in Thailand!</p>
+            <div class="stats d-flex justify-content-center my-4">
+                <div class="me-5"><strong>18</strong> internship programs</div>
+                <div class="me-5"><strong>35</strong> positions available</div>
+                <div><strong>4</strong> job categories</div>
+            </div>
+            <!-- Search Box centered -->
+            <div class="search-box text-center mb-5">
+                <input type="text" id="searchInput" class="form-control d-inline-block" style="width: 60%;" placeholder="Enter the program you are interested in...">
+                <button class="btn btn-dark" onclick="applySearch()"><i class="bi bi-search"></i> Search</button>
+            </div>
+            <!-- Category Tabs centered -->
+            <div class="category-tabs text-center mb-4">
+                <button class="category-btn btn btn-outline-secondary active" onclick="filterCategory('IT')">IT</button>
+                <button class="category-btn btn btn-outline-secondary" onclick="filterCategory('HR')">Human Resources</button>
+                <button class="category-btn btn btn-outline-secondary" onclick="filterCategory('Marketing')">Marketing</button>
+                <button class="category-btn btn btn-outline-secondary" onclick="filterCategory('Translation')">Translation</button>
+            </div>
+            <!-- Listings -->
+            <div id="listings" class="listings">
+                <!-- Dynamic content will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-light py-4">
+        <div class="container text-center">
+            <div class="row align-items-center">
+                <div class="col-md-6 fw-bold fs-4">INTERNPLUS</div>
+                <div class="col-md-6 text-end">
+                    <input type="email" class="form-control d-inline-block w-50" placeholder="Enter your email to get the latest news...">
+                    <button class="btn btn-dark">Subscribe</button>
+                </div>
+            </div>
+            <hr>
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h5 class="fw-bold mb-3">Contact Us</h5>
+                    <p><i class="bi bi-geo-alt"></i> 287 Si Lom Rd, Silom, Bang Rak, Bangkok 10500</p>
+                    <p><i class="bi bi-telephone"></i> 02-0777581 (Head Quarter Contact)</p>
+                    <p><i class="bi bi-envelope"></i> cs@internplus.com</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <img src="./assets/img/location.png" alt="Map Icon" class="img-fluid">
+                </div>
+            </div>
+            <hr>
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p>&copy; Internplus @ 2024. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <a href="#" class="text-dark mx-2"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="text-dark mx-2"><i class="bi bi-twitter"></i></a>
+                    <a href="#" class="text-dark mx-2"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="text-dark mx-2"><i class="bi bi-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JavaScript for Dynamic Content and Filtering -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            filterCategory('IT'); // Default to IT jobs on page load
+        });
+        
+        // Global declaration of category data
+        const categories = {
+            'IT': [
+                { title: 'Software Developer Intern', description: 'Participate in development projects.', positions: 3 },
+                { title: 'Network Administrator Intern', description: 'Maintain and oversee network operations.', positions: 2 }
+            ],
+            'HR': [
+                { title: 'HR Trainee', description: 'Hi, Vanness Plus consulting Co., Ltd. is now recruiting interns. Internships can be done in both Work from home, On-site, and Hybrid with allowances. The office is located at Liberty Square Building, near BTS Sala Daeng/MRT Silom.', positions: 3 }
+            ],
+            'Marketing': [
+                { title: 'Marketing Specialist', description: 'Develop and execute marketing strategies.', positions: 2 }
+            ],
+            'Translation': [
+                { title: 'Translator Intern', description: 'Provide support for translation of documents.', positions: 1 }
+            ]
+        };
+        
+        let currentCategory = 'IT'; // Maintain the current category globally
+        
+        function filterCategory(category) {
+            currentCategory = category; // Update the current category
+            applySearch(); // Apply search filter based on the current category and input
+        }
+        
+        function applySearch() {
+            const searchText = document.getElementById('searchInput').value.toLowerCase();
+            const filteredJobs = categories[currentCategory].filter(job => 
+                job.title.toLowerCase().includes(searchText) || job.description.toLowerCase().includes(searchText)
+            );
+            
+            updateListings(filteredJobs);
+        }
+        
+        function updateListings(jobs) {
+            const listingsElement = document.getElementById('listings');
+            listingsElement.innerHTML = ''; // Clear previous listings
+        
+            if (jobs.length > 0) {
+                jobs.forEach(job => {
+                    const jobElement = document.createElement('div');
+                    jobElement.classList.add('card', 'mb-3');
+                    jobElement.innerHTML = `
+                        <div class="card-body">
+                            <h5 class="card-title">${job.title}</h5>
+                            <p class="card-text">${job.description}</p>
+                            <p class="card-text"><small class="text-muted">${job.positions} positions available</small></p>
+                            <a href="#" class="btn btn-dark">Apply</a>
+                        </div>
+                    `;
+                    listingsElement.appendChild(jobElement);
+                });
+            } else {
+                listingsElement.innerHTML = '<div class="text-center">No results found.</div>'; // Show no results message if no jobs match
+            }
+        
+            updateActiveCategoryButton(currentCategory);
+        }
+        
+        function updateActiveCategoryButton(activeCategory) {
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                if (btn.textContent === activeCategory) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+        }
+        </script>
+        
+</body>
+</html>

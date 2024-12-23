@@ -37,3 +37,308 @@ footer .form-control {
 footer .btn {
     vertical-align: middle;
 }
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+}
+
+.navbar-nav .nav-link {
+    font-weight: 500;
+    color: #000;
+}
+
+.navbar-nav .nav-link.active {
+    color: #000;
+}
+
+.hero-section img {
+    max-width: 400px;
+}
+
+.features img, .program-page img {
+    width: 80px;
+    height: 80px;
+}
+
+footer {
+    color: #333;
+    background-color: #f8f9fa;
+}
+
+footer .form-control {
+    display: inline-block;
+    width: 300px;
+    border: 1px solid #ddd;
+}
+
+footer .btn {
+    vertical-align: middle;
+}
+
+.program-page {
+    background-color: #fff;
+    color: #333;
+}
+
+.program-page h2, .program-page p {
+    color: #000;
+}
+
+.stats {
+    font-size: 1.2rem;
+}
+
+.search-box input[type="text"] {
+    width: 50%;
+    margin-right: -1px;
+    border-radius: 0.25rem 0 0 0.25rem;
+}
+
+.search-box button {
+    border-radius: 0 0.25rem 0.25rem 0;
+}
+
+.card {
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.card-text {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.btn-dark {
+    background-color: #000;
+    border-color: #000;
+}
+
+.btn-dark:hover {
+    background-color: #333;
+    border-color: #333;
+}
+
+
+.category-tabs {
+    display: inline-block; /* Aligns buttons in a row */
+    margin-bottom: 20px; /* Space below the tabs */
+}
+
+.category-btn {
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 8px 16px;
+    font-size: 16px;
+    color: #333;
+    outline: none;
+    cursor: pointer;
+}
+
+.category-btn:hover, .category-btn.active {
+    background-color: #f8f8f8;
+    border-color: #bbb;
+}
+
+.category-btn.active {
+    font-weight: bold;
+    color: #000;
+}
+
+/* Ensure the search input and button are on the same line and centered */
+.search-box {
+    text-align: center;
+}
+
+.search-box input[type="text"] {
+    width: 40%; /* Adjust width as needed */
+    display: inline-block; /* Keeps the input and button on the same line */
+}
+
+.search-box button {
+    vertical-align: top; /* Aligns the button with the input */
+}
+
+/* Centering category buttons */
+.category-tabs {
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.category-btn {
+    margin: 0 10px; /* Spacing between buttons */
+}
+
+
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.navbar {
+    background-color: #fff; /* Set the background color of navbar */
+}
+
+.registration-card {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 8px;
+}
+
+.registration-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image covers the div without stretching */
+    border-radius: 8px 0 0 8px; /* Rounded corners on the left side */
+}
+
+.card-body {
+    padding: 2rem;
+}
+
+.form-control {
+    border-radius: 0.25rem;
+}
+
+.btn-primary {
+    background-color: #0056b3;
+    border-color: #004085;
+}
+
+.social-login button {
+    width: 49%; /* Almost half width for each button to fit side by side */
+}
+
+
+.input-group-text {
+    background-color: #fff; /* Make the background the same as the input field */
+    border-right: none; /* Remove the border between the icon and the input */
+}
+
+.form-control {
+    border-left: none; /* Remove the left border on the input field to merge with icon */
+}
+
+/* Additional styles to handle focus states and ensure borders connect nicely */
+.form-control:focus {
+    box-shadow: none; /* Optional: removes the default focus shadow */
+    border-color: #80bdff; /* Light blue border, adjust color as needed */
+}
+
+.input-group-text, .form-control {
+    border-color: #ced4da; /* Consistent border color for both */
+}
+
+
+.social-login button {
+    width: 49%; /* Control width to ensure they fill the container appropriately */
+    padding: 0.375rem 0.75rem; /* Standard Bootstrap padding, adjust as necessary */
+}
+
+/* Adjust margins if needed for better visual separation */
+.social-login .btn-info {
+    margin-right: 2%; /* Add a small right margin to the Facebook button */
+}
+
+.social-login .btn-danger {
+    margin-left: 2%; /* Add a small left margin to the Google button if needed */
+}
+
+
+/* Black Register Button */
+.btn-black {
+    background-color: #000; /* Black background */
+    color: #fff; /* White text */
+    border: none; /* No border */
+}
+
+/* Social Buttons with only border and transparent background */
+.social-btn {
+    background-color: transparent; /* Clear background */
+    color: #333; /* Dark text, adjust as needed */
+    border: 1px solid #ccc; /* Light grey border */
+    width: 49%; /* Keeping them side by side */
+}
+
+#facebook-btn {
+    border-color: #000; /* Facebook blue border */
+    color: #000; /* Facebook blue text */
+}
+
+#google-btn {
+    border-color: #000; /* Google red border */
+    color: #000; /* Google red text */
+}
+
+.social-btn:hover {
+    background-color: #f8f8f8; /* Light grey background on hover for visibility */
+}
+
+.input-group-text {
+    background-color: #fff; /* Background matching the input field */
+    border-right: none; /* Smooth transition between icon and input */
+}
+
+.form-control {
+    border-left: none; /* Seamless connection on the left where the icon sits */
+}
+
+.form-control:focus {
+    box-shadow: none; /* Remove default focus glow for cleaner look */
+    border-color: #80bdff; /* Bootstrap's light blue focus border */
+}
+
+
+.toggle-password {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+.input-group .form-control {
+    border-radius: 0.25rem; /* Rounded corners for the input */
+    border-right: none; /* Remove the right border where the icon will be */
+}
+
+.input-group-text {
+    border-radius: 0.25rem; /* Rounded corners for the icon container */
+    border-left: none; /* Remove the left border to merge visually with the input */
+    cursor: pointer; /* Indicates that the icon is clickable */
+}
+
+/* Ensuring that the icons are vertically centered and have padding that aligns them neatly */
+.input-group-text i {
+    vertical-align: middle; /* Aligns the icon vertically */
+}
+
+/* Styling for the input group when focused */
+.input-group .form-control:focus {
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6); /* Bootstrap's default focus glow */
+    border-color: #000; /* Highlight color when input is focused */
+}
+
+/* Additional tweaks if needed for the input group to handle small screens or specific form alignments */
+.input-group {
+    flex-wrap: nowrap; /* Prevents wrapping of elements inside the input group */
+}
+
+/* This style is optional to visually distinguish the clickable area for toggling password visibility */
+.input-group-text {
+    background-color: #f8f9fa; /* Slightly different background to indicate it's clickable */
+}
+
+.input-group-text:hover {
+    background-color: #e9ecef; /* Slightly darker on hover for better user interaction feedback */
+}
+
