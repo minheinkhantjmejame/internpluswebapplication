@@ -2,7 +2,17 @@ body {
     font-family: Arial, sans-serif;
 }
 
+#google_translate_element {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    z-index: 1000;
+}
+
+
 .navbar-brand {
+    display:inline-block; 
+    margin-right : 10px;
     font-size: 1.5rem;
 }
 
@@ -15,6 +25,23 @@ body {
     color: #000;
 }
 
+
+/* language change drop-down button  */
+.dropdown{
+    display:inline-block;
+    vertical-align:middle;
+}
+.btn-white {
+    color: #000; /* Text color */
+    background-color: #fff; /* Button color */
+    border: 1px solid #ccc; /* Border color */
+}
+
+.btn-white:hover {
+    background-color: #f8f8f8; /* Hover background color */
+}
+
+/* language change drop-down button  */
 .hero-section img {
     max-width: 400px;
 }
@@ -342,3 +369,72 @@ body, html {
     background-color: #e9ecef;
 }
 
+
+/* internship page  */
+
+
+h1.fw-bold {
+    font-size: 24px; /* Large font size for the main title */
+}
+
+.text-muted {
+    color: #6c757d; /* Muted text color for less important text */
+}
+
+.btn-secondary {
+    color: #fff; /* White text inside buttons */
+    background-color: #6c757d; /* Grey background for buttons */
+    border: none; /* No border for a cleaner look */
+}
+
+.btn-secondary i {
+    margin-right: 5px; /* Space between icon and text (if needed) */
+}
+
+p {
+    font-size: 16px; /* Standard text size for readability */
+    line-height: 1.5; /* Adequate line height for readability */
+    margin-top: 0;
+    margin-bottom: 1rem; /* Space below paragraphs */
+}
+
+.internship-type .type-option {
+    padding: 20px;
+    border: 1px solid #000;
+    border-radius: 10px;
+    width: 150px;
+    cursor: pointer;
+}
+
+.internship-type .type-option:hover {
+    background-color: #fff;
+    border-color: #fff;
+}
+
+.internship-type input[type="radio"]:checked + label {
+    border-color: #000; /* Highlight color when selected */
+    background-color: #fff; /* Light grey background for selected option */
+}
+
+.type-option label {
+    cursor: pointer; /* Ensure the label is clickable */
+}
+
+
+input[type="date"] {
+    padding: .375rem .75rem;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    font-size: 1rem;
+}
+
+/* Style the focus state */
+input[type="date"]:focus {
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, .25);
+}
+
+
+
+/* internship page  */
