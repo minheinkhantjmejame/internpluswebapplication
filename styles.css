@@ -580,3 +580,23 @@ input[type="date"]:focus {
         font-size: 1.5rem; /* smaller icon size for mobile */
     }
 }
+
+@media (max-width: 576px) { /* Adjusting for devices smaller than 576px */
+    .internship-type {
+        flex-direction: column; /* Stack the options vertically */
+        align-items: center; /* Center align the items */
+    }
+
+    .internship-type .type-option {
+        max-width: 100%; /* Allow each option to expand fully within the container */
+        margin: 10px auto; /* Center margin and standard spacing */
+    }
+
+    .internship-type .type-option:not(:last-child) {
+        margin-bottom: 15px; /* Add more space between options */
+    }
+
+    .internship-type .type-option i {
+        font-size: 1.2rem; /* Slightly smaller icons */
+    }
+}
