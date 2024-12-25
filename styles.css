@@ -25,6 +25,11 @@ body {
     color: #000;
 }
 
+.navbar-nav .btn{
+   margin:auto;
+   
+}
+
 
 /* language change drop-down button  */
 .dropdown{
@@ -65,9 +70,6 @@ footer .btn {
     vertical-align: middle;
 }
 
-body {
-    font-family: Arial, sans-serif;
-}
 
 .navbar-brand {
     font-size: 1.5rem;
@@ -397,28 +399,49 @@ p {
     margin-top: 0;
     margin-bottom: 1rem; /* Space below paragraphs */
 }
-
+.internship-type{
+    margin-left:10px;
+}
 .internship-type .type-option {
-    padding: 20px;
-    border: 1px solid #000;
-    border-radius: 10px;
-    width: 150px;
-    cursor: pointer;
+    width: 150px;      /* Sets a fixed width for each option */
+    height: 100px;     /* Sets a fixed height for each option */
+    padding: 10px;     /* Padding inside each option */
+    margin: 0 2px;    /* Adds space between options */
+    display: flex;     /* Uses flexbox for alignment */
+    flex-direction: column; /* Aligns the icon and text vertically */
+    justify-content: center; /* Centers content vertically */
+    align-items: center; /* Centers content horizontally */
+    border: 1px solid #ccc; /* Border to visually separate elements */
+    border-radius: 10px; /* Rounded corners for aesthetics */
+    cursor: pointer; /* Changes cursor to pointer on hover */
+    background-color: #000;
+    transition: background-color 0.3s, border-color 0.3s,color 0.3s; /* Smooth transition for hover effects */
 }
 
-.internship-type .type-option:hover {
-    background-color: #fff;
-    border-color: #fff;
+
+/* .internship-type .type-option:hover {
+    background-color: #f8f8f8; Changes background on hover
+    border-color: #333; Changes border color on hover
+    color:#000;
+} */
+
+.internship-type .type-option label {
+    font-size: 1.25rem; /* larger font size for desktop */
+    color:#fff;
+    padding: 15px; /* more padding for larger display */
 }
 
-.internship-type input[type="radio"]:checked + label {
-    border-color: #000; /* Highlight color when selected */
-    background-color: #fff; /* Light grey background for selected option */
+.internship-type .type-option i {
+    font-size: 2rem; /* original icon size for desktop */
 }
 
-.type-option label {
-    cursor: pointer; /* Ensure the label is clickable */
+.internship-type .type-option input[type="radio"]:checked + label {
+    border-color: #000; /* Highlight border when selected */
+    color:skyblue; /* Light background when selected */
+   
 }
+
+
 
 
 input[type="date"] {
@@ -435,7 +458,15 @@ input[type="date"]:focus {
     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, .25);
 }
 
+.footer-icons {
+    text-align: right; /* Aligns content to the right on larger screens */
+    order:2;    
+}
 
+.copyright{
+    text-align:left;
+    order:1;
+}
 
 /* internship page  */
 
@@ -455,46 +486,97 @@ input[type="date"]:focus {
 
 .hero-section h1 {
     font-size: 24px; /* Adjusts font size for mobile */
-    margin-bottom: 20px; /* Adds space below the heading */
+    text-align:center;
+    margin-bottom: 10px; /* Adds space below the heading */
 }
 
 .hero-section p {
-    font-size: 18px; /* Adjusts paragraph font size for readability */
+    font-size: 16px; /* Adjusts paragraph font size for readability */
+    margin-bottom:20px;
 }
 
 .hero-section img {
-    width: 80%; /* Reduces image width to 80% of its container */
+    width: 100%; /* Reduces image width to 80% of its container */
     max-width: 300px; /* Maximum width to avoid overly large images */
+    height:auto;
     margin-bottom: 20px; /* Adds space below the image */
 }
 
 .hero-section a.btn {
     width: 80%; /* Makes the button wider to fit content */
-    max-width: 200px; /* Maximum width for the button */
+    max-width: 250px; /* Maximum width for the button */
+    margin-bottom:20px;
+
 }
 
+.copyright{
+    display:flex;
+    justify-content: center;
+    align-items:center;
+}
+
+
+
 @media (min-width: 768px) {
+    .navbar-nav .btn{
+        margin-left:0px;
+    }
     .hero-section .container {
-        flex-direction: row; /* Horizontal layout for larger screens */
-        justify-content: space-between; /* Spreads content to use available space */
-        text-align: left; /* Left-aligns text for a more traditional layout */
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
     }
 
     .hero-section h1 {
-        font-size: 2.5rem; /* Larger font size for headlines */
+        font-size: 40px; /* Larger font size for desktop */
     }
 
     .hero-section p {
-        font-size: 1.25rem; /* Larger font size for paragraphs */
+        font-size: 18px; /* Adjust paragraph font size */
     }
 
     .hero-section img {
-        width: 50%; /* Larger relative width on desktop */
-        max-width: 600px; /* Larger maximum width */
+        width: auto; /* Auto width for larger screens */
+        max-width: 400px; /* Increase max width */
     }
 
     .hero-section a.btn {
-        width: auto; /* Auto width for buttons */
-        max-width: none; /* Removes max width restriction */
+        width: auto;
+        max-width: none;
+    }
+
+    footer .form-control, footer .btn {
+        width: auto;
+    }
+
+    .hero-image {
+        display: block; /* Show the image on larger screens */
+    }
+
+
+}
+
+@media (max-width: 767px) {
+    .footer-icons {
+        text-align: center; /* Centers icons on mobile */
+        order: 1; /* Icons come first */
+    }
+    .copyright {
+        text-align: center; /* Center the text on mobile */
+        order: 2; /* Copyright text comes after icons */
+        margin-top: 20px; /* Optional: adds space between icons and text */
+    }
+
+    .hero-image {
+        display: none; /* Hide the image by default (for mobile devices) */
+    }
+
+    .internship-type .type-option label {
+        font-size: 1rem; /* smaller font size for mobile */
+        padding: 10px; /* less padding for smaller display */
+    }
+    
+    .internship-type .type-option i {
+        font-size: 1.5rem; /* smaller icon size for mobile */
     }
 }
