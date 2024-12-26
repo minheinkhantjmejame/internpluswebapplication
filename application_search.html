@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InternPlus</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <style rel="stylesheet" type="text/css">
+        body{
+            background-color:#ffffff;
+        }
+        .container h5{
+            text-align: center;
+        }
+        .search-container {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 40px 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 100%;
+            margin: auto;
+}
+
+    .input-group {
+        justify-content: center;
+    }
+
+.app-id-input {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    margin-right: 5px; /* Adjust spacing if needed */
+    border-radius: 5px;
+    border: 1px solid #d1d1f0; /* Ensure the left border is visible */
+    background-color:#d1d1f0;
+    transition: border-color .15s ease-in-out;
+    display: inline-block;
+}
+
+.app-id-input:last-child {
+    margin-right: 0; /* Removes extra spacing on the last input box */
+}
+
+.app-id-input:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+.app-search-button {
+    width: 100px; /* Button width to match the container */
+    padding: 10px 0; /* Adjust padding for better height */
+    margin-top: 10px; /* Spacing between input boxes and the button */
+    background-color: #007bff;
+    border-color: #007bff;
+    box-shadow: none;
+}
+
+.app-search-button:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+}
+
+.internship-details .btn {
+    margin: 0 5px;
+}
+
+.internship-details .card {
+    background-color: #f8f9fa;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.internship-details .card-body {
+    padding: 20px;
+    line-height: 1.6;
+    color: #333;
+}
+
+.status-buttons button {
+    margin-bottom: 5px; /* Ensure consistent spacing around buttons */
+}
+
+.statuscontainer {
+    max-width: 1000px; /* Adjust based on your layout width */
+    margin: auto;
+    background-color: #f8f9fa;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.status-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px; /* Ensure buttons have space between them */
+}
+
+.btn {
+    padding: 10px 15px; /* Sufficient padding for readability */
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    overflow: hidden; /* Ensures no overflow outside the card */
+}
+
+.card-body {
+    display: flex;
+    flex-wrap: wrap; /* Allows content to wrap if needed */
+    align-items: center;
+    justify-content: space-between; /* Distributes spacing evenly */
+    padding: 20px;
+}
+
+
+.card-image {
+    height: 100%; /* Make the image take full height of its container */
+    object-fit: cover; /* Ensures the image covers the area without being stretched */
+}
+
+.hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-top: 1px solid #eee;
+}
+
+.col-md-3 {
+    flex: 1 1 20%; /* Flex grow, flex shrink, and base width */
+    margin: 10px; /* Provides spacing around columns */
+    min-width: 160px; /* Minimum width for each column to avoid too much squeeze */
+    max-width: 240px; /* Maximum width to prevent columns from getting too large */
+}
+
+.date-box, .type-box {
+    background-color: #f4f4f9;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px; /* Adds space between the date boxes */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    width: 100%; /* Ensures box takes full width of the column */
+    text-align: center;
+}
+
+.date-details p {
+    margin-bottom: 5px;
+}
+
+.type-title {
+    font-size: 24px; /* Larger icon */
+    margin-bottom: 0;
+}
+
+.type-text {
+    font-size: 16px;
+    margin-top: 5px; /* Space between icon and text */
+}
+
+.card-title {
+    font-size: 1.2rem; /* Adjust font size for readability */
+    margin-bottom: 5px; /* Reduces gap between title and content */
+}
+
+.card-title, .card-text {
+    margin-bottom: 4px; /* Reduces spacing within text for compactness */
+}
+
+.card-body p {
+    font-size: 0.9rem; /* Adjust font size for content */
+    margin-bottom: 5px; /* Reduces gap */
+
+}
+.btn-primary, .btn-success, .btn-danger {
+    color: #fff;
+}
+
+.btn-primary {
+    background-color: #007bff; /* Standard primary color */
+}
+
+.btn-success {
+    background-color: #28a745; /* Success state */
+}
+
+.btn-danger {
+    background-color: #dc3545; /* Failure state */
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    overflow: hidden; /* Ensures no overflow outside the card */
+}
+
+.col-md-3 {
+    flex: 1 1 20%; /* Flex grow, flex shrink, and base width */
+    margin: 10px; /* Provides spacing around columns */
+    min-width: 160px; /* Minimum width for each column to avoid too much squeeze */
+}
+
+.date-box, .type-box {
+    background-color: #f4f4f9;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px; /* Adds space between the date boxes */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    width: 100%; /* Ensures box takes full width of the column */
+    text-align: center;
+}
+.card-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.date-box, .type-box {
+    background-color: #f4f4f9;
+    padding: 10px 15px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.card-title {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.card-text {
+    font-size: 14px;
+}
+
+.hr {
+    border-top: 1px solid #ddd;
+    margin: 8px 0;
+}
+
+.type-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bi-suitcase-lg {
+    font-size: 24px;
+    color: #6c757d;
+}
+
+
+
+
+@media (max-width: 992px) { /* Adjusts when the screen size is below 992px */
+    .card-body {
+        flex-direction: column; /* Stacks the columns vertically on smaller screens */
+    }
+
+    .col-md-3 {
+        flex: 1 1 100%; /* Takes full width on smaller screens */
+    }
+
+    .date-box, .type-box {
+        margin-bottom: 10px; /* Ensures spacing between boxes on smaller screens */
+    }
+}
+
+@media (max-width: 1196px) {
+    .card-body {
+        justify-content: space-around; /* Adjusts spacing for medium screens */
+    }
+    .col-md-3 {
+        flex: 1 1 22%; /* Slightly more width per column at this breakpoint */
+    }
+}
+
+
+    </style>
+
+    <!-- Jquery UI -->
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="./index.html">INTERNPLUS</a>
+            <!-- Language Dropdown next to the brand -->
+            <div class="dropdown" style="display: inline-block;">
+                <button class="btn btn-white" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span id="dropdownLabel">EN</span> <i class="bi bi-chevron-down"></i>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item" href="#" onclick="updateLanguage('EN')">EN</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="updateLanguage('THAI')">THAI</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="updateLanguage('MYAN')">MYAN</a></li>
+                </ul>
+            </div>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+    
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link active" href="./index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./program.html">Program</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./internship.html">Apply Now</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./register.html">Register</a></li>
+                    <li class="nav-item"><a class="btn btn-dark " href="./login.html">Log In</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container my-5">
+        <h5 class="mb-4">YOUR INTERNSHIP</h5>
+        <div class="search-container text-center">
+            <p>Enter Your Application ID</p>
+            <div class="d-flex justify-content-center mb-3">
+                <input type="text" maxlength="1" class="form-control app-id-input">
+                <input type="text" maxlength="1" class="form-control app-id-input">
+                <input type="text" maxlength="1" class="form-control app-id-input">
+                <input type="text" maxlength="1" class="form-control app-id-input">
+                <input type="text" maxlength="1" class="form-control app-id-input">
+                <input type="text" maxlength="1" class="form-control app-id-input">
+                <input type="text" maxlength="1" class="form-control app-id-input">
+                <input type="text" maxlength="1" class="form-control app-id-input">
+                <input type="text" maxlength="1" class="form-control app-id-input">
+            </div>
+            <button class="btn btn-primary app-search-button" type="button">Search</button>
+        </div>
+    </div>
+
+        <div class="container internship-details mt-3">
+            <h4 class="text-center mb-4">APPLICATION INTERNSHIP</h4>
+            <div class="status-buttons d-flex justify-content-center mb-3">
+                <button class="btn btn-primary mx-2">Pending</button>
+                <button class="btn btn-primary mx-2">Request Internship Application</button>
+                <button class="btn btn-primary mx-2">Request Internship Document</button>
+                <button class="btn btn-primary mx-2">Acceptance Terms</button>
+                <button class="btn btn-success mx-2">Success</button>
+                <button class="btn btn-danger mx-2">Fail</button>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-md-3">
+                            <img src="./assets/img/pending_status.jpg" alt="Profile" class="img-fluid">
+                        </div>
+                        <div class="col-md-3">
+                            <h6 class="card-title">UX/UI Designer Trainee</h6>
+                            <p class="card-text"><i class="bi bi-geo-alt"></i> 287 Si Lom Rd, Liberty Square Building</p>
+                            <hr>
+                            <p class="card-text"><strong>Application ID:</strong> 112987630</p>
+                        </div>
+                        <div class="col-md-3">
+                    <div class="date-box">
+                        <p><strong>Start date:</strong></p>
+                        <p>Mon, 25 Nov 2024</p>
+                    </div>
+                    <div class="date-box">
+                        <p><strong>End date:</strong></p>
+                        <p>Sat, 14 Mar 2025</p>
+                    </div>
+                       </div>
+                        <div class="col-md-3">
+                            <div class="type-box">
+                                <p><i class="bi bi-suitcase-lg"></i> Hybrid</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>           
+    
+    
+    
+    
+    
+
+
+    <footer class="bg-light py-4">
+        <div class="container text-center">
+            <div class="row align-items-center">
+                <div class="col-md-6 fw-bold fs-4">INTERNPLUS</div>
+                <div class="col-md-6 text-end">
+                    <input type="email" class="form-control d-inline-block w-50" placeholder="Enter your email to get the latest news...">
+                    <button class="btn btn-dark">Subscribe</button>
+                </div>
+            </div>
+            <hr>
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h5 class="fw-bold mb-3">Contact Us</h5>
+                    <p><i class="bi bi-geo-alt"></i> 287 Si Lom Rd, Silom, Bang Rak, Bangkok 10500</p>
+                    <p><i class="bi bi-telephone"></i> 02-0777581 (Head Quarter Contact)</p>
+                    <p><i class="bi bi-envelope"></i> cs@internplus.com</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <img src="./assets/img/location.png" alt="Map Icon" class="img-fluid">
+                </div>
+            </div>
+            <hr>
+            <div class="row align-items-center" id="footer">
+                <div class="col-md-6 order-md-1 copyright">
+                    <p>&copy; Internplus @ 2024. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 order-md-2 footer-icons">
+                    <a href="#" class="text-dark mx-2"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="text-dark mx-2"><i class="bi bi-twitter"></i></a>
+                    <a href="#" class="text-dark mx-2"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="text-dark mx-2"><i class="bi bi-linkedin"></i></a>
+                </div>               
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS  -->
+    <script>
+        function updateLanguage(language) {
+            document.getElementById('dropdownLabel').textContent = language;
+        }
+
+        $(document).ready(function() {
+                $("#startDate, #endDate").datepicker({
+                    showButtonPanel: true,
+                    dateFormat: "dd/mm/yy"
+                });
+            });
+
+            document.querySelectorAll('.app-id-input').forEach((input, index, array) => {
+    input.addEventListener('keyup', function() {
+        if (this.value.length === 1 && index !== array.length - 1) {
+            array[index + 1].focus();
+        }
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    const searchButton = document.querySelector('.app-search-button');
+    const appIdInputs = document.querySelectorAll('.app-id-input');
+    const internshipDetails = document.querySelector('.internship-details');
+
+    // Hide the internship details on page load
+    internshipDetails.style.display = 'none';
+
+    function getAppId() {
+        return Array.from(appIdInputs).map(input => input.value).join('');
+    }
+
+    searchButton.addEventListener('click', function() {
+        const appId = getAppId();
+        if (appId === "112987630") {  // Assuming "112987630" is a valid ID for demonstration
+            internshipDetails.style.display = 'block';
+        } else {
+            alert('No application found with that ID.');
+            internshipDetails.style.display = 'none';
+        }
+    });
+
+    appIdInputs.forEach((input, index) => {
+        input.addEventListener('keyup', (event) => {
+            if (input.value.length === 1 && index < appIdInputs.length - 1) {
+                appIdInputs[index + 1].focus();
+            }
+        });
+    });
+});
+
+
+    </script>
+</body>
+</html>
