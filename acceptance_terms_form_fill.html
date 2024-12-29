@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>presentation powerpoint form</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- custom css  -->
+    <link rel="stylesheet" href="./styles.css" />
+
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 10px 12px;
+            font-size: 0.75em;
+            font-weight:3;
+            line-height: 1;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: baseline;
+            border-radius: 0.375rem;
+            background-color: #d1d1f0;
+            color: black;
+        }
+        .btn{
+            background-color: #d1d1f0;
+            color:black;
+            border-radius:0px;
+            border:none;
+        }
+        .topic {
+            margin: 10px 0;
+        }
+        .duedate{
+            font-size:12px;
+        }
+
+
+        .input-group-text{
+            background-color:#474bc2;
+        }
+
+        .form-control {
+        border: 1px solid black; /* Apply black border */
+        box-shadow: none; /* Remove any shadow for a cleaner look */
+    }
+    .form-control:focus {
+        border-color: black; /* Keeps border black on focus */
+        box-shadow: none; /* Optionally remove the default Bootstrap focus glow */
+    }
+
+        .form-check {
+            padding-left: 0;
+        }
+        .form-check-input {
+    display: none; /* Hide the default radio button */
+}
+
+.form-check-label {
+    display: inline-block;
+    padding: 8px 15px;
+    margin-right: 10px;
+    border: 1px solid black; /* Solid border for the box */
+    background-color: #fff; /* White background */
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for background and text color */
+}
+
+.form-check-input:checked + .form-check-label {
+    background-color: #474bc2; /* Change background to dark blue when selected */
+    color: white; /* White text when selected */
+    border-color: #474bc2; /* Border color changes to match the background */
+}
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">INTERNPLUS</a>
+            <!-- Language Dropdown next to the brand -->
+            <div class="dropdown" style="display: inline-block;">
+                <button class="btn btn-white" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span id="dropdownLabel">EN</span> <i class="bi bi-chevron-down"></i>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item" href="#" onclick="updateLanguage('EN')">EN</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="updateLanguage('THAI')">THAI</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="updateLanguage('MYAN')">MYAN</a></li>
+                </ul>
+            </div>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+    
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./program.html">Program</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./internship.html">Apply Now</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./register.html">Register</a></li>
+                    <li class="nav-item"><a class="btn btn-dark " href="./login.html">Log In</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <p class="badge">In-progress</p>
+        <div class="header-content mb-0">
+            <h1>ACCEPTANCE TERMS FORM</h1>
+            <a href="#" class="btn "><i class="bi bi-arrow-left-short"></i>Back</a>
+        </div>
+        <p class="duedate mt-0">Due 2 days</p>        
+        <p style="text-align:justify;">This form outlines the essential terms and conditions for interns at Vanness Plus Consulting Co., Ltd. Interns must review, acknowledge, and agree to these terms, which cover work arrangements, confidentiality, compliance with company policies, and responsibility for assigned tasks during the internship.</p>
+        <hr>
+
+        <form>
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label for="emailAddress" class="form-label">Email Address *</label>
+                    <input type="email" class="form-control" id="emailAddress" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="university" class="form-label">University *</label>
+                    <input type="text" class="form-control" id="university" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="firstName" class="form-label">First Name *</label>
+                    <input type="text" class="form-control" id="firstName" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="position" class="form-label">Position *</label>
+                    <input type="text" class="form-control" id="position" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="lastName" class="form-label">Last Name *</label>
+                    <input type="text" class="form-control" id="lastName" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="internshipPeriod" class="form-label">Internship Period *</label>
+                    <input type="text" class="form-control" id="internshipPeriod" required>
+                </div>
+            </div>
+
+            <p class="mt-3 mb-3">At Vanness Plus Consulting Co., Ltd, we are committed to establishing clear and professional Acceptance Terms for our internship program. The following outlines the key terms and conditions that interns must acknowledge and agree to upon acceptance of their internship offer:</p>
+    
+            <div class="my-3">
+                <label style="font-weight: bold; text-transform:uppercase;">For the hybrid internship option, working from the office or from home will be determined by the company:</label>
+                <div class="mb-3 mt-3">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="hybridOption" id="hybridOptionAccepted" value="Accepted" required>
+                        <label class="form-check-label" for="hybridOptionAccepted">Accepted</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="hybridOption" id="hybridOptionNotAccepted" value="Not Accepted" required>
+                        <label class="form-check-label" for="hybridOptionNotAccepted">Not Accepted</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="my-3">
+                <label style="font-weight: bold; text-transform:uppercase;">Any information or work conducted during the internship is considered internal and must not be shared with others without permission:</label>
+                <div class="mb-3 mt-3">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="infoSharing" id="infoSharingAccepted" value="Accepted" required>
+                        <label class="form-check-label" for="infoSharingAccepted">Accepted</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="infoSharing" id="infoSharingNotAccepted" value="Not Accepted" required>
+                        <label class="form-check-label" for="infoSharingNotAccepted">Not Accepted</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="my-3">
+                <label style="font-weight: bold; text-transform:uppercase;">Interns are required to follow the company's rules and regulations. In case of violation, the company reserves the right to send the intern back to the university:</label>
+                <div class="mb-3 mt-3">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="rulesCompliance" id="rulesComplianceAccepted" value="Accepted" required>
+                        <label class="form-check-label" for="rulesComplianceAccepted">Accepted</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="rulesCompliance" id="rulesComplianceNotAccepted" value="Not Accepted" required>
+                        <label class="form-check-label" for="rulesComplianceNotAccepted">Not Accepted</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="my-3">
+                <label style="font-weight: bold;">THE COMPANY EMPHASIZES SELF-LEARNING AND PERSONAL DEVELOPMENT OVER FORMAL CLASSROOM TRAINING. INTERNS ARE RESPONSIBLE FOR THEIR ASSIGNED TASKS AND MAY NOT EXTEND DEADLINES WITHOUT APPROVAL FROM THEIR SUPERVISOR</label>
+                <div class="mb-3 mt-3">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="selfLearning" id="selfLearningAccepted" value="Accepted" required>
+                        <label class="form-check-label" for="selfLearningAccepted">Accepted</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="selfLearning" id="selfLearningNotAccepted" value="Not Accepted" required>
+                        <label class="form-check-label" for="selfLearningNotAccepted">Not Accepted</label>
+                    </div>
+                </div>
+            </div>
+            
+    
+            <button type="submit" class="btn mb-3" style="background-color:#474bc2; color:white;">Send</button>
+        </form>
+    </div>
+
+        
+
+
+
+        
+        
+        
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Attach a click listener to the entire input group
+                const inputGroup = document.querySelector('.input-group');
+                inputGroup.addEventListener('click', function() {
+                    document.getElementById('fileInput').click();  // Trigger file input click
+                });
+
+    // Listen for changes on the file input
+    document.getElementById('fileInput').addEventListener('change', function() {
+        const textInput = document.querySelector('.input-group input[type="text"]');
+        if (this.files.length > 0) {
+            textInput.value = this.files[0].name;  // Display the selected file name
+        } else {
+            textInput.value = "Select the file to upload";  // Reset to placeholder if no file is selected
+        }
+    });
+});
+
+    
+        // Trigger file input when icon is clicked
+        document.querySelector('.input-group-text').onclick = function() {
+            document.getElementById('fileInput').click();
+        };
+    </script>
+    
+</body>
+</html>
