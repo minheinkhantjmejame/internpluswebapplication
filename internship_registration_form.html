@@ -10,7 +10,7 @@
 
     <!-- custom css  -->
     <link rel="stylesheet" href="./styles.css" />
-    <!-- Include jQuery and Inputmask library -->
+    <!-- Jquery JS -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/inputmask/5.0.6/inputmask.min.js"></script>
 
@@ -93,7 +93,7 @@
             gap: 10px;
         }
         input[type="text"].toggle-input {
-            width: auto; /* Allow 'Other' input to grow as needed */
+            width: auto;
             flex-grow: 1;
         }
 
@@ -104,7 +104,6 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
         <div class="container">
             <a class="navbar-brand fw-bold" href="#">INTERNPLUS</a>
-            <!-- Language Dropdown next to the brand -->
             <div class="dropdown" style="display: inline-block;">
                 <button class="btn btn-white" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                     <span id="dropdownLabel">EN</span> <i class="bi bi-chevron-down"></i>
@@ -283,35 +282,33 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Function to set up a file input and text display linkage
             function setupFileInput(fileInputId, textInputId) {
                 const fileInput = document.getElementById(fileInputId);
                 const textInput = document.getElementById(textInputId);
         
-                // Update text input when file input changes
+
                 fileInput.addEventListener('change', function() {
                     if (this.files.length > 0) {
-                        textInput.value = this.files[0].name;  // Display the selected file name
+                        textInput.value = this.files[0].name;  
                     } else {
-                        textInput.value = "Please Upload Your File";  // Reset to placeholder if no file is selected
+                        textInput.value = "Please Upload Your File";  
                     }
                 });
         
-                // Trigger file input when text input or icon is clicked
+
                 textInput.parentElement.addEventListener('click', function() {
                     fileInput.click();
                 });
             }
 
             document.addEventListener('DOMContentLoaded', function() {
-                // Attach a click listener to the entire input group
                 const inputGroup = document.querySelector('.input-group');
                 inputGroup.addEventListener('click', function() {
-                    document.getElementById('fileInput').click();  // Trigger file input click
+                    document.getElementById('fileInput').click();  
                 });
             });
         
-            // Set up each file input with its corresponding text input
+
             setupFileInput('idCardInput', 'textIdCard');
             setupFileInput('houseRegInput', 'textHouseReg');
             setupFileInput('transcriptInput', 'textTranscript');
@@ -338,17 +335,17 @@
             }
         }
 
-                // Handle file selection changes
+
         document.querySelector('#fileInput').addEventListener('change', function() {
             const textInput = document.querySelector('.input-group input[type="text"]');
             if (this.files.length > 0) {
-                textInput.value = this.files[0].name; // Display the selected file name
+                textInput.value = this.files[0].name; 
             } else {
-                textInput.value = "Select the file to upload"; // Reset to placeholder if no file is selected
+                textInput.value = "Select the file to upload"; 
             }
         });
     
-        // Trigger file input when icon is clicked
+
         document.querySelector('.input-group-text').onclick = function() {
             document.getElementById('fileInput').click();
         };
@@ -371,7 +368,7 @@
                     selector.classList.add('active');
                 }
             });
-            document.getElementById('reason').value = selectedReason;  // Update the hidden input with the selected reason
+            document.getElementById('reason').value = selectedReason; 
         }
 
         document.addEventListener('DOMContentLoaded', function() {
@@ -379,10 +376,10 @@
                 enableTime: false,
                 dateFormat: "m/d/Y",
                 "locale": {
-                    "firstDayOfWeek": 1 // start week on Monday
+                    "firstDayOfWeek": 1 
                 },
                 onChange: function(selectedDates, dateStr, instance) {
-                    instance.input.value = dateStr; // ensures the date string is updated in the input
+                    instance.input.value = dateStr;
                 },
             });
         });
@@ -401,7 +398,7 @@
                 });
                 document.getElementById('otherInternshipType').value = '';
             }
-            document.getElementById('internshipType').value = type; // Set the hidden input value to the selected type
+            document.getElementById('internshipType').value = type; 
         }
 
 

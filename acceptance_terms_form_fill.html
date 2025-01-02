@@ -54,35 +54,35 @@
         }
 
         .form-control {
-        border: 1px solid black; /* Apply black border */
-        box-shadow: none; /* Remove any shadow for a cleaner look */
+        border: 1px solid black; 
+        box-shadow: none; 
     }
     .form-control:focus {
-        border-color: black; /* Keeps border black on focus */
-        box-shadow: none; /* Optionally remove the default Bootstrap focus glow */
+        border-color: black; 
+        box-shadow: none;
     }
 
         .form-check {
             padding-left: 0;
         }
         .form-check-input {
-    display: none; /* Hide the default radio button */
+    display: none; 
 }
 
 .form-check-label {
     display: inline-block;
     padding: 8px 15px;
     margin-right: 10px;
-    border: 1px solid black; /* Solid border for the box */
-    background-color: #fff; /* White background */
+    border: 1px solid black;
+    background-color: #fff; 
     cursor: pointer;
-    transition: background-color 0.3s, color 0.3s; /* Smooth transition for background and text color */
+    transition: background-color 0.3s, color 0.3s; 
 }
 
 .form-check-input:checked + .form-check-label {
-    background-color: #474bc2; /* Change background to dark blue when selected */
-    color: white; /* White text when selected */
-    border-color: #474bc2; /* Border color changes to match the background */
+    background-color: #474bc2;
+    color: white;
+    border-color: #474bc2; 
 }
     </style>
 </head>
@@ -220,37 +220,27 @@
         </form>
     </div>
 
-        
-
-
-
-        
-        
-        
+  
     
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
             document.addEventListener('DOMContentLoaded', function() {
-                // Attach a click listener to the entire input group
                 const inputGroup = document.querySelector('.input-group');
                 inputGroup.addEventListener('click', function() {
-                    document.getElementById('fileInput').click();  // Trigger file input click
+                    document.getElementById('fileInput').click();  
                 });
 
-    // Listen for changes on the file input
-    document.getElementById('fileInput').addEventListener('change', function() {
-        const textInput = document.querySelector('.input-group input[type="text"]');
-        if (this.files.length > 0) {
-            textInput.value = this.files[0].name;  // Display the selected file name
-        } else {
-            textInput.value = "Select the file to upload";  // Reset to placeholder if no file is selected
-        }
-    });
-});
+            document.getElementById('fileInput').addEventListener('change', function() {
+                const textInput = document.querySelector('.input-group input[type="text"]');
+                if (this.files.length > 0) {
+                    textInput.value = this.files[0].name; 
+                } else {
+                    textInput.value = "Select the file to upload";  
+                }
+            });
+        });
 
-    
-        // Trigger file input when icon is clicked
         document.querySelector('.input-group-text').onclick = function() {
             document.getElementById('fileInput').click();
         };

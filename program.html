@@ -16,35 +16,35 @@
             align-items: center;
             padding: 20px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            margin-bottom: 20px; /* Space between cards */
+            margin-bottom: 20px; 
         }
 
         .card-body {
             display: flex;
             justify-content: space-between;
-            align-items: stretch; /* Make items fill the container */
+            align-items: stretch;
 
             position:relative;
 
         }
         .card-text-content {
-            width: 60%; /* Text content takes up 60% of the card */
-            padding: 20px; /* Padding for spacing inside the text area */
+            width: 60%;
+            padding: 20px;
         }
         .card-image {
-            width: 40%; /* Image takes up 40% of the card */
-            height: 100%; /* Stretch to full height of the card */
-            object-fit: cover; /* Ensures the image covers the given area without distorting its aspect ratio */
+            width: 40%;
+            height: 100%;
+            object-fit: cover;
         }
 
 .card-text-content {
-    width: 100%; /* Text content takes up 70% of the card */
+    width: 100%; 
 }
 
 .card-image {
     width:30%;
     height:100%;
-    object-fit: cover; /* Ensures the image covers the given area without distorting its aspect ratio */
+    object-fit: cover; 
 }
 
     </style>
@@ -76,19 +76,16 @@
                 <div class="me-5"><strong>35</strong> positions available</div>
                 <div><strong>4</strong> job categories</div>
             </div>
-            <!-- Search Box centered -->
             <div class="search-box text-center mb-5">
                 <input type="text" id="searchInput" class="form-control d-inline-block m-0" style="width: 60%; " placeholder="Enter the program you are interested in...">
                 <button class="btn btn-dark m-0" onclick="applySearch()" style="background-color:#474bc2;"><i class="bi bi-search"></i></button>
             </div>
-            <!-- Category Tabs centered -->
             <div class="category-tabs text-center mb-4">
                 <button class="category-btn btn btn-outline-secondary active" onclick="filterCategory('IT')">IT</button>
                 <button class="category-btn btn btn-outline-secondary" onclick="filterCategory('HR')">Human Resources</button>
                 <button class="category-btn btn btn-outline-secondary" onclick="filterCategory('Marketing')">Marketing</button>
                 <button class="category-btn btn btn-outline-secondary" onclick="filterCategory('Translation')">Translation</button>
             </div>
-            <!-- Listings -->
             <div id="listings" class="listings">
                 <!-- Dynamic content will be loaded here -->
             </div>
@@ -138,7 +135,7 @@
     <!-- Custom JavaScript for Dynamic Content and Filtering -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            filterCategory('IT'); // Default to IT jobs on page load
+            filterCategory('IT');
         });
         
         // Global declaration of category data

@@ -60,11 +60,11 @@
         }
 
         .btn-topic {
-            margin: 0.5rem; /* Spacing between buttons */
+            margin: 0.5rem;
         }
 
         .btn-active {
-            background-color: #474bc2; /* Bootstrap primary color */
+            background-color: #474bc2;
             color: white;
         }
 
@@ -74,17 +74,17 @@
         }
 
         .disabled-input, .input-group-text.disabled-input, .form-control.disabled-input {
-            background-color: #e9ecef; /* Light grey background, consistent for all disabled inputs */
-            color: #6c757d; /* Dimmed text color */
-            cursor: not-allowed; /* Show a 'not allowed' cursor */
-}
+            background-color: #e9ecef;
+            color: #6c757d;
+            cursor: not-allowed;
+        }
 
-.disabled-input {
-    background-color: #e9ecef; /* Light grey background, consistent for all disabled inputs */
-    color: #6c757d; /* Dimmed text color */
-    cursor: not-allowed; /* Show a 'not allowed' cursor */
-    pointer-events: none; /* Disable mouse interactions */
-}
+        .disabled-input {
+            background-color: #e9ecef;
+            color: #6c757d;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
 
 
 
@@ -101,7 +101,6 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
         <div class="container">
             <a class="navbar-brand fw-bold" href="#">INTERNPLUS</a>
-            <!-- Language Dropdown next to the brand -->
             <div class="dropdown" style="display: inline-block;">
                 <button class="btn btn-white" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                     <span id="dropdownLabel">EN</span> <i class="bi bi-chevron-down"></i>
@@ -185,30 +184,28 @@
         
     
     <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
 
-document.addEventListener('DOMContentLoaded', function() {
-                // Attach a click listener to the entire input group
-                const inputGroup = document.querySelector('.input-group');
-                inputGroup.addEventListener('click', function() {
-                    document.getElementById('fileInput').click();  // Trigger file input click
-                });
-            });
-
-        
-        // Toggle selection for topics
-        document.querySelectorAll('.btn-topic').forEach(button => {
-            button.addEventListener('click', function() {
-                this.classList.toggle('btn-active'); // Toggle active class on click
+    document.addEventListener('DOMContentLoaded', function() {
+            const inputGroup = document.querySelector('.input-group');
+            inputGroup.addEventListener('click', function() {
+            document.getElementById('fileInput').click();  
             });
         });
+
+        
+    document.querySelectorAll('.btn-topic').forEach(button => {
+        button.addEventListener('click', function() {
+        this.classList.toggle('btn-active');
+        });
+    });
     
-        // Function to toggle between file input and link input
-        function toggleInput(type) {
-    const fileInput = document.getElementById('fileInput');
-    const fileTextInput = document.querySelector('.input-group input[type="text"]'); // Text display for file input
-    const linkInput = document.getElementById('linkInput');
+        
+    function toggleInput(type) {
+        const fileInput = document.getElementById('fileInput');
+        const fileTextInput = document.querySelector('.input-group input[type="text"]'); 
+        const linkInput = document.getElementById('linkInput');
 
     if (type === 'file') {
         fileInput.disabled = false;
@@ -217,30 +214,30 @@ document.addEventListener('DOMContentLoaded', function() {
 
         linkInput.disabled = true;
         linkInput.classList.add('disabled-input');
-        linkInput.value = ''; // Clear link input
+        linkInput.value = '';
     } else {
         linkInput.disabled = false;
         linkInput.classList.remove('disabled-input');
 
         fileInput.disabled = true;
-        fileTextInput.classList.add('disabled-input'); // Disable visual for text input
+        fileTextInput.classList.add('disabled-input');
         fileInput.classList.add('disabled-input');
-        fileInput.value = ''; // Clear file input
+        fileInput.value = '';
     }
 }
 
     
-        // Handle file selection changes
-        document.querySelector('#fileInput').addEventListener('change', function() {
-            const textInput = document.querySelector('.input-group input[type="text"]');
-            if (this.files.length > 0) {
-                textInput.value = this.files[0].name; // Display the selected file name
-            } else {
-                textInput.value = "Select the file to upload"; // Reset to placeholder if no file is selected
+
+    document.querySelector('#fileInput').addEventListener('change', function() {
+        const textInput = document.querySelector('.input-group input[type="text"]');
+        if (this.files.length > 0) {
+        textInput.value = this.files[0].name; 
+        } else {
+                textInput.value = "Select the file to upload"; 
             }
         });
     
-        // Trigger file input when icon is clicked
+
         document.querySelector('.input-group-text').onclick = function() {
             document.getElementById('fileInput').click();
         };

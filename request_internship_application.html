@@ -16,18 +16,18 @@
         }
 
 
-.application_info_container {
-            max-width: 1200px;
-            background-color:#d1d1f0;
-            margin: auto;
-            margin-top:100px;
-            padding: 30px 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        .application_info_container {
+                    max-width: 1200px;
+                    background-color:#d1d1f0;
+                    margin: auto;
+                    margin-top:100px;
+                    padding: 30px 20px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
 
-            position:relative;
-        }
+                    position:relative;
+                }
 
         .info-row {
             width: 100%;
@@ -43,14 +43,14 @@
         }
 
         .outer-circle {
-            background-color: #FFFFFF; /* White background for the outer circle */
+            background-color: #FFFFFF;
             border-radius: 50%;
-            width: 150px; /* Size of the outer circle */
-            height: 150px; /* Size of the outer circle */
+            width: 150px;
+            height: 150px;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 5px; /* Padding to create the white border effect */
+            padding: 5px;
 
             position:absolute;
             top:0;
@@ -60,21 +60,21 @@
         }
 
             .inner-circle {
-                background-color: #474bc2; /* Blue background for the inner circle */
+                background-color: #474bc2; 
                 border-radius: 50%;
-                width: 100%; /* Full width of the outer circle's content area */
-                height: 100%; /* Full height of the outer circle's content area */
+                width: 100%;
+                height: 100%;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                color: #000000; /* White text color */
-                font-size: 18px; /* Text size */
-                font-family: Arial, sans-serif; /* Font style */
+                color: #000000;
+                font-size: 18px;
+                font-family: Arial, sans-serif;
 
                 
             }
 
-            /* Adding more specific styling if necessary */
+        
             .inner-circle span {
                 padding: 20px;
             }
@@ -112,14 +112,14 @@
             position:relative;
         }
 
-.badge {
-    background-color: #007bff; /* Blue background */
-    color: white;
-    padding: 5px 10px;
-    border-radius: 5px;
-    position: relative; /* To position lines */
-    z-index: 2; /* Ensure badge is above lines */
-}
+    .badge {
+        background-color: #007bff;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        position: relative;
+        z-index: 2; 
+    }
 
 /* .line {
     height: 2px;
@@ -170,75 +170,75 @@
         }
 
         .task-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
 
-.task-item {
-    display: flex;
-    align-items: center;
-    background: #FFFFFF;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
+        .task-item {
+            display: flex;
+            align-items: center;
+            background: #FFFFFF;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
 
-.task-list a {
-        display: block; /* Make the link block level to fill the entire div */
-        color: inherit; /* Inherit the text color */
-        text-decoration: none; /* Remove underline */
-    }
+        .task-list a {
+                display: block; 
+                color: inherit; 
+                text-decoration: none;
+            }
 
-.task-item img {
-    width: 100px; /* Adjust size as needed */
+        .task-item img {
+            width: 100px;
 
-}
+        }
 
-.task-label {
-    flex-grow: 1;
-    margin:10px;
-}
+        .task-label {
+            flex-grow: 1;
+            margin:10px;
+        }
 
-.task-status {
-    margin-left: auto;
-    padding: 5px 10px;
-    border-radius: 10px;
-    font-size: 0.8em;
-}
+        .task-status {
+            margin-left: auto;
+            padding: 5px 10px;
+            border-radius: 10px;
+            font-size: 0.8em;
+        }
 
-.task-status.done {
-    background-color: #d1d1f0; /* Green for done */
-    color: #000000;
-}
+        .task-status.done {
+            background-color: #d1d1f0;
+            color: #000000;
+        }
 
-.task-status.in-progress {
-    background-color: #d1d1f0; /* Orange for in-progress */
-    color: #000000;
-}
+        .task-status.in-progress {
+            background-color: #d1d1f0;
+            color: #000000;
+        }
 
-.task-due {
-    margin-left: 10px;
-    color: #333;
-    font-size: 0.8em;
-}
+        .task-due {
+            margin-left: 10px;
+            color: #333;
+            font-size: 0.8em;
+        }
 
-.submit-btn {
-    background-color: #474bc2; /* Deep blue background */
-    color: white; /* White text color */
-    border: none; /* No border */
-    padding: 10px 20px; /* Top-bottom and left-right padding */
-    border-radius: 5px; /* Rounded corners */
-    cursor: pointer; /* Cursor indicates clickable */
-    font-size: 16px; /* Larger font size for better readability */
-    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
-    width: 100%; /* Full width for better visibility */
-    margin-top: 20px; /* Margin on the top for spacing */
-}
+        .submit-btn {
+            background-color: #474bc2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            margin-top: 20px;
+        }
 
-.submit-btn:hover {
-    background-color: #3658a7; /* Lighter blue on hover */
-}
+        .submit-btn:hover {
+            background-color: #3658a7;
+        }
 
 
     </style>
@@ -248,7 +248,6 @@
    <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
     <div class="container">
         <a class="navbar-brand fw-bold" href="#">INTERNPLUS</a>
-        <!-- Language Dropdown next to the brand -->
         <div class="dropdown" style="display: inline-block;">
             <button class="btn btn-white" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                 <span id="dropdownLabel">EN</span> <i class="bi bi-chevron-down"></i>
@@ -277,7 +276,6 @@
 </nav>
 
 <div class="application_info_container">
-    <!-- Application Information Card -->
     <div class="info-card">
         <div class="info-row">
             <div class="outer-circle">
