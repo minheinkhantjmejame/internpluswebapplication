@@ -3,14 +3,16 @@
 
 *{
     font-family:Fustat;
-    font-style: normal;
+
+
+    .btn{
+        border:0;
+        border-radius:4px;
+    }
+
+
 }
 
-body {
-    font-family:Fustat;
-    font-style: normal;
-    
-}
 
 #google_translate_element {
     position: fixed;
@@ -19,6 +21,7 @@ body {
     z-index: 1000;
 }
 
+/* home page  */
 
 .navbar-brand {
     display:inline-block; 
@@ -63,6 +66,8 @@ body {
     background-color: #f8f8f8;
 }
 
+
+
 .hero-section img {
     max-width: 400px;
 }
@@ -100,9 +105,9 @@ footer .btn {
     color: #000;
 }
 
-.hero-section img {
-    max-width: 400px;
-}
+
+
+
 
 .features img, .program-page img {
     width: 80px;
@@ -122,6 +127,10 @@ footer .form-control {
 
 footer .btn {
     vertical-align: middle;
+}
+
+.contact p{
+    font-size:16px;
 }
 
 .program-page {
