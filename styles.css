@@ -1,6 +1,15 @@
+/* Google Font Api   */
+@import url('https://fonts.googleapis.com/css2?family=Fustat:wght@200..800&display=swap');
+
+*{
+    font-family:Fustat;
+    font-style: normal;
+}
 
 body {
-    font-family: Arial, sans-serif;
+    font-family:Fustat;
+    font-style: normal;
+    
 }
 
 #google_translate_element {
@@ -45,16 +54,15 @@ body {
     vertical-align:middle;
 }
 .btn-white {
-    color: #000; /* Text color */
-    background-color: #fff; /* Button color */
-    border: 1px solid #ccc; /* Border color */
+    color: #000;
+    background-color: #fff; 
+    border: 1px solid #ccc; 
 }
 
 .btn-white:hover {
-    background-color: #f8f8f8; /* Hover background color */
+    background-color: #f8f8f8;
 }
 
-/* language change drop-down button  */
 .hero-section img {
     max-width: 400px;
 }
@@ -384,68 +392,64 @@ body, html {
 
 
 h1.fw-bold {
-    font-size: 24px; /* Large font size for the main title */
+    font-size: 24px; 
 }
 
 .text-muted {
-    color: #6c757d; /* Muted text color for less important text */
+    color: #6c757d; 
 }
 
 .btn-secondary {
-    color: #fff; /* White text inside buttons */
-    background-color: #6c757d; /* Grey background for buttons */
-    border: none; /* No border for a cleaner look */
+    color: #fff;
+    background-color: #6c757d; 
+    border: none; 
 }
 
 .btn-secondary i {
-    margin-right: 5px; /* Space between icon and text (if needed) */
+    margin-right: 5px;
 }
 
 p {
-    font-size: 16px; /* Standard text size for readability */
-    line-height: 1.5; /* Adequate line height for readability */
+    font-size: 16px; 
+    line-height: 1.5; 
     margin-top: 0;
-    margin-bottom: 1rem; /* Space below paragraphs */
+    margin-bottom: 1rem; 
 }
 .internship-type{
     margin-left:10px;
 }
 .internship-type .type-option {
-    width: 150px;      /* Sets a fixed width for each option */
-    height: 100px;     /* Sets a fixed height for each option */
-    padding: 10px;     /* Padding inside each option */
-    margin: 0 2px;    /* Adds space between options */
-    display: flex;     /* Uses flexbox for alignment */
-    flex-direction: column; /* Aligns the icon and text vertically */
-    justify-content: center; /* Centers content vertically */
-    align-items: center; /* Centers content horizontally */
-    border: 1px solid #ccc; /* Border to visually separate elements */
-    border-radius: 10px; /* Rounded corners for aesthetics */
-    cursor: pointer; /* Changes cursor to pointer on hover */
+    width: 150px;     
+    height: 100px;    
+    padding: 10px;    
+    margin: 0 2px;   
+    display: flex;   
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    border: 1px solid #ccc; 
+    border-radius: 10px; 
+    cursor: pointer; 
     background-color: #fff;
-    transition: background-color 0.3s, border-color 0.3s,color 0.3s; /* Smooth transition for hover effects */
+    transition: background-color 0.3s, border-color 0.3s,color 0.3s;
 }
 
 
-/* .internship-type .type-option:hover {
-    background-color: #f8f8f8; Changes background on hover
-    border-color: #333; Changes border color on hover
-    color:#000;
-} */
+
 
 .internship-type .type-option label {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100%; /* Make label take full width of the type-option */
-    height: auto; /* Make label take full height of the type-option */
+    width: 100%;
+    height: auto;
     padding: 20px;
     cursor: pointer;
 }
 
 .internship-type .type-option i {
-    font-size: 14px; /* original icon size for desktop */
+    font-size: 14px; 
 }
 
 .internship-type .type-option input[type="radio"]:checked + label {
@@ -471,7 +475,7 @@ input[type="date"] {
     font-size: 1rem;
 }
 
-/* Style the focus state */
+
 input[type="date"]:focus {
     border-color: #80bdff;
     outline: 0;
@@ -479,7 +483,7 @@ input[type="date"]:focus {
 }
 
 .footer-icons {
-    text-align: right; /* Aligns content to the right on larger screens */
+    text-align: right; 
     order:2;    
 }
 
@@ -494,17 +498,17 @@ input[type="date"]:focus {
 
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4; /* Light grey background */
+    background-color: #f4f4f4; 
 }
 
 .navbar {
-    background-color: #fff; /* White background for the navbar */
+    background-color: #fff; 
 }
 
 .card {
     margin-top: 20px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.5); /* Subtle shadow for card */
-    border-radius: 8px; /* Rounded corners for the card */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.5); 
+    border-radius: 8px; 
 }
 
 .card-body {
@@ -512,94 +516,93 @@ body {
 }
 
 .btn-primary {
-    background-color: #007bff; /* Primary blue */
+    background-color: #007bff; 
     border: none;
 }
 
 #applicationId {
-    font-size: 24px; /* Larger font for emphasis */
-    color: #555; /* Dark grey for the ID */
+    font-size: 24px; 
+    color: #555; 
 }
 
 .card-title {
-    color: #333; /* Dark color for the title */
+    color: #333;
     margin-bottom: 15px;
 }
 
 .card-text {
-    margin-bottom: 20px; /* Space above the application ID */
+    margin-bottom: 20px; 
 }
 
 img {
-    width: 200px; /* Set appropriate size for the image */
+    width: 200px;
     height: auto;
-    margin-bottom: 20px; /* Space above the button */
+    margin-bottom: 20px;
 }
 
 
 
 
-/* Application Success Page  */
-/* Application Search Page  */
+
 .search-box input[type="text"] {
-    width: 100%; /* Full width */
-    padding: 10px; /* Padding */
-    margin: 8px 0; /* Margin */
-    display: inline-block; /* Centering */
-    border: 1px solid #ccc; /* Border */
-    box-sizing: border-box; /* Box sizing */
+    width: 100%; 
+    padding: 10px; 
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc; 
+    box-sizing: border-box; 
 }
 
 .btn-primary {
-    color: #fff; /* White text color */
-    background-color: #007bff; /* Blue background color */
-    border-color: #007bff; /* Blue border color */
+    color: #fff; 
+    background-color: #007bff; 
+    border-color: #007bff; 
 }
 
 .card {
-    background-color: #fff; /* White background for the card */
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* Shadow for the card */
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
 }
 
 .card-body {
-    padding: 20px; /* Padding inside the card */
+    padding: 20px; 
 }
-/* Application_search_page */
-/* Mobile responsive  */
+
+
 
 .hero-section {
-    background-color: #f8f9fa; /* Light background color */
-    padding: 40px 0; /* Top and bottom padding */
+    background-color: #f8f9fa; 
+    padding: 40px 0; 
 }
 
 .hero-section .container {
     display: flex;
-    flex-direction: column; /* Stacks content vertically on mobile */
-    align-items: center; /* Centers content horizontally */
-    text-align: center; /* Centers text */
+    flex-direction: column; 
+    align-items: center; 
+    text-align: center; 
 }
 
 .hero-section h1 {
-    font-size: 24px; /* Adjusts font size for mobile */
+    font-size: 24px;
     text-align:center;
-    margin-bottom: 10px; /* Adds space below the heading */
+    margin-bottom: 10px;
 }
 
 .hero-section p {
-    font-size: 16px; /* Adjusts paragraph font size for readability */
+    font-size: 16px;
     margin-bottom:20px;
 }
 
 .hero-section img {
-    width: 100%; /* Reduces image width to 80% of its container */
-    max-width: 300px; /* Maximum width to avoid overly large images */
+    width: 100%; 
+    max-width: 300px;
     height:auto;
-    margin-bottom: 20px; /* Adds space below the image */
+    margin-bottom: 20px;
 }
 
 .hero-section a.btn {
-    width: 80%; /* Makes the button wider to fit content */
-    max-width: 250px; /* Maximum width for the button */
+    width: 80%;
+    max-width: 250px;
     margin-bottom:20px;
 
 }
@@ -623,16 +626,16 @@ img {
     }
 
     .hero-section h1 {
-        font-size: 40px; /* Larger font size for desktop */
+        font-size: 40px; 
     }
 
     .hero-section p {
-        font-size: 18px; /* Adjust paragraph font size */
+        font-size: 18px;
     }
 
     .hero-section img {
-        width: auto; /* Auto width for larger screens */
-        max-width: 400px; /* Increase max width */
+        width: auto; 
+        max-width: 400px; 
     }
 
     .hero-section a.btn {
@@ -645,7 +648,7 @@ img {
     }
 
     .hero-image {
-        display: block; /* Show the image on larger screens */
+        display: block;
     }
 
 
@@ -653,45 +656,45 @@ img {
 
 @media (max-width: 767px) {
     .footer-icons {
-        text-align: center; /* Centers icons on mobile */
-        order: 1; /* Icons come first */
+        text-align: center; 
+        order: 1; 
     }
     .copyright {
-        text-align: center; /* Center the text on mobile */
-        order: 2; /* Copyright text comes after icons */
-        margin-top: 20px; /* Optional: adds space between icons and text */
+        text-align: center; 
+        order: 2; 
+        margin-top: 20px; 
     }
 
     .hero-image {
-        display: none; /* Hide the image by default (for mobile devices) */
+        display: none; 
     }
 
     .internship-type .type-option label {
-        font-size: 1rem; /* smaller font size for mobile */
-        padding: 10px; /* less padding for smaller display */
+        font-size: 1rem; 
+        padding: 10px; 
     }
     
     .internship-type .type-option i {
-        font-size: 1.5rem; /* smaller icon size for mobile */
+        font-size: 1.5rem; 
     }
 }
 
-@media (max-width: 576px) { /* Adjusting for devices smaller than 576px */
+@media (max-width: 576px) { 
     .internship-type {
-        flex-direction: column; /* Stack the options vertically */
-        align-items: center; /* Center align the items */
+        flex-direction: column;
+        align-items: center; 
     }
 
     .internship-type .type-option {
-        max-width: 100%; /* Allow each option to expand fully within the container */
-        margin: 10px auto; /* Center margin and standard spacing */
+        max-width: 100%; 
+        margin: 10px auto;
     }
 
     .internship-type .type-option:not(:last-child) {
-        margin-bottom: 15px; /* Add more space between options */
+        margin-bottom: 15px; 
     }
 
     .internship-type .type-option i {
-        font-size: 1.2rem; /* Slightly smaller icons */
+        font-size: 1.2rem; 
     }
 }
