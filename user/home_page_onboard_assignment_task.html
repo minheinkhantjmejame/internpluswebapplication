@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InternPlus Dashboard</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- font awesome cdn  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    body {
+      background-color: #ffffff;
+      font-family: Arial, sans-serif;
+    }
+
+    .sidebar {
+  background-color: #eef3fb;
+  border-radius: 4px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .sidebar .menu-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-left:10px;
+      margin-bottom: 20px;
+      color: #000;
+      text-decoration: none;
+      font-weight: bold;
+      
+    }
+
+    .menu-item i{
+      width:20px;
+      height:20px;
+      color:black;
+    }
+
+.notification-badge {
+  font-size: 12px;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.notification-menu {
+  width: 300px; /* Adjust width as needed */
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.notification-item {
+  font-size: 14px;
+}
+
+.notification-item .btn-link {
+  font-size: 10px; /* Adjust icon size */
+  color: #6c757d;    /* Adjust icon color */
+  border:none;
+}
+
+.notification-item .btn-link:hover {
+  color: #474BC2;    /* Change color on hover */
+}
+
+
+.notification-item button{
+  color:#000;
+  border:1px solid black;
+  padding:5px;
+  font-size:10px;
+  border-radius:4px;
+}
+
+.notification-item p {
+  margin: 0;
+  font-size: 14px;
+  color: #000;
+}
+
+.notification-item small {
+  font-size: 12px;
+  color: #888;
+}
+
+
+
+.notification-item .dropdown-divider {
+  margin: 8px 0;
+}
+
+
+.notification-item p::before {
+  content: '•';
+  font-size: 20px;
+  color: green;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+
+
+
+.profile-card {
+  display: flex;
+  align-items: center;
+  background-color: #D1D1F0;
+  padding: 10px;
+  border-radius: 10px;
+  gap: 15px;
+}
+
+.profile-photo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.text-container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+}
+
+.name {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.badge {
+  width: fit-content;
+  border-radius: 4px;
+  background-color: #B1BBE7;
+  color: black;
+}
+
+.action-icon {
+  background-color: white;
+  font-size: 24px;
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 0 3px;
+}
+
+.profile-upload-label {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.profile-upload-label:hover .profile-photo {
+  opacity: 0.8;
+}
+
+    .profile-card img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+    }
+
+    .content {
+      padding: 20px;
+    }
+
+    .card {
+      border: none;
+      border-radius: 4px;
+      background-color: #eef3fb;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .card#search-card .btn{
+        padding: 6px 6px;
+        font-size: 0.9rem;
+ 
+    }
+
+    .card .btn {
+      background-color: #474BC2;
+      color: #FFFFFF;
+      font-weight: bold;
+      border: none;
+      border-radius: 4px;
+      padding: 10px 20px;
+      width:150px;
+      height:50px;
+    }
+
+    .card .btn:hover {
+      background-color: #6C77D9;
+    }
+
+    .my-board img {
+      width: 80px;
+      margin-bottom: 20px;
+    }
+
+    .my-board p {
+      font-size: 16px;
+      font-weight: bold;
+      margin: 0;
+    }
+
+    .my-board small {
+      color: #888;
+    }
+
+    .navbar {
+  background-color: #FFFFFF;
+  padding: 15px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar .navbar-brand {
+  font-size: 24px;
+  color: #323438;
+  font-weight: bold;
+}
+
+.navbar .nav-item {
+  text-decoration: none;
+  color: #323438;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+
+
+.navbar .dropdown-toggle {
+  font-size: 16px;
+  color: #323438;
+  font-weight: bold;
+}
+
+
+
+.navbar .bi-bell {
+  color: #323438;
+  transition: color 0.3s;
+}
+
+
+
+.navbar .profile-icon img {
+  transition: opacity 0.3s;
+}
+
+.navbar .profile-icon img:hover {
+  opacity: 0.8;
+}
+
+.navbar .nav-items {
+  display: flex;
+  align-items: center;
+}
+
+.navbar .nav-items .nav-item {
+  margin-left: 20px;
+}
+
+.application-link {
+    position: relative;
+    padding: 20px;
+  }
+
+  .application-link::after {
+    content: "";
+    position: absolute;
+    right: -10px;
+    top: 50%; /* Center the border vertically */
+    transform: translateY(-50%);
+    height: 20px; /* Set the height of the border */
+    width: 1px; /* Set the width of the border */
+    background-color: #000; /* Border color */
+  }
+
+  .menu-item.active {
+    background-color: #474BC2;
+    padding:4px;
+    color: white;
+    border-radius: 4px;
+    
+  }
+
+  .menu-item.active i {
+  color: white; /* Ensure icon color is white when active */
+  margin:4px;
+}
+
+.dropdown-header{
+  color:#000;
+}
+  
+
+  .my-board-centered {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 300px; /* Adjust height if needed */
+  }
+
+  .board-card-updated {
+    background-color: white !important;
+    box-shadow: none !important;
+  }
+
+  .my-board-card {
+  background-color: #f8f9fc;
+  padding: 20px;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.onboard-btn {
+  background-color: #fff;
+  color: #000;
+  font-weight: bold;
+  border:1px solid #000;
+  border-radius: 4px;
+  padding: 8px 20px;
+}
+
+
+.sub-card {
+  background-color: #d1d1f0;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: left; /* Align text to the left */
+  justify-content:space-between;
+
+  height:100%;
+
+}
+
+.row{
+  row-gap:20px;
+}
+
+.col-6.col-md-3 {
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+  }
+
+.icon-circle {
+  width: 50px;
+  height: 50px;
+  background-color: #b1bbe7;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 10px auto;
+  font-size: 20px;
+  color: #fff;
+}
+
+.sub-card h6 {
+  font-weight: bold;
+  margin-top:15px;
+  margin-bottom:10px;
+}
+
+.sub-card p {
+  font-size: 14px;
+  margin-bottom:5px;
+}
+
+.sub-card small {
+  font-size: 12px;
+  display: block;
+  margin-top: auto;
+}
+
+.indent-text{
+  display:flex;
+  align-items: center;
+  text-indent:-10px;
+  margin-left:15px;
+}
+
+.bullet-point {
+  margin-right:1px;
+  width: 6px;
+  height: 6px;
+  background-color: #000;
+  border-radius: 50%;
+  display: inline-block;
+
+}
+
+#datepicker_btn{
+   width:180px;
+   height:30px;
+}
+
+#filter-btn{
+    width:100px;
+    height:30px;
+}
+
+table{
+    border-radius:4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+td#starttime span,td#endtime span{
+    padding-right:9px;
+    padding-left:9px;
+    padding-top:3px;
+    padding-bottom:3px;
+    width:40px;
+    background-color:#474BC2;
+    color:white;
+    text-align:center;
+    border-radius:4px;
+}
+
+td#status span{
+    padding-right:9px;
+    padding-left:9px;
+    padding-top:3px;
+    padding-bottom:3px;
+    width:40px;
+    background-color:#74DE6080;
+    color:#359C22;
+    text-align:center;
+    border-radius:4px; 
+}
+
+.submit-btn{
+    width:100px;
+    height:25px;
+    font-size:15px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border:1px solid black;
+    background-color:#fff;
+    border-radius:4px;
+}
+
+.options-box {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    z-index: 10;
+  }
+
+  .options-box ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .options-box ul li {
+    padding: 5px 10px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .options-box ul li:hover {
+    background-color: #f0f0f0;
+  }
+
+/* Style for time input */
+/* input[type="time"] {
+  background-color: #474BC2;
+  color: white;
+  border: none;
+  text-align: center;
+  padding: 5px;
+  border-radius: 4px;
+  width: 80px;
+} */
+
+/* Remove default clock icon in time input */
+input[type="time"]::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+/* Dropdown styles for status */
+/* Remove default dropdown arrow */
+select.form-select {
+  appearance: none; /* Standard */
+  -webkit-appearance: none; /* Safari and Chrome */
+  -moz-appearance: none; /* Firefox */
+  background: none;
+  border: none;
+  width: 100%;
+  font-size: 14px;
+  text-align: center;
+  outline: none;
+  cursor: pointer;
+}
+
+/* Wrapper for custom status styling */
+.select-container {
+  display: inline-block;
+  width: 120px;
+  padding: 5px;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.select-container[data-value="Not Started"] {
+  background-color: #FFB9B9;
+  color: #980C0C;
+}
+
+.select-container[data-value="Pending"] {
+  background-color: #FFF06878;
+  color: #B2A211;
+}
+
+.select-container[data-value="Completed"] {
+  background-color: #74DE6080;
+  color: #359C22;
+}
+
+/* File upload styling */
+label.upload-files {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  color: #474BC2;
+}
+
+label.upload-files i {
+  font-size: 1rem;
+}
+.status-button {
+  border: none;
+  border-radius: 4px;
+  padding: 5px 15px;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.status-button.not-started {
+  background-color: #ffb9b9;
+  color: #980c0c;
+}
+
+.status-button.pending {
+  background-color: #fff06878;
+  color: #b2a211;
+}
+
+.status-button.completed {
+  background-color: #74de6080;
+  color: #359c22;
+}
+
+/* Ensure no other CSS rules override these styles */
+
+
+/* Ensure no other CSS rules override these styles */
+
+
+
+/* Dropdown Card for Status */
+.status-dropdown {
+  position: absolute;
+  display: none;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  z-index: 10;
+}
+
+.status-dropdown button {
+  margin: 5px 0;
+  width: 100%;
+  text-align: left;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.status-dropdown button:hover {
+  background-color: #f0f0f0;
+}
+
+   /* Style for time input box */
+   .time-input {
+    background-color: #474BC2;
+      color: white;
+      border: none;
+      text-align: center;
+      padding: 5px;
+      border-radius: 4px;
+      width: 80px;
+    }
+
+    /* Placeholder styling */
+    .time-input::placeholder {
+      color: white;
+    }
+
+    /* Success state */
+    .time-input.success {
+      background-color: #474BC2;
+      color: white;
+      border: none;
+      text-align: center;
+      padding: 5px;
+      border-radius: 4px;
+      width: 80px;
+    }
+
+    /* Error state */
+    .time-input.error {
+      background-color: #f8d7da; /* Light red */
+      color: #721c24; /* Dark red text */
+    }
+
+
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+<!-- Navbar -->
+<nav class="navbar d-flex align-items-center justify-content-end">
+  <div class="d-flex align-items-center">
+    <div class="nav-items d-flex me-3">
+      <a href="#" class="nav-item mx-3">Home</a>
+      <a href="#" class="nav-item mx-3">Program</a>
+      <a href="#" class="nav-item mx-3 application-link">Application</a>
+    </div>
+    <div class="dropdown mx-0">
+      <button class="btn dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="border: none; background: none; font-weight: bold;">
+        EN
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+        <li><a class="dropdown-item" href="#">EN</a></li>
+        <li><a class="dropdown-item" href="#">THAI</a></li>
+        <li><a class="dropdown-item" href="#">MYAN</a></li>
+      </ul>
+    </div>
+<div class="dropdown mx-0">
+<button class="btn position-relative" type="button" id="notificationDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="border: none; background: none;">
+  <i class="bi bi-bell" style="font-size: 1.5rem; cursor: pointer; position: relative;"></i>
+  <span class="notification-badge position-absolute badge rounded-pill bg-danger" 
+        style="top: 0; right: 0; font-size: 10px; padding: 4px 6px;">
+    2 <!-- Number of notifications -->
+  </span>
+</button>
+  <ul class="dropdown-menu dropdown-menu-end notification-menu shadow" aria-labelledby="notificationDropdown">
+    <!-- Notification lists will be here  -->
+  </ul>
+</div>
+      
+    <div class="profile-icon mx-3">
+      <img src="../assets/img/user_sample.png" alt="Profile Picture" style="width: 40px; height: 40px; border-radius: 50%; cursor: pointer;">
+    </div>
+  </div>
+</nav>
+
+
+
+  <!-- Main Container -->
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Sidebar -->
+      <div class="col-md-3 sidebar" style="position: relative; top: -60px; left: 30px; z-index: 1; margin-right: 20px;">
+        <i class="bi bi-list" style="font-size:25px;"></i><a class="navbar-brand" style="font-size:30px;" href="#">INTERNPLUS</a>
+        <hr/>
+        <a href="#" class="menu-item">
+          <i class="fa-regular fa-clipboard"></i> Assignments Task
+        </a>
+        <a href="./home_page_onboard_time_sheet.html" class="menu-item">
+          <i class="fa-regular fa-calendar"></i>Timesheet
+        </a>
+        <a href="#" class="menu-item">
+          <i class="fa-solid fa-phone-slash"></i> Leave
+        </a>
+        <a href="#" class="menu-item">
+          <i class="fa-regular fa-file-lines"></i> Report
+        </a>
+        <a href="#" class="menu-item">
+          <i class="fa-regular fa-user"></i> Supervisor
+        </a>
+        <a href="#" class="menu-item">
+          <i class="bi bi-shield"></i>Rules & Policies
+        </a>
+        <a href="#" class="menu-item">
+          <i class="bi bi-archive"></i> Offboard
+        </a>
+        <a href="#" class="menu-item">
+          <i class="bi bi-book"></i> Manual
+        </a>
+        <div class="mt-3">
+          <small class="text-left" >InternPlus @ 2024. All rights reserved.</small>
+          <br>
+          <small class="text-left">Terms of Use</small>
+        </div>
+        <div class="profile-card d-flex align-items-center mt-3" style="background-color: #D1D1F0; padding: 10px; border-radius: 10px; gap: 15px;">
+          <label for="profileUpload" class="profile-upload-label mb-0">
+            <img id="profileImage" src="../assets/img/user_sample.png" alt="Profile" class="profile-photo" style="width: 50px; height: 50px; border-radius: 50%;"/>
+          </label>
+          <div class="d-flex flex-column flex-grow-1">
+            <p class="mb-0 fw-bold" style="font-size: 16px;">Nicharee S.</p>
+            <span class="badge text-black" style="width: fit-content; border-radius:4px; background-color:#B1BBE7;">Student</span>
+          </div>
+          <i class="bi bi-box-arrow-right" style="background-color:white;font-size: 24px; cursor: pointer; border-radius:4px; padding:0 3px;"></i>
+        </div>
+        
+      </div>
+    
+      <div class="col-md-8 content" style="margin-left: 20px;">
+        <div class="card">
+            <h3 class="fw-bold">ASSIGNMENTS TASK</h3>
+            <p>Filling out Assingment or work records mush be filled in and submitted after the end of daily work.</p>
+        </div>
+                <!-- Assignments for Internship Card -->
+                <div id="search-card" class="card p-3">
+                  <div class="d-flex justify-content-between align-items-center">
+                      <!-- Heading -->
+                      <h5 class="fw-bold mb-0">ASSIGNMENTS FOR INTERNSHIP</h5>
+              
+                      <!-- Action Buttons -->
+                      <div class="d-flex align-items-center gap-2">
+                          <!-- Search Icon -->
+                          <button id="original-search-btn" style=" background-color:#fff; color: #000; border: 1px solid black; border-radius:4px;">
+                            <i class="bi bi-search"></i>
+                        </button>
+              
+                                                <!-- Hidden Search Input -->
+
+                                              
+                                              <!-- Input Box -->
+                                              <div id="search-container" style="position: absolute; bottom: 0; right:0; transform:translateY(100%); width: 250px; display: none; z-index: 10;">
+                                                  <!-- Input Field --> 
+                                                  <input id="search-input" type="text" class="form-control" placeholder="Search For Task/Day..." style="width: 100%; padding-right: 40px;">
+                                                                                                          
+                                                      
+                                                      
+
+                                                  <!-- New Search Icon Button -->
+                                                  <button
+                                                      id="search-btn_input"
+                                                      style="position: absolute; top: 50%; right: 0; transform: translateY(-50%); height:100%; background-color: #474BC2; border:none; border-radius: 0 4px 4px 0; cursor: pointer; padding: 5px;"
+                                                  >
+                                                      <i class="bi bi-search" style="color:#fff;"></i>
+                                                  </button>
+                                              </div>
+                                                <!-- Hidden Search Input -->
+
+                          <!-- Date Picker -->
+                          <div id="datepicker_btn" class="btn position-relative d-flex align-items-center" style="padding: 0 10px; background-color:#fff;border:1px solid #000;color:#000">
+                              <i class="bi bi-calendar-event me-2"></i>
+                              <span id="selected-date">25 November 2024</span>
+                              <input type="date" id="date-picker" class="position-absolute w-100 h-100" style="opacity: 0; top: 0; left: 0; cursor: pointer; z-index: 2;">
+                          </div>
+              
+                          <!-- Filter Button -->
+                          <button id="filter-btn" class="btn" style="background-color:#fff;border:1px solid #000;color:#000;">
+                              <i class="bi bi-funnel"></i> Filters
+                          </button>
+                      </div>
+                  </div>
+              </div>
+   <div class=" col-md-12 mt-5">
+                <table id="mytable" class="table table-sm " style="border:1px solid #F3F5FC;border-radius:4px;">
+                    <thead>
+                        <th>Tasks/Day</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                        <th>Status</th>
+                        <th>Files</th>
+                        <td class="opacity-0">
+                        </td>
+                    </thead>
+
+                    <tr id="new-task-row" class="p-3" style="position:relative; overflow:hidden;">
+                      <td style="color:#474BC2; cursor: pointer;" onclick="addNewTaskRow()">+ New task</td>
+                      <td style="position:absolute;top:0;right:0;">
+                        <button class="m-0 submit-btn me-3">Submit</button>
+                      </td>
+                    </tr>                   
+                </table>
+    </div>
+      </div>
+    </div>
+    
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+// Wait for DOM to load
+document.addEventListener("DOMContentLoaded", function () {
+  // Load tasks from localStorage on page load
+  loadTasksFromLocalStorage();
+  attachTimeInputListeners();
+
+  // Add a new task row when the "+ New task" row is clicked
+  document.getElementById("new-task-row").addEventListener("click", function () {
+    const table = document.getElementById("mytable");
+    const newRow = document.createElement("tr");
+
+    newRow.innerHTML = `
+      <td>
+        <input type="text" class="form-control" placeholder="Type task and press enter..." />
+      </td>
+      <td>
+        <input type="text" class="time-input" placeholder="00:00" />
+      </td>
+      <td>
+        <input type="text" class="time-input" placeholder="00:00" />
+      </td>
+      <td>
+        <div class="status-container position-relative">
+          <button class="status-button not-started" onclick="toggleStatusDropdown(this)">Not Started</button>
+          <div class="status-dropdown">
+            <button class="status-button completed" onclick="updateStatus(this, 'Completed')">Completed</button>
+            <button class="status-button pending" onclick="updateStatus(this, 'Pending')">Pending</button>
+            <button class="status-button not-started" onclick="updateStatus(this, 'Not Started')">Not Started</button>
+          </div>
+        </div>
+      </td>
+      <td>
+        <label class="upload-files">
+          <i class="bi bi-upload"></i>
+          <span>Upload Files</span>
+          <input type="file" style="display: none;" onchange="updateFileName(this)" />
+        </label>
+      </td>
+      <td>
+        <button class="btn p-0 options-btn">
+          <i class="bi bi-three-dots-vertical"></i>
+        </button>
+        <div class="options-box">
+          <ul>
+            <li><i class="bi bi-pen"></i>Edit</li>
+            <li><i class="bi bi-trash"></i>Remove</li>
+            <li>Approval</li>
+            <li>Comments (10)</li>
+          </ul>
+        </div>
+      </td>
+    `;
+
+    const newTaskRow = document.getElementById("new-task-row");
+    table.querySelector("tbody").insertBefore(newRow, newTaskRow);
+
+    attachTimeInputListeners(); // Attach listeners to new inputs
+
+    document.getElementById("mytable").addEventListener("click", function (event) {
+    const target = event.target;
+
+    // Check if the clicked element is an options-btn
+    if (target.closest(".options-btn")) {
+      const optionsBox = target.closest("td").querySelector(".options-box");
+
+      // Close all other open options boxes
+      document.querySelectorAll(".options-box").forEach((box) => {
+        if (box !== optionsBox) {
+          box.style.display = "none";
+        }
+      });
+
+      // Toggle visibility of the clicked options box
+      if (optionsBox) {
+        optionsBox.style.display =
+          optionsBox.style.display === "block" ? "none" : "block";
+      }
+
+      // Prevent event propagation
+      event.stopPropagation();
+    }
+
+    // Check if "Remove" is clicked in the options box
+    if (target.closest(".options-box ul li") && target.textContent.trim() === "Remove") {
+      const row = target.closest("tr");
+      if (row) {
+        row.remove(); // Remove the row
+        saveTasksToLocalStorage(); // Update localStorage
+      }
+    }
+  });
+
+  // Close all options boxes when clicking outside
+  document.addEventListener("click", function () {
+    document.querySelectorAll(".options-box").forEach((box) => {
+      box.style.display = "none";
+    });
+  });
+
+  });
+
+  // Submit all rows when the bottom submit button is clicked
+  document.querySelector(".submit-btn").addEventListener("click", function () {
+    const rows = document.querySelectorAll("#mytable tbody tr:not(#new-task-row)");
+    rows.forEach((row) => {
+      // Make inputs readonly
+      const inputs = row.querySelectorAll("input");
+      inputs.forEach((input) => {
+        input.setAttribute("readonly", true);
+        input.classList.add("readonly-input");
+      });
+
+      // Disable dropdown interactions
+      const dropdownButtons = row.querySelectorAll(".status-dropdown button");
+      dropdownButtons.forEach((button) => (button.disabled = true));
+    });
+
+    // Optionally show a success message
+    alert("All tasks submitted successfully!");
+  });
+
+  // Update status functionality
+  function updateStatus(button, status) {
+    const container = button.closest(".status-container");
+    const statusButton = container.querySelector(".status-button");
+
+    // Update text and class for the status button
+    statusButton.textContent = status;
+    statusButton.className = `status-button ${status.toLowerCase().replace(" ", "-")}`;
+
+    // Hide the dropdown
+    container.querySelector(".status-dropdown").style.display = "none";
+  }
+
+  // Toggle the dropdown visibility
+  function toggleStatusDropdown(button) {
+    const dropdown = button.nextElementSibling;
+
+    // Close all other dropdowns
+    document.querySelectorAll(".status-dropdown").forEach((drop) => {
+      if (drop !== dropdown) {
+        drop.style.display = "none";
+      }
+    });
+
+    // Toggle visibility of the current dropdown
+    dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+
+    // Stop propagation to prevent unwanted event triggers
+    event.stopPropagation();
+  }
+
+  // Attach listeners to time input fields
+  function attachTimeInputListeners() {
+    document.querySelectorAll(".time-input").forEach((input) => {
+      if (input.dataset.listenerAdded) return;
+      input.dataset.listenerAdded = true;
+
+      input.addEventListener("blur", function () {
+        const formattedTime = convertTo24HourFormat(this.value);
+
+        if (formattedTime) {
+          this.value = formattedTime;
+          this.classList.remove("error");
+          this.classList.add("success");
+        } else if (this.value.trim() !== "") {
+          this.classList.add("error");
+          this.classList.remove("success");
+        } else {
+          this.classList.remove("success", "error");
+        }
+      });
+
+      input.addEventListener("focus", function () {
+        this.classList.remove("success", "error");
+      });
+    });
+  }
+
+  // Convert various time formats to 24-hour format
+  function convertTo24HourFormat(timeString) {
+    timeString = timeString.trim().toLowerCase();
+
+    const patterns = [
+      /^(\d{1,2}):(\d{2})\s*([ap]m)?$/, // Matches hh:mm am/pm
+      /^(\d{1,2})\s*([ap]m)?$/, // Matches hh am/pm
+      /^(\d{1,2}):(\d{2})$/, // Matches hh:mm (24-hour)
+      /^(\d{1,2})$/, // Matches hh (24-hour)
+    ];
+
+    for (const pattern of patterns) {
+      const match = timeString.match(pattern);
+      if (match) {
+        let hours = parseInt(match[1], 10);
+        let minutes = match[2] ? parseInt(match[2], 10) : 0;
+        const period = match[3] ? match[3].toLowerCase() : null;
+
+        if (period) {
+          if (period === "pm" && hours < 12) hours += 12;
+          if (period === "am" && hours === 12) hours = 0;
+        }
+
+        if (hours >= 0 && hours <= 23 && minutes >= 0 && minutes <= 59) {
+          return `${hours.toString().padStart(2, "0")}:${minutes
+            .toString()
+            .padStart(2, "0")}`;
+        }
+      }
+    }
+
+    return null;
+  }
+
+  // Handle the "Edit" option in the three-dotted menu
+if (target.closest(".edit-option")) {
+    const row = target.closest("tr");
+    if (row) {
+        // Enable all inputs in the row for editing
+        const inputs = row.querySelectorAll("input");
+        inputs.forEach((input) => {
+            input.removeAttribute("readonly");
+            input.classList.remove("readonly-input");
+        });
+
+        // Optional: Remove the "submitted-row" class if present
+        row.classList.remove("submitted-row");
+    }
+}
+
+});
+
+// Load tasks from localStorage
+function loadTasksFromLocalStorage() {
+  const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  const table = document.getElementById("mytable");
+  const newTaskRow = document.getElementById("new-task-row");
+
+  tasks.forEach((task) => {
+    const newRow = document.createElement("tr");
+    const statusClass = task.status
+      ? task.status.toLowerCase().replace(" ", "-")
+      : "not-started";
+
+    newRow.innerHTML = `
+      <td>
+        <input type="text" class="form-control" value="${task.task}" style="border: none;" />
+      </td>
+      <td>
+        <input type="text" class="time-input" value="${task.startTime}" placeholder="00:00" />
+      </td>
+      <td>
+        <input type="text" class="time-input" value="${task.endTime}" placeholder="00:00" />
+      </td>
+      <td>
+        <div class="status-container position-relative">
+          <button class="status-button ${statusClass}" onclick="toggleStatusDropdown(this)">
+            ${task.status || "Not Started"}
+          </button>
+          <div class="status-dropdown">
+            <button class="status-button completed" onclick="updateStatus(this, 'Completed')">Completed</button>
+            <button class="status-button pending" onclick="updateStatus(this, 'Pending')">Pending</button>
+            <button class="status-button not-started" onclick="updateStatus(this, 'Not Started')">Not Started</button>
+          </div>
+        </div>
+      </td>
+      <td>
+        <label class="upload-files">
+          <i class="bi bi-upload"></i>
+          <span>${task.fileName || "Upload Files"}</span>
+          <input type="file" style="display: none;" onchange="updateFileName(this)" />
+        </label>
+      </td>
+      <td>
+        <button class="btn p-0 options-btn">
+          <i class="bi bi-three-dots-vertical"></i>
+        </button>
+        <div class="options-box">
+          <ul>
+            <li><i class="bi bi-pen"></i>Edit</li>
+            <li><i class="bi bi-trash"></i>Remove</li>
+            <li>Approval</li>
+            <li>Comments (10)</li>
+          </ul>
+        </div>
+      </td>
+    `;
+    table.querySelector("tbody").insertBefore(newRow, newTaskRow);
+
+    document.getElementById("mytable").addEventListener("click", function (event) {
+    const target = event.target;
+
+    // Check if the clicked element is an options-btn
+    if (target.closest(".options-btn")) {
+      const optionsBox = target.closest("td").querySelector(".options-box");
+
+      // Close all other open options boxes
+      document.querySelectorAll(".options-box").forEach((box) => {
+        if (box !== optionsBox) {
+          box.style.display = "none";
+        }
+      });
+
+      // Toggle visibility of the clicked options box
+      if (optionsBox) {
+        optionsBox.style.display =
+          optionsBox.style.display === "block" ? "none" : "block";
+      }
+
+      // Prevent event propagation
+      event.stopPropagation();
+    }
+
+    // Check if "Remove" is clicked in the options box
+    if (target.closest(".options-box ul li") && target.textContent.trim() === "Remove") {
+      const row = target.closest("tr");
+      if (row) {
+        row.remove(); // Remove the row
+        saveTasksToLocalStorage(); // Update localStorage
+      }
+    }
+  });
+
+  // Close all options boxes when clicking outside
+  document.addEventListener("click", function () {
+    document.querySelectorAll(".options-box").forEach((box) => {
+      box.style.display = "none";
+    });
+  });
+
+  });
+
+  attachTimeInputListeners();
+
+  
+}
+
+
+function updateFileName(inputElement) {
+  const label = inputElement.previousElementSibling;
+  if (inputElement.files.length > 0) {
+    label.textContent = inputElement.files[0].name;
+    saveTasksToLocalStorage(); // Update localStorage with the new file name
+  }
+}
+
+
+// Update status button
+function updateStatus(button, status) {
+  const container = button.closest(".status-container");
+  const statusButton = container.querySelector(".status-button");
+
+  // Update text and class for the status button
+  statusButton.textContent = status;
+  statusButton.className = `status-button ${status.toLowerCase().replace(" ", "-")}`;
+
+  // Hide the dropdown
+  container.querySelector(".status-dropdown").style.display = "none";
+
+  // Save the updated tasks
+  saveTasksToLocalStorage();
+}
+
+// Toggle the dropdown visibility
+function toggleStatusDropdown(button) {
+  const dropdown = button.nextElementSibling;
+
+  // Close all other dropdowns
+  document.querySelectorAll(".status-dropdown").forEach((drop) => {
+    if (drop !== dropdown) {
+      drop.style.display = "none";
+    }
+  });
+
+  // Toggle visibility of the current dropdown
+  dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+
+  // Stop propagation to prevent unwanted event triggers
+  event.stopPropagation();
+}
+
+// Attach listeners to time input fields
+function attachTimeInputListeners() {
+  document.querySelectorAll(".time-input").forEach((input) => {
+    if (input.dataset.listenerAdded) return;
+    input.dataset.listenerAdded = true;
+
+    input.addEventListener("blur", function () {
+      const formattedTime = convertTo24HourFormat(this.value);
+
+      if (formattedTime) {
+        this.value = formattedTime;
+        this.classList.remove("error");
+        this.classList.add("success");
+      } else if (this.value.trim() !== "") {
+        this.classList.add("error");
+        this.classList.remove("success");
+      } else {
+        this.classList.remove("success", "error");
+      }
+    });
+
+    input.addEventListener("focus", function () {
+      this.classList.remove("success", "error");
+    });
+  });
+}
+
+// Convert various time formats to 24-hour format
+function convertTo24HourFormat(timeString) {
+  timeString = timeString.trim().toLowerCase();
+
+  const patterns = [
+    /^(\d{1,2}):(\d{2})\s*([ap]m)?$/, // Matches hh:mm am/pm
+    /^(\d{1,2})\s*([ap]m)?$/,         // Matches hh am/pm
+    /^(\d{1,2}):(\d{2})$/,            // Matches hh:mm (24-hour)
+    /^(\d{1,2})$/                      // Matches hh (24-hour)
+  ];
+
+  for (const pattern of patterns) {
+    const match = timeString.match(pattern);
+    if (match) {
+      let hours = parseInt(match[1], 10);
+      let minutes = match[2] ? parseInt(match[2], 10) : 0;
+      const period = match[3] ? match[3].toLowerCase() : null;
+
+      if (period) {
+        if (period === "pm" && hours < 12) hours += 12;
+        if (period === "am" && hours === 12) hours = 0;
+      }
+
+      if (hours >= 0 && hours <= 23 && minutes >= 0 && minutes <= 59) {
+        return `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}`;
+      }
+    }
+  }
+
+  return null;
+}
+
+function saveTasksToLocalStorage() {
+  const rows = document.querySelectorAll("#mytable tbody tr:not(#new-task-row)");
+  const tasks = [];
+
+  rows.forEach((row) => {
+    const fileInput = row.cells[4]?.querySelector("input[type='file']");
+    const fileName = fileInput?.files.length ? fileInput.files[0].name : row.cells[4]?.querySelector("span")?.textContent;
+
+    const task = {
+      task: row.cells[0]?.querySelector("input")?.value || row.cells[0].textContent,
+      startTime: row.cells[1]?.querySelector("input")?.value || "",
+      endTime: row.cells[2]?.querySelector("input")?.value || "",
+      status: row.cells[3]?.querySelector("button")?.textContent || "",
+      fileName: fileName || "Upload Files",
+    };
+    tasks.push(task);
+  });
+
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
+const originalSearchBtn = document.getElementById('original-search-btn'); // The original search button
+const searchContainer = document.getElementById('search-container'); // The container for input and new button
+const searchInput = document.getElementById('search-input'); // Input box
+const newSearchBtn = document.getElementById('search-btn_input'); // New search button
+
+// Toggle visibility of the input box and the new search button
+originalSearchBtn.addEventListener('click', () => {
+    if (searchContainer.style.display === 'none' || searchContainer.style.display === '') {
+        searchContainer.style.display = 'block'; // Show input box and its search button
+        searchInput.focus(); // Focus the input
+    } else {
+        searchContainer.style.display = 'none'; // Hide input box and its search button
+    }
+});
+
+// Optional functionality for the new search button
+newSearchBtn.addEventListener('click', () => {
+    alert('Search triggered!');
+});
+
+// Attach event listener to search input box
+searchInput.addEventListener('input', function () {
+    const searchValue = searchInput.value.toLowerCase().trim(); // Convert search value to lowercase and trim whitespace
+    const rows = document.querySelectorAll("#mytable tbody tr:not(#new-task-row)"); // Exclude the new task row
+
+    rows.forEach((row) => {
+        const taskCell = row.cells[0]; // Get the first cell (Tasks/Day column)
+        if (taskCell) {
+            // Check if the cell has an input field
+            const taskText = taskCell.querySelector('input') 
+                ? taskCell.querySelector('input').value.toLowerCase().trim() // Use input value
+                : taskCell.textContent.toLowerCase().trim(); // Use cell text content
+            
+            // Check if the search value matches the task text
+            if (taskText.includes(searchValue)) {
+                row.style.display = ""; // Show row
+            } else {
+                row.style.display = "none"; // Hide row
+            }
+        }
+    });
+});
+
+
+
+
+
+    </script>
+    
+</body>
+</html>
