@@ -842,13 +842,18 @@ function populateTable() {
     displayedData.forEach(row => {
         const tr = document.createElement('tr');
         const formattedDate = row.Date ? convertExcelDate(row.Date) : "Invalid Date";
+        const dateObject = new Date(formattedDate); // Convert to Date object
+        const isWeekend = dateObject.getDay() === 0 || dateObject.getDay() === 6; // Check if Saturday/Sunday
+        const isHoliday = row.Holiday && row.Holiday.toLowerCase() === 'yes'; // Check if the row is marked as a holiday
+
+        const disableRow = isWeekend || isHoliday;
 
         tr.innerHTML = `
-            <td><input type="checkbox" /></td>
+            <td><input type="checkbox" ${disableRow ? 'disabled' : ''} /></td>
             <td>${formattedDate}</td>
-            <td><input class="time-input" type="time" value="${row['Time In'] || ''}" /></td>
-            <td><input class="time-input" type="time" value="${row['Time Out'] || ''}" /></td>
-            <td><input type="text" value="${row.Description || ''}" class="form-control form-control-sm" /></td>
+            <td><input class="time-input" type="time" value="${row['Time In'] || ''}" ${disableRow ? 'disabled' : ''} /></td>
+            <td><input class="time-input" type="time" value="${row['Time Out'] || ''}" ${disableRow ? 'disabled' : ''} /></td>
+            <td><input type="text" value="${row.Description || ''}" class="form-control form-control-sm" ${disableRow ? 'disabled' : ''} /></td>
             <td>${row['Site Name'] || 'Office'}</td>
         `;
         tableBody.appendChild(tr);
@@ -856,6 +861,7 @@ function populateTable() {
 
     updateFooter(totalPages); // Update pagination controls
 }
+
 function updateFooter(totalPages) {
     const paginationButtons = document.getElementById('paginationButtons');
     paginationButtons.innerHTML = ''; // Clear existing buttons
@@ -995,63 +1001,4 @@ function getDaySuffix(day) {
 
 
 
-<!-- function populateTable(data) {
-  const tableBody = document.getElementById('mytable').querySelector('tbody');
-  const tableFooter = document.getElementById('mytable').querySelector('tfoot');
-  tableBody.innerHTML = ''; // Clear existing rows
-
-  // Calculate the data range to display
-  const totalPages = Math.ceil(data.length / rowsPerPage);
-  const startIndex = (currentPage - 1) * rowsPerPage;
-  const endIndex = Math.min(startIndex + rowsPerPage, data.length);
-  const displayedData = data.slice(startIndex, endIndex);
-
-  // Display rows
-  displayedData.forEach((row) => {
-      const tr = document.createElement('tr');
-
-      // Convert Excel serial date or string date to a proper format
-      const formattedDate = row.Date ? convertExcelDate(row.Date) : "Invalid Date";
-      const dayOfWeek = getDayOfWeek(formattedDate);
-
-      // Prefill "Weekend" in the description for Saturdays and Sundays
-      if (dayOfWeek === "Saturday" || dayOfWeek === "Sunday") {
-          row.Description = "Weekend";
-      }
-
-      // Render the row based on the description
-      if (
-          row.Description === "Weekend" || 
-          row.Description === "Public Holiday" || 
-          row.Description === "Constitution Day"
-      ) {
-          // Only display Date and Description
-          tr.innerHTML = `
-              <td><input type="checkbox" /></td>
-              <td>${formattedDate}</td>
-              <td colspan="3" style="text-align: center;">${row.Description}</td>
-              <td></td>
-              <td></td>
-              <td></td>
-          `;
-      } else {
-          // Display all fields for other rows
-          tr.innerHTML = `
-              <td><input type="checkbox" /></td>
-              <td>${formattedDate}</td>
-              <td><input class="time-input" type="time" value="${row['Time In'] || ''}" /></td>
-              <td><input class="time-input" type="time" value="${row['Time Out'] || ''}" /></td>
-              <td><input type="text" value="${row.Description || ''}" class="form-control form-control-sm" /></td>
-              <td>
-                  <button class="btn btn-outline-secondary btn-sm">${row['Site Name'] || 'Office'}</button>
-              </td>
-          `;
-      }
-
-      tableBody.appendChild(tr);
-  });
-
-  // Update footer with controls
-  updateFooter(totalPages);
-} -->
 

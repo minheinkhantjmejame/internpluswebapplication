@@ -20,7 +20,11 @@
   border-radius: 4px;
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
+  position: fixed; /* Fix the sidebar */
+  height: 100vh; /* Full height of the viewport */
+  overflow-y: auto; /* Add scroll if content exceeds the height */
+}
+
 
     .sidebar .menu-item {
       display: flex;
@@ -421,10 +425,6 @@ table{
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-td {
-  position: relative; /* Make the <td> relative so the options box aligns properly */
-}
-
 
 td#starttime span,td#endtime span{
     padding-right:9px;
@@ -581,6 +581,8 @@ label.upload-files i {
   color: #359c22;
 }
 
+
+
 /* Ensure no other CSS rules override these styles */
 
 
@@ -646,32 +648,16 @@ label.upload-files i {
       color: #721c24; /* Dark red text */
     }
 
-    .options-box {
-  display: none;
-  position: absolute;
-  top: 30px; /* Adjust based on button position */
-  right: 0; /* Align with the button */
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  padding: 10px;
-  z-index: 10;
-}
-.options-box ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-.options-box ul li {
-  padding: 5px 10px;
-  cursor: pointer;
-  white-space: nowrap;
-}
-.options-box ul li:hover {
-  background-color: #f0f0f0;
-}
 
+  .rule-text {
+    width: 80%; /* Fixed width for rules */
+    word-wrap: break-word; /* Ensure text wraps inside the fixed width */
+  }
+
+  .accept-btn {
+    width: 120px; /* Fixed width for buttons */
+    text-align: center;
+  }
 
 
   </style>
@@ -767,337 +753,228 @@ label.upload-files i {
       </div>
     
       <div class="col-md-8 content" style="margin-left: 20px;">
+        <!-- Existing Card -->
         <div class="card">
-            <h3 class="fw-bold">LEAVE</h3>
-            <p>Leave must be submitted to the supervisor 15 days in advance. After notifying the supervisor, submit the leave form below.</p>
-            <p>*Frequent absences and unannounced absences give effect to performance evaluations.</p>    
+          <h3 class="fw-bold">INTERNSHIP ORIENTATION (FIRST DAY CHECKLIST)</h3>
+          <p>Have students read the documents and check the list of documents on the day the internship begins.</p>
         </div>
-                <!-- Assignments for Internship Card -->
-        <div id="search-card" class="card p-3">
-            <div class="d-flex justify-content-between align-items-center">
-            <!-- Heading -->
-            <h5 class="fw-bold mb-0">LEAVE HISTORY</h5>
-
-            <!-- Action Buttons -->
-            <div class="d-flex align-items-center gap-2">
-                <!-- Search Icon -->
-                <button class="btn align-items-center" style="width:30px;height:30px; background-color:#fff;border:1px solid #000;color:#000">
-                  <i class="bi bi-search m-0"></i>
-                </button>
-              
-                <!-- Date Picker -->
-                <div id="datepicker_btn" class="btn position-relative d-flex align-items-center" style="padding: 0 10px; background-color:#fff;border:1px solid #000;color:#000">
-                  <i class="bi bi-calendar-event me-2"></i>
-                  <span id="selected-date">25 November 2024</span>
-                  <input type="date" id="date-picker" class="position-absolute w-100 h-100" style="opacity: 0; top: 0; left: 0; cursor: pointer; z-index: 2;">
-                </div>                                               
-                <!-- Filter Button -->
-                <button id="filter-btn" class="btn" style="background-color:#fff;border:1px solid #000;color:#000;">
-                  <i class="bi bi-funnel"></i> Filters
-                </button>                
-              </div>
-
-              
+      
+        <!-- New Card: Name-Surname Section -->
+        <div class="card">
+          <h3 class="fw-bold">NAME-SURNAME</h3>
+          <form>
+            <div class="mb-3">
+              <label for="nameSurname" class="form-label fw-bold">NAME-SURNAME</label>
+              <input type="text" class="form-control" id="nameSurname" required>
             </div>
+            <div class="mb-3">
+              <label for="position" class="form-label fw-bold">POSITION</label>
+              <input type="text" class="form-control" id="position" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-bold">ORIENTATION</label>
+              <div class="d-flex gap-2">
+                <button type="button" class="btn btn-outline-dark">Orientation received</button>
+                <button type="button" class="btn btn-outline-dark">Haven't orientation yet</button>
+              </div>
+            </div>
+          </form>
         </div>
-        <div class=" col-md-12 ">
-                      <table id="mytable" class="table table-sm " style="border:1px solid #F3F5FC;border-radius:4px;">
-                          <thead>
-                              <th>Leave Type</th>
-                              <th>Duration</th>
-                              <th>Start-End Date</th>
-                              <th>Start time</th>
-                              <th>End Time</th>
-                              <th>Reason</th>
-                              <th>Status</th>
-                              <td class="opacity-0">
-                              </td>
-                          </thead>
-                          <tbody id="leave-table">
-                              <!-- Leave history will be appended here -->
-                          </tbody>                  
-                      </table>
-                      <button class="submit-btn" id="add-leave-btn">Add Leave</button>
-        </div>        
-      </div>
-      <!-- Leave Form Panel -->
-      <div id="leave-form-panel" style="display: none; position: fixed; top: 0; right: 0; width: 400px; height: 100%; background-color: #ffffff; box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1); z-index: 1000; padding: 20px;   overflow-y: auto;">
-        <div style="display: flex;justify-content: space-between;align-items: center;">
-          <h5 class="fw-bold leave-title">LEAVE</h5>
-          <i class="bi bi-x-lg fw-bold" id="cancel-btn"></i>
-      </div>      
-        <form id="leave-form">
-          <div class="mb-3">
-            <div class="profile-card d-flex align-items-center mt-3" style="background-color: #f3f5fc; padding: 10px; border-radius: 10px; gap: 15px;">
-              <label for="profileUpload" class="profile-upload-label mb-0">
-                <img id="profileImage" src="../assets/img/user_sample.png" alt="Profile" class="profile-photo" style="width: 50px; height: 50px; border-radius: 50%;"/>
-              </label>
-              <div class="d-flex flex-column flex-grow-1">
-                <p class="mb-0 fw-bold" style="font-size: 16px;">Nicharee Seatthanont</p>
-                 <small>UX/UI Designer</small>
-              </div>
-              <span class="badge text-black" style="width: fit-content; border-radius:4px; background-color:#B1BBE7;">Intern</span>
-            </div>
-            <select id="leave-type" class="form-select">
-              <option value="Sick Leave">Sick Leave</option>
-              <option value="Business">Business</option>
-              <option value="Vacation">Vacation</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
-          <div class="mb-3">
-            <label for="start-date" class="form-label">Start Date</label>
-            <input type="date" id="start-date" class="form-control" required>
-          </div>
-          <div class="mb-3">
-            <label for="end-date" class="form-label">End Date</label>
-            <input type="date" id="end-date" class="form-control" required>
-          </div>
-          <div class="mb-3">
-            <label for="start-time" class="form-label">Start Time</label>
-            <input type="time" id="start-time" class="form-control">
-          </div>
-          <div class="mb-3">
-            <label for="end-time" class="form-label">End Time</label>
-            <input type="time" id="end-time" class="form-control">
-          </div>
-          <div class="mb-3">
-            <label for="reason" class="form-label">Reason</label>
-            <textarea id="reason" class="form-control" rows="3"></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary w-100">Submit</button>
+      
 
-        </form>
+<!-- Card: Regulations and Guidelines -->
+            <div class="card">
+                <h3 class="fw-bold">REGULATIONS AND GUIDELINES FOR INTERN WORK</h3>
+                <p><small>*Read and understand and press accept for each item</small></p>
+
+                <div class="d-flex flex-column gap-3">
+                <!-- Rule 1 -->
+                <div class="d-flex justify-content-between align-items-center">
+                    <p class="mb-0 rule-text">1. Students must prepare for work or report to work at 8:00 a.m.</p>
+                    <button type="button" class="btn btn-outline-dark accept-btn">Accept</button>
+                </div>
+                <!-- Rule 2 -->
+                <div class="d-flex justify-content-between align-items-center">
+                    <p class="mb-0 rule-text">2. Operations are reported daily with details included.</p>
+                    <button type="button" class="btn btn-outline-dark accept-btn">Accept</button>
+                </div>
+                <!-- Rule 3 -->
+                <div class="d-flex justify-content-between align-items-center">
+                    <p class="mb-0 rule-text">3. Students must submit a work record (Assignment) and report it to their supervisor before the end of their daily work.</p>
+                    <button type="button" class="btn btn-outline-dark accept-btn">Accept</button>
+                </div>
+                <!-- Rule 4 -->
+                <div class="d-flex justify-content-between align-items-center">
+                    <p class="mb-0 rule-text">4. Students must submit a time note (Timesheet) of their internship to their supervisor every week.</p>
+                    <button type="button" class="btn btn-outline-dark accept-btn">Accept</button>
+                </div>
+                <!-- Rule 5 -->
+                <div class="d-flex justify-content-between align-items-center">
+                    <p class="mb-0 rule-text">5. Assigned work should be submitted within the specified period.</p>
+                    <button type="button" class="btn btn-outline-dark accept-btn">Accept</button>
+                </div>
+                <!-- Rule 6 -->
+                <div class="d-flex justify-content-between align-items-center">
+                    <p class="mb-0 rule-text">6. Student leave must be submitted to the supervisor 15 days in advance.</p>
+                    <button type="button" class="btn btn-outline-dark accept-btn">Accept</button>
+                </div>
+                <!-- Rule 7 -->
+                <div class="d-flex justify-content-between align-items-center">
+                    <p class="mb-0 rule-text">7. If you miss work or stop performing your duties without notifying the company of your leave, the first time will be a warning.</p>
+                    <button type="button" class="btn btn-outline-dark accept-btn">Accept</button>
+                </div>
+                <!-- Rule 8 -->
+                <div class="d-flex justify-content-between align-items-center">
+                    <p class="mb-0 rule-text">8. In the case that students work from home, there will be an allowance of 80 baht per day.</p>
+                    <button type="button" class="btn btn-outline-dark accept-btn">Accept</button>
+                </div>
+                <!-- Rule 9 -->
+                <div class="d-flex justify-content-between align-items-center">
+                    <p class="mb-0 rule-text">9. If the intern is not completed as scheduled, unable to submit work as assigned, the company reserves the right to provide allowances.</p>
+                    <button type="button" class="btn btn-outline-dark accept-btn">Accept</button>
+                </div>
+                </div>
+            </div>
+
+            <!-- Card: Other Regulations and Guidelines -->
+  <div class="card">
+    <h3 class="fw-bold">OTHER REGULATIONS AND GUIDELINES</h3>
+    <div class="d-flex flex-column gap-3">
+      <!-- Rule 1 -->
+      <div>
+        <p class="mb-0"><strong>1.</strong> Strictly follow company rules and policies during the period of the apprenticeship.</p>
       </div>
-      <!-- Leave Form Panel -->
+      <!-- Rule 2 -->
+      <div>
+        <p class="mb-0"><strong>2.</strong> Internship time and daily activities</p>
+        <p class="ms-4 mb-0">- Internship days Monday to Friday, excluding public holidays, internship time 8:30 a.m. – 5:30 p.m.</p>
+      </div>
+      <!-- Rule 3 -->
+      <div>
+        <p class="mb-0"><strong>3.</strong> Privacy information</p>
+        <p class="ms-4 mb-0">- Keep customer and employee information confidential.</p>
+      </div>
+      <!-- Rule 4 -->
+      <div>
+        <p class="mb-0"><strong>4.</strong> Evaluation</p>
+        <p class="ms-4 mb-0">Evaluation criteria are as follows:</p>
+        <div class="d-flex flex-wrap gap-3 ms-4 mt-2">
+          <div class="border p-2 rounded bg-light text-center" style="width: 200px;">
+            Time to work
+          </div>
+          <div class="border p-2 rounded bg-light text-center" style="width: 200px;">
+            Punctuality in submitting work
+          </div>
+          <div class="border p-2 rounded bg-light text-center" style="width: 200px;">
+            Accuracy of work
+          </div>
+          <div class="border p-2 rounded bg-light text-center" style="width: 200px;">
+            Cooperation in working in groups
+          </div>
+          <div class="border p-2 rounded bg-light text-center" style="width: 200px;">
+            Efficiency in communicating both speaking and writing
+          </div>
+          <div class="border p-2 rounded bg-light text-center" style="width: 200px;">
+            Ability to think analytically and solve problems
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Accept Button -->
+    <div class="d-flex justify-content-end align-items-center mt-3">
+      <button type="button" class="btn btn-outline-dark" style="width: 120px;">Accept</button>
+    </div>
+  </div>
+
+  <!-- Card: Guidelines for Complying with Personal Data Protection Act -->
+  <div class="card">
+    <h3 class="fw-bold">GUIDELINES FOR COMPLYING WITH THE PERSONAL DATA PROTECTION ACT</h3>
+    <div class="d-flex flex-column gap-3">
+      <!-- Guidelines -->
+      <ol>
+        <li>Do not use or disclose personal information without the consent of the owner of personal data. 
+          Format of information that the company stores includes: first name, last name, telephone number, address, email address, national ID card number, photograph, work history, age, race, ethnicity, political opinions, religious beliefs, health information, and more. This must comply with the Personal Data Protection Committee guidelines.
+        </li>
+        <li>It is prohibited to collect personal information about race, ethnicity, political opinions, religious or philosophical beliefs, sexual behavior, criminal history, health information, and other sensitive information without the express consent of the owner of personal data.</li>
+        <li>It is prohibited to use or disclose personal information for purposes other than the purposes stated while collecting the information.</li>
+        <li>Requesting consent must be made expressly. This can be in writing or through an electronic system unless such means are not possible.</li>
+        <li>The personal data collector must collect, use, or disclose personal data only for the purposes informed to the owner before or at the time of collection.</li>
+        <li>Requesting consent must be clearly separated from other messages, using clear and accessible language.</li>
+        <li>Collection of personal information must be necessary for legitimate purposes.</li>
+        <li>It is prohibited to collect personal information from sources other than directly from the owner.</li>
+        <li>When transferring personal data abroad, the receiving country or organization must have adequate data protection standards in line with Section 16 (5).</li>
+      </ol>
+    </div>
+    <!-- Penalties Section -->
+    <div class="mt-3">
+      <h5 class="fw-bold">Penalties</h5>
+      <p class="mb-0">If the intern does not follow the work guidelines and the guidelines for compliance with the Personal Data Protection Act, the internship will be terminated immediately.</p>
+    </div>
+    <!-- Effective Date -->
+    <div class="mt-3">
+      <h5 class="fw-bold">Effective date</h5>
+      <p class="mb-0">Effective May 27, 2020</p>
+    </div>
+    <!-- Accept Button -->
+    <div class="d-flex justify-content-end align-items-center mt-3">
+      <button type="button" class="btn btn-outline-dark" style="width: 120px;">Accept</button>
+    </div>
+  </div>
+
+  <!-- Card 1 -->
+  <div class="card">
+    <p>
+      Interns have read and understood the above work guidelines carefully and at the end of the internship will delete or destroy all relevant information during the internship with the company. If it is found that the information has been distributed to the outside, interns will be responsible for all damages incurred. This edition of the intern's work guidelines is final. Other intern's work guidelines are void.
+    </p>
+    <div class="d-flex justify-content-end align-items-center mt-3">
+      <button type="button" class="btn btn-outline-dark" style="width: 120px;">Accept</button>
+    </div>
+  </div>
+
+  <!-- Card 2: Copy of ID Card -->
+  <div class="card">
+    <h5 class="fw-bold">COPY OF ID CARD OF THE INTERN</h5>
+    <div class="d-flex align-items-center">
+      <label class="upload-label me-3" for="idCardUpload">
+        <i class="fa-solid fa-upload" style="font-size: 24px; color: #474BC2;"></i>
+      </label>
+      <input type="file" class="form-control" id="idCardUpload" accept=".jpg,.jpeg,.png,.pdf">
+      <span class="text-danger ms-3">*</span>
+    </div>
+    <small class="text-muted">*Supports size up to 10 MB</small>
+  </div>
+
+  <!-- Card 3: Copy of Bank Account -->
+  <div class="card">
+    <h5 class="fw-bold">COPY OF KASIKORN BANK ACCOUNT</h5>
+    <div class="d-flex align-items-center">
+      <label class="upload-label me-3" for="bankAccountUpload">
+        <i class="fa-solid fa-upload" style="font-size: 24px; color: #474BC2;"></i>
+      </label>
+      <input type="file" class="form-control" id="bankAccountUpload" accept=".jpg,.jpeg,.png,.pdf">
+      <span class="text-danger ms-3">*</span>
+    </div>
+    <small class="text-muted">*Supports size up to 10 MB</small>
+  </div>
+
+  <!-- Submit Button -->
+  <div class="d-flex justify-content-start mt-4">
+    <button type="submit" class="btn btn-primary" style="width: 150px;">Submit</button>
+  </div>
+          
+      </div>
+      
     </div>
     
   </div>
 
-
-
   <!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const addLeaveBtn = document.getElementById('add-leave-btn');
-    const leaveFormPanel = document.getElementById('leave-form-panel');
-    const cancelBtn = document.getElementById('cancel-btn');
-    const leaveForm = document.getElementById('leave-form');
-    const leaveTable = document.getElementById('leave-table');
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Custom Js  -->
+  <script>
 
-    let isEditing = false;
-    let editingRow = null;
-
-    // Load existing leaves from localStorage
-    loadLeavesFromLocalStorage();
-
-    // Show the leave form
-    addLeaveBtn.addEventListener('click', () => {
-        isEditing = false; // Reset editing mode
-        editingRow = null; // Reset the row being edited
-        leaveForm.reset(); // Clear form fields
-        leaveFormPanel.style.display = 'block';
-        leaveFormPanel.style.transform = 'translateX(0)';
-        leaveFormPanel.scrollTop = 0; // Reset scroll position to the top
-    });
-
-    // Hide the leave form
-    cancelBtn.addEventListener('click', () => {
-        leaveFormPanel.style.display = 'none';
-    });
-
-    // Handle form submission
-    leaveForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-
-        // Get form values
-        const leaveType = document.getElementById('leave-type').value;
-        const startDate = document.getElementById('start-date').value;
-        const endDate = document.getElementById('end-date').value;
-        const startTime = document.getElementById('start-time').value || 'N/A';
-        const endTime = document.getElementById('end-time').value || 'N/A';
-        const reason = document.getElementById('reason').value || 'N/A';
-
-        const leave = {
-            leaveType,
-            startDate,
-            endDate,
-            startTime,
-            endTime,
-            reason,
-            status: 'Pending',
-        };
-
-        if (isEditing && editingRow) {
-            // Update the existing row
-            updateRow(editingRow, leave);
-            updateLeaveInLocalStorage(editingRow.dataset.leaveId, leave);
-            isEditing = false;
-            editingRow = null;
-        } else {
-            // Add new leave
-            const leaveId = saveLeaveToLocalStorage(leave);
-            appendLeaveToTable({ ...leave, id: leaveId });
-        }
-
-        // Clear and hide the form
-        leaveForm.reset();
-        leaveFormPanel.style.display = 'none';
-    });
-
-    // Toggle options box visibility and handle edit functionality
-    leaveTable.addEventListener('click', (event) => {
-        // Check if the clicked element is a three-dotted button
-        if (event.target.closest('.options-btn')) {
-            const btn = event.target.closest('.options-btn');
-            const optionsBox = btn.nextElementSibling;
-
-            // Hide all other options boxes
-            document.querySelectorAll('.options-box').forEach((box) => {
-                if (box !== optionsBox) {
-                    box.style.display = 'none';
-                }
-            });
-
-            // Toggle the clicked options box
-            optionsBox.style.display =
-                optionsBox.style.display === 'block' ? 'none' : 'block';
-
-            // Stop propagation to prevent triggering the global click listener
-            event.stopPropagation();
-        }
-
-        // Handle edit button
-        const editBtn = event.target.closest('.bi-pen');
-        if (editBtn) {
-            const row = editBtn.closest('tr');
-            editingRow = row; // Save the row being edited
-            isEditing = true; // Enable editing mode
-            populateFormForEdit(row);
-            leaveFormPanel.style.display = 'block'; // Show the form
-        }
-
-        // Handle remove button
-        const removeBtn = event.target.closest('.remove-row');
-        if (removeBtn) {
-            const row = removeBtn.closest('tr');
-            if (confirm('Are you sure you want to remove this leave?')) {
-                removeLeaveFromLocalStorage(row.dataset.leaveId);
-                row.remove();
-            }
-        }
-
-        // Handle "View Reason" button
-        const viewReasonBtn = event.target.closest('.view-reason-btn');
-        if (viewReasonBtn) {
-            const row = viewReasonBtn.closest('tr');
-            const leave = JSON.parse(row.dataset.leaveData);
-            alert(`Reason: ${leave.reason}`);
-        }
-    });
-
-    // Hide options box when clicking anywhere outside
-    document.addEventListener('click', (event) => {
-        if (!event.target.closest('.options-btn') && !event.target.closest('.options-box')) {
-            document.querySelectorAll('.options-box').forEach((box) => {
-                box.style.display = 'none';
-            });
-        }
-    });
-
-    // Populate the form for editing
-    function populateFormForEdit(row) {
-        const leave = JSON.parse(row.dataset.leaveData);
-        document.getElementById('leave-type').value = leave.leaveType;
-        document.getElementById('start-date').value = leave.startDate;
-        document.getElementById('end-date').value = leave.endDate;
-        document.getElementById('start-time').value = leave.startTime === 'N/A' ? '' : leave.startTime;
-        document.getElementById('end-time').value = leave.endTime === 'N/A' ? '' : leave.endTime;
-        document.getElementById('reason').value = leave.reason;
-    }
-
-    // Append leave to the table
-    function appendLeaveToTable(leave) {
-        const newRow = document.createElement('tr');
-        const leaveId = leave.id || `${Date.now()}`; // Unique ID for the row
-        newRow.dataset.leaveId = leaveId;
-        newRow.dataset.leaveData = JSON.stringify(leave);
-        newRow.innerHTML = `
-            <td>${leave.leaveType}</td>
-            <td>${calculateDuration(leave.startDate, leave.endDate)} days</td>
-            <td>${leave.startDate} - ${leave.endDate}</td>
-            <td id="starttime"><span>${leave.startTime}</span></td>
-            <td id="endtime"><span>${leave.endTime}</span></td>
-            <td><button class="btn btn-link view-reason-btn">View Reason</button></td>
-            <td id="status"><span>${leave.status}</span></td>
-            <td>
-                <button class="btn p-0 options-btn">
-                    <i class="bi bi-three-dots-vertical"></i>
-                </button>
-                <div class="options-box">
-                    <ul>
-                        <li><i class="bi bi-pen"></i>Edit</li>
-                        <li class="remove-row"><i class="bi bi-trash"></i> Remove</li>
-                    </ul>
-                </div>
-            </td>
-        `;
-        leaveTable.appendChild(newRow);
-    }
-
-    // Update the existing row in the table
-    function updateRow(row, leave) {
-        row.dataset.leaveData = JSON.stringify(leave);
-        row.querySelector('td:nth-child(1)').textContent = leave.leaveType;
-        row.querySelector('td:nth-child(2)').textContent = `${calculateDuration(leave.startDate, leave.endDate)} days`;
-        row.querySelector('td:nth-child(3)').textContent = `${leave.startDate} - ${leave.endDate}`;
-        row.querySelector('td:nth-child(4) span').textContent = leave.startTime;
-        row.querySelector('td:nth-child(5) span').textContent = leave.endTime;
-    }
-
-    // Save leave to localStorage
-    function saveLeaveToLocalStorage(leave) {
-        const leaveId = `${Date.now()}`;
-        let leaves = JSON.parse(localStorage.getItem('leaves')) || [];
-        leaves.push({ ...leave, id: leaveId });
-        localStorage.setItem('leaves', JSON.stringify(leaves));
-        return leaveId;
-    }
-
-    // Update leave in localStorage
-    function updateLeaveInLocalStorage(leaveId, updatedLeave) {
-        let leaves = JSON.parse(localStorage.getItem('leaves')) || [];
-        const index = leaves.findIndex((leave) => leave.id === leaveId);
-        if (index !== -1) {
-            leaves[index] = { ...updatedLeave, id: leaveId };
-            localStorage.setItem('leaves', JSON.stringify(leaves));
-        }
-    }
-
-    // Remove leave from localStorage
-    function removeLeaveFromLocalStorage(leaveId) {
-        let leaves = JSON.parse(localStorage.getItem('leaves')) || [];
-        leaves = leaves.filter((leave) => leave.id !== leaveId);
-        localStorage.setItem('leaves', JSON.stringify(leaves));
-    }
-
-    // Load leaves from localStorage
-    function loadLeavesFromLocalStorage() {
-        const leaves = JSON.parse(localStorage.getItem('leaves')) || [];
-        leaves.forEach((leave) => appendLeaveToTable(leave));
-    }
-
-    // Calculate duration in days
-    function calculateDuration(start, end) {
-        const startDate = new Date(start);
-        const endDate = new Date(end);
-        const diff = Math.abs(endDate - startDate);
-        return Math.ceil(diff / (1000 * 60 * 60 * 24)) + 1; // Include start date
-    }
-});
-</script>
-
-   
+  </script>
+  <!-- Custom Js  -->
+    
 </body>
 </html>
