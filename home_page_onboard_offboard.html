@@ -9,7 +9,9 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
   <!-- font awesome cdn  -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <style>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="./css/styles.css">
+  <style type="text/css" rel="stylesheet">
     body {
       background-color: #ffffff;
       font-family: Arial, sans-serif;
@@ -799,7 +801,7 @@ label.upload-files i {
 </div>
       
     <div class="profile-icon mx-3">
-      <img src="../assets/img/user_sample.png" alt="Profile Picture" style="width: 40px; height: 40px; border-radius: 50%; cursor: pointer;">
+      <img src="./assets/img/user_sample.png" alt="Profile Picture" style="width: 40px; height: 40px; border-radius: 50%; cursor: pointer;">
     </div>
   </div>
 </nav>
@@ -844,7 +846,7 @@ label.upload-files i {
         </div>
         <div class="profile-card d-flex align-items-center mt-3" style="background-color: #D1D1F0; padding: 10px; border-radius: 10px; gap: 15px;">
           <label for="profileUpload" class="profile-upload-label mb-0">
-            <img id="profileImage" src="../assets/img/user_sample.png" alt="Profile" class="profile-photo" style="width: 50px; height: 50px; border-radius: 50%;"/>
+            <img id="profileImage" src="./assets/img/user_sample.png" alt="Profile" class="profile-photo" style="width: 50px; height: 50px; border-radius: 50%;"/>
           </label>
           <div class="d-flex flex-column flex-grow-1">
             <p class="mb-0 fw-bold" style="font-size: 16px;">Nicharee S.</p>
@@ -899,7 +901,7 @@ label.upload-files i {
               <div class="col-md-3">
                 <div class="sub-card" >
                   <div class="mb-3" style="text-align:end;">
-                    <img src="../assets/icon/heart-fill.png" alt="">
+                    <img src="./assets/icon/heart-fill.png" alt="">
                   </div>                 
                   <p>Feelings about internships</p>
                 </div>
@@ -907,7 +909,7 @@ label.upload-files i {
               <div class="col-md-3">
                 <div class="sub-card" >
                   <div class="mb-3" style="text-align:end;">
-                    <img src="../assets/icon/heart-fill.png" alt="">
+                    <img src="./assets/icon/heart-fill.png" alt="">
                   </div>                 
                   <p>What do you get from your internship</p>
                 </div>
@@ -915,7 +917,7 @@ label.upload-files i {
               <div class="col-md-3">
                 <div class="sub-card" >
                   <div class="mb-3" style="text-align:end;">
-                    <img src="../assets/icon/heart-fill.png" alt="">
+                    <img src="./assets/icon/heart-fill.png" alt="">
                   </div>                 
                   <p>Problems encountered, problem solving and others</p>
                 </div>
@@ -923,7 +925,7 @@ label.upload-files i {
               <div class="col-md-3">
                 <div class="sub-card" >
                   <div class="mb-3" style="text-align:end;">
-                    <img src="../assets/icon/heart-fill.png" alt="">
+                    <img src="./assets/icon/heart-fill.png" alt="">
                   </div>                 
                   <p>Video about 3-5 minutes</p>
                 </div>
@@ -931,7 +933,7 @@ label.upload-files i {
             </div>
             <div class="input-group mt-5" style="width:50%;" onclick="document.getElementById('vdotest').click();">                        
               <label class="input-group-text" style="background-color: #474BC2;" for="vdotest">
-                <img src="../assets/icon/file.png" alt="">
+                <img src="./assets/icon/file.png" alt="">
               </label>
               <input type="text" class="form-control internship" style="border:1px solid #000;border-left:none; border-radius:0 4px 4px 0;"     aria-label="File's placeholder" readonly>
               <input type="file" id="vdotest" class="form-control internship d-none" accept=".mp4" aria-label="Upload file" required>
@@ -970,7 +972,7 @@ label.upload-files i {
                 <div class="d-flex align-items-center justify-content-between mb-3" style="background-color:#eef3fb; padding:16px; border-radius:4px;">
                   <div class="d-flex align-items-center">
                     <!-- Profile Image -->
-                    <img src="../assets/img/supervisor.png" alt="User Avatar" class="rounded-circle" style="width: 50px; height: 50px;">
+                    <img src="./assets/img/supervisor.png" alt="User Avatar" class="rounded-circle" style="width: 50px; height: 50px;">
                     <!-- Name and Role -->
                     <div class="ms-3">
                       <h5 class="mb-0">Nicharee Seatthananont</h5>
@@ -1030,7 +1032,7 @@ label.upload-files i {
             <p class="mt-4">If you have internship assessment form, you can send them to us below.</p>
             <div class="input-group" style="width:50%;" onclick="document.getElementById('assessment').click();">                        
               <label class="input-group-text" style="background-color: #474BC2;" for="assessment">
-                <img src="../assets/icon/file.png" alt="">
+                <img src="./assets/icon/file.png" alt="">
               </label>
               <input type="text" class="form-control internship" style="border:1px solid #000;border-left:none; border-radius:0 4px 4px 0;"     aria-label="File's placeholder" readonly>
               <input type="file" id="assessment" class="form-control internship d-none" accept=".pdf" aria-label="Upload file" required>
@@ -1042,7 +1044,7 @@ label.upload-files i {
           </div>
     
           <div id="step-5" class="card step-content" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
-            <img src="../assets/img/diploma-icon.png" alt="diploma-icon" class="img-fluid" style="width: 200px; height: 200px;">
+            <img src="./assets/img/diploma-icon.png" alt="diploma-icon" class="img-fluid" style="width: 200px; height: 200px;">
             <h3 class="fw-bold">OFFBOARD SUCCESSFUL</h3>
             <p>Thank you for joining our internship program. Wish you luck.
               We will send the documents to you soon via this website. Including the allowance payment period.</p>
