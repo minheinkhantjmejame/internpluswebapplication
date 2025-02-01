@@ -450,18 +450,17 @@ p {
 }
 .internship-type .type-option {
     width: 150px;     
-    height: 100px;    
-    padding: 10px;    
-    margin: 0 2px;   
+    height: 130px;    
     display: flex;   
     flex-direction: column; 
     justify-content: center; 
     align-items: center; 
-    border: 1px solid black; 
-    border-radius: 10px; 
+    border: 2px solid black; 
+    border-radius:4px;
     cursor: pointer; 
     background-color: #fff;
     transition: background-color 0.3s, border-color 0.3s,color 0.3s;
+    padding:0;
 }
 
 
@@ -495,6 +494,7 @@ p {
 .internship-type .type-option.active {
     background-color: #b1bbe7;
     color: black;
+    border:none;
 }
 
 
@@ -606,7 +606,6 @@ img {
 
 .hero-section {
     background-color: #f8f9fa; 
-    padding: 40px 0; 
 }
 
 .hero-section .container {

@@ -15,8 +15,11 @@
             background-color:#474bc2;
         }
 
+        body{
+            background-color:#fff;
+        }
         .calendar-container {
-            background: #fff;
+            background: #f3f5fc;
             border: 1px solid #d0d8e9;
             box-shadow:0px 4px 4px rgba(0,0,0,0.2);
             border-radius: 10px;
@@ -50,6 +53,7 @@
         .calendar-header .nav-buttons {
             display: flex;
             gap: 10px;
+            color:#000;
         }
 
         .calendar-header .nav-buttons button {
@@ -57,7 +61,7 @@
             border: none;
             font-size: 18px;
             font-weight: bold;
-            color: #474bc2;
+            color: #000;
             cursor: pointer;
         }
 
@@ -80,9 +84,9 @@
         .calendar-dates div {
             padding: 10px;
             border-radius: 5px;
-            background-color: #fff;
+            background-color: #f3f5fc;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: background-color 0.3s;
         }
 
         .calendar-dates div:hover {
@@ -90,9 +94,15 @@
         }
 
         .calendar-dates div.selected {
-            background-color: #888cea;
-            color: #fff;
+            background-color: #d1d1f0;
+            color: #000;
         }
+
+        .calendar-dates div.in-range {
+    background-color: #e4e4f7; /* Soft pastel purple */
+    color: #000;
+}
+
 
         .date-buttons {
             display: flex;
@@ -111,13 +121,15 @@
             font-weight: bold;
             text-align: left;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: background-color 0.3s;
         }
 
         .date-button.active {
-            background-color: #d6e2f9;
-            border-color: #888cea;
+            background-color: #d1d1f0;
+            border:none;
         }
+
+
     </style>
 </head>
 <body>
@@ -171,8 +183,10 @@
                 <p style="font-size:24px;">Hi, Vanness Plus consulting Co., Ltd. is now recruiting interns. Internships can be done in both Work from home, On-site, and Hybrid with allowances. The office is located at Liberty Square Building, near BTS Sala Daeng/MRT Silom.</p>
             </div>
         </div>
-        
+            <hr/>
     </div>
+
+
 
     <div class="container mt-4">
         <div class="row">
@@ -248,8 +262,8 @@
                         
                             <!-- Start and End Date Buttons -->
                             <div class="date-buttons">
-                              <div class="date-button" id="startDateButton">Start date: Select date</div>
-                              <div class="date-button" id="endDateButton">End date: Select date</div>
+                              <div class="date-button" id="startDateButton"><h5>Start date</h5> Select date</div>
+                              <div class="date-button" id="endDateButton"><h5>End date</h5> Select date</div>
                             </div>
                           </div>
                     </div>
@@ -258,26 +272,40 @@
                     
         <div class="row">
             <div class="col-md-12 d-flex justify-content-center">
-                <div class="internship-type d-flex align-items-center justify-content-center">
+                <div class="internship-type d-flex align-items-center justify-content-center gap-2">
                     <div class="type-option">
                         <input type="radio" id="onSite" name="internshipType" value="on-site" hidden />
-                        <label for="onSite" class="d-block text-center">
-                            <i class="bi bi-building" style="font-size: 2rem;"></i>
-                            <p>On-site</p>
+                        <label for="onSite" class="d-block ">
+                            <div class="text-end">
+                                <i class="bi bi-building" style="font-size: 2rem;"></i>
+                            </div>
+                            <div class="text-start">
+                                <p>On-site</p>
+                            </div>
                         </label>
                     </div>
                     <div class="type-option">
                         <input type="radio" id="workFromHome" name="internshipType" value="work-from-home" hidden />
                         <label for="workFromHome" class="d-block text-center">
-                            <i class="bi bi-house" style="font-size: 2rem;"></i>
-                            <p>Work From Home</p>
+                            <div class="text-end mt-3">
+                                <i class="bi bi-house" style="font-size: 2rem;"></i>
+                            </div>
+                            <div class="text-start ml-0">
+                               <p>Work From Home</p> 
+                            </div>
+                            
                         </label>
                     </div>
-                    <div class="type-option">
+                    <div class="type-option" >
                         <input type="radio" id="hybrid" name="internshipType" value="hybrid" hidden />
                         <label for="hybrid" class="d-block text-center">
-                            <i class="bi bi-briefcase" style="font-size: 2rem;"></i>
-                            <p>Hybrid</p>
+                            <div class="text-end">
+                                <i class="bi bi-briefcase" style="font-size: 2rem;"></i>
+                            </div>      
+                            <div class="text-start ml-0">
+                                <p>Hybrid</p>
+                            </div>                    
+                            
                         </label>
                     </div>
                 </div>
@@ -390,40 +418,59 @@ document.addEventListener("DOMContentLoaded", () => {
           calendarDates.appendChild(emptyDiv);
         }
 
-        // Add days of the month
         for (let i = 1; i <= daysInMonth; i++) {
-          const dateDiv = document.createElement("div");
-          dateDiv.textContent = i;
+    const dateDiv = document.createElement("div");
+    dateDiv.textContent = i;
 
-          // Add click event to update Start or End Date
-          dateDiv.addEventListener("click", () => {
-            const selectedDate = new Date(year, month, i).toDateString();
-            if (activeButton === "start") {
-              startDate = selectedDate;
-              startDateButton.textContent = `Start date: ${startDate}`;
-              startDateButton.classList.add("selected");
-            } else if (activeButton === "end") {
-              if (startDate && new Date(selectedDate) < new Date(startDate)) {
+    // Format the date correctly: "Mon, 23 Nov 2024"
+    const selectedDateObj = new Date(year, month, i);
+    const formattedDate = selectedDateObj.toLocaleDateString("en-GB", {
+        weekday: "short",
+        day: "2-digit",
+        month: "short",
+        year: "numeric"
+    }).replace(/^(\w{3}) (\d{2}) (\w{3}) (\d{4})$/, "$1, $2 $3 $4"); // Adds comma
+
+    // Remove previous styles
+    dateDiv.classList.remove("selected", "in-range");
+
+    // Highlight Start Date
+    if (startDate === formattedDate) {
+        dateDiv.classList.add("selected");
+    }
+
+    // Highlight End Date
+    if (endDate === formattedDate) {
+        dateDiv.classList.add("selected");
+    }
+
+    // Highlight dates between Start and End
+    if (startDate && endDate && new Date(startDate) < selectedDateObj && selectedDateObj < new Date(endDate)) {
+        dateDiv.classList.add("in-range");
+    }
+
+    // Click event to update Start or End Date
+    dateDiv.addEventListener("click", () => {
+        if (activeButton === "start") {
+            startDate = formattedDate;
+            startDateButton.innerHTML = `<h5>Start date</h5> ${startDate}`;
+            startDateButton.classList.add("selected");
+        } else if (activeButton === "end") {
+            if (startDate && selectedDateObj < new Date(startDate)) {
                 alert("End date cannot be earlier than Start date!");
                 return;
-              }
-              endDate = selectedDate;
-              endDateButton.textContent = `End date: ${endDate}`;
-              endDateButton.classList.add("selected");
             }
-            updateCalendar();
-          });
-
-          // Highlight selected dates
-          if (startDate === new Date(year, month, i).toDateString()) {
-            dateDiv.classList.add("selected");
-          }
-          if (endDate === new Date(year, month, i).toDateString()) {
-            dateDiv.classList.add("selected");
-          }
-
-          calendarDates.appendChild(dateDiv);
+            endDate = formattedDate;
+            endDateButton.innerHTML = `<h5>End date</h5> ${endDate}`;
+            endDateButton.classList.add("selected");
         }
+        updateCalendar(); // Re-render calendar with correct highlighting
+    });
+
+    calendarDates.appendChild(dateDiv);
+}
+
+
       }
 
       // Event listeners for navigation

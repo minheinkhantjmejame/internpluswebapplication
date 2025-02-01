@@ -217,12 +217,13 @@
                         <label for="gpa" class="form-label">GPA.</label>
                         <input type="text" class="form-control"   style="border:2px solid black; border-radius:4px;" id="gpa">
                     </div>
-                    <div class=" mb-3">
-                        <div>
-                            <label for="resume" class="form-label">Resume</label>
+                    <div class="mb-3">
+                        <label for="resume" class="form-label">Resume</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-file-earmark"></i></span>
+                            <input type="text" class="form-control file-name" style="border:2px solid black;border-left:none; border-radius:0 4px 4px 0;" placeholder="Select the file to upload" readonly>
+                            <input type="file" id="fileInput" class="form-control file-input d-none" aria-label="Upload file" accept=".pdf">
                         </div>
-                        <input type="text" class="form-control" style="border:2px solid black; border-radius:4px;" placeholder="Select the file to upload" readonly>
-                        <input type="file" id="fileInput" class="form-control d-none"    aria-label="Upload file">
                     </div>
                     <div class="mb-3">
                         <label for="position" class="form-label">Position</label>
@@ -282,38 +283,28 @@
     <script src="../js/app.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            function setupFileInput(fileInputId, textInputId) {
-                const fileInput = document.getElementById(fileInputId);
-                const textInput = document.getElementById(textInputId);
         
+        document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".file-input").forEach((fileInput) => {
+        const textInput = fileInput.closest(".input-group").querySelector(".file-name");
 
-                fileInput.addEventListener('change', function() {
-                    if (this.files.length > 0) {
-                        textInput.value = this.files[0].name;  
-                    } else {
-                        textInput.value = "Please Upload Your File";  
-                    }
-                });
-        
-
-                textInput.parentElement.addEventListener('click', function() {
-                    fileInput.click();
-                });
-            }
-
-            document.addEventListener('DOMContentLoaded', function() {
-                const inputGroup = document.querySelector('.input-group');
-                inputGroup.addEventListener('click', function() {
-                    document.getElementById('fileInput').click();  
-                });
-            });
-        
-
-            setupFileInput('idCardInput', 'textIdCard');
-            setupFileInput('houseRegInput', 'textHouseReg');
-            setupFileInput('transcriptInput', 'textTranscript');
+        fileInput.addEventListener("change", function () {
+            textInput.value = this.files.length > 0 ? this.files[0].name : "Select the file to upload";
         });
+
+        textInput.parentElement.addEventListener("click", function () {
+            fileInput.click();
+        });
+    });
+
+    document.querySelectorAll(".input-group-text").forEach((label) => {
+        label.addEventListener("click", function () {
+            const fileInput = this.closest(".input-group").querySelector(".file-input");
+            fileInput.click();
+        });
+    });
+});
+
 
         document.getElementById('dob').addEventListener('focus', function() {
             this.type = 'date';
@@ -337,19 +328,20 @@
         }
 
 
-        document.querySelector('#fileInput').addEventListener('change', function() {
-            const textInput = document.querySelector('.input-group input[type="text"]');
-            if (this.files.length > 0) {
-                textInput.value = this.files[0].name; 
-            } else {
-                textInput.value = "Select the file to upload"; 
-            }
-        });
+        document.querySelectorAll('.file-input').forEach(input => {
+    input.addEventListener('change', function() {
+        const textInput = this.closest('.input-group').querySelector('.file-name');
+        textInput.value = this.files.length > 0 ? this.files[0].name : "Select the file to upload";
+    });
+});
+
     
 
-        document.querySelector('.input-group-text').onclick = function() {
-            document.getElementById('fileInput').click();
-        };
+document.querySelectorAll('.input-group-text').forEach((label, index) => {
+    label.addEventListener('click', function() {
+        document.querySelectorAll('.file-input')[index].click();
+    });
+});
 
         function selectPC(choice) {
             const selectors = document.querySelectorAll('#pcOwnership .toggle-select');

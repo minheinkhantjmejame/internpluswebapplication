@@ -112,14 +112,14 @@
             position:relative;
         }
 
-        .badge {
-            background-color: #007bff;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 5px;
-            position: relative;
-            z-index: 2;
-        }
+.badge {
+    background-color: #007bff;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    position: relative;
+    z-index: 2;
+}
 
 /* .line {
     height: 2px;
@@ -168,6 +168,27 @@
             width:300px;
             height:200px;
         }
+        .confirm-button, .cancel-button {
+                background-color: #474bc2;
+                color: white;
+                border: none;
+                padding: 10px 15px;
+                border-radius: 5px;
+                font-size: 16px;
+                margin: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }   
+
+            .cancel-button {
+                background-color: #ffffff;
+                border:1px solid #000000;
+                color:#000000;
+            }
+
+
+
+        
     </style>
 </head>
 <body>
@@ -202,6 +223,7 @@
     </div>
 </nav>
 
+
 <div class="application_info_container">
     <div class="info-card">
         <div class="info-row">
@@ -231,10 +253,11 @@
             </div>
         </div>
 
+
         <!-- Status Buttons -->
     <div class="buttons info-row">
         <div>
-            <a href="./pending_status.html"><button class="button status-button-color" style="color:white;">1</button></a>
+            <a href="./pending_status.html"><button class="button status-button-color" style="color:#fff;">1</button></a>
             <p>Pending</p>
         </div>
 
@@ -245,12 +268,12 @@
         </div> -->
         
         <div>
-            <a href="./request_internship_application.html"><button class="button">2</button></a>
+            <a href="./request_internship_application.html"><button class="button status-button-color" style="color:#fff">2</button></a>
             <p>Request Internship Application</p>
         </div>
         
         <div>
-            <a href="./request_internship_document.html"><button class="button">3</button></a>
+            <button class="button status-button-color" style="color:white;">3</button>
             <p>Request Internship Document</p>
         </div>
         
@@ -272,11 +295,13 @@
 
         <!-- Status Card -->
         <div class="status-card">
-            <h4 style="font-size:36px;">PENDING</h4>
             <div class="status-description">
-                <img src="../assets/img/application_success.png" style="width:200px;" alt="">
-                <h3 style="font-weight:bolder;">APPLICATION SUCCESSFUL</h3>
-                <p style="font-size:18x;">We have received your application! <br/>Please wait to proceed to the next step in a few days.</p>
+                <img src="../assets/img/application_fail.png" style="width:200px;" alt="">
+                <h3>APPLICATION FAILED</h3>
+                <p>Thank you for your interest in joining our internship program. Hope we will have the opportunity to work together in the future.</p>
+                <a href="./application_search.html" style="text-decoration:none;">
+                    <button class="confirm-button" onclick="confirmInternship()">Goto Applicationpage</button>
+                </a>          
             </div>
         </div>
     </div>

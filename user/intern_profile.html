@@ -693,6 +693,11 @@ a .bi-box-arrow-up-right{
     color:#000;
 }
 
+.edit-card {
+      display: none; /* Initially hidden */
+      margin-top: 20px;
+    }
+
   </style>
 </head>
 <body>
@@ -791,7 +796,7 @@ a .bi-box-arrow-up-right{
     <!-- Row for INTERN PROFILE and Button -->
     <div class="d-flex align-items-center justify-content-between mb-3">
       <h3 class="fw-bold">INTERN PROFILE</h3>
-      <button class="btn btn-primary">drer</button>
+      <button class="btn btn-primary" style="width:40px; height:40px;display:flex;justify-content: center; align-items: center;" ><img src="../assets/icon/edit.png" style="width:15px;height:15px;" alt=""></button>
     </div>
 
     <!-- Profile Details -->
@@ -819,10 +824,9 @@ a .bi-box-arrow-up-right{
 
       <!-- Attendance Details -->
       <div class="col-md-12">
-        <div class="row">
-
-          <div class="col-md-3">
-            <div class="row">
+        <div class="row gap-2">
+          <div class="col-md-3" style="border-radius:4px;background-color: #D1D1F0; width: calc(25% - 0.5rem);">
+            <div class="row" style="display:flex;justify-content: center; align-items: center;">
               <div class="col-md-4">
                 <img src="../assets/icon/calendar-time.png" alt="">
               </div>
@@ -832,44 +836,71 @@ a .bi-box-arrow-up-right{
               </div>
             </div>
           </div>
-
-          <div class="col-md-3">
-            <div class="row">
+      
+          <div class="col-md-3" style="border-radius:4px;background-color: #D1D1F0; width: calc(25% - 0.5rem);">
+            <div class="row" style="display:flex;justify-content: center; align-items: center;">
               <div class="col-md-4">
                 <img src="../assets/icon/signout.png" alt="">
               </div>
               <div class="col-md-8">
-                <h4>352</h4>
-                <p>Total Attendance</p>
+                <h4>8:28</h4>
+                <p>Avg Time In</p>
               </div>
             </div>
           </div>
-
-          <div class="col-md-3">
-            <div class="row">
+      
+          <div class="col-md-3" style="border-radius:4px;background-color: #D1D1F0; width: calc(25% - 0.5rem);">
+            <div class="row" style="display:flex;justify-content: center; align-items: center;">
               <div class="col-md-4">
                 <img src="../assets/icon/signout.png" alt="">
               </div>
               <div class="col-md-8">
-                <h4>352</h4>
-                <p>Total Attendance</p>
+                <h4>17:32</h4>
+                <p>Avg Time Out</p>
               </div>
             </div>
           </div>
-
-          <div class="col-md-3">
-            <div class="row">
+      
+          <div class="col-md-3" style="border-radius:4px;background-color: #D1D1F0; width: calc(25% - 0.5rem);">
+            <div class="row" style="display:flex;justify-content: center; align-items: center;">
               <div class="col-md-4">
                 <img src="../assets/icon/user.png" alt="">
               </div>
-              <div class="col-md-8">
-                <h4>352</h4>
-                <p>Total Attendance</p>
+              <div class="col-md-8" style="align-items: center;">
+                <h4>Emma W.</h4>
+                <p>Supervisor</p>
               </div>
             </div>
-          </div>
-
+          </div>      
         </div>
+
+          <!-- Edit Card -->
+          <div id="editCard" class="card p-3 mb-3 edit-card" style="background-color: #f8f9fc;">
+            <h3 class="fw-bold">Edit Profile</h3>
+            <form>
+              <div class="mb-3">
+                <label for="firstName" class="form-label">First Name</label>
+                <input type="text" class="form-control" id="firstName" value="Nicharee">
+              </div>
+              <div class="mb-3">
+                <label for="lastName" class="form-label">Last Name</label>
+                <input type="text" class="form-control" id="lastName" value="Seatthananont">
+              </div>
+              <div class="mb-3">
+                <label for="position" class="form-label">Position</label>
+                <input type="text" class="form-control" id="position" value="UX/UI Designer Trainee">
+              </div>
+              <div class="mb-3">
+                <label for="phoneNumber" class="form-label">Phone Number</label>
+                <input type="text" class="form-control" id="phoneNumber" value="(+66)824941461">
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">Email Address</label>
+                <input type="email" class="form-control" id="email" value="niccy0901@gmail.com">
+              </div>
+              <button type="submit" class="btn btn-primary">Save Changes</button>
+            </form>
+          </div>
       </div>
 
     </div>

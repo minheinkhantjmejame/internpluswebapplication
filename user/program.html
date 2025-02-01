@@ -25,6 +25,8 @@
             align-items: stretch;
 
             position:relative;
+            padding:0;
+            margin:0;
 
         }
         .card-text-content {
@@ -79,7 +81,7 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link" href="./index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Program</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./program.html">Program</a></li>
                     <li class="nav-item"><a class="nav-link applynow" href="./application_search.html">Application</a></li>
                     <li class="nav-item"><a class="nav-link register" href="./register.html">Register</a></li>
                     <li class="nav-item"><a class="btn btn-dark " href="./login.html" style="background-color:#b1bbe7; color:black;">Log In</a></li>
@@ -131,9 +133,9 @@
             <div class="row align-items-center">
                 <div class="col-md-6 fw-bold fs-4">INTERNPLUS</div>
                 <div class="col-md-6 text-end">
-                    <div class="bg-light form-control d-inline-flex align-items-center me-2" style="border:0;width:  300px; height:35px; " >
-                        <span class="input-group-text bg-light" style="border:0;background-color:#fff;"><i class="bi bi-envelope"></i></span>
-                        <input type="email" class="form-control bg-light"  style="border:0; width:300px;" id="email" placeholder="Enter your email to get the latest news..." required>
+                    <div class=" form-control d-inline-flex align-items-center me-2" style="background-color: #f3f4f6;border:0;width:  300px; height:35px; " >
+                        <span class="input-group-text bg-transparent" style="border:0;"><i class="bi bi-envelope"></i></span>
+                        <input type="email" class="form-control bg-trasparent"  style="border:0; width:300px;background-color: transparent;" id="email" placeholder="Enter your email to get the latest news..." required>
                     </div>
                     <button class="btn" style="background-color:#474bc2; color:white;">Subscribe</button>
                 </div>
@@ -249,20 +251,38 @@
             const jobElement = document.createElement('div');
             jobElement.classList.add('card', 'mb-3');
             jobElement.innerHTML = `
-            <div class="card-body d-flex justify-content-between align-items-start">
-            <div class="card-text-content" style="width: 70%;">
-                <h5 class="card-title" style="font-size:32px;">${job.title}</h5>
-                <p class="card-text" style="font-size:20px;">${job.description}</p>
-                <button class="card-text" style="border:none;background-color:#D1D1F0; border-radius:4px;">
-                    <small class="text-muted" style="font-size:16px;">${currentCategory}</small>
-                </button>
-                <button class="card-text" style="border:none;background-color:#B1BBE7; border-radius:4px;">
-                    <small class="text-muted"  style="font-size:16px;">${job.positions} positions</small>
-                </button>
-                <a href="./internship.html" class="btn btn-dark" style="position:absolute;bottom:50px;right:50px; background-color:#474bc2;border:0;">Apply</a>
+            <div class="card-body row" style="background-color:#F3F5FC;margin:0;padding:0; border:0; border-radius: 8px; height:auto;">
+                <!-- Left Column: Job Description (col-md-7) -->
+                <div class="col-md-7 d-flex flex-column justify-content-start" style="background-color:#F3F5FC; margin:0;padding:20px;  border-radius: 8px;">
+                    <h5 class="card-title" style="font-size:32px;">${job.title}</h5>
+                    <p class="card-text" style="font-size:20px;">${job.description}</p>
+                    <div class="row">
+                        <div class="d-flex gap-2">
+                            <button class="card-text" 
+                                    style="border:none; background-color:#D1D1F0; border-radius:4px; width:auto;height:30px;">
+                                <small class="text-muted" style="font-size:16px;">${currentCategory}</small>
+                            </button>
+                            <button class="card-text" 
+                                    style="border:none; background-color:#B1BBE7; border-radius:4px;width:auto;height:30px;">
+                                <small class="text-muted" style="font-size:16px;">${job.positions} positions</small>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5 position-relative" style="background-color:white; margin:0;padding:0;  border-radius:0 8px 8px 0; overflow: hidden; height: 100%;">
+                    <!-- Full-width and full-height Image -->
+                    <img class="card-image" src="${job.imgSrc || '../assets/img/hrphoto.png'}" alt="Job Image" 
+                        style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px; margin: 0; padding: 0; display: block;">
+
+                    <!-- "Apply" Button Positioned Bottom-Right -->
+                    <a href="./internship.html" class="btn btn-dark" 
+                    style="background-color:#474bc2; border:0; padding: 10px 20px; 
+                            position: absolute; bottom: 10px; right: 10px;">
+                        Apply
+                    </a>
+                </div>
             </div>
-            <img class="card-image" src="${job.imgSrc || '../assets/img/hrphoto.png'}" alt="Job Image" style="width: 40%; height:250px; ">
-            </div>
+
             `;
             listingsElement.appendChild(jobElement);
         });
