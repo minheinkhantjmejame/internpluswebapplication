@@ -23,7 +23,13 @@
   border-radius: 4px;
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
+  height: 100%; /* Make the sidebar height equal to the viewport height */
+  position: fixed; /* Fix the sidebar position */
+  top: 0;
+  left: 0;
+
+}
+
 
     .sidebar .menu-item {
       display: flex;
@@ -771,6 +777,31 @@ tfoot td {
   <!-- Js SheetJS (xlsx) -->
   <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
 <script>
+
+document.addEventListener('DOMContentLoaded', function () {
+  const menuItems = document.querySelectorAll('.menu-item');
+
+  // Load active menu from localStorage on page load
+  const activePage = localStorage.getItem('activeMenu');
+  if (activePage) {
+    menuItems.forEach(menu => {
+      if (menu.getAttribute('href') === activePage) {
+        menu.classList.add('active');
+        const icon = menu.querySelector('i');
+        if (icon) {
+          icon.style.color = 'white'; // Keep icon white
+        }
+      }
+    });
+  }
+
+  menuItems.forEach(item => {
+    item.addEventListener('click', function (event) {
+      // Store active menu item in localStorage before navigation
+      localStorage.setItem('activeMenu', this.getAttribute('href'));
+    });
+  });
+});
   document.addEventListener('DOMContentLoaded', function () {
     const notificationBadge = document.querySelector('.notification-badge');
     const notificationDropdown = document.querySelector('.notification-menu');

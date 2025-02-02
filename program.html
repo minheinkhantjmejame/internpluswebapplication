@@ -7,57 +7,74 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+        <!-- Myanmar Unicode Font (Noto Sans Myanmar) -->
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@400;700&display=swap" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="./css/styles.css">
+    
+        <!-- Jquery UI -->
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="./css/styles.css">
     <style type="text/css" rel="stylesheet">
-        .card-custom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            margin-bottom: 20px; 
-        }
 
-        .card-body {
-            display: flex;
-            justify-content: space-between;
-            align-items: stretch;
-
-            position:relative;
-            padding:0;
-            margin:0;
-
+body {
+            font-family: 'Noto Sans Myanmar', sans-serif;
         }
-        .card-text-content {
-            width: 60%;
-            padding: 20px;
-        }
-        .card-image {
-            width: 40%;
-            height: 100%;
-            object-fit: cover;
-        }
+       .card-custom {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch; /* Ensure the card stretches to fill the container */
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
 
-        .card-text-content {
-            width: 100%; 
-        }
+.card-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    position: relative;
+    padding: 0;
+    margin: 0;
+    width: 100%; /* Ensure the card body takes full width */
+}
 
-        .card-image {
-            width:30%;
-            height:100%;
-            object-fit: cover; 
-        }
+.card-text-content {
+    width: 60%;
+    padding: 20px;
+    background-color: #F3F5FC; /* Ensure the background color is consistent */
+    border-radius: 8px 0 0 8px; /* Rounded corners on the left side */
+}
 
-        .custom-pagination-button{
-            background-color:#474BC2;
-            border:none;
-            border-radius:4px;
-            width:50px;
-            height:50px;
-            color:white;
-        }
+.card-image-container {
+    width: 100%;
+    height:100%;
+    position: relative;
+    overflow: hidden; /* Ensure the image doesn't overflow */
+    border-radius: 0 8px 8px 0; /* Rounded corners on the right side */
+}
 
+.card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the image covers the entire container */
+    display: block; /* Remove any extra space below the image */
+}
+
+.custom-pagination-button {
+    background-color: #474BC2;
+    border: none;
+    border-radius: 4px;
+    width: 50px;
+    height: 50px;
+    color: white;
+}
     </style>
 </head>
 <body>
@@ -70,21 +87,21 @@
                     <span id="dropdownLabel">EN</span> <i class="bi bi-chevron-down"></i>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="#" onclick="updateLanguage('EN')">EN</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="updateLanguage('THAI')">THAI</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="updateLanguage('MYAN')">MYAN</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="updateLanguage('en')">EN</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="updateLanguage('th')">THAI</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="updateLanguage('my')">MYAN</a></li>
                 </ul>
-            </div>    
+            </div> 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>    
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="./index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="./program.html">Program</a></li>
-                    <li class="nav-item"><a class="nav-link applynow" href="./application_search.html">Application</a></li>
-                    <li class="nav-item"><a class="nav-link register" href="./register.html">Register</a></li>
-                    <li class="nav-item"><a class="btn btn-dark " href="./login.html" style="background-color:#b1bbe7; color:black;">Log In</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="./index.html" data-translate="Home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./program.html" data-translate="Program">Program</a></li>
+                    <li class="nav-item"><a class="nav-link applynow" href="./application_search.html" data-translate="Application">Application</a></li>
+                    <li class="nav-item"><a class="nav-link register" href="./register.html" data-translate="Register">Register</a></li>
+                    <li class="nav-item"><a class="btn btn-dark" href="./login.html" style="background-color:#b1bbe7; color:black;" data-translate="Log In">Log In</a></li>
                 </ul>
             </div>
         </div>
@@ -93,27 +110,27 @@
     <!-- Program Page Section -->
     <section class="program-page bg-white py-5">
         <div class="container">
-            <h2 class="text-center fw-bold mb-4" style="font-size:48px;">INTERNSHIP PROGRAM</h2>
-            <p class="text-center" style="font-size:24px;">Shape the Future with a Paid Internship at Vanness Plus Consulting Co. Ltd in Thailand!</p>
+            <h2 class="text-center fw-bold mb-4" style="font-size:48px;" data-translate="Internship Program">INTERNSHIP PROGRAM</h2>
+            <p class="text-center" style="font-size:24px;" data-translate="Shape the Future with a Paid Internship at Vanness Plus Consulting Co. Ltd in Thailand!">Shape the Future with a Paid Internship at Vanness Plus Consulting Co. Ltd in Thailand!</p>
             <div class="stats d-flex justify-content-center my-4">
-                <div class="me-5 text-center"><strong>18</strong><br/><span> internship programs</span></div>
-                <div class="me-5 text-center"><strong>35</strong><br/><span> positions available</span></div>
-                <div class="text-center"><strong>4</strong><br/><span>job categories</span></div>
+                <div class="me-5 text-center"><strong>18</strong><br/><span data-translate="internship programs"> internship programs</span></div>
+                <div class="me-5 text-center"><strong>35</strong><br/><span data-translate="available positions"> positions available</span></div>
+                <div class="text-center"><strong>4</strong><br/><span data-translate="job categories">job categories</span></div>
             </div>
             <div class="search-box text-center mb-5">
-                <div class="input-group" id="input-search" style="width: 60%; margin: auto;">
-                    <input type="text" id="searchInput" class="form-control" style="border:none; box-shadow:0px 2px 2px rgba(0,0,0,0.1); background-color:#f3f5fc;" placeholder="Enter the program you are interested in...">
+                <div class="input-group" id="input-search" style="width: 60%; margin: auto;" >
+                    <input type="text" id="searchInput" class="form-control" style="border:none; box-shadow:0px 2px 2px rgba(0,0,0,0.1); background-color:#f3f5fc;"  placeholder="Enter the program you are interested in..." data-translate="Enter the program you are interested in...">
                     <button class="btn btn-dark" onclick="applySearch()" style="background-color:#474bc2;box-shadow:0px 4px 4px rgba(0,0,0,0.1); ">
                         <i class="bi bi-search"></i>
                     </button>
                 </div>
             </div>
             <div class="category-tabs text-center mb-4">
-                <button class="category-btn btn btn-outline-secondary active" onclick="filterCategory('IT')">IT</button>
-                <button class="category-btn btn btn-outline-secondary" onclick="filterCategory('Marketing')">Marketing</button>
-                <button class="category-btn btn btn-outline-secondary" onclick="filterCategory('Human Resources')">Human Resources</button>
-                <button class="category-btn btn btn-outline-secondary" onclick="filterCategory('Translation')">Translation</button>
-            </div>
+                <button class="category-btn btn btn-outline-secondary active" data-category="IT" data-translate="Information Technology" onclick="filterCategory('IT')">IT</button>
+                <button class="category-btn btn btn-outline-secondary" data-category="Marketing" data-translate="Marketing" onclick="filterCategory('Marketing')">Marketing</button>
+                <button class="category-btn btn btn-outline-secondary" data-category="Human Resources" data-translate="Human Resources" onclick="filterCategory('Human Resources')">Human Resources</button>
+                <button class="category-btn btn btn-outline-secondary" data-category="Translation" data-translate="Translation" onclick="filterCategory('Translation')">Translation</button>
+            </div>            
             <div id="listings" class="listings">
                 <!-- Dynamic content will be loaded here -->
             </div>
@@ -127,28 +144,25 @@
 
   
 
-    <!-- Footer -->
-    <footer class="py-4" style="background-color:#fff;">
+    <footer class="bg-light py-4">
         <div class="container text-left">
             <div class="row align-items-center">
                 <div class="col-md-6 fw-bold fs-4">INTERNPLUS</div>
                 <div class="col-md-6 text-end">
-                    <div class=" form-control d-inline-flex align-items-center me-2" style="background-color: #f3f4f6;border:0;width:  300px; height:35px; " >
+                    <div class="form-control d-inline-flex align-items-center me-2" style="background-color: #f3f4f6;border:0;width:  300px; height:35px;">
                         <span class="input-group-text bg-transparent" style="border:0;"><i class="bi bi-envelope"></i></span>
-                        <input type="email" class="form-control bg-trasparent"  style="border:0; width:300px;background-color: transparent;" id="email" placeholder="Enter your email to get the latest news..." required>
+                        <input type="email" class="form-control bg-trasparent" style="border:0; width:300px;background-color: transparent;" id="email" placeholder="Enter your email to get the latest news..." required>
                     </div>
-                    <button class="btn" style="background-color:#474bc2; color:white;">Subscribe</button>
+                    <button class="btn" style="background-color:#474bc2; color:white;" data-translate="Subscribe">Subscribe</button>
                 </div>
-                
-                
             </div>
             <hr>
             <div class="row align-items-center">
                 <div class="col-md-6 contact">
-                    <h5 class="fw-bold mb-3">Contact Us</h5>
-                    <p><i class="bi bi-geo-alt"></i> 287 Si Lom Rd, Silom, Bang Rak, Bangkok 10500</p>
-                    <p><i class="bi bi-telephone"></i> 02-0777581 (Head Quarter Contact)</p>
-                    <p><i class="bi bi-envelope"></i> cs@internplus.com</p>
+                    <h5 class="fw-bold mb-3" data-translate="Contact Information">Contact Us</h5>
+                    <p><a href="https://maps.app.goo.gl/vupuH5eNXeRHCKHC9" class="text-decoration-none" style="color:#333333;"><i class="bi bi-geo-alt"></i> 287 Si Lom Rd, Silom, Bang Rak, Bangkok 10500</a></p>
+                    <p><i class="bi bi-telephone"></i> <a href="tel:020777581" class="text-decoration-none" style="color:#333333;">02-0777581 (Head Quarter Contact)</a></p>
+                    <p><i class="bi bi-envelope"></i> <a href="https://mail.google.com/mail/?view=cm&fs=1&to=cs@internplus.com" class="text-decoration-none" style="color:#333333;">cs@internplus.com</a></p>
                 </div>
                 <div class="col-md-6 text-end">
                     <img src="./assets/img/location.png" alt="Map Icon" class="img-fluid">
@@ -157,7 +171,7 @@
             <hr>
             <div class="row align-items-center" id="footer">
                 <div class="col-md-6 order-md-1">
-                    <p>&copy; Internplus @ 2024. All rights reserved.</p>
+                    <p data-translate="&copy; Internplus @ 2024. All rights reserved.">&copy; Internplus @ 2024. All rights reserved.</p>
                 </div>
                 <div class="col-md-6 order-md-2 footer-icons">
                     <a href="#" class="text-dark mx-2"><i class="bi bi-twitter-x"></i></a>
@@ -165,7 +179,7 @@
                     <a href="#" class="text-dark mx-2"><i class="bi bi-twitter"></i></a>
                     <a href="#" class="text-dark mx-2"><i class="bi bi-instagram"></i></a>
                     <a href="#" class="text-dark mx-2"><i class="bi bi-linkedin"></i></a>
-                </div>               
+                </div>
             </div>
         </div>
     </footer>
@@ -173,6 +187,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="./js/app.js"></script>
     <script>
+
+        
         
         document.addEventListener('DOMContentLoaded', function() {
             filterCategory('IT');
@@ -233,29 +249,28 @@
             
             updateListings(filteredJobs);
         }
-        
         function updateListings(jobs) {
-                const listingsElement = document.getElementById('listings');
-                const paginationElement = document.getElementById('pagination');
-                
-                listingsElement.innerHTML = ''; 
+    const listingsElement = document.getElementById('listings');
+    const paginationElement = document.getElementById('pagination');
+    
+    listingsElement.innerHTML = ''; 
 
-                // Calculate pagination
-                const totalPages = Math.ceil(jobs.length / itemsPerPage);
-                const start = (currentPage - 1) * itemsPerPage;
-                const end = start + itemsPerPage;
-                const jobsToShow = jobs.slice(start, end);
+    // Calculate pagination
+    const totalPages = Math.ceil(jobs.length / itemsPerPage);
+    const start = (currentPage - 1) * itemsPerPage;
+    const end = start + itemsPerPage;
+    const jobsToShow = jobs.slice(start, end);
 
     if (jobsToShow.length > 0) {
         jobsToShow.forEach(job => {
             const jobElement = document.createElement('div');
             jobElement.classList.add('card', 'mb-3');
             jobElement.innerHTML = `
-            <div class="card-body row" style="background-color:#F3F5FC;margin:0;padding:0; border:0; border-radius: 8px; height:auto;">
+            <div class="card-body row position-relative" style="background-color:white;margin:0;padding:0; border:0; border-radius: 8px; height:auto;">
                 <!-- Left Column: Job Description (col-md-7) -->
-                <div class="col-md-7 d-flex flex-column justify-content-start" style="background-color:#F3F5FC; margin:0;padding:20px;  border-radius: 8px;">
-                    <h5 class="card-title" style="font-size:32px;">${job.title}</h5>
-                    <p class="card-text" style="font-size:20px;">${job.description}</p>
+                <div class="col-md-7 d-flex flex-column justify-content-start" style="background-color:#F3F5FC; margin:0;padding:20px; border-radius: 8px 0 0 8px;">
+                    <h5 class="card-title" style="font-size:32px;" data-translate="${job.title}">${job.title}</h5>
+                    <p class="card-text" style="font-size:20px;" data-translate="${job.description}">${job.description}</p>
                     <div class="row">
                         <div class="d-flex gap-2">
                             <button class="card-text" 
@@ -269,20 +284,19 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-5 position-relative" style="background-color:white; margin:0;padding:0;  border-radius:0 8px 8px 0; overflow: hidden; height: 100%;">
+                <div class="col-md-5 " style="background-color:white; margin:0;padding:0; border-radius:0 8px 8px 0; overflow: hidden; height: 100%;">
                     <!-- Full-width and full-height Image -->
                     <img class="card-image" src="${job.imgSrc || './assets/img/hrphoto.png'}" alt="Job Image" 
                         style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px; margin: 0; padding: 0; display: block;">
 
-                    <!-- "Apply" Button Positioned Bottom-Right -->
-                    <a href="./internship.html" class="btn btn-dark" 
-                    style="background-color:#474bc2; border:0; padding: 10px 20px; 
-                            position: absolute; bottom: 10px; right: 10px;">
+                    <!-- "Apply" Button with URL Parameters -->
+                    <a href="./internship.html?title=${encodeURIComponent(job.title)}&category=${encodeURIComponent(currentCategory)}&positions=${job.positions}" 
+                        class="btn btn-dark" 
+                        style="background-color:#474bc2; border:0; padding: 10px 20px; position: absolute; bottom: 10px; right: 10px;">
                         Apply
                     </a>
                 </div>
             </div>
-
             `;
             listingsElement.appendChild(jobElement);
         });
@@ -319,18 +333,25 @@ function updatePagination(totalPages) {
         
 function updateActiveCategoryButton(activeCategory) { 
     document.querySelectorAll('.category-btn').forEach(btn => {
-        // Compare the button text with activeCategory, ensuring case-insensitivity and trimming whitespace
-        if (btn.textContent.trim().toLowerCase() === activeCategory.toLowerCase()) {
+        // Check `data-category` instead of button text
+        if (btn.getAttribute('data-category') === activeCategory) {
             btn.classList.add('active');
+            btn.classList.remove('btn-outline-secondary'); // Remove outline style
+            btn.classList.add('btn-primary'); // Add active style
         } else {
             btn.classList.remove('active');
+            btn.classList.remove('btn-primary');
+            btn.classList.add('btn-outline-secondary'); // Restore outline style
         }
     });
 }
 
+
 document.addEventListener('DOMContentLoaded', () => {
     filterCategory('IT'); // Default category
 });
+
+
 
 
 </script>

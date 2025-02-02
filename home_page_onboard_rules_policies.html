@@ -22,10 +22,13 @@
   border-radius: 4px;
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  position: fixed; /* Fix the sidebar */
-  height: 100vh; /* Full height of the viewport */
-  overflow-y: auto; /* Add scroll if content exceeds the height */
+  height: 100%; /* Make the sidebar height equal to the viewport height */
+  position: fixed; /* Fix the sidebar position */
+  top: 0;
+  left: 0;
+
 }
+
 
 
     .sidebar .menu-item {
@@ -984,7 +987,31 @@ label.upload-files i {
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <!-- Custom Js  -->
-  <script>
+  <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+  const menuItems = document.querySelectorAll('.menu-item');
+
+  // Load active menu from localStorage on page load
+  const activePage = localStorage.getItem('activeMenu');
+  if (activePage) {
+    menuItems.forEach(menu => {
+      if (menu.getAttribute('href') === activePage) {
+        menu.classList.add('active');
+        const icon = menu.querySelector('i');
+        if (icon) {
+          icon.style.color = 'white'; // Keep icon white
+        }
+      }
+    });
+  }
+
+  menuItems.forEach(item => {
+    item.addEventListener('click', function (event) {
+      // Store active menu item in localStorage before navigation
+      localStorage.setItem('activeMenu', this.getAttribute('href'));
+    });
+  });
+});
     document.querySelectorAll('.accept-btn').forEach(button => {
   button.addEventListener('click', function () {
     this.setAttribute('style', 'background-color: #D1D1F0;color:#000; border: none;');
