@@ -280,56 +280,42 @@
     height:40px;
 }
 
-/* Container and Title */
-.product-services-container {
-    background-color: #F8FBFF; /* Light blue background */
-    padding: 40px;
-    text-align: center;
+/* Product & Services Section */
+.product-services .card {
+    transition: all 0.3s ease-in-out;
+    flex: 1;
+    margin: 10px;
+    position: relative;
+    overflow: hidden;
 }
 
-.section-title {
-    font-size: 32px;
-    font-weight: bold;
-    color: #323438;
-    margin-bottom: 30px;
+.product-services .card.expanded {
+    flex: 2; /* Expanded card takes more width */
 }
 
-/* Services Cards Layout */
-.services-cards {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    align-items: flex-start;
+.product-services .card .collapse-text {
+    display: none; /* Hide text by default */
+    transition: opacity 0.3s ease-in-out;
 }
 
-.service-card {
-    background-color: #ffffff; /* White background */
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    width: 250px; /* Default card width */
-    padding: 20px;
+.product-services .card.expanded .collapse-text {
+    display: block; /* Show text when expanded */
+    opacity: 1;
+}
+
+.product-services .card .arrow-icon {
+    transition: transform 0.3s ease;
+}
+
+.product-services .card.expanded .arrow-icon {
+    transform: rotate(180deg); /* Rotate icon when expanded */
+}
+
+.product-services .card .card-body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    text-align: left;
-}
-
-.large-card {
-    width: 450px; /* Larger card for Internship Data Management */
-}
-
-/* Card Title and Description */
-.service-card h3 {
-    font-size: 18px;
-    font-weight: bold;
-    color: #323438;
-    margin-bottom: 15px;
-}
-
-.service-card p {
-    font-size: 14px;
-    color: #5A5A5A;
-    line-height: 1.5;
+    height: 100%;
 }
 
 /* Card Footer */
@@ -462,11 +448,22 @@
 .card-body {
     padding: 10px;
     text-align: left;
+    height:200px;
+    position:relative;
+    width:300px;
 
 }
 .upcoming{
     border:2px solid #B1BBE7;
     border-radius:4px;
+    background-color:#F3F5FC;
+    width:290px;
+    height:100px;
+    position:absolute;
+    left:0;
+    bottom:0;
+    padding:10px;
+
 }
 .card-body h3 {
     font-size: 16px;
@@ -676,67 +673,10 @@
                     <button id="yearlyBtn" type="button" class="btn" style="border-radius:4px;" onclick="togglePricing('yearly')">Yearly</button>
                 </div>
             </div>
-            
     
             <!-- Pricing Cards -->
             <div class="pricing-section">
                 <div id="pricingCards" class="pricing-cards-container">
-                    <!-- Starter Card -->
-                    <div class="pricing-card" style="margin-top:37px;">
-                        <div class="icon mb-3">
-                            <span class="icon-container" style="display: flex; background-color: #474bc2; border-radius: 50%; width: 50px; height: 50px; justify-content: center; align-items: center; overflow: hidden; margin: 0; padding: 0;">
-                                <img src="../assets/icon/battery-v-50.png" style="width: 20px; height: 20px; display: block; margin: 0; padding: 0;" alt="">
-                            </span>                            
-                        </div>
-                        <h4 class="card-title">Starter</h4>
-                        <p class="card-description">Suitable for students and beginners who need basic features.</p>
-                        <h3 class="card-price">Free</h3>
-                        <p class="card-device">
-                            <img src="../assets/icon/device.png" style="transform:translateY(70%);" class="device-icon" alt="">1 device
-                        </p>
-                        <div class="text-center">
-                            <button class="btn start-trial-btn" style="background-color:#474bc2; color: white;">Start Trial</button>
-                        </div>
-                    </div>
-            
-                    <!-- Best Deal Card -->
-                    <div class="pricing-card best-deal-container">
-                        <h6 class="mt-5 mb-5" style="text-align: center; font-weight:bold;">Best Deal</h6>
-                        <div class="pricing-card-content" style="margin-top:5px;">
-                            <div class="icon mb-3">
-                                <span class="icon-container" style="display: flex; background-color: #474bc2; border-radius: 50%; width: 50px; height: 50px; justify-content: center; align-items: center; overflow: hidden; margin: 0; padding: 0;">
-                                    <img src="../assets/icon/battery-v-charging.png" style="width: 20px; height: 20px; display: block; margin: 0; padding: 0;" alt="">
-                                </span>   
-                            </div>
-                            <h4 class="card-title">Best Deal</h4>
-                            <p class="card-description">Perfect for growing teams and organizations with advanced features.</p>
-                            <h3 class="card-price">฿199/month</h3>
-                            <p class="card-device">
-                                <img src="../assets/icon/device.png" class="device-icon" style="transform:translateY(70%);" alt="">5 devices
-                            </p>
-                            <div class="text-center">
-                                <button class="btn start-trial-btn" style="background-color:#D1D1F0; color:#000;">Start Trial</button>
-                            </div>
-                        </div>
-                    </div>
-            
-                    <!-- Premium Card -->
-                    <div class="pricing-card"  style="margin-top:37px;" >
-                        <div class="icon mb-3">
-                            <span class="icon-container" style="display: flex; background-color: #474bc2; border-radius: 50%; width: 50px; height: 50px; justify-content: center; align-items: center; overflow: hidden; margin: 0; padding: 0;">
-                                <img src="../assets/icon/plug.png" style="width: 15px; height: 18px; display: block; margin: 0; padding: 0;" alt="">
-                            </span>   
-                        </div>
-                        <h4 class="card-title">Premium</h4>
-                        <p class="card-description">Best for large organizations needing comprehensive tools.</p>
-                        <h3 class="card-price">฿399/month</h3>
-                        <p class="card-device">
-                            <img src="../assets/icon/device.png" class="device-icon" style="transform:translateY(70%);" alt="">10 devices
-                        </p>
-                        <div class="text-center">
-                            <button class="btn start-trial-btn" style="background-color:#474bc2; color: white;">Start Trial</button>
-                        </div>
-                    </div>
                 </div>
             </div>
              
@@ -764,7 +704,7 @@
                             </span>                            
                         </div>
                         <h4 class="card-title text-start">Standard</h4>
-                        <h3 class="card-price text-start"  style="font-size:36px;">฿199 <span class="text-muted" style="font-size:small;">/month</span></h3>
+                        <h3 id="standardPrice" class="card-price text-start" style="font-size:36px;">฿199 <span class="text-muted" style="font-size:small;">/month</span></h3>
                     </div>
                     <div class="card text-center p-3">
                         <div class="icon mb-3">
@@ -773,7 +713,7 @@
                             </span>                            
                         </div>
                         <h4 class="card-title text-start">Premium</h4>
-                        <h3 class="card-price text-start" style="font-size:36px;">฿399<span class="text-muted" style="font-size:small;">/month</span></h3>
+                        <h3 id="premiumPrice" class="card-price text-start" style="font-size:36px;">฿399<span class="text-muted" style="font-size:small;">/month</span></h3>
                     </div>
                 </div>
                 <div class="feature-row">
@@ -836,73 +776,10 @@
 
     <section class="product-services py-5">
         <div class="container">
-          <h2 class="text-left mb-5">Product & Services</h2>
-          <div class="row">
-            <div class="col-md-4">
-                <div class="card">
-                  <div class="card-body">
-                    <h5 class="card-title">Internship Data Management</h5>
-                    <p class="card-text collapse-text" id="text-1">
-                      Internship Data Management provides real-time data updates for both interns and corporate users.
-                    </p>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <button class="btn" style="background-color:#b1bbe7">Learn More</button>
-                      <button
-                        class="btn btn-light toggle-btn"
-                        data-target="text-1"
-                        onclick="toggleText(this)"
-                      >
-                        <img
-                          class="arrow-icon"
-                          src="../assets/icon/right_arrow.png"
-                          alt="Arrow"
-                        />
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-            <!-- Card 2 -->
-            <div class="col-md-4">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Time Attendance</h5>
-                  <p class="card-text collapse-text" id="text-2">
-                    Realtime time attendance key in and out rely on setup location which user can choose work from home, work from office, or flexible mode, manage shift. Time attendance could help in time tracking and overtime payment and payroll automatically upon organizational setting which could reduce working time and workload of administrative tasks.
-                  </p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <button class="btn" style="background-color:#b1bbe7;">Learn More</button>
-                    <button class="btn btn-light toggle-btn" data-target="text-2" onclick="toggleText(this)">
-                      <img class="arrow-icon" src="../assets/icon/right_arrow.png" alt="right arrow icon">
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- Card 3 -->
-            <div class="col-md-4">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Leave Request</h5>
-                  <p class="card-text collapse-text" id="text-3">
-                    The Leave Request system streamlines the process of applying and approving leave. Employees can submit requests online, and managers can easily review and approve them, improving efficiency and transparency.
-                  </p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <button class="btn" style="background-color:#b1bbe7;">Learn More</button>
-                    <button class="btn btn-light toggle-btn" data-target="text-3" onclick="toggleText(this)">
-                      <img class="arrow-icon" src="../assets/icon/right_arrow.png" alt="right arrow icon">
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
             <h2 class="text-left mb-5">Product & Services</h2>
             <div class="row">
-                <!-- Card 1 -->
                 <div class="col-md-4">
-                    <div class="card expanded">
+                    <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Internship Data Management</h5>
                             <p class="card-text collapse-text" id="text-1">
@@ -911,14 +788,12 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <button class="btn" style="background-color:#b1bbe7">Learn More</button>
                                 <button class="btn btn-light toggle-btn" data-target="text-1" onclick="toggleText(this)">
-                                    <img class="arrow-icon rotated" src="../assets/icon/left_arrow.png" alt="Arrow">
+                                    <img class="arrow-icon" src="../assets/icon/right_arrow.png" alt="Arrow">
                                 </button>
                             </div>
                         </div>
-                        <img src="../assets/img/internship_data_management.jpg" class="card-img-right" alt="Internship Data Management">
                     </div>
                 </div>
-                
                 <!-- Card 2 -->
                 <div class="col-md-4">
                     <div class="card">
@@ -934,10 +809,8 @@
                                 </button>
                             </div>
                         </div>
-                        <img src="../assets/img/time_attendance.jpg" class="card-img-right" alt="Time Attendance">
                     </div>
                 </div>
-                
                 <!-- Card 3 -->
                 <div class="col-md-4">
                     <div class="card">
@@ -953,19 +826,15 @@
                                 </button>
                             </div>
                         </div>
-                        <img src="../assets/img/leave_request.jpg" class="card-img-right" alt="Leave Request">
                     </div>
                 </div>
             </div>
         </div>
     </section>
       
-      
-      
-      
     
 
-    <section class="upcoming-features py-5">
+    <section class="upcoming-features py-5" style="background-color:#f3f5fc;">
         <div class="container">
             <div class="header-section">
                 <h2 class="section-title">What's Upcoming Features</h2>
@@ -977,36 +846,42 @@
     
             <div class="features-cards">
                 <!-- Card 1 -->
-                <div class="feature-card">
+                <div class="feature-card" style="background-image:url(../assets/img/recruitment.png);background-size: cover;  background-repeat: no-repeat;">
                     <div class="card-header">
                         <button class="learn-more-btn">Learn More</button>
                     </div>
-                    <div class="card-body upcoming">
-                        <h3>Recruitment</h3>
-                        <p>Streamline data handling with robust solutions for storing, organizing, and accessing critical internship information efficiently and securely.</p>
-                    </div>
+                    <div class="card-body">
+                        <div class="upcoming">
+                            <h6>Recruitment</h6>
+                            <p style="font-size:10px;">Streamline data handling with robust solutions for storing, organizing, and accessing critical internship information efficiently and securely.</p>
+                         </div>
+                </div>
                 </div>
     
                 <!-- Card 2 -->
-                <div class="feature-card">
+                <div class="feature-card" style="background-image:url(../assets/img/application_tracking.png);background-size: cover;  background-repeat: no-repeat;">
                     <div class="card-header">
                         <button class="learn-more-btn">Learn More</button>
                     </div>
-                    <div class="card-body upcoming">
-                        <h3>Application Tracking System</h3>
-                        <p>Keep track of all applications in one place, making it easier to manage candidates, track their progress, and communicate effectively with them throughout the hiring process.</p>
+                    <div class="card-body">
+                        <div class="upcoming">
+                            <h6>Application Tracking System</h6>
+                            <p style="font-size:10px;">Keep track of all applications in one place, making it easier to manage candidates, track their progress, and communicate effectively with them throughout the hiring process.</p>
+                        </div>
                     </div>
                 </div>
     
                 <!-- Card 3 -->
-                <div class="feature-card">
+                <div class="feature-card"  style="background-image:url(../assets/img/approval_system.png);background-size: cover;  background-repeat: no-repeat;">
                     <div class="card-header">
                         <button class="learn-more-btn">Learn More</button>
                     </div>
-                    <div class="card-body upcoming">
-                        <h3>Approval System</h3>
-                        <p>HR has the right to approve the actions of interns, whether it is the process of applying for an internship or requesting leave from work and paying allowances.</p>
-                    </div>
+                    <div class="card-body">
+                        <div class="upcoming">
+                            <h6>Approval System</h6>
+                            <p style="font-size:10px;">HR has the right to approve the actions of interns, whether it is the process of applying for an internship or requesting leave from work and paying allowances.</p>
+                        </div>
+                </div>
                 </div>
             </div>
         </div>
@@ -1060,175 +935,175 @@
     <!-- Custom JS  -->
     <script src="../js/app.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const monthlyBtn = document.getElementById('monthlyBtn');
-            const yearlyBtn = document.getElementById('yearlyBtn');
-            const pricingCardsContainer = document.getElementById('pricingCards'); // Ensure this ID matches the HTML
-    
-            // Define Monthly and Yearly Packages
-            const monthlyPackages = `
-            <div class="pricing-card" style="margin-top:37px;">
-                        <div class="icon mb-3">
-                            <span class="icon-container" style="display: flex; background-color: #474bc2; border-radius: 50%; width: 50px; height: 50px; justify-content: center; align-items: center; overflow: hidden; margin: 0; padding: 0;">
-                                <img src="../assets/icon/battery-v-50.png" style="width: 20px; height: 20px; display: block; margin: 0; padding: 0;" alt="">
-                            </span>                            
-                        </div>
-                        <h4 class="card-title">Starter</h4>
-                        <p class="card-description">Suitable for students and beginners who need basic features.</p>
-                        <h3 class="card-price">Free</h3>
-                        <p class="card-device">
-                            <img src="../assets/icon/device.png" style="transform:translateY(70%);" class="device-icon" alt="">1 device
-                        </p>
-                        <div class="text-center">
-                            <button class="btn start-trial-btn" style="background-color:#474bc2; color: white;">Start Trial</button>
-                        </div>
-                    </div>
-                    <div class="pricing-card best-deal-container">
-                        <h6 class="mb-0" style="text-align: center; font-weight:bold;">Best Deal</h6>
-                        <div class="pricing-card-content" style="margin-top:5px;">
-                            <div class="icon mb-3">
-                                <span class="icon-container" style="display: flex; background-color: #474bc2; border-radius: 50%; width: 50px; height: 50px; justify-content: center; align-items: center; overflow: hidden; margin: 0; padding: 0;">
-                                    <img src="../assets/icon/battery-v-charging.png" style="width: 20px; height: 20px; display: block; margin: 0; padding: 0;" alt="">
-                                </span>   
-                            </div>
-                            <h4 class="card-title">Best Deal</h4>
-                            <p class="card-description">Perfect for growing teams and organizations with advanced features.</p>
-                            <h3 class="card-price">฿199/month</h3>
-                            <p class="card-device">
-                                <img src="../assets/icon/device.png" class="device-icon" style="transform:translateY(70%);" alt="">5 devices
-                            </p>
-                            <div class="text-center">
-                                <button class="btn start-trial-btn" style="background-color:#e8ebfc; color:black;">Start Trial</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="pricing-card"  style="margin-top:37px;" >
-                        <div class="icon mb-3">
-                            <span class="icon-container" style="display: flex; background-color: #474bc2; border-radius: 50%; width: 50px; height: 50px; justify-content: center; align-items: center; overflow: hidden; margin: 0; padding: 0;">
-                                <img src="../assets/icon/plug.png" style="width: 15px; height: 18px; display: block; margin: 0; padding: 0;" alt="">
-                            </span>   
-                        </div>
-                        <h4 class="card-title">Premium</h4>
-                        <p class="card-description">Best for large organizations needing comprehensive tools.</p>
-                        <h3 class="card-price">฿399/month</h3>
-                        <p class="card-device">
-                            <img src="../assets/icon/device.png" class="device-icon" style="transform:translateY(70%);" alt="">10 devices
-                        </p>
-                        <div class="text-center">
-                            <button class="btn start-trial-btn" style="background-color:#474bc2; color: white;">Start Trial</button>
-                        </div>
-                    </div>
+document.addEventListener('DOMContentLoaded', () => {
+    const monthlyBtn = document.getElementById('monthlyBtn');
+    const yearlyBtn = document.getElementById('yearlyBtn');
+    const pricingCardsContainer = document.getElementById('pricingCards');
+    const standardPrice = document.getElementById('standardPrice');
+    const premiumPrice = document.getElementById('premiumPrice');
 
-                    
-            `;
-    
-            const yearlyPackages = `
-            <div class="pricing-card" style="margin-top:37px;">
-                        <div class="icon mb-3">
-                            <span class="icon-container" style="display: flex; background-color: #474bc2; border-radius: 50%; width: 50px; height: 50px; justify-content: center; align-items: center; overflow: hidden; margin: 0; padding: 0;">
-                                <img src="../assets/icon/battery-v-50.png" style="width: 20px; height: 20px; display: block; margin: 0; padding: 0;" alt="">
-                            </span>                            
-                        </div>
-                        <h4 class="card-title">Starter</h4>
-                        <p class="card-description">Suitable for students and beginners who need basic features.</p>
-                        <h3 class="card-price">Free</h3>
-                        <p class="card-device">
-                            <img src="../assets/icon/device.png" style="transform:translateY(70%);" class="device-icon" alt="">1 device
-                        </p>
-                        <div class="text-center">
-                            <button class="btn start-trial-btn" style="background-color:#474bc2; color: white;">Start Trial</button>
-                        </div>
-                    </div>
-                    <div class="pricing-card best-deal-container">
-                        <h6 class="mb-0" style="text-align: center; font-weight:bold;">Best Deal</h6>
-                        <div class="pricing-card-content" style="margin-top:5px;">
-                            <div class="icon mb-3">
-                                <span class="icon-container" style="display: flex; background-color: #474bc2; border-radius: 50%; width: 50px; height: 50px; justify-content: center; align-items: center; overflow: hidden; margin: 0; padding: 0;">
-                                    <img src="../assets/icon/battery-v-charging.png" style="width: 20px; height: 20px; display: block; margin: 0; padding: 0;" alt="">
-                                </span>   
-                            </div>
-                            <h4 class="card-title">Best Deal</h4>
-                            <p class="card-description">Perfect for growing teams and organizations with advanced features.</p>
-                            <h3 class="card-price">฿2,388/month</h3>
-                            <p class="card-device">
-                                <img src="../assets/icon/device.png" class="device-icon" style="transform:translateY(70%);" alt="">5 devices
-                            </p>
-                            <div class="text-center">
-                                <button class="btn start-trial-btn" style="background-color:#e8ebfc; color:black;">Start Trial</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="pricing-card"  style="margin-top:37px;" >
-                        <div class="icon mb-3">
-                            <span class="icon-container" style="display: flex; background-color: #474bc2; border-radius: 50%; width: 50px; height: 50px; justify-content: center; align-items: center; overflow: hidden; margin: 0; padding: 0;">
-                                <img src="../assets/icon/plug.png" style="width: 15px; height: 18px; display: block; margin: 0; padding: 0;" alt="">
-                            </span>   
-                        </div>
-                        <h4 class="card-title">Premium</h4>
-                        <p class="card-description">Best for large organizations needing comprehensive tools.</p>
-                        <h3 class="card-price">฿4,788/month</h3>
-                        <p class="card-device">
-                            <img src="../assets/icon/device.png" class="device-icon" style="transform:translateY(70%);" alt="">10 devices
-                        </p>
-                        <div class="text-center">
-                            <button class="btn start-trial-btn" style="background-color:#474bc2; color: white;">Start Trial</button>
-                        </div>
-                    </div>
-            `;
-    
-            // Default to Monthly Packages
-            pricingCardsContainer.innerHTML = monthlyPackages;
-    
-            // Event Listeners for Toggle Buttons
-            monthlyBtn.addEventListener('click', () => {
-                pricingCardsContainer.innerHTML = monthlyPackages;
-                monthlyBtn.classList.add('active');
-                yearlyBtn.classList.remove('active');
-            });
-    
-            yearlyBtn.addEventListener('click', () => {
-                pricingCardsContainer.innerHTML = yearlyPackages;
-                yearlyBtn.classList.add('active');
-                monthlyBtn.classList.remove('active');
-            });
-        });
+    const monthlyPackages = `
+<div class="pricing-card" style="margin-top:37px;">
+            <div class="icon mb-3">
+                <span class="icon-container" style="display: flex; background-color: #474bc2; border-radius: 50%; width: 50px; height: 50px; justify-content: center; align-items: center; overflow: hidden; margin: 0; padding: 0;">
+                    <img src="../assets/icon/battery-v-50.png" style="width: 20px; height: 20px; display: block; margin: 0; padding: 0;" alt="">
+                </span>                            
+            </div>
+            <h4 class="card-title">Starter</h4>
+            <p class="card-description">Suitable for students and beginners who need basic features.</p>
+            <h3 class="card-price">Free</h3>
+            <p class="card-device">
+                <img src="../assets/icon/device.png" class="device-icon" alt="">1 device
+            </p>
+            <div class="text-center">
+                <button class="btn start-trial-btn" style="background-color:#474bc2; color: white;">Start Trial</button>
+            </div>
+        </div>
+        <div class="pricing-card best-deal-container">
+            <h6 class="mb-0" style="text-align: center; font-weight:bold;">Best Deal</h6>
+            <div class="pricing-card-content" style="margin-top:5px;">
+                <div class="icon mb-3">
+                    <span class="icon-container" style="display: flex; background-color: #474bc2; border-radius: 50%; width: 50px; height: 50px; justify-content: center; align-items: center; overflow: hidden; margin: 0; padding: 0;">
+                        <img src="../assets/icon/battery-v-charging.png" style="width: 20px; height: 20px; display: block; margin: 0; padding: 0;" alt="">
+                    </span>   
+                </div>
+                <h4 class="card-title">Standard</h4>
+                <p class="card-description">Suitable for small organizations or educational institutions that need more features.</p>
+                <h3 class="card-price">฿199/month</h3>
+                <p class="card-device">
+                    <img src="../assets/icon/device.png" class="device-icon"  alt="">5 devices
+                </p>
+                <div class="text-center">
+                    <button class="btn start-trial-btn" style="background-color:#e8ebfc; color:black;">Start Trial</button>
+                </div>
+            </div>
+        </div>
+        <div class="pricing-card"  style="margin-top:37px;" >
+            <div class="icon mb-3">
+                <span class="icon-container" style="display: flex; background-color: #474bc2; border-radius: 50%; width: 50px; height: 50px; justify-content: center; align-items: center; overflow: hidden; margin: 0; padding: 0;">
+                    <img src="../assets/icon/plug.png" style="width: 15px; height: 18px; display: block; margin: 0; padding: 0;" alt="">
+                </span>   
+            </div>
+            <h4 class="card-title">Premium</h4>
+            <p class="card-description">Suitable for large organizations or educational institutions that require a complete system.</p>
+            <h3 class="card-price">฿399/month</h3>
+            <p class="card-device">
+                <img src="../assets/icon/device.png" class="device-icon" alt="">10 devices
+            </p>
+            <div class="text-center">
+                <button class="btn start-trial-btn" style="background-color:#474bc2; color: white;">Start Trial</button>
+            </div>
+        </div>
 
+        
+`;
 
-  function toggleText(button) {
-  const targetId = button.getAttribute("data-target");
-  const textElement = document.getElementById(targetId);
-  const card = button.closest(".card");
-  const allCards = document.querySelectorAll(".card");
+const yearlyPackages = `
+<div class="pricing-card" style="margin-top:37px;">
+            <div class="icon mb-3">
+                <span class="icon-container" style="display: flex; background-color: #474bc2; border-radius: 50%; width: 50px; height: 50px; justify-content: center; align-items: center; overflow: hidden; margin: 0; padding: 0;">
+                    <img src="../assets/icon/battery-v-50.png" style="width: 20px; height: 20px; display: block; margin: 0; padding: 0;" alt="">
+                </span>                            
+            </div>
+            <h4 class="card-title">Starter</h4>
+            <p class="card-description">Suitable for students and beginners who need basic features.</p>
+            <h3 class="card-price">Free</h3>
+            <p class="card-device">
+                <img src="../assets/icon/device.png" class="device-icon" alt="">1 device
+            </p>
+            <div class="text-center">
+                <button class="btn start-trial-btn" style="background-color:#474bc2; color: white;">Start Trial</button>
+            </div>
+        </div>
+        <div class="pricing-card best-deal-container">
+            <h6 class="mb-0" style="text-align: center; font-weight:bold;">Best Deal</h6>
+            <div class="pricing-card-content" style="margin-top:5px;">
+                <div class="icon mb-3">
+                    <span class="icon-container" style="display: flex; background-color: #474bc2; border-radius: 50%; width: 50px; height: 50px; justify-content: center; align-items: center; overflow: hidden; margin: 0; padding: 0;">
+                        <img src="../assets/icon/battery-v-charging.png" style="width: 20px; height: 20px; display: block; margin: 0; padding: 0;" alt="">
+                    </span>   
+                </div>
+                <h4 class="card-title">Standard</h4>
+                <p class="card-description">Suitable for small organizations or educational institutions that need more features.</p>
+                <h3 class="card-price">฿2,388/month</h3>
+                <p class="card-device">
+                    <img src="../assets/icon/device.png" class="device-icon"  alt="">5 devices
+                </p>
+                <div class="text-center">
+                    <button class="btn start-trial-btn" style="background-color:#e8ebfc; color:black;">Start Trial</button>
+                </div>
+            </div>
+        </div>
+        <div class="pricing-card"  style="margin-top:37px;" >
+            <div class="icon mb-3">
+                <span class="icon-container" style="display: flex; background-color: #474bc2; border-radius: 50%; width: 50px; height: 50px; justify-content: center; align-items: center; overflow: hidden; margin: 0; padding: 0;">
+                    <img src="../assets/icon/plug.png" style="width: 15px; height: 18px; display: block; margin: 0; padding: 0;" alt="">
+                </span>   
+            </div>
+            <h4 class="card-title">Premium</h4>
+            <p class="card-description">Suitable for large organizations or educational institutions that require a complete system.</p>
+            <h3 class="card-price">฿4,788/month</h3>
+            <p class="card-device">
+                <img src="../assets/icon/device.png" class="device-icon" alt="">10 devices
+            </p>
+            <div class="text-center">
+                <button class="btn start-trial-btn" style="background-color:#474bc2; color: white;">Start Trial</button>
+            </div>
+        </div>
+`;
+    // Default to Monthly Packages
+    pricingCardsContainer.innerHTML = monthlyPackages;
 
-  // Collapse all other cards
-  allCards.forEach((c) => {
-    if (c !== card) {
-      c.classList.remove("expanded");
-      const otherArrow = c.querySelector(".arrow-icon");
-      if (otherArrow) {
-        otherArrow.src = "../assets/icon/right_arrow.png";
-        otherArrow.classList.remove("rotated");
-      }
+    // Event Listeners for Toggle Buttons
+    monthlyBtn.addEventListener('click', () => {
+        pricingCardsContainer.innerHTML = monthlyPackages;
+        monthlyBtn.classList.add('active');
+        yearlyBtn.classList.remove('active');
+        standardPrice.innerHTML = '฿199 <span class="text-muted" style="font-size:small;">/month</span>';
+        premiumPrice.innerHTML = '฿399 <span class="text-muted" style="font-size:small;">/month</span>';
+    });
+
+    yearlyBtn.addEventListener('click', () => {
+        pricingCardsContainer.innerHTML = yearlyPackages;
+        yearlyBtn.classList.add('active');
+        monthlyBtn.classList.remove('active');
+        standardPrice.innerHTML = '฿2,388 <span class="text-muted" style="font-size:small;">/year</span>';
+        premiumPrice.innerHTML = '฿4,788 <span class="text-muted" style="font-size:small;">/year</span>';
+    });
+});
+
+function toggleText(button) {
+    const targetId = button.getAttribute("data-target");
+    const textElement = document.getElementById(targetId);
+    const card = button.closest(".card");
+    const allCards = document.querySelectorAll(".card");
+
+    // Collapse all other cards
+    allCards.forEach((c) => {
+        if (c !== card) {
+            c.classList.remove("expanded");
+            const otherArrow = c.querySelector(".arrow-icon");
+            if (otherArrow) {
+                otherArrow.src = "../assets/icon/right_arrow.png";
+                otherArrow.classList.remove("rotated");
+            }
+        }
+    });
+
+    // Toggle the clicked card
+    if (card.classList.contains("expanded")) {
+        card.classList.remove("expanded");
+        button.querySelector(".arrow-icon").classList.remove("rotated");
+        button.querySelector(".arrow-icon").src = "../assets/icon/right_arrow.png";
+    } else {
+        card.classList.add("expanded");
+        button.querySelector(".arrow-icon").classList.add("rotated");
+        button.querySelector(".arrow-icon").src = "../assets/icon/left_arrow.png";
     }
-  });
 
-  // Toggle the clicked card
-  if (card.classList.contains("expanded")) {
-    card.classList.remove("expanded");
-    button.querySelector(".arrow-icon").classList.remove("rotated");
-    button.querySelector(".arrow-icon").src = "../assets/icon/right_arrow.png";
-  } else {
-    card.classList.add("expanded");
-    button.querySelector(".arrow-icon").classList.add("rotated");
-    button.querySelector(".arrow-icon").src = "../assets/icon/left_arrow.png";
-  }
-
-  // Log for debugging
-  console.log(`Toggled card ID: ${targetId}`);
+    // Log for debugging
+    console.log(`Toggled card ID: ${targetId}`);
 }
-
-
-
 
 
 
@@ -1237,3 +1112,8 @@
     
 </body>
 </html>
+
+// Define Monthly and Yearly Packages
+
+
+
