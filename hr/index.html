@@ -11,96 +11,79 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../css/styles.css">
     <style rel="stylesheet" type="text/css">
-        body{
-            background-color:#fff;
+  body {
+            background-color: #fff;
         }
-        .heroparagraph{
-            text-align:right;
-            margin-top:20px;
-            margin-right:50px;
-            margin-bottom:50px;
+        .heroparagraph {
+            text-align: right;
+            margin-top: 20px;
+            margin-right: 50px;
+            margin-bottom: 50px;
         }
-        .heroparagraph p{
-            margin-bottom:0px;
+        .heroparagraph p {
+            margin-bottom: 0px;
         }
-         #lineptag{
+        #lineptag {
             font-size: 18px;
             font-weight: bold;
             color: #323438;
             letter-spacing: 3px;
-            position:absolute;
-            transform:translateX(50%)translateY(-50%);
-
+            position: absolute;
+            transform: translateX(50%) translateY(-50%);
         }
-
-        #lineptag span{
+        #lineptag span {
             position: absolute;
             top: 50%;
             width: 70px;
             height: 2px;
             background-color: #323438;
-            transform:translateX(-150%)translateY(-50%);
+            transform: translateX(-150%) translateY(-50%);
         }
-
         .about-section {
             background-color: #ffffff;
         }
-
         .about-section h2 {
-            color: #3c3f7c; /* Matches the blue heading */
+            color: #3c3f7c;
             margin-bottom: 10px;
         }
-
         .line-to-left {
-            width: 90%; /* Full width of the container */
-            height: 3px; /* Thickness of the line */
-            background-color: #000; /* Ensures the line is black */
+            width: 90%;
+            height: 3px;
+            background-color: #000;
             position: absolute;
-            top: 10px; /* Aligns the line to the top */
-            left: 10px; /* Ensures the line starts at the left */
+            top: 10px;
+            left: 10px;
         }
-
-
-            .col-md-6.d-flex.align-items-center {
-                align-items: flex-start; /* Aligns the line to the top */
-                justify-content: flex-start; /* Optional: ensures proper alignment at the start */
-                height: 100%; /* Ensures the container spans the full height */
-            }
-
-
+        .col-md-6.d-flex.align-items-center {
+            align-items: flex-start;
+            justify-content: flex-start;
+            height: 100%;
+        }
         .about-section .badge {
             padding: 10px 20px;
             font-size: 14px;
-            border:2px solid #000;
+            border: 2px solid #000;
             border-radius: 4px;
             font-weight: 500;
-            background-color:none;
+            background-color: none;
         }
-
         .pricing-section {
             background-color: #ffffff;
-
         }
-
         .pricing-section h2 {
             color: #474bc2;
         }
-
         .pricing-section .line {
             margin: 0 auto;
             height: 3px;
             width: 50px;
             background-color: #474bc2;
         }
-
-        /* Toggle Button Styles */
         .pricing-toggle-container {
-            height:65px;
+            height: 65px;
             text-align: center;
             margin: auto;
         }
-
-
         .btn-group .btn {
             border: none;
             padding: 10px 20px;
@@ -108,198 +91,168 @@
             font-weight: bold;
             transition: background-color 0.3s, color 0.3s;
         }
-
         .btn-group .btn.active {
             background-color: #ffffff;
             color: #474bc2;
             color: #000;
             box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
         }
-
         .btn-group .btn:not(.active) {
             background-color: #f3f5fc;
             color: #323438;
         }
-
         .btn-group .btn:hover {
             cursor: pointer;
         }
-
-
-
-    .pricing-cards-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 20px;
-    margin: 20px 0;
-}
-
-.pricing-card {
-    width: 300px; /* Fixed width for all cards */
-    border: 2px solid #8C97C9;
-    border-radius: 8px;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: left;
-}
-
-.best-deal-container {
-    width: 350px; /* Larger width for best deal container */
-    background-color: #D1D1F0;
-    border-radius: 12px;
-    padding: 10px;
-    border:none;
-}
-
-.pricing-card-content {
-    border: 2px solid #8C97C9; /* Kept the correct border */
-    border-radius: 8px;
-    padding: 20px;
-    background-color: #fff;
-}
-
-.start-trial-btn{
-    width:200px;
-}
-
-.icon-container {
-    display: flex;
-    background-color: #474BC2;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    justify-content: center;
-    align-items: center;
-}
-
-.icon-image {
-    width: 20px;
-    height: 20px;
-}
-
-.card-title {
-    font-weight: bold;
-    font-size: 20px;
-
-    margin: 10px 0;
-}
-
-.card-description {
-    font-size: 16px;
-    margin-bottom: 10px;
-}
-
-.card-price {
-    font-size: 24px;
-    font-weight: bold;
-    margin: 10px 0;
-}
-
-.card-device {
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-}
-
-.device-icon {
-    width: 13px;
-    height: 13px;
-    margin-right: 5px;
-}
-
-.text-center {
-    margin-top: 15px;
-}
-
-
-.compare-features {
-    background-color: #ffffff;
-}
-
-.features-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 15px;
-    align-items: center;
-}
-
-.features-header {
-    display: contents;
-}
-
-.feature-row {
-    display: contents;
-    text-align: center;
-    align-items: center;
-    font-size: 16px;
-}
-
-.feature-row p {
-    text-align: left;
-    font-size: 16px;
-    margin: 0;
-    padding: 15px 0;
-
-}
-
-.card {
-    border: 1px solid #8c97c9;
-    border-radius: 8px;
-    background-color: white;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 15px;
-}
-
-.feature-check {
-    color: #474bc2;
-    font-size: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #e8ebfc;
-    border-radius: 8px;
-    height: 40px;
-    width: 40px;
-    margin: auto;
-}
-
-.feature-info {
-    background-color: #B1BBE7;
-    border-radius: 8px;
-    padding: 10px;
-    font-weight: bold;
-    text-align: center;
-}
-
-.feature-check-button{
-    background-color:#B1BBE7;
-    border:none;
-    border-radius:4px;
-    height:40px;
-}
-
-/* Product & Services Section */
-.product-services .card {
-    transition: all 0.3s ease-in-out;
-    flex: 1;
-    margin: 10px;
-    position: relative;
+        .pricing-cards-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .pricing-card {
+            width: 300px;
+            border: 2px solid #8C97C9;
+            border-radius: 8px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+        .best-deal-container {
+            width: 350px;
+            background-color: #D1D1F0;
+            border-radius: 12px;
+            padding: 10px;
+            border: none;
+        }
+        .pricing-card-content {
+            border: 2px solid #8C97C9;
+            border-radius: 8px;
+            padding: 20px;
+            background-color: #fff;
+        }
+        .start-trial-btn {
+            width: 200px;
+        }
+        .icon-container {
+            display: flex;
+            background-color: #474BC2;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            justify-content: center;
+            align-items: center;
+        }
+        .icon-image {
+            width: 20px;
+            height: 20px;
+        }
+        .card-title {
+            font-weight: bold;
+            font-size: 20px;
+            margin: 10px 0;
+        }
+        .card-description {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .card-price {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .card-device {
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+        }
+        .device-icon {
+            width: 13px;
+            height: 13px;
+            margin-right: 5px;
+        }
+        .text-center {
+            margin-top: 15px;
+        }
+        .compare-features {
+            background-color: #ffffff;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 15px;
+            align-items: center;
+        }
+        .features-header {
+            display: contents;
+        }
+        .feature-row {
+            display: contents;
+            text-align: center;
+            align-items: center;
+            font-size: 16px;
+        }
+        .feature-row p {
+            text-align: left;
+            font-size: 16px;
+            margin: 0;
+            padding: 15px 0;
+        }
+        .card {
+            border: 1px solid #8c97c9;
+            border-radius: 8px;
+            background-color: white;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+        }
+        .feature-check {
+            color: #474bc2;
+            font-size: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #e8ebfc;
+            border-radius: 8px;
+            height: 40px;
+            width: 40px;
+            margin: auto;
+        }
+        .feature-info {
+            background-color: #B1BBE7;
+            border-radius: 8px;
+            padding: 10px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .feature-check-button {
+            background-color: #B1BBE7;
+            border: none;
+            border-radius: 4px;
+            height: 40px;
+        }
+        .product-services .card {
+    transition: width 0.3s ease-in-out;
+    width: 100%;
+    max-width: 350px;
+    height: 400px; /* Fixed height */
     overflow: hidden;
+    position: relative;
 }
 
 .product-services .card.expanded {
-    flex: 2; /* Expanded card takes more width */
+    width: 700px; /* Expanded width */
+    max-width: 100%;
 }
 
 .product-services .card .collapse-text {
-    display: none; /* Hide text by default */
+    display: none;
     transition: opacity 0.3s ease-in-out;
 }
 
 .product-services .card.expanded .collapse-text {
-    display: block; /* Show text when expanded */
+    display: block;
     opacity: 1;
 }
 
@@ -308,7 +261,7 @@
 }
 
 .product-services .card.expanded .arrow-icon {
-    transform: rotate(180deg); /* Rotate icon when expanded */
+    transform: rotate(180deg);
 }
 
 .product-services .card .card-body {
@@ -318,240 +271,169 @@
     height: 100%;
 }
 
-/* Card Footer */
 .card-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-top: 20px;
 }
-
-.learn-more-btn {
-    background-color: #E8EBFC;
-    color: #474BC2;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 5px;
-    font-size: 14px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.learn-more-btn:hover {
-    background-color: #D6D9F3;
-}
-
-/* Icons in Footer */
-.card-footer i {
-    font-size: 18px;
-    color: #474BC2;
-    cursor: pointer;
-}
-
-/* Carousel Controls */
-.carousel-controls {
-    margin-top: 30px;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
-
-.carousel-controls i {
-    font-size: 24px;
-    color: #474BC2;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.carousel-controls i:hover {
-    color: #323438;
-}
-
-.upcoming-features {
-    background-color: #F8FBFF;
-    padding: 40px;
-    text-align: left;
-}
-
-.header-section {
-    margin-bottom: 30px;
-}
-
-.section-title {
-    font-size: 32px;
-    font-weight: bold;
-    color: #323438;
-    margin-bottom: 10px;
-}
-
-.subtitle {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.horizontal-line {
-    flex: 1; /* Line stretches to fill remaining space */
-    height: 2px;
-    background-color: #000;
-    display: inline-block;
-}
-
-.text {
-    color: #000;
-    text-transform: uppercase;
-    font-size: 14px;
-    font-weight: bold;
-    letter-spacing: 1px;
-}
-
-.features-cards {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-}
-
-.feature-card {
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    width: 30%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 20px;
-}
-
-.card-header {
-    display: flex;
-    justify-content: flex-end;
-    padding: 10px;
-}
-
-.learn-more-btn {
-    background-color: #E8EBFC;
-    color: #474BC2;
-    border: none;
-    border-radius: 5px;
-    font-size: 14px;
-    font-weight: bold;
-    padding: 8px 16px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.learn-more-btn:hover {
-    background-color: #D6D9F3;
-}
-
-.card-body {
-    padding: 10px;
-    text-align: left;
-    height:200px;
-    position:relative;
-    width:300px;
-
-}
-.upcoming{
-    border:2px solid #B1BBE7;
-    border-radius:4px;
-    background-color:#F3F5FC;
-    width:290px;
-    height:100px;
-    position:absolute;
-    left:0;
-    bottom:0;
-    padding:10px;
-
-}
-.card-body h3 {
-    font-size: 16px;
-    font-weight: bold;
-    color: #323438;
-    margin-bottom: 10px;
-}
-
-.card-body p {
-    font-size: 14px;
-    color: #5A5A5A;
-    line-height: 1.6;
-}
-
-/* Carousel Controls */
-.carousel-controls {
-    margin-top: 30px;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
-
-.carousel-controls i {
-    font-size: 24px;
-    color: #474BC2;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.carousel-controls i:hover {
-    color: #323438;
-}
-
-/* .row {
-  display: flex;
-  gap: 1rem;
-  align-items: stretch;
-}
-
-.card {
-  transition: all 0.3s ease-in-out;
-  height: 100%; /* Consistent card height */
-  /* flex: 1;
-} */
-
-.card.expanded {
-  flex: 2; /* Expanded card takes more width */
-  z-index: 1; /* Ensure it stays on top */
-}
-
-.card:not(.expanded) {
-  flex: 1; /* Non-expanded cards retain default size */
-}
-
-.collapse-text {
-  display: none; /* Hide text by default */
-}
-
-.card.expanded .collapse-text {
-  display: block; /* Show text when expanded */
-}
-
-.toggle-btn {
-  align-self: flex-end;
-  background-color: transparent;
-  border: none;
-}
-
-.arrow-icon {
-  width: 20px;
-  transition: transform 0.3s ease;
-}
-
-.arrow-icon.rotated {
-  transform: rotate(180deg); /* Rotate icon when expanded */
-} */
-
-
-
-
-.product-services .card .card-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-
-
+        .learn-more-btn {
+            background-color: #E8EBFC;
+            color: #474BC2;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .learn-more-btn:hover {
+            background-color: #D6D9F3;
+        }
+        .card-footer i {
+            font-size: 18px;
+            color: #474BC2;
+            cursor: pointer;
+        }
+        .carousel-controls {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .carousel-controls i {
+            font-size: 24px;
+            color: #474BC2;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .carousel-controls i:hover {
+            color: #323438;
+        }
+        .upcoming-features {
+            background-color: #F8FBFF;
+            padding: 40px;
+            text-align: left;
+        }
+        .header-section {
+            margin-bottom: 30px;
+        }
+        .section-title {
+            font-size: 32px;
+            font-weight: bold;
+            color: #323438;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .horizontal-line {
+            flex: 1;
+            height: 2px;
+            background-color: #000;
+            display: inline-block;
+        }
+        .text {
+            color: #000;
+            text-transform: uppercase;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        .features-cards {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .feature-card {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            width: 30%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 20px;
+        }
+        .card-header {
+            display: flex;
+            justify-content: flex-end;
+            padding: 10px;
+        }
+        .learn-more-btn {
+            background-color: #E8EBFC;
+            color: #474BC2;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 8px 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .learn-more-btn:hover {
+            background-color: #D6D9F3;
+        }
+        .card-body {
+            padding: 10px;
+            text-align: left;
+            height: 200px;
+            position: relative;
+            width: 300px;
+        }
+        .upcoming {
+            border: 2px solid #B1BBE7;
+            border-radius: 4px;
+            background-color: #F3F5FC;
+            width: 290px;
+            height: 100px;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            padding: 10px;
+            
+        }
+        .card-body h3 {
+            font-size: 16px;
+            font-weight: bold;
+            color: #323438;
+            margin-bottom: 10px;
+        }
+        .card-body p {
+            font-size: 14px;
+            color: #000;
+            line-height: 1.6;
+            z-index:1;
+        }
+        .card {
+            transition: width 0.3s ease-in-out;
+            width: 100%;
+            max-width: 350px;
+        }
+        .card.expanded {
+            width: 700px;
+            max-width: 100%;
+        }
+        .card-body {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            position:relative;
+        }
+        .card-body img {
+            transition: transform 0.3s ease-in-out;
+            z-index:0;
+            position:absolute;
+            bottom:50px;
+            right:0;
+        }
+        .arrow-icon.rotated {
+            transform: rotate(180deg);
+        }
 
 
 
@@ -785,6 +667,7 @@
                             <p class="card-text collapse-text" id="text-1">
                                 Internship Data Management provides real-time data updates for both interns and corporate users.
                             </p>
+                            <img src="../assets/img/data_management.jpg" style="width:250px;height:250px;" alt="">
                             <div class="d-flex justify-content-between align-items-center">
                                 <button class="btn" style="background-color:#b1bbe7">Learn More</button>
                                 <button class="btn btn-light toggle-btn" data-target="text-1" onclick="toggleText(this)">
@@ -802,6 +685,7 @@
                             <p class="card-text collapse-text" id="text-2">
                                 Realtime time attendance key in and out rely on setup location which user can choose work from home, work from office, or flexible mode, manage shift. Time attendance could help in time tracking and overtime payment and payroll automatically upon organizational setting which could reduce working time and workload of administrative tasks.
                             </p>
+                            <img src="../assets/img/time_attendance.jpg"  style="width:250px;height:250px;"  alt="">
                             <div class="d-flex justify-content-between align-items-center">
                                 <button class="btn" style="background-color:#b1bbe7;">Learn More</button>
                                 <button class="btn btn-light toggle-btn" data-target="text-2" onclick="toggleText(this)">
@@ -819,6 +703,7 @@
                             <p class="card-text collapse-text" id="text-3">
                                 The Leave Request system streamlines the process of applying and approving leave. Employees can submit requests online, and managers can easily review and approve them, improving efficiency and transparency.
                             </p>
+                            <img src="../assets/img/leave_request.jpg"  style="width:250px;height:250px;"  alt="">
                             <div class="d-flex justify-content-between align-items-center">
                                 <button class="btn" style="background-color:#b1bbe7;">Learn More</button>
                                 <button class="btn btn-light toggle-btn" data-target="text-3" onclick="toggleText(this)">
