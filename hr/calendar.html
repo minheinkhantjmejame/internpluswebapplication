@@ -22,13 +22,15 @@
             align-items: stretch; /* Ensures both sidebar & content stretch equally */
         }
         .sidebar {
-            background-color: #F3F5FC;
-            padding-top: 10px;
-            padding-left: 20px;
-            height: auto; /* Allows it to stretch dynamically */
+    background-color: #F3F5FC;
+    padding-top: 10px;
+    padding-left: 20px;
+    height: 100vh; /* ✅ ENSURE FULL PAGE HEIGHT */
 
-            
-        }
+
+    overflow-y: auto; /* ✅ Allows scrolling if content is longer */
+}
+
         /* Default styling for sidebar links */
 /* Default sidebar link styling */
 .nav-link {
@@ -315,10 +317,126 @@
     margin-top: 5px; /* Spacing below the Calendar heading */
 }
 
-/* Year Selector */
-.year-selector {
-    width: 100px;
+/* Container to hold the dropdown */
+.year-selector-container {
+    position: relative;
+    display: inline-block;
 }
+
+.description-box {
+    display: none;
+    position: absolute;
+    background-color: white;
+    border: 1px solid #000;
+    border-radius: 4px;
+    padding: 15px;
+    width: 250px;
+    z-index: 1000;
+}
+
+.description-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.description-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.description-select {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.description-input {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.description-badge .badge {
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    width:60px;
+}
+
+.description-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Styled button that looks like a select */
+.year-selector-btn {
+    background-color: #F3F5FC;
+    border: none;
+    font-size: 16px;
+    padding:10px 20px;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* White circular background for the arrow */
+.year-selector-btn i {
+    background-color: white;
+    color: black;
+    border-radius: 4px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+}
+
+/* Dropdown menu */
+.year-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 5px 0;
+    z-index: 1000;
+    list-style: none;
+}
+
+.year-dropdown li {
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.year-dropdown li:hover {
+    background-color: #F3F5FC;
+}
+
+
+.white-arrow {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: black;
+    pointer-events: none; /* Prevent clicking on the icon */
+    background-color:#ffffff;
+}
+
+
 
 /* Month Navigation */
 .month-navigation {
@@ -362,24 +480,153 @@
 }
 
 .day-box {
+    position: relative;
+    width: 100px; /* Fixed width */
+    height: 80px; /* Fixed height */
     background-color: #f8f9fa;
-    padding: 20px;
+    padding: 10px;
     border-radius: 5px;
-    min-height: 80px;
     display: flex;
-    align-items: center;
-    justify-content: center;
     flex-direction: column;
+    align-items: flex-start; /* Align content to the left */
+    justify-content: flex-end; /* Pushes badges to the bottom */
+    text-align: left;
+    overflow: hidden; /* Prevents overflow */
+}
+
+
+.day-box .badge-container {
+    display: flex;
+    flex-direction: column; /* Stack badges vertically */
+    align-items: flex-start; /* Align to bottom left */
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    gap: 2px; /* Space between multiple badges */
+}
+
+/* Highlight selected day box */
+.day-box.selected {
+    border: 2px solid #474BC2; /* Change to match your UI */
+    background-color: #ffffff;
+}
+
+/* Plus Icon Styling */
+.plus-icon {
+    font-size: 24px;
+    font-weight: bold;
+    color: #474BC2;
+    display: none; /* Initially hidden */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+/* Show plus icon when selected */
+.day-box.selected .plus-icon {
+    display: block;
+}
+
+.day-number {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 14px;
+    color: #333;
+    font-weight:bold;
 }
 
 .date-description {
     flex: 1;
     background-color: #f8f9fa;
     padding: 15px;
-    border-radius: 5px;
+    border-radius: 4px;
     min-height: 300px;
     margin-left: 20px;
+   
 }
+
+/* Ensures badge text stays on a single line in the description box */
+.description-badge .badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    width: auto; /* Adjusts width dynamically */
+    max-width: 100%; /* Ensures it doesn’t exceed the box */
+    white-space: nowrap; /* Prevents breaking into multiple lines */
+    overflow: hidden; /* Hides any overflow */
+    text-overflow: ellipsis; /* Adds '...' if text is too long */
+}
+
+
+#add-button,#delete-button{
+    background-color:#474BC2;
+    border:none;
+    border-radius:4px;
+    color:#ffff;
+    font-size:14px;
+}
+
+/* Style for badge container to keep text inline */
+.badge-text {
+    display: flex;
+    align-items: center; /* Aligns vertically */
+    gap: 8px; /* Adds spacing between badge and text */
+    font-size: 14px; /* Adjust font size */
+}
+
+/* Ensure the badge itself is properly aligned */
+/* Badge styling with multi-line support */
+.badge {
+    display: inline-block;
+    padding: 3px 6px;
+    font-size: 12px;
+    border-radius: 4px;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    white-space: normal;
+    line-height: 1.2;
+    word-wrap: break-word;
+    text-transform: capitalize;
+}
+
+/* Colors for different events */
+.holiday-badge {
+    background-color: #D5CFFB;
+    color:#5C5AC8;
+}
+
+.weekend-badge {
+    background-color: #DDF7FE;
+    color: #25849D;
+}
+
+.onboard-badge {
+    background-color: #DCE3FF;
+    color:#6F7CB5;
+}
+
+.offboard-badge {
+    background-color: #E1FEF1;
+    color:#64C79B;
+    
+}
+
+.faint-text {
+    color: #A0A0A0; /* Light gray text */
+    font-weight: 400; /* Normal weight (not bold) */
+    font-size: 14px; /* Adjust size if needed */
+
+}
+
+
+
+
+
 
     </style>
 
@@ -465,11 +712,19 @@
                     <!-- New container for Year Selector & Month Navigation -->
                     <div class="calendar-controls">
                         <!-- Year Selector -->
-                        <select id="year-selector" class="form-select year-selector">
-                            <option value="2024">2024</option>
-                            <option value="2025">2025</option>
-                            <option value="2026">2026</option>
-                        </select>
+                        <div class="year-selector-container">
+                            <button id="year-selector-btn" class="year-selector-btn">
+                                <span id="selected-year">2024</span>
+                                <i class="bi bi-chevron-down"></i>
+                            </button>
+                            <ul id="year-dropdown" class="year-dropdown">
+                                <li data-value="2024">2024</li>
+                                <li data-value="2025">2025</li>
+                                <li data-value="2026">2026</li>
+                            </ul>
+                        </div>
+                        
+                        
                 
                         <!-- Month Navigation -->
                         <div class="month-navigation text-center" style="width:80%;display:flex;justify-content: center;align-items: center;">
@@ -497,21 +752,60 @@
                             <!-- Dates will be inserted dynamically -->
                         </div>
                     </div>
+
+                    <!-- Add this inside the calendar-container div -->
+                    <div id="description-box" class="description-box">
+                        <div class="description-header">
+                            <span id="description-date">Wed, 25 Dec 2024</span>
+                        </div>
+                        <div class="description-content">
+                            <div class="description-select">
+                                <img src="../assets/icon/pin.png" alt="">
+                                <select id="description-type" style="border:none; background-color: #F3F5FC; padding:10px 10px;" >
+                                    <option value="holiday">Holiday</option>
+                                    <option value="weekend">Weekend</option>
+                                    <option value="internship-onboard">Internship Onboard</option>
+                                    <option value="internship-offboard">Internship Offboard</option>
+                                </select>
+                            </div>
+                            <div class="description-input">
+                                <label style="font-size:16px;">Description</label>
+                                <input type="text" id="description-text" placeholder="Enter description">
+                            </div>
+                            <div class="description-badge">
+                                <span class="badge" id="description-badge">Weekend</span>
+                            </div>
+                            <div>
+                                <img src="../assets/icon/add_profile.png" style="width: 35px; height: 35px; border: 1px dashed black; border-radius: 50%; padding: 10px; box-sizing: border-box;"  alt="">
+                            </div>
+                            <div class="description-actions" style="display:flex;justify-content: end;align-items: end;">
+                                <button id="add-button">Add</button>
+                                <button id="delete-button">Delete</button>
+                            </div>
+                        </div>
+                    </div>
                     
-                    <!-- Date Description -->
                     <div class="date-description">
                         <h5>Date Description</h5>
-                        <p><strong>5</strong> - Father's Day</p>
-                        <p><strong>10</strong> - Constitution Day</p>
-                        <p><strong>16</strong> - Doc Hudson offboard</p>
-                        <p><strong>23</strong> - Holley Shiftwell onboard</p>
-                        <p><strong>31</strong> - New Year's Eve</p>
                         <hr>
-                        <p><span class="event holiday">Holiday</span> Holiday</p>
-                        <p><span class="event weekend">Weekend</span> Weekend</p>
-                        <p><span class="event internship-onboard">Internship Onboard</span> Internship onboard</p>
-                        <p><span class="event internship-offboard">Internship Offboard</span> Internship offboard</p>
+                        <p class="badge-text">
+                            <span class="badge holiday-badge" style="width:15px;height:15px;"> </span> Holiday
+                        </p>
+                        <p class="badge-text">
+                            <span class="badge offboard-badge" style="width:15px;height:15px;"> </span> Weekend
+                        </p>
+                        <p class="badge-text">
+                            <span class="badge onboard-badge" style="width:15px;height:15px;"> </span> Internship onboard
+                        </p>
+                        <p class="badge-text">
+                            <span class="badge holiday-badge" style="width:15px;height:15px;"> </span> Internship offboard
+                        </p>
+
+
                     </div>
+                    
+                    
+                    
                 </div>
                 
             </div>
@@ -524,7 +818,6 @@
     <!-- Custom JS  -->
     <script src="../js/app.js"></script>
     <script>
-
 document.addEventListener("DOMContentLoaded", function () {
     let sidebarLinks = document.querySelectorAll(".nav-link");
 
@@ -539,59 +832,81 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         link.addEventListener("click", function (event) {
-            // Only prevent default for internal navigation (hash links)
             if (!this.getAttribute("href").startsWith("#")) {
                 localStorage.setItem("activeSidebarLink", this.getAttribute("href"));
                 return; // Let the browser navigate normally
             }
-            
-            event.preventDefault(); // Prevent hash-based jumps
-
-            // Remove active class from all links
+            event.preventDefault();
             sidebarLinks.forEach(l => l.classList.remove("active"));
-
-            // Add active class only to the clicked link
             this.classList.add("active");
-
-            // Save active link in localStorage
             localStorage.setItem("activeSidebarLink", this.getAttribute("href"));
         });
     });
-});
 
-document.addEventListener("DOMContentLoaded", function () {
-    const monthNames = [
-        "January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
-    ];
-    
-    const events = {
-        "2024-12-05": "holiday",
-        "2024-12-10": "holiday",
-        "2024-12-16": "internship-offboard",
-        "2024-12-23": "internship-onboard",
-        "2024-12-31": "holiday"
-    };
+    const calendarGrid = document.getElementById("calendar");
+    const dayNamesRow = document.getElementById("day-names"); // Day names container
+    const descriptionBox = document.getElementById("description-box");
+    const descriptionDate = document.getElementById("description-date");
+    const descriptionType = document.getElementById("description-type");
+    const descriptionText = document.getElementById("description-text");
+    const addButton = document.getElementById("add-button");
+    const deleteButton = document.getElementById("delete-button");
+    const descriptionBadge = document.getElementById("description-badge");
+    const dateDescriptionContainer = document.querySelector(".date-description"); // Date description section
+    const prevMonthBtn = document.getElementById("prev-month"); // ⬅️ Previous Month Button
+    const nextMonthBtn = document.getElementById("next-month"); // ➡️ Next Month Button
 
-    let currentMonth = 11;
-    let currentYear = 2024;
+    let events = {}; // Store event data
+
+    let currentMonth = 11; // December default
+    let currentYear = 2024; // Default year
+    let selectedDate = null; // Track the clicked date
+
+    // Year Selector Functionality
+    const yearSelectorBtn = document.getElementById("year-selector-btn");
+    const yearDropdown = document.getElementById("year-dropdown");
+    const selectedYearSpan = document.getElementById("selected-year");
+
+    // Toggle dropdown visibility
+    yearSelectorBtn.addEventListener("click", function (event) {
+        event.stopPropagation();
+        yearDropdown.style.display = yearDropdown.style.display === "block" ? "none" : "block";
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener("click", function () {
+        yearDropdown.style.display = "none";
+    });
+
+    // Handle year selection
+    yearDropdown.querySelectorAll("li").forEach(item => {
+        item.addEventListener("click", function () {
+            const selectedYear = this.getAttribute("data-value");
+            selectedYearSpan.textContent = selectedYear;
+            currentYear = parseInt(selectedYear);
+            generateCalendar(currentMonth, currentYear);
+            yearDropdown.style.display = "none";
+        });
+    });
 
     function generateCalendar(month, year) {
+        const monthNames = [
+            "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        ];
+        
         document.getElementById("current-month").innerText = monthNames[month];
-        document.getElementById("year-selector").value = year;
+        document.getElementById("selected-year").innerText = year;
 
-        const calendarGrid = document.getElementById("calendar");
-        const dayNamesRow = document.getElementById("day-names");
-        calendarGrid.innerHTML = "";
-        dayNamesRow.innerHTML = "";
+        calendarGrid.innerHTML = ""; // Clear the previous calendar
+        dayNamesRow.innerHTML = ""; // Clear day names
 
-        // Insert Day Names (SUN - SAT)
+        // Day names (Sun - Sat)
         const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
         dayNames.forEach(day => {
             const dayDiv = document.createElement("div");
             dayDiv.textContent = day;
-            dayDiv.style.fontWeight = "bold";
-            dayDiv.style.textAlign = "center";
+            dayDiv.classList.add("day-name"); // Add a class for styling
             dayNamesRow.appendChild(dayDiv);
         });
 
@@ -604,43 +919,207 @@ document.addEventListener("DOMContentLoaded", function () {
 
         for (let day = 1; day <= daysInMonth; day++) {
             const dateKey = `${year}-${(month + 1).toString().padStart(2, "0")}-${day.toString().padStart(2, "0")}`;
-            let className = "day-box";
-            if (events[dateKey]) className += " " + events[dateKey];
-            if (new Date(year, month, day).getDay() === 0 || new Date(year, month, day).getDay() === 6) {
-                className += " weekend";
+            const dayOfWeek = new Date(year, month, day).getDay();
+            let badge = "";
+
+            // Automatically mark weekends (Saturday & Sunday) as "Weekend"
+            if (dayOfWeek === 0 || dayOfWeek === 6) { // Sunday (0) & Saturday (6)
+                events[dateKey] = { type: "weekend", description: "Weekend" };
             }
-            calendarGrid.innerHTML += `<div class="${className}">${day}</div>`;
+
+            if (events[dateKey]) {
+                let badgeClass = getBadgeClass(events[dateKey].type);
+                badge = `<span class="badge ${badgeClass}">${events[dateKey].type.replace("-", " ")}</span>`;
+            }
+
+            const dayBox = document.createElement("div");
+            dayBox.className = "day-box";
+            dayBox.innerHTML = `<span class="day-number">${day}</span> ${badge}`;
+            
+            dayBox.addEventListener("click", function (event) {
+                event.stopPropagation();
+                selectedDate = dateKey;
+                showDescriptionBox(dateKey, events[dateKey]?.type || "", events[dateKey]?.description || "", dayBox);
+            });
+
+            calendarGrid.appendChild(dayBox);
+        }
+
+        updateDateDescription();
+    }
+
+
+
+    function showDescriptionBox(date, eventType, description, targetElement) {
+    // Remove previous selection
+    document.querySelectorAll(".day-box").forEach(box => {
+        box.classList.remove("selected");
+    });
+
+    // Add selected class to the clicked day
+    targetElement.classList.add("selected");
+
+    // Create or update the plus icon inside the selected day box
+    let plusIcon = targetElement.querySelector(".plus-icon");
+    if (!plusIcon) {
+        plusIcon = document.createElement("span");
+        plusIcon.className = "plus-icon";
+        plusIcon.innerHTML = "+"; // Plus sign
+        targetElement.appendChild(plusIcon);
+    }
+
+    // Show full date in description box
+    descriptionDate.textContent = new Date(date).toLocaleDateString('en-US', { 
+        weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' 
+    });
+
+    // If the selected date is a weekend, show "Weekend" as default
+    if (new Date(date).getDay() === 0 || new Date(date).getDay() === 6) {
+        eventType = "weekend"; 
+        description = "Weekend";
+    }
+
+    descriptionType.value = eventType || "holiday";
+    descriptionText.value = description || ""; // Loads saved descriptions
+
+    updateBadge(eventType); // Show badge dynamically
+
+    addButton.style.display = "inline-block";
+    deleteButton.style.display = events[date] ? "inline-block" : "none";
+
+    addButton.onclick = function () {
+        saveEvent(date);
+    };
+    
+    deleteButton.onclick = function () {
+        deleteEvent(date);
+    };
+
+    descriptionBox.style.display = "block";
+
+    // Positioning near the clicked date
+    const rect = targetElement.getBoundingClientRect();
+    descriptionBox.style.left = `${rect.left + window.scrollX}px`;
+    descriptionBox.style.top = `${rect.bottom + window.scrollY + 10}px`;
+}
+
+
+function hideDescriptionBox() {
+    descriptionBox.style.display = "none";
+
+    // Remove selection border and plus icon when clicking outside
+    document.querySelectorAll(".day-box").forEach(dayBox => {
+        dayBox.classList.remove("selected"); // Remove border
+        let plusIcon = dayBox.querySelector(".plus-icon");
+        if (plusIcon) {
+            plusIcon.remove(); // Remove + icon
+        }
+    });
+}
+
+
+    function saveEvent(date) {
+        const eventType = descriptionType.value;
+        const description = descriptionText.value;
+
+        events[date] = { type: eventType, description: description };
+        generateCalendar(currentMonth, currentYear); // Refresh UI
+        updateDateDescription();
+        showDescriptionBox(date, eventType, description, document.querySelector(`.day-box .day-number`)); // Show updated
+    }
+
+    function deleteEvent(date) {
+        delete events[date];
+        generateCalendar(currentMonth, currentYear);
+        updateDateDescription();
+        hideDescriptionBox();
+    }
+
+    function updateBadge(eventType) {
+    let badgeClass = getBadgeClass(eventType);
+
+    // If no event is selected, hide the badge
+    if (!eventType) {
+        descriptionBadge.style.display = "none";
+        descriptionBadge.textContent = ""; // Clear the text
+    } else {
+        descriptionBadge.style.display = "inline-block"; // Show only if event is selected
+        descriptionBadge.textContent = eventType.replace("-", " "); // Proper spacing
+        descriptionBadge.className = "badge " + badgeClass;
+    }
+}
+
+
+
+    function getBadgeClass(eventType) {
+        switch (eventType) {
+            case "weekend": return "weekend-badge";
+            case "internship-onboard": return "onboard-badge";
+            case "internship-offboard": return "offboard-badge";
+            default: return "holiday-badge";
         }
     }
 
-    document.getElementById("prev-month").addEventListener("click", () => {
-        if (currentMonth === 0) {
-            currentMonth = 11;
-            currentYear--;
-        } else {
-            currentMonth--;
+    function updateDateDescription() {
+    let descriptionHTML = `<h5>Date Description</h5>`;
+
+    // 🔹 Add user-selected events before the separator line
+    Object.keys(events).forEach(date => {
+        if (events[date].type !== "weekend") { // Exclude automatic weekends
+            let event = events[date];
+            let badgeClass = getBadgeClass(event.type);
+            let dayNumber = date.split("-")[2]; // Extract only the day number
+
+            descriptionHTML += `
+                <p class="badge-text">
+                    <span class="badge ${badgeClass}">${dayNumber}</span> ${event.description || ""}
+                </p>
+            `;
         }
+    });
+
+    // 🔹 Add a separator line before default event badges
+    descriptionHTML += `<hr>
+                        <p class="badge-text">
+                            <span class="badge holiday-badge" style="width:15px;height:15px;"> </span> Holiday
+                        </p>
+                        <p class="badge-text">
+                            <span class="badge offboard-badge" style="width:15px;height:15px;"> </span> Weekend
+                        </p>
+                        <p class="badge-text">
+                            <span class="badge onboard-badge" style="width:15px;height:15px;"> </span> Internship onboard
+                        </p>
+                        <p class="badge-text">
+                            <span class="badge holiday-badge" style="width:15px;height:15px;"> </span> Internship offboard
+                        </p>`;
+
+    dateDescriptionContainer.innerHTML = descriptionHTML;
+}
+
+
+    // 📌 Month Navigation Fix
+    prevMonthBtn.addEventListener("click", () => {
+        currentMonth = (currentMonth === 0) ? 11 : currentMonth - 1;
+        currentYear = (currentMonth === 11) ? currentYear - 1 : currentYear;
         generateCalendar(currentMonth, currentYear);
     });
 
-    document.getElementById("next-month").addEventListener("click", () => {
-        if (currentMonth === 11) {
-            currentMonth = 0;
-            currentYear++;
-        } else {
-            currentMonth++;
-        }
-        generateCalendar(currentMonth, currentYear);
-    });
-
-    document.getElementById("year-selector").addEventListener("change", (event) => {
-        currentYear = parseInt(event.target.value);
+    nextMonthBtn.addEventListener("click", () => {
+        currentMonth = (currentMonth === 11) ? 0 : currentMonth + 1;
+        currentYear = (currentMonth === 0) ? currentYear + 1 : currentYear;
         generateCalendar(currentMonth, currentYear);
     });
 
     generateCalendar(currentMonth, currentYear);
+
+    // Hide description box when clicking outside of it
+document.addEventListener("click", function (event) {
+    if (!descriptionBox.contains(event.target) && !event.target.classList.contains("day-box")) {
+        hideDescriptionBox();
+    }
 });
 
+});
 
 
     </script>
