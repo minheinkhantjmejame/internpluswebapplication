@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InternPlus</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/styles.css">
+    <style rel="stylesheet" type="text/css">
+        body {
+            background-color: #fff;
+            height: 100%;
+        }
+        .main-container {
+            display: flex;
+            align-items: stretch; /* Ensures both sidebar & content stretch equally */
+        }
+        .sidebar {
+            background-color: #F3F5FC;
+            padding-top: 10px;
+            padding-left: 20px;
+            height: 100vh; /* Allows it to stretch dynamically */
+
+            
+        }
+        /* Default styling for sidebar links */
+/* Default sidebar link styling */
+.nav-link {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+    border-left: 3px solid transparent; /* No border by default */
+    transition: border-left 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+/* Add border-left only when clicked */
+.nav-link.active {
+    border-left: 4px solid black; /* Highlight color */
+    background-color: #EDEFF7; /* Optional: Background change */
+}
+
+
+        .dashboard-content {
+            padding: 20px;
+        }
+        .card {
+            margin-bottom: 20px;
+        }
+
+        .container {
+        background-color:#F3F5FC;
+        padding-left: 20px;
+        border-radius: 8px;
+
+        }
+
+        h3 {
+            color: #333;
+        }
+
+        .underline {
+            border-bottom: 3px solid #4a90e2;
+        }
+
+        .chart-container {
+            width: 100%;
+            height: 350px;
+            border:1px solid #b6a6f1;
+            padding:30px;
+        }
+
+        .legend {
+            margin-top: 90px;
+            display: flex;
+            flex-direction:column;
+            text-align: left;
+            gap:20px;
+        }
+
+        .legend-item {
+            width: 12px;
+            height: 12px;
+            display: inline-block;
+            border-radius: 3px;
+            text-align:left;
+        }
+
+        .on-time {
+            background-color: #D1D1F0;
+        }
+
+        .late {
+            background-color: #D5CFFB;
+        }
+
+        .absent {
+            background-color: #B1BBE7;
+        }
+
+        #category-container .btn {
+    margin-right: 10px; /* Adjust the value as needed */
+}
+
+#category-container .btn:last-child {
+    margin-right: 0; /* Remove margin from the last button */
+}
+
+    /* Sidebar Styling */
+    .sidebar-form {
+        position: fixed;
+        top: 0;
+        right: -400px; /* Hidden by default */
+        width: 400px;
+        height: 100vh;
+        background-color: white;
+        box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+        transition: right 0.3s ease-in-out;
+        z-index: 1000;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    /* Show Sidebar */
+    .sidebar-form.show {
+        right: 0;
+    }
+
+    /* Sidebar Header */
+    .sidebar-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+
+    .sidebar-header h3 {
+        font-size: 20px;
+        margin: 0;
+    }
+
+    /* Close Button */
+    .close-btn {
+        font-size: 20px;
+        cursor: pointer;
+        color: black;
+    }
+
+    /* Sidebar Content */
+    .sidebar-content {
+        flex-grow: 1;
+    }
+
+    /* Category Name Label */
+    .text-muted {
+        font-size: 14px;
+    }
+
+    /* Create Button */
+    .btn-create {
+        background-color: #5c67f2; /* Color from image */
+        color: white;
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        font-size: 16px;
+        border: none;
+    }
+
+    .btn-create:hover {
+        background-color: #4a54d2; /* Darker shade on hover */
+    }
+        .card-container {
+            background: #F3F5FC;
+            padding: 20px;
+            padding-bottom:0;
+            border-radius: 8px;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+            margin: 50px auto;
+        }
+
+        .header-title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .table-container {
+            background-color: #F3F5FC;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .table{
+            background-color:#F3F5FC;
+        }
+
+        .table th {
+            background-color: #ffffff;
+            border-bottom: 2px solid #e0e4f5;
+            font-weight: bold;
+        }
+
+        .table td, .table th {
+            vertical-align: middle;
+            padding: 15px;
+        }
+        .table tr{
+            background-color:#F3F5FC;
+        }
+        .table td{
+            background-color:#F3F5FC;
+        }
+
+        .table td .approved{
+            color:green;
+        }
+
+        .profile-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .approval-text {
+            font-weight: bold;
+        }
+
+        .approval-text.approved {
+            color: #6DD52D;
+        }
+
+        .approval-text.rejected {
+            color: #DD3D3D;
+        }
+
+        .approval-icons img{
+            margin-right:10px;
+        }
+
+
+
+        .hold { background-color: #ddd4ff; color: #5a49a1; }
+        .paid { background-color: #d4ffe5; color: #2b8750; }
+        .approved { color: green; }
+        .setup { color: gray; }
+
+
+        .table-container {
+            overflow-x: auto;
+            border:none;
+        }
+        .profile-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+        }
+
+
+
+        .profile-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .contact-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+        .menu-icon {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            cursor: pointer;
+        }
+
+        .search-container {
+            position: relative;
+            width: 100%;
+
+            
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 40px; /* Space for icon */
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            outline: none;
+            color: #555;
+            background-color: #fff;
+        }
+
+        .search-input::placeholder {
+            color: #aaa;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #aaa;
+            font-size: 18px;
+        }
+
+        .dropdown-container {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            background-color: #F8F9FC;
+            border-radius: 4px;
+            padding: 10px 10px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: 500;
+            width: 100%;
+            justify-content: space-between;
+        }
+
+        /* Left Section: Icon + Text */
+        .dropdown-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #333;
+        }
+
+        /* Down Arrow Button */
+        .dropdown-arrow {
+            background: white;
+            border: none;
+            padding: 5px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background 0.2s ease-in-out;
+        }
+
+        .dropdown-arrow:hover {
+            background: #EDEDED;
+        }
+
+        /* Dropdown Menu */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: white;
+            border-radius: 4px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            display: none; /* Initially hidden */
+            padding: 5px 0;
+            z-index: 1000;
+        }
+
+        .dropdown-menu.show {
+            display: block;
+        }
+
+        /* Dropdown Items */
+        .dropdown-item {
+            padding: 10px 15px;
+            font-size: 16px;
+            color: #333;
+            cursor: pointer;
+            transition: background 0.2s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .dropdown-item:hover {
+            background: #F3F5FC;
+        }
+
+        /* Selected Checkmark */
+        .dropdown-item.selected {
+            color: #000;
+            font-weight: bold;
+
+        }
+
+        .dropdown-item.selected::after {
+            content: "✔";
+            font-size: 16px;
+            color: #474BC2;
+        }
+
+        .internship-card {
+    position: relative; /* Add this line */
+    border: 1px solid #DDE2F0;
+    border-radius: 12px;
+    padding: 20px;
+    background-color: #F8F9FC;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.05);
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+.status-container {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    border: none;
+    position: relative; /* Ensure it doesn't interfere with the dropdown */
+}
+        /* Different Status Colors */
+        .status-open { background-color: #34C759; }  /* Green */
+        .status-close { background-color: #FF3B30; } /* Red */
+        .status-hold { background-color: #333333; }  /* Black */
+
+        /* Dropdown Menu */
+        .dropdown-menu {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .dropdown-item {
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 8px 15px;
+            transition: background 0.2s ease-in-out;
+        }
+
+        .dropdown-item:hover {
+            background: #F3F5FC;
+        }
+
+        /* Title */
+        .internship-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        /* Location */
+        .location {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* Stats Section */
+        .stats-container {
+            display: flex;
+            background: white;
+            border-radius: 8px;
+            padding: 12px;
+            margin: 15px 0;
+            border: 1px solid #DDE2F0;
+        }
+
+        .stats-box {
+            flex: 1;
+            text-align: center;
+        }
+
+        .stats-box:not(:last-child) {
+            border-right: 1px solid #DDE2F0;
+        }
+
+        .stats-number {
+            font-size: 18px;
+            font-weight: bold;
+            color: black;
+        }
+
+        .stats-text {
+            font-size: 12px;
+            color: #666;
+        }
+
+        /* Tags */
+        .tag {
+            background: #D5CFFB;
+            color: #4A3DA1;
+            padding: 6px 12px;
+            font-size: 12px;
+            font-weight: bold;
+            border-radius: 6px;
+            display: inline-block;
+        }
+
+        /* View Details Link */
+        .view-details {
+            color: black;
+            font-size: 14px;
+            font-weight: bold;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .view-details:hover {
+            text-decoration: underline;
+        }
+
+        /* Three-dot menu */
+        .menu-icon {
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .dropdown-menu.status-dropdown-menu {
+    position: absolute; /* Add this line */
+    top: 100%; /* Position it below the button */
+    left: 0; /* Align it with the left edge of the parent */
+    width: 100%; /* Match the width of the parent */
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    display: none; /* Initially hidden */
+    z-index: 1000; /* Ensure it appears above other elements */
+    padding: 5px 0;
+}
+
+
+        
+
+        
+    </style>
+
+    <!-- Jquery UI -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+</head>
+<body>
+    <div class="row mb-0">
+        <div class="col-md-3" style="background-color:#F3F5FC;border-right:2px solid #fff;border-bottom:2px solid #fff;">
+            <a class="navbar-brand fw-bold" href="#" style="font-size:40px; margin-left:20px;">INTERNPLUS</a>
+            <div class="dropdown" style="margin:0;display: inline-block;">
+                <button class="btn btn-white" style="border:none;background-color:#F3F5FC" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span id="dropdownLabel">EN</span> <i class="bi bi-chevron-down"></i>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item" href="#" onclick="updateLanguage('EN')">EN</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="updateLanguage('THAI')">THAI</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="updateLanguage('MYAN')">MYAN</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-9" style="background-color:#F3F5FC; display:flex; align-items:center; justify-content:space-between;">
+            <div style="margin-left:30px;display:flex;align-items:center;flex-grow:0.2; justify-content: flex-start;">
+                <div class="input-group" id="input-search" style="width: 100%;">
+                    <button class="btn btn-dark" onclick="applySearch()" style="background-color:#ffffff; display:flex;justify-content: center;align-items:center;">
+                        <i class="bi bi-search" style="color:#000;"></i>
+                    </button>
+                    <input type="text" id="searchInput" class="form-control" style="border:none; background-color:#ffffff;" placeholder="Search for program, candidates and more...">
+                </div>
+            </div>
+            <div style="display:flex; align-items:center; gap:10px; margin-right:10px;">
+                <button class="btn text-center gpa-2" style="color:#474BC2; border:1px solid #474BC2; background-color:#ffffff; border-radius:40px;">
+                    <img src="../assets/icon/battery-v-charging_purple.png" style="margin-right:5px;" alt="">Standard
+                </button>
+                <button class="btn"  style="background-color:#ffffff; border-radius:50%; width:40px; height:40px; display:flex; justify-content:center; align-items:center;">
+                    <img src="../assets/icon/settings-alt.png" alt="">
+                </button>
+                <button class="btn" style="background-color:#ffffff; border-radius:50%; width:40px; height:40px; display:flex; justify-content:center; align-items:center;">
+                    <img src="../assets/icon/notification.png" alt="">
+                </button>
+                <div class="profile_photo">
+                    <img src="../assets/img/user_sample_1.png" alt="">
+                </div>
+            </div>
+        </div>   
+    </div>
+
+    <div class="row main-container" >
+    <div class="col-md-3 sidebar">
+        <!-- Sidebar Navigation -->
+        <nav class="nav flex-column">
+            <a class="nav-link text-dark" href="./dashboard.html"><img src="../assets/icon/dashboard.png" alt=""> Dashboard</a>
+            <a class="nav-link text-dark" href="./calendar.html"><img src="../assets/icon/calendar.png" alt=""> Calendar</a>
+            <a class="nav-link text-dark" href="./storage.html"><img src="../assets/icon/folder-open.png" alt=""> Storage</a>
+            
+            <p class="text-muted mt-3">RECRUITMENT</p>
+            <a class="nav-link text-dark" href="./program.html"><img src="../assets/icon/suitcase.png" alt=""> Program</a>
+            <a class="nav-link text-dark" href="#candidates"><img src="../assets/icon/users.png" alt=""> Candidates</a>
+            <a class="nav-link text-dark" href="#test_forms"><img src="../assets/icon/book-library.png" alt=""> Test & Forms</a>
+            
+            <p class="text-muted mt-3">ORGANIZED</p>
+            <a class="nav-link text-dark" href="#intern"><img src="../assets/icon/user.png" alt=""> Interns</a>
+            <a class="nav-link text-dark" href="#time_attendance"> <img src="../assets/icon/clock.png" alt=""> Time Attendance</a>
+            <a class="nav-link text-dark" href="#assignment_sheet"> <img src="../assets/icon/paste.png" alt=""> Assignment Sheet</a>
+            <a class="nav-link text-dark" href="#report"> <img src="../assets/icon/document.png" alt="">Report</a>
+
+            <p class="text-muted mt-3">RESIGNATION</p>
+            <a class="nav-link text-dark" href="#offboard"><img src="../assets/icon/box.png" alt=""> Offboard</a>
+            <a class="nav-link text-dark" href="#payroll"><img src="../assets/icon/wallet.png" alt="">Payroll</a>
+        </nav>
+    </div>
+
+
+
+    <div class="col-md-9 dashboard-content">
+        <div  class="row">
+            <div class="col-md-6" style="text-align: start;">
+                <h1>Internship Program</h1>
+                <div class="row">
+                    <div class="col-md-3"><p style="color:#359C22;">. Open <span>14</span></p></div>
+                    <div class="col-md-3"><p style="color:#DD3D3D;">. Close <span>3</span></p></div>
+                    <div class="col-md-3"><p style="color:#000000;">. Hold <span>1</span></p></div>
+                </div>
+            </div>
+            <div class="col-md-6" style="text-align:end;">
+                <button style="border:none;background-color:#474BC2; padding:10px; color:white;"> <img src="../assets/icon/feather-add.png" alt=""> Create Program</button>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-6">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <!-- Search Box (6 columns) -->
+                        <div class="col-md-6 col-lg-6">
+                            <div class="search-container">
+                                <i class="bi bi-search search-icon"></i>
+                                <input type="text" class="search-input" placeholder="Search for internship program">
+                            </div>
+                        </div>
+                
+                        <!-- Category Dropdown (3 columns) -->
+                        <div class="col-md-3 col-lg-3">
+                            <div class="dropdown-container">
+                                <div class="dropdown-label">
+                                    <i class="bi bi-diagram-3"></i> 
+                                    <span id="selected-category">All Categories</span>
+                                </div>
+                                <button class="dropdown-arrow" onclick="toggleDropdown()">
+                                    <i class="bi bi-chevron-down"></i>
+                                </button>
+                                <div class="dropdown-menu" id="dropdown-menu">
+                                    <div class="dropdown-item selected" onclick="selectCategory('All')">All</div>
+                                    <div class="dropdown-item" onclick="selectCategory('Human Resources')">Human Resources</div>
+                                    <div class="dropdown-item" onclick="selectCategory('IT')">IT</div>
+                                    <div class="dropdown-item" onclick="selectCategory('Marketing')">Marketing</div>
+                                    <div class="dropdown-item" onclick="selectCategory('Translation')">Translation</div>
+                                </div>
+                            </div>
+                        </div>
+                
+                        <!-- Status Dropdown (3 columns) -->
+                        <div class="col-md-3 col-lg-3">
+                            <div class="dropdown-container">
+                                <div class="dropdown-label">
+                                    <i class="bi bi-activity"></i> 
+                                    <span id="selected-status">All Status</span>
+                                </div>
+                                <button class="dropdown-arrow" onclick="toggleStatusDropdown()">
+                                    <i class="bi bi-chevron-down"></i>
+                                </button>
+                                <div class="dropdown-menu" id="status-dropdown-menu">
+                                    <div class="dropdown-item selected" onclick="selectStatus('All')">All</div>
+                                    <div class="dropdown-item" onclick="selectStatus('Open')">Open</div>
+                                    <div class="dropdown-item" onclick="selectStatus('Hold')">Hold</div>
+                                    <div class="dropdown-item" onclick="selectStatus('Close')">Close</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+
+            </div>
+            <div class="col-md-6 text-end" >
+                <button style="border:1px solid #000;background-color:#fff; padding:10px;"><img src="../assets/icon/filter.png" alt=""> General Setting</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="internship-card">
+                    <!-- Status Dropdown Button -->
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="status-dropdown-container" style="position:relative;">
+                            <button class="status-container status-open" onclick="toggleStatusDropdownCard(event)">
+                                <span>• Open</span>
+                                <i class="bi bi-chevron-down"></i>
+                            </button>
+                            <!-- Status Dropdown Menu -->
+                            <div class="dropdown-menu status-dropdown-menu" style="position:absolute;">
+                                <div class="dropdown-item" onclick="changeStatus(event, 'Open')">Open</div>
+                                <div class="dropdown-item" onclick="changeStatus(event, 'Close')">Close</div>
+                                <div class="dropdown-item" onclick="changeStatus(event, 'Hold')">Hold</div>
+                            </div>
+                        </div>    
+                        <i class="bi bi-three-dots-vertical menu-icon"></i>
+                    </div>
+                
+                    <!-- Internship Title & Location -->
+                    <h2 class="internship-title">UX/UI Designer Trainee</h2>
+                    <p class="location"><i class="bi bi-geo-alt-fill"></i> 287 Si Lom Rd, Liberty Square Building</p>
+                
+                    <!-- Stats Section -->
+                    <div class="stats-container">
+                        <div class="stats-box">
+                            <p class="stats-number">42</p>
+                            <p class="stats-text">Candidates applied</p>
+                        </div>
+                        <div class="stats-box">
+                            <p class="stats-number">8</p>
+                            <p class="stats-text">Candidate pending</p>
+                        </div>
+                    </div>
+                
+                    <!-- Tags & View Details -->
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <span class="tag">IT</span>
+                            <span class="tag">10 Position</span>
+                        </div>
+                        <a href="#" class="view-details">View Details <i class="bi bi-chevron-right"></i></a>
+                    </div>
+                </div>
+                
+                
+                
+            </div>
+            <div class="col-md-4">
+                <div class="internship-card">
+                    <!-- Status Dropdown Button -->
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="status-dropdown-container" style="position:relative;">
+                            <button class="status-container status-open" onclick="toggleStatusDropdownCard(event)">
+                                <span>• Open</span>
+                                <i class="bi bi-chevron-down"></i>
+                            </button>
+                            <!-- Status Dropdown Menu -->
+                            <div class="dropdown-menu status-dropdown-menu" style="position:absolute;">
+                                <div class="dropdown-item" onclick="changeStatus(event, 'Open')">Open</div>
+                                <div class="dropdown-item" onclick="changeStatus(event, 'Close')">Close</div>
+                                <div class="dropdown-item" onclick="changeStatus(event, 'Hold')">Hold</div>
+                            </div>
+                        </div>    
+                        <i class="bi bi-three-dots-vertical menu-icon"></i>
+                    </div>
+                
+                    <!-- Internship Title & Location -->
+                    <h2 class="internship-title">UX/UI Designer Trainee</h2>
+                    <p class="location"><i class="bi bi-geo-alt-fill"></i> 287 Si Lom Rd, Liberty Square Building</p>
+                
+                    <!-- Stats Section -->
+                    <div class="stats-container">
+                        <div class="stats-box">
+                            <p class="stats-number">42</p>
+                            <p class="stats-text">Candidates applied</p>
+                        </div>
+                        <div class="stats-box">
+                            <p class="stats-number">8</p>
+                            <p class="stats-text">Candidate pending</p>
+                        </div>
+                    </div>
+                
+                    <!-- Tags & View Details -->
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <span class="tag">IT</span>
+                            <span class="tag">10 Position</span>
+                        </div>
+                        <a href="#" class="view-details">View Details <i class="bi bi-chevron-right"></i></a>
+                    </div>
+                </div>
+                
+                
+                
+            </div>
+            <div class="col-md-4">
+                <div class="internship-card">
+                    <!-- Status Dropdown Button -->
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="status-dropdown-container" style="position:relative;">
+                            <button class="status-container status-open" onclick="toggleStatusDropdownCard(event)">
+                                <span>• Open</span>
+                                <i class="bi bi-chevron-down"></i>
+                            </button>
+                            <!-- Status Dropdown Menu -->
+                            <div class="dropdown-menu status-dropdown-menu" style="position:absolute;">
+                                <div class="dropdown-item" onclick="changeStatus(event, 'Open')">Open</div>
+                                <div class="dropdown-item" onclick="changeStatus(event, 'Close')">Close</div>
+                                <div class="dropdown-item" onclick="changeStatus(event, 'Hold')">Hold</div>
+                            </div>
+                        </div>    
+                        <i class="bi bi-three-dots-vertical menu-icon"></i>
+                    </div>
+                
+                    <!-- Internship Title & Location -->
+                    <h2 class="internship-title">UX/UI Designer Trainee</h2>
+                    <p class="location"><i class="bi bi-geo-alt-fill"></i> 287 Si Lom Rd, Liberty Square Building</p>
+                
+                    <!-- Stats Section -->
+                    <div class="stats-container">
+                        <div class="stats-box">
+                            <p class="stats-number">42</p>
+                            <p class="stats-text">Candidates applied</p>
+                        </div>
+                        <div class="stats-box">
+                            <p class="stats-number">8</p>
+                            <p class="stats-text">Candidate pending</p>
+                        </div>
+                    </div>
+                
+                    <!-- Tags & View Details -->
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <span class="tag">IT</span>
+                            <span class="tag">10 Position</span>
+                        </div>
+                        <a href="#" class="view-details">View Details <i class="bi bi-chevron-right"></i></a>
+                    </div>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="internship-card">
+                    <!-- Status Dropdown Button -->
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="status-dropdown-container" style="position:relative;">
+                            <button class="status-container status-open" onclick="toggleStatusDropdownCard(event)">
+                                <span>• Open</span>
+                                <i class="bi bi-chevron-down"></i>
+                            </button>
+                            <!-- Status Dropdown Menu -->
+                            <div class="dropdown-menu status-dropdown-menu" style="position:absolute;">
+                                <div class="dropdown-item" onclick="changeStatus(event, 'Open')">Open</div>
+                                <div class="dropdown-item" onclick="changeStatus(event, 'Close')">Close</div>
+                                <div class="dropdown-item" onclick="changeStatus(event, 'Hold')">Hold</div>
+                            </div>
+                        </div>    
+                        <i class="bi bi-three-dots-vertical menu-icon"></i>
+                    </div>
+                
+                    <!-- Internship Title & Location -->
+                    <h2 class="internship-title">UX/UI Designer Trainee</h2>
+                    <p class="location"><i class="bi bi-geo-alt-fill"></i> 287 Si Lom Rd, Liberty Square Building</p>
+                
+                    <!-- Stats Section -->
+                    <div class="stats-container">
+                        <div class="stats-box">
+                            <p class="stats-number">42</p>
+                            <p class="stats-text">Candidates applied</p>
+                        </div>
+                        <div class="stats-box">
+                            <p class="stats-number">8</p>
+                            <p class="stats-text">Candidate pending</p>
+                        </div>
+                    </div>
+                
+                    <!-- Tags & View Details -->
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <span class="tag">IT</span>
+                            <span class="tag">10 Position</span>
+                        </div>
+                        <a href="#" class="view-details">View Details <i class="bi bi-chevron-right"></i></a>
+                    </div>
+                </div>
+                
+                
+                
+            </div>
+            <div class="col-md-4">
+                <div class="internship-card">
+                    <!-- Status Dropdown Button -->
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="status-dropdown-container" style="position:relative;">
+                            <button class="status-container status-open" onclick="toggleStatusDropdownCard(event)">
+                                <span>• Open</span>
+                                <i class="bi bi-chevron-down"></i>
+                            </button>
+                            <!-- Status Dropdown Menu -->
+                            <div class="dropdown-menu status-dropdown-menu" style="position:absolute;">
+                                <div class="dropdown-item" onclick="changeStatus(event, 'Open')">Open</div>
+                                <div class="dropdown-item" onclick="changeStatus(event, 'Close')">Close</div>
+                                <div class="dropdown-item" onclick="changeStatus(event, 'Hold')">Hold</div>
+                            </div>
+                        </div>    
+                        <i class="bi bi-three-dots-vertical menu-icon"></i>
+                    </div>
+                
+                    <!-- Internship Title & Location -->
+                    <h2 class="internship-title">UX/UI Designer Trainee</h2>
+                    <p class="location"><i class="bi bi-geo-alt-fill"></i> 287 Si Lom Rd, Liberty Square Building</p>
+                
+                    <!-- Stats Section -->
+                    <div class="stats-container">
+                        <div class="stats-box">
+                            <p class="stats-number">42</p>
+                            <p class="stats-text">Candidates applied</p>
+                        </div>
+                        <div class="stats-box">
+                            <p class="stats-number">8</p>
+                            <p class="stats-text">Candidate pending</p>
+                        </div>
+                    </div>
+                
+                    <!-- Tags & View Details -->
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <span class="tag">IT</span>
+                            <span class="tag">10 Position</span>
+                        </div>
+                        <a href="#" class="view-details">View Details <i class="bi bi-chevron-right"></i></a>
+                    </div>
+                </div>
+                
+                
+                
+            </div>
+            <div class="col-md-4">
+                <div class="internship-card">
+                    <!-- Status Dropdown Button -->
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="status-dropdown-container" style="position:relative;">
+                            <button class="status-container status-open" onclick="toggleStatusDropdownCard(event)">
+                                <span>• Open</span>
+                                <i class="bi bi-chevron-down"></i>
+                            </button>
+                            <!-- Status Dropdown Menu -->
+                            <div class="dropdown-menu status-dropdown-menu" style="position:absolute;">
+                                <div class="dropdown-item" onclick="changeStatus(event, 'Open')">Open</div>
+                                <div class="dropdown-item" onclick="changeStatus(event, 'Close')">Close</div>
+                                <div class="dropdown-item" onclick="changeStatus(event, 'Hold')">Hold</div>
+                            </div>
+                        </div>    
+                        <i class="bi bi-three-dots-vertical menu-icon"></i>
+                    </div>
+                
+                    <!-- Internship Title & Location -->
+                    <h2 class="internship-title">UX/UI Designer Trainee</h2>
+                    <p class="location"><i class="bi bi-geo-alt-fill"></i> 287 Si Lom Rd, Liberty Square Building</p>
+                
+                    <!-- Stats Section -->
+                    <div class="stats-container">
+                        <div class="stats-box">
+                            <p class="stats-number">42</p>
+                            <p class="stats-text">Candidates applied</p>
+                        </div>
+                        <div class="stats-box">
+                            <p class="stats-number">8</p>
+                            <p class="stats-text">Candidate pending</p>
+                        </div>
+                    </div>
+                
+                    <!-- Tags & View Details -->
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <span class="tag">IT</span>
+                            <span class="tag">10 Position</span>
+                        </div>
+                        <a href="#" class="view-details">View Details <i class="bi bi-chevron-right"></i></a>
+                    </div>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+    <!-- Custom JS  -->
+    <script src="../js/app.js"></script>
+    <script>
+
+document.addEventListener("DOMContentLoaded", function () {
+    let sidebarLinks = document.querySelectorAll(".nav-link");
+
+    // Get the last active link from localStorage
+    let activeLink = localStorage.getItem("activeSidebarLink");
+
+    sidebarLinks.forEach(link => {
+        if (link.getAttribute("href") === activeLink) {
+            link.classList.add("active");
+        } else {
+            link.classList.remove("active"); // Remove active from other links
+        }
+
+        link.addEventListener("click", function (event) {
+            // Only prevent default for internal navigation (hash links)
+            if (!this.getAttribute("href").startsWith("#")) {
+                localStorage.setItem("activeSidebarLink", this.getAttribute("href"));
+                return; // Let the browser navigate normally
+            }
+            
+            event.preventDefault(); // Prevent hash-based jumps
+
+            // Remove active class from all links
+            sidebarLinks.forEach(l => l.classList.remove("active"));
+
+            // Add active class only to the clicked link
+            this.classList.add("active");
+
+            // Save active link in localStorage
+            localStorage.setItem("activeSidebarLink", this.getAttribute("href"));
+        });
+    });
+});
+
+ function toggleSidebar() {
+        document.getElementById("createProgramSidebar").classList.toggle("show");
+    }
+
+    function addCategory() {
+        var categoryName = document.getElementById("category-name").value.trim();
+        if (categoryName === "") {
+            alert("Please enter a category name.");
+            return;
+        }
+
+        // Create new button
+        var newButton = document.createElement("button");
+        newButton.className = "btn mb-2";
+        newButton.style.backgroundColor = "#474BC2";
+        newButton.style.color = "#ffffff";
+        newButton.innerText = categoryName;
+
+        // Append new button inside the category container
+        document.getElementById("category-container").appendChild(newButton);
+
+        // Clear input field
+        document.getElementById("category-name").value = "";
+
+        // Hide sidebar
+        toggleSidebar();
+    }
+        function updateLanguage(lang) {
+            document.getElementById('dropdownLabel').innerText = lang;
+        }
+
+        function toggleDropdown() {
+        document.getElementById("dropdown-menu").classList.toggle("show");
+    }
+
+    function selectCategory(category) {
+        document.getElementById("selected-category").innerText = category;
+        document.querySelectorAll(".dropdown-item").forEach(item => {
+            item.classList.remove("selected");
+        });
+        event.target.classList.add("selected");
+        toggleDropdown(); // Close the dropdown after selection
+    }
+
+    // Close dropdown when clicking outside
+    document.addEventListener("click", function(event) {
+        if (!event.target.closest(".dropdown-container")) {
+            document.getElementById("dropdown-menu").classList.remove("show");
+        }
+    });
+
+    function toggleStatusDropdown() {
+        document.getElementById("status-dropdown-menu").classList.toggle("show");
+    }
+
+    function selectStatus(status) {
+        document.getElementById("selected-status").innerText = status;
+        document.querySelectorAll("#status-dropdown-menu .dropdown-item").forEach(item => {
+            item.classList.remove("selected");
+        });
+        event.target.classList.add("selected");
+        toggleStatusDropdown(); // Close the dropdown after selection
+    }
+
+    // Close dropdown when clicking outside
+    document.addEventListener("click", function(event) {
+        if (!event.target.closest(".dropdown-container")) {
+            document.getElementById("status-dropdown-menu").classList.remove("show");
+        }
+    });
+
+// Toggle the dropdown inside the internship card
+function toggleStatusDropdownCard(event) {
+    event.stopPropagation(); // Prevents dropdown from closing immediately
+
+    let card = event.currentTarget.closest(".internship-card"); // Find the nearest internship card
+    let dropdown = card.querySelector(".status-dropdown-menu"); // Select the dropdown inside the card
+
+    // Close all other dropdowns before opening this one
+    document.querySelectorAll(".status-dropdown-menu").forEach(menu => {
+        if (menu !== dropdown) {
+            menu.style.display = "none";
+        }
+    });
+
+    // Toggle visibility
+    if (dropdown.style.display === "none" || dropdown.style.display === "") {
+        dropdown.style.display = "block";
+    } else {
+        dropdown.style.display = "none";
+    }
+}
+
+// Change status when selecting from the dropdown
+function changeStatus(event, status) {
+    let card = event.currentTarget.closest(".internship-card"); // Find the internship card
+    let statusButton = card.querySelector(".status-container"); // Get the status button
+    let statusText = statusButton.querySelector("span"); // Get the text inside the button
+
+    if (status === "Open") {
+        statusButton.className = "status-container status-open";
+        statusText.innerText = "• Open";
+    } else if (status === "Close") {
+        statusButton.className = "status-container status-close";
+        statusText.innerText = "• Close";
+    } else {
+        statusButton.className = "status-container status-hold";
+        statusText.innerText = "• Hold";
+    }
+
+    // Close dropdown after selection
+    let dropdown = card.querySelector(".status-dropdown-menu");
+    dropdown.style.display = "none";
+}
+
+// Close dropdown when clicking outside
+document.addEventListener("click", function (event) {
+    document.querySelectorAll(".status-dropdown-menu").forEach(dropdown => {
+        if (!event.target.closest(".status-container") && !event.target.closest(".status-dropdown-menu")) {
+            dropdown.style.display = "none";
+        }
+    });
+});
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>
