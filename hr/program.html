@@ -7,12 +7,16 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
+
+    <!-- fontawesome cdn  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../css/styles.css">
     <style rel="stylesheet" type="text/css">
+        
         body {
             background-color: #fff;
             height: 100%;
@@ -48,9 +52,11 @@
 }
 
 
-        .dashboard-content {
-            padding: 20px;
-        }
+.dashboard-content {
+    padding: 20px;
+    flex-grow: 1; /* Ensure the content area takes the remaining space */
+    overflow-y: auto; /* Add scroll if content overflows */
+}
         .card {
             margin-bottom: 20px;
         }
@@ -406,6 +412,134 @@
             color: #474BC2;
         }
 
+        /* Overlay Background */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 999;
+    display: none;
+}
+
+/* Sidebar Styling */
+.sidebar-form {
+    position: fixed;
+    top: 0;
+    right: -400px; /* Hidden by default */
+    width: 400px;
+    height: 100vh;
+    background-color: white;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    transition: right 0.3s ease-in-out;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Show Sidebar */
+.sidebar-form.show {
+    right: 0;
+}
+
+/* Sidebar Header */
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.sidebar-header h3 {
+    font-size: 20px;
+    margin: 0;
+}
+
+/* Close Button */
+.close-btn {
+    font-size: 20px;
+    cursor: pointer;
+    color: black;
+    background: none;
+    border: none;
+}
+
+/* Sidebar Content */
+.sidebar-content {
+    flex-grow: 1;
+}
+
+.sidebar-content input,.sidebar-content textarea,.sidebar-content select{
+    border:1px solid grey;
+    margin-bottom:10px;
+}
+
+
+.image-upload-label {
+    font-size: 13px;
+    display: block;
+    margin-bottom: 5px;
+    color: #666;
+}
+
+.image-input-container {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 100%;
+    height:40px;
+    background-color: #fff;
+    
+}
+
+.image-icon {
+    background-color: #4c47fe;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-icon i {
+    font-size: 20px;
+    color: white;
+}
+
+.image-input {
+    border: none;
+    flex-grow: 1;
+    padding: 10px;
+    outline: none;
+}
+
+
+/* Category Name Label */
+.text-muted {
+    font-size: 14px;
+}
+
+/* Create Button */
+.btn-create {
+    background-color: #5c67f2; /* Color from image */
+    color: white;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    border: none;
+}
+
+.btn-create:hover {
+    background-color: #4a54d2; /* Darker shade on hover */
+}
+
+
         .internship-card {
     position: relative; /* Add this line */
     border: 1px solid #DDE2F0;
@@ -544,15 +678,86 @@
     padding: 5px 0;
 }
 
+/* 🔹 Internship Details Panel */
+.details-panel {
+    position: fixed;
+    top: 0;
+    right: -500px; /* Initially hidden */
+    width: 500px;
+    height: 100vh;
+    background-color: white;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    transition: right 0.3s ease-in-out;
+    z-index: 1000;
+}
+
+/* 🔹 Show Details Panel */
+.details-panel.show {
+    right: 0;
+}
+
+/* 🔹 Header */
+.details-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+/* Hide Internship List when viewing Details */
+#internship-details-page {
+    display: none;
+}
+
+.back-btn {
+    font-size: 16px;
+    background: none;
+    border: none;
+
+    cursor: pointer;
+    padding: 10px;
+}
+
+/* 🔹 Card Styling */
+.details-card {
+    background: #F3F5FC;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* 🔹 Tab Styling */
+.nav-tabs{
+    width:100%;
+    padding:0;
+    margin:0;
+}
+.nav-tabs .nav-link {
+
+    font-weight: bold;
+    border: none;
+    color:grey;
+
+}
+
+.nav-tabs .nav-link.active {
+
+    border-bottom: 3px solid #474BC2 !important;
+    background-color:#F3F5FC;
+    box-shadow:none;
+
+}
+
+
 .pagination {
     display: flex;
     gap: 8px;
 }
 
 .page-item .page-link {
-    border-radius: 6px;
+    /* border-radius: 6px;
     color: black;
-    border: 1px solid #ddd;
+    border: 1px solid #ddd; */
     padding: 8px 12px;
     font-weight: 500;
     transition: 0.3s ease-in-out;
@@ -575,6 +780,127 @@
     background-color: #f0f0f0;
     color: black;
 }
+
+
+.kanban-board {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+}
+
+.column {
+    background: #F3F5FC;
+    border-radius: 8px;
+    padding: 10px;
+    min-width: 200px;
+}
+
+.card {
+    background: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.status-pending{
+    padding:10px;
+    background-color:#FFE9A7;
+    border-radius:4px;
+}
+
+.status-pending .badge{
+    background-color:#FFC822;
+}
+
+.status-request{
+    padding:10px;
+    background-color:#D5EAFF;
+    border-radius:4px;
+}
+
+.status-request .badge{
+    background-color:#4EA6FF;
+}
+
+.status-document{
+    padding:10px;
+    background-color:#DFC1FF;
+    border-radius:4px;
+}
+
+.status-document .badge{
+    background-color:#AA5BFF;
+}
+
+
+.status-acceptance{
+    padding:10px;
+    background-color:#FFB9E3;
+    border-radius:4px;
+}
+
+.status-acceptance .badge{
+    background-color:#FF68C3;
+}
+
+
+.status-success{
+    padding:10px;
+    background-color:#ADF1D7;
+    border-radius:4px;
+}
+
+.status-success .badge{
+    background-color:#4FD8A3;
+}
+
+.applicant-card {
+    background: white;
+    border-radius: 4px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 300px;
+}
+
+.profile-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.applicant-name {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.applicant-email {
+    font-size: 12px;
+    color: gray;
+    margin: 0;
+}
+
+.file-list {
+    margin-top: 10px;
+}
+
+.file-item {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.file-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+}
+
+
+
 
         
 
@@ -656,980 +982,1280 @@
 
 
     <div class="col-md-9 dashboard-content">
+        <div id="area_of_details"> 
         <div  class="row">
-            <div class="col-md-6" style="text-align: start;">
-                <h1>Internship Program</h1>
-                <div class="row">
-                    <div class="col-md-3"><p style="color:#359C22;">. Open <span>14</span></p></div>
-                    <div class="col-md-3"><p style="color:#DD3D3D;">. Close <span>3</span></p></div>
-                    <div class="col-md-3"><p style="color:#000000;">. Hold <span>1</span></p></div>
-                </div>
-            </div>
-            <div class="col-md-6" style="text-align:end;">
-                <button style="border:none;background-color:#474BC2; padding:10px; color:white;"> <img src="../assets/icon/feather-add.png" alt=""> Create Program</button>
-            </div>
-        </div>
-        <div class="row mt-3">
-            <div class="col-md-6">
-                <div class="container-fluid">
-                    <div class="row align-items-center">
-                        <!-- Search Box (6 columns) -->
-                        <div class="col-md-6 col-lg-6">
-                            <div class="search-container">
-                                <i class="bi bi-search search-icon"></i>
-                                <input type="text" class="search-input" placeholder="Search for internship program">
-                            </div>
-                        </div>
-                
-                        <!-- Category Dropdown (3 columns) -->
-                        <div class="col-md-3 col-lg-3">
-                            <div class="dropdown-container">
-                                <div class="dropdown-label">
-                                    <i class="bi bi-diagram-3"></i> 
-                                    <span id="selected-category">All Categories</span>
-                                </div>
-                                <button class="dropdown-arrow" onclick="toggleDropdown()">
-                                    <i class="bi bi-chevron-down"></i>
-                                </button>
-                                <div class="dropdown-menu" id="dropdown-menu">
-                                    <div class="dropdown-item selected" onclick="selectCategory('All')">All</div>
-                                    <div class="dropdown-item" onclick="selectCategory('Human Resources')">Human Resources</div>
-                                    <div class="dropdown-item" onclick="selectCategory('IT')">IT</div>
-                                    <div class="dropdown-item" onclick="selectCategory('Marketing')">Marketing</div>
-                                    <div class="dropdown-item" onclick="selectCategory('Translation')">Translation</div>
-                                </div>
-                            </div>
-                        </div>
-                
-                        <!-- Status Dropdown (3 columns) -->
-                        <div class="col-md-3 col-lg-3">
-                            <div class="dropdown-container">
-                                <div class="dropdown-label">
-                                    <i class="bi bi-activity"></i> 
-                                    <span id="selected-status">All Status</span>
-                                </div>
-                                <button class="dropdown-arrow" onclick="toggleStatusDropdown()">
-                                    <i class="bi bi-chevron-down"></i>
-                                </button>
-                                <div class="dropdown-menu" id="status-dropdown-menu">
-                                    <div class="dropdown-item selected" onclick="selectStatus('All')">All</div>
-                                    <div class="dropdown-item" onclick="selectStatus('Open')">Open</div>
-                                    <div class="dropdown-item" onclick="selectStatus('Hold')">Hold</div>
-                                    <div class="dropdown-item" onclick="selectStatus('Close')">Close</div>
-                                </div>
-                            </div>
-                        </div>
+              
+                <div class="col-md-6" style="text-align: start;">
+                    <h1>Internship Program</h1>
+                    <div class="row">
+                        <div class="col-md-3"><p style="color:#359C22;">. Open <span>14</span></p></div>
+                        <div class="col-md-3"><p style="color:#DD3D3D;">. Close <span>3</span></p></div>
+                        <div class="col-md-3"><p style="color:#000000;">. Hold <span>1</span></p></div>
                     </div>
                 </div>
-                
+                <div class="col-md-6" style="text-align:end;">
+                    <button id="open-create-program" style="border:none;background-color:#474BC2; padding:10px; color:white;"> <img src="../assets/icon/feather-add.png" alt=""> Create Program</button>
+                </div>
+                <!-- Overlay Background -->
+    <div id="overlay" class="overlay"></div>
 
+    <!-- Create Program Sidebar -->
+    <div id="create-program-sidebar" class="sidebar-form">
+        <div class="sidebar-header">
+            <h2>Create Program</h2>
+            <button id="close-create-program" style="font-size:40px;" class="close-btn">&times;</button>
+        </div>
+
+        <div class="sidebar-content">
+            <label for="program-name" style="font-size:13px;">Program Name</label>
+            <input type="text" class="form-control" id="program-name" placeholder="Enter program name">
+
+            <label for="image-upload" class="image-upload-label">Image</label>
+            <div class="image-input-container" onclick="document.getElementById('image-upload').click()">
+                <div class="image-icon">
+                    <i class="bi bi-image"></i>
+                </div>
+                <input type="file" id="image-upload" class="image-input" accept="image/*" onchange="displayFileName()" hidden>
+                <span id="file-name" class="file-name-placeholder"></span>
             </div>
-            <div class="col-md-6 text-end" >
-                <button style="border:1px solid #000;background-color:#fff; padding:10px;"><img src="../assets/icon/filter.png" alt=""> General Setting</button>
+            
+            
+
+            <label for="description"  style="font-size:13px;">Description</label>
+            <textarea class="form-control" id="description" rows="3"></textarea>
+
+            <label for="location"  style="font-size:13px;">Location</label>
+            <input type="text" class="form-control" id="location" placeholder="Enter location">
+
+            <div class="d-flex justify-content-between gap-3">
+                <div class="w-50">
+                    <label  style="font-size:13px;">Category</label>
+                    <select class="form-control">
+                        <option>IT</option>
+                        <option>Human Resources</option>
+                        <option>Marketing</option>
+                        <option>Translation</option>
+                    </select>
+                </div>
+                <div class="w-50">
+                    <label  style="font-size:13px;">Number of open positions</label>
+                    <input type="number" class="form-control" min="1" placeholder="Enter number">
+                </div>
             </div>
         </div>
-        <div id="internship-container">
-            <div class="row internship-page" data-page="1">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="internship-card">
-                            <!-- Status Dropdown Button -->
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="status-dropdown-container" style="position:relative;">
-                                    <button class="status-container status-open" onclick="toggleStatusDropdownCard(event)">
-                                        <span>• Open</span>
+
+        <button class="btn btn-create mt-3">Create</button>
+    </div>
+
+            
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <div class="container-fluid">
+                        <div class="row align-items-center">
+                            <!-- Search Box (6 columns) -->
+                            <div class="col-md-6 col-lg-6">
+                                <div class="search-container">
+                                    <i class="bi bi-search search-icon"></i>
+                                    <input type="text" class="search-input" placeholder="Search for internship program">
+                                </div>
+                            </div>
+                    
+                            <!-- Category Dropdown (3 columns) -->
+                            <div class="col-md-3 col-lg-3">
+                                <div class="dropdown-container">
+                                    <div class="dropdown-label">
+                                        <i class="bi bi-diagram-3"></i> 
+                                        <span id="selected-category">All Categories</span>
+                                    </div>
+                                    <button class="dropdown-arrow" onclick="toggleDropdown()">
                                         <i class="bi bi-chevron-down"></i>
                                     </button>
-                                    <!-- Status Dropdown Menu -->
-                                    <div class="dropdown-menu status-dropdown-menu" style="position:absolute;">
-                                        <div class="dropdown-item" onclick="changeStatus(event, 'Open')">Open</div>
-                                        <div class="dropdown-item" onclick="changeStatus(event, 'Close')">Close</div>
-                                        <div class="dropdown-item" onclick="changeStatus(event, 'Hold')">Hold</div>
+                                    <div class="dropdown-menu" id="dropdown-menu">
+                                        <div class="dropdown-item selected" onclick="selectCategory('All')">All</div>
+                                        <div class="dropdown-item" onclick="selectCategory('Human Resources')">Human Resources</div>
+                                        <div class="dropdown-item" onclick="selectCategory('IT')">IT</div>
+                                        <div class="dropdown-item" onclick="selectCategory('Marketing')">Marketing</div>
+                                        <div class="dropdown-item" onclick="selectCategory('Translation')">Translation</div>
                                     </div>
-                                </div>    
-                                <i class="bi bi-three-dots-vertical menu-icon"></i>
-                            </div>
-                        
-                            <!-- Internship Title & Location -->
-                            <h2 class="internship-title">UX/UI Designer Trainee</h2>
-                            <p class="location"><i class="bi bi-geo-alt-fill"></i> 287 Si Lom Rd, Liberty Square Building</p>
-                        
-                            <!-- Stats Section -->
-                            <div class="stats-container">
-                                <div class="stats-box">
-                                    <p class="stats-number">42</p>
-                                    <p class="stats-text">Candidates applied</p>
-                                </div>
-                                <div class="stats-box">
-                                    <p class="stats-number">8</p>
-                                    <p class="stats-text">Candidate pending</p>
                                 </div>
                             </div>
-                        
-                            <!-- Tags & View Details -->
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <span class="tag">IT</span>
-                                    <span class="tag">10 Position</span>
-                                </div>
-                                <a href="#" class="view-details">View Details <i class="bi bi-chevron-right"></i></a>
-                            </div>
-                        </div>
-                                     
-                    </div>
-                    <div class="col-md-4">
-                        <div class="internship-card">
-                            <!-- Status Dropdown Button -->
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="status-dropdown-container" style="position:relative;">
-                                    <button class="status-container status-open" onclick="toggleStatusDropdownCard(event)">
-                                        <span>• Open</span>
+                    
+                            <!-- Status Dropdown (3 columns) -->
+                            <div class="col-md-3 col-lg-3">
+                                <div class="dropdown-container">
+                                    <div class="dropdown-label">
+                                        <i class="bi bi-activity"></i> 
+                                        <span id="selected-status">All Status</span>
+                                    </div>
+                                    <button class="dropdown-arrow" onclick="toggleStatusDropdown()">
                                         <i class="bi bi-chevron-down"></i>
                                     </button>
-                                    <div class="dropdown-menu status-dropdown-menu" style="position:absolute;">
-                                        <div class="dropdown-item" onclick="changeStatus(event, 'Open')">Open</div>
-                                        <div class="dropdown-item" onclick="changeStatus(event, 'Close')">Close</div>
-                                        <div class="dropdown-item" onclick="changeStatus(event, 'Hold')">Hold</div>
+                                    <div class="dropdown-menu" id="status-dropdown-menu">
+                                        <div class="dropdown-item selected" onclick="selectStatus('All')">All</div>
+                                        <div class="dropdown-item" onclick="selectStatus('Open')">Open</div>
+                                        <div class="dropdown-item" onclick="selectStatus('Hold')">Hold</div>
+                                        <div class="dropdown-item" onclick="selectStatus('Close')">Close</div>
                                     </div>
-                                </div>    
-                                <i class="bi bi-three-dots-vertical menu-icon"></i>
-                            </div>
-            
-                            <!-- Internship Title & Location -->
-                            <h2 class="internship-title">Graphic Design Intern</h2>
-                            <p class="location"><i class="bi bi-geo-alt-fill"></i> Paris, France</p>
-            
-                            <!-- Stats Section -->
-                            <div class="stats-container">
-                                <div class="stats-box">
-                                    <p class="stats-number">22</p>
-                                    <p class="stats-text">Candidates applied</p>
                                 </div>
-                                <div class="stats-box">
-                                    <p class="stats-number">5</p>
-                                    <p class="stats-text">Candidate pending</p>
-                                </div>
-                            </div>
-            
-                            <!-- Tags & View Details -->
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <span class="tag">Design</span>
-                                    <span class="tag">4 Positions</span>
-                                </div>
-                                <a href="#" class="view-details">View Details <i class="bi bi-chevron-right"></i></a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="internship-card">
-                            <!-- Status Dropdown Button -->
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="status-dropdown-container" style="position:relative;">
-                                    <button class="status-container status-open" onclick="toggleStatusDropdownCard(event)">
-                                        <span>• Open</span>
-                                        <i class="bi bi-chevron-down"></i>
-                                    </button>
-                                    <!-- Status Dropdown Menu -->
-                                    <div class="dropdown-menu status-dropdown-menu" style="position:absolute;">
-                                        <div class="dropdown-item" onclick="changeStatus(event, 'Open')">Open</div>
-                                        <div class="dropdown-item" onclick="changeStatus(event, 'Close')">Close</div>
-                                        <div class="dropdown-item" onclick="changeStatus(event, 'Hold')">Hold</div>
+                    
+
+                </div>
+                <div class="col-md-6 text-end" >
+                    <button style="border:1px solid #000;background-color:#fff; padding:10px;"><img src="../assets/icon/filter.png" alt=""> General Setting</button>
+                </div>
+            </div>
+            <div id="internship-container">
+                <div class="row internship-page" data-page="1">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="internship-card">
+                                <!-- Status Dropdown Button -->
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="status-dropdown-container" style="position:relative;">
+                                        <button class="status-container status-open" onclick="toggleStatusDropdownCard(event)">
+                                            <span>• Open</span>
+                                            <i class="bi bi-chevron-down"></i>
+                                        </button>
+                                        <!-- Status Dropdown Menu -->
+                                        <div class="dropdown-menu status-dropdown-menu" style="position:absolute;">
+                                            <div class="dropdown-item" onclick="changeStatus(event, 'Open')">Open</div>
+                                            <div class="dropdown-item" onclick="changeStatus(event, 'Close')">Close</div>
+                                            <div class="dropdown-item" onclick="changeStatus(event, 'Hold')">Hold</div>
+                                        </div>
+                                    </div>    
+                                    <i class="bi bi-three-dots-vertical menu-icon"></i>
+                                </div>
+                            
+                                <!-- Internship Title & Location -->
+                                <h2 class="internship-title">UX/UI Designer Trainee</h2>
+                                <p class="location"><i class="bi bi-geo-alt-fill"></i> 287 Si Lom Rd, Liberty Square Building</p>
+                            
+                                <!-- Stats Section -->
+                                <div class="stats-container">
+                                    <div class="stats-box">
+                                        <p class="stats-number">42</p>
+                                        <p class="stats-text">Candidates applied</p>
                                     </div>
-                                </div>    
-                                <i class="bi bi-three-dots-vertical menu-icon"></i>
-                            </div>
-                        
-                            <!-- Internship Title & Location -->
-                            <h2 class="internship-title">UX/UI Designer Trainee</h2>
-                            <p class="location"><i class="bi bi-geo-alt-fill"></i> 287 Si Lom Rd, Liberty Square Building</p>
-                        
-                            <!-- Stats Section -->
-                            <div class="stats-container">
-                                <div class="stats-box">
-                                    <p class="stats-number">42</p>
-                                    <p class="stats-text">Candidates applied</p>
+                                    <div class="stats-box">
+                                        <p class="stats-number">8</p>
+                                        <p class="stats-text">Candidate pending</p>
+                                    </div>
                                 </div>
-                                <div class="stats-box">
-                                    <p class="stats-number">8</p>
-                                    <p class="stats-text">Candidate pending</p>
+                            
+                                <!-- Tags & View Details -->
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <span class="tag">IT</span>
+                                        <span class="tag">10 Position</span>
+                                    </div>
+                                    <a href="#" class="view-details">View Details <i class="bi bi-chevron-right"></i></a>
                                 </div>
                             </div>
-                        
-                            <!-- Tags & View Details -->
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <span class="tag">IT</span>
-                                    <span class="tag">10 Position</span>
+                                        
+                        </div>
+                        <div class="col-md-4">
+                            <div class="internship-card">
+                                <!-- Status Dropdown Button -->
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="status-dropdown-container" style="position:relative;">
+                                        <button class="status-container status-open" onclick="toggleStatusDropdownCard(event)">
+                                            <span>• Open</span>
+                                            <i class="bi bi-chevron-down"></i>
+                                        </button>
+                                        <div class="dropdown-menu status-dropdown-menu" style="position:absolute;">
+                                            <div class="dropdown-item" onclick="changeStatus(event, 'Open')">Open</div>
+                                            <div class="dropdown-item" onclick="changeStatus(event, 'Close')">Close</div>
+                                            <div class="dropdown-item" onclick="changeStatus(event, 'Hold')">Hold</div>
+                                        </div>
+                                    </div>    
+                                    <i class="bi bi-three-dots-vertical menu-icon"></i>
                                 </div>
-                                <a href="#" class="view-details">View Details <i class="bi bi-chevron-right"></i></a>
+                
+                                <!-- Internship Title & Location -->
+                                <h2 class="internship-title">Graphic Design Intern</h2>
+                                <p class="location"><i class="bi bi-geo-alt-fill"></i> Paris, France</p>
+                
+                                <!-- Stats Section -->
+                                <div class="stats-container">
+                                    <div class="stats-box">
+                                        <p class="stats-number">22</p>
+                                        <p class="stats-text">Candidates applied</p>
+                                    </div>
+                                    <div class="stats-box">
+                                        <p class="stats-number">5</p>
+                                        <p class="stats-text">Candidate pending</p>
+                                    </div>
+                                </div>
+                
+                                <!-- Tags & View Details -->
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <span class="tag">Design</span>
+                                        <span class="tag">4 Positions</span>
+                                    </div>
+                                    <a href="#" class="view-details">View Details <i class="bi bi-chevron-right"></i></a>
+                                </div>
                             </div>
                         </div>
-                        
-                        
-                        
+                        <div class="col-md-4">
+                            <div class="internship-card">
+                                <!-- Status Dropdown Button -->
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="status-dropdown-container" style="position:relative;">
+                                        <button class="status-container status-open" onclick="toggleStatusDropdownCard(event)">
+                                            <span>• Open</span>
+                                            <i class="bi bi-chevron-down"></i>
+                                        </button>
+                                        <!-- Status Dropdown Menu -->
+                                        <div class="dropdown-menu status-dropdown-menu" style="position:absolute;">
+                                            <div class="dropdown-item" onclick="changeStatus(event, 'Open')">Open</div>
+                                            <div class="dropdown-item" onclick="changeStatus(event, 'Close')">Close</div>
+                                            <div class="dropdown-item" onclick="changeStatus(event, 'Hold')">Hold</div>
+                                        </div>
+                                    </div>    
+                                    <i class="bi bi-three-dots-vertical menu-icon"></i>
+                                </div>
+                            
+                                <!-- Internship Title & Location -->
+                                <h2 class="internship-title">UX/UI Designer Trainee</h2>
+                                <p class="location"><i class="bi bi-geo-alt-fill"></i> 287 Si Lom Rd, Liberty Square Building</p>
+                            
+                                <!-- Stats Section -->
+                                <div class="stats-container">
+                                    <div class="stats-box">
+                                        <p class="stats-number">42</p>
+                                        <p class="stats-text">Candidates applied</p>
+                                    </div>
+                                    <div class="stats-box">
+                                        <p class="stats-number">8</p>
+                                        <p class="stats-text">Candidate pending</p>
+                                    </div>
+                                </div>
+                            
+                                <!-- Tags & View Details -->
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <span class="tag">IT</span>
+                                        <span class="tag">10 Position</span>
+                                    </div>
+                                    <a href="#" class="view-details">View Details <i class="bi bi-chevron-right"></i></a>
+                                </div>
+                            </div>
+                            
+                            
+                            
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="internship-card">
+                                <!-- Status Dropdown Button -->
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="status-dropdown-container" style="position:relative;">
+                                        <button class="status-container status-open" onclick="toggleStatusDropdownCard(event)">
+                                            <span>• Open</span>
+                                            <i class="bi bi-chevron-down"></i>
+                                        </button>
+                                        <!-- Status Dropdown Menu -->
+                                        <div class="dropdown-menu status-dropdown-menu" style="position:absolute;">
+                                            <div class="dropdown-item" onclick="changeStatus(event, 'Open')">Open</div>
+                                            <div class="dropdown-item" onclick="changeStatus(event, 'Close')">Close</div>
+                                            <div class="dropdown-item" onclick="changeStatus(event, 'Hold')">Hold</div>
+                                        </div>
+                                    </div>    
+                                    <i class="bi bi-three-dots-vertical menu-icon"></i>
+                                </div>
+                            
+                                <!-- Internship Title & Location -->
+                                <h2 class="internship-title">UX/UI Designer Trainee</h2>
+                                <p class="location"><i class="bi bi-geo-alt-fill"></i> 287 Si Lom Rd, Liberty Square Building</p>
+                            
+                                <!-- Stats Section -->
+                                <div class="stats-container">
+                                    <div class="stats-box">
+                                        <p class="stats-number">42</p>
+                                        <p class="stats-text">Candidates applied</p>
+                                    </div>
+                                    <div class="stats-box">
+                                        <p class="stats-number">8</p>
+                                        <p class="stats-text">Candidate pending</p>
+                                    </div>
+                                </div>
+                            
+                                <!-- Tags & View Details -->
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <span class="tag">IT</span>
+                                        <span class="tag">10 Position</span>
+                                    </div>
+                                    <a href="#" class="view-details">View Details <i class="bi bi-chevron-right"></i></a>
+                                </div>
+                            </div>
+                            
+                            
+                            
+                        </div>
+                        <div class="col-md-4">
+                            <div class="internship-card">
+                                <!-- Status Dropdown Button -->
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="status-dropdown-container" style="position:relative;">
+                                        <button class="status-container status-open" onclick="toggleStatusDropdownCard(event)">
+                                            <span>• Open</span>
+                                            <i class="bi bi-chevron-down"></i>
+                                        </button>
+                                        <!-- Status Dropdown Menu -->
+                                        <div class="dropdown-menu status-dropdown-menu" style="position:absolute;">
+                                            <div class="dropdown-item" onclick="changeStatus(event, 'Open')">Open</div>
+                                            <div class="dropdown-item" onclick="changeStatus(event, 'Close')">Close</div>
+                                            <div class="dropdown-item" onclick="changeStatus(event, 'Hold')">Hold</div>
+                                        </div>
+                                    </div>    
+                                    <i class="bi bi-three-dots-vertical menu-icon"></i>
+                                </div>
+                            
+                                <!-- Internship Title & Location -->
+                                <h2 class="internship-title">UX/UI Designer Trainee</h2>
+                                <p class="location"><i class="bi bi-geo-alt-fill"></i> 287 Si Lom Rd, Liberty Square Building</p>
+                            
+                                <!-- Stats Section -->
+                                <div class="stats-container">
+                                    <div class="stats-box">
+                                        <p class="stats-number">42</p>
+                                        <p class="stats-text">Candidates applied</p>
+                                    </div>
+                                    <div class="stats-box">
+                                        <p class="stats-number">8</p>
+                                        <p class="stats-text">Candidate pending</p>
+                                    </div>
+                                </div>
+                            
+                                <!-- Tags & View Details -->
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <span class="tag">IT</span>
+                                        <span class="tag">10 Position</span>
+                                    </div>
+                                    <a href="#" class="view-details">View Details <i class="bi bi-chevron-right"></i></a>
+                                </div>
+                            </div>
+                            
+                            
+                            
+                        </div>
+                        <div class="col-md-4">
+                            <div class="internship-card">
+                                <!-- Status Dropdown Button -->
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="status-dropdown-container" style="position:relative;">
+                                        <button class="status-container status-open" onclick="toggleStatusDropdownCard(event)">
+                                            <span>• Open</span>
+                                            <i class="bi bi-chevron-down"></i>
+                                        </button>
+                                        <!-- Status Dropdown Menu -->
+                                        <div class="dropdown-menu status-dropdown-menu" style="position:absolute;">
+                                            <div class="dropdown-item" onclick="changeStatus(event, 'Open')">Open</div>
+                                            <div class="dropdown-item" onclick="changeStatus(event, 'Close')">Close</div>
+                                            <div class="dropdown-item" onclick="changeStatus(event, 'Hold')">Hold</div>
+                                        </div>
+                                    </div>    
+                                    <i class="bi bi-three-dots-vertical menu-icon"></i>
+                                </div>
+                            
+                                <!-- Internship Title & Location -->
+                                <h2 class="internship-title">UX/UI Designer Trainee</h2>
+                                <p class="location"><i class="bi bi-geo-alt-fill"></i> 287 Si Lom Rd, Liberty Square Building</p>
+                            
+                                <!-- Stats Section -->
+                                <div class="stats-container">
+                                    <div class="stats-box">
+                                        <p class="stats-number">42</p>
+                                        <p class="stats-text">Candidates applied</p>
+                                    </div>
+                                    <div class="stats-box">
+                                        <p class="stats-number">8</p>
+                                        <p class="stats-text">Candidate pending</p>
+                                    </div>
+                                </div>
+                            
+                                <!-- Tags & View Details -->
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <span class="tag">IT</span>
+                                        <span class="tag">10 Position</span>
+                                    </div>
+                                    <a href="#" class="view-details">View Details <i class="bi bi-chevron-right"></i></a>
+                                </div>
+                            </div>
+                            
+                            
+                            
+                        </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="internship-card">
-                            <!-- Status Dropdown Button -->
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="status-dropdown-container" style="position:relative;">
-                                    <button class="status-container status-open" onclick="toggleStatusDropdownCard(event)">
-                                        <span>• Open</span>
-                                        <i class="bi bi-chevron-down"></i>
-                                    </button>
-                                    <!-- Status Dropdown Menu -->
-                                    <div class="dropdown-menu status-dropdown-menu" style="position:absolute;">
-                                        <div class="dropdown-item" onclick="changeStatus(event, 'Open')">Open</div>
-                                        <div class="dropdown-item" onclick="changeStatus(event, 'Close')">Close</div>
-                                        <div class="dropdown-item" onclick="changeStatus(event, 'Hold')">Hold</div>
+                <div class="row internship-page" data-page="2" style="display: none;">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="internship-card">
+                                <!-- Status Dropdown Button -->
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="status-dropdown-container" style="position:relative;">
+                                        <button class="status-container status-open" onclick="toggleStatusDropdownCard(event)">
+                                            <span>• Open</span>
+                                            <i class="bi bi-chevron-down"></i>
+                                        </button>
+                                        <!-- Status Dropdown Menu -->
+                                        <div class="dropdown-menu status-dropdown-menu" style="position:absolute;">
+                                            <div class="dropdown-item" onclick="changeStatus(event, 'Open')">Open</div>
+                                            <div class="dropdown-item" onclick="changeStatus(event, 'Close')">Close</div>
+                                            <div class="dropdown-item" onclick="changeStatus(event, 'Hold')">Hold</div>
+                                        </div>
+                                    </div>    
+                                    <i class="bi bi-three-dots-vertical menu-icon"></i>
+                                </div>
+                            
+                                <!-- Internship Title & Location -->
+                                <h2 class="internship-title">Web Developer</h2>
+                                <p class="location"><i class="bi bi-geo-alt-fill"></i> 287 Si Lom Rd, Liberty Square Building</p>
+                            
+                                <!-- Stats Section -->
+                                <div class="stats-container">
+                                    <div class="stats-box">
+                                        <p class="stats-number">42</p>
+                                        <p class="stats-text">Candidates applied</p>
                                     </div>
-                                </div>    
-                                <i class="bi bi-three-dots-vertical menu-icon"></i>
-                            </div>
-                        
-                            <!-- Internship Title & Location -->
-                            <h2 class="internship-title">UX/UI Designer Trainee</h2>
-                            <p class="location"><i class="bi bi-geo-alt-fill"></i> 287 Si Lom Rd, Liberty Square Building</p>
-                        
-                            <!-- Stats Section -->
-                            <div class="stats-container">
-                                <div class="stats-box">
-                                    <p class="stats-number">42</p>
-                                    <p class="stats-text">Candidates applied</p>
+                                    <div class="stats-box">
+                                        <p class="stats-number">8</p>
+                                        <p class="stats-text">Candidate pending</p>
+                                    </div>
                                 </div>
-                                <div class="stats-box">
-                                    <p class="stats-number">8</p>
-                                    <p class="stats-text">Candidate pending</p>
+                            
+                                <!-- Tags & View Details -->
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <span class="tag">IT</span>
+                                        <span class="tag">10 Position</span>
+                                    </div>
+                                    <a href="#" class="view-details">View Details <i class="bi bi-chevron-right"></i></a>
                                 </div>
                             </div>
-                        
-                            <!-- Tags & View Details -->
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <span class="tag">IT</span>
-                                    <span class="tag">10 Position</span>
-                                </div>
-                                <a href="#" class="view-details">View Details <i class="bi bi-chevron-right"></i></a>
-                            </div>
+                            
+                            
+                            
                         </div>
-                        
-                        
-                        
+                        <div class="col-md-4">
+                            <div class="internship-card">
+                                <!-- Status Dropdown Button -->
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="status-dropdown-container" style="position:relative;">
+                                        <button class="status-container status-open" onclick="toggleStatusDropdownCard(event)">
+                                            <span>• Open</span>
+                                            <i class="bi bi-chevron-down"></i>
+                                        </button>
+                                        <!-- Status Dropdown Menu -->
+                                        <div class="dropdown-menu status-dropdown-menu" style="position:absolute;">
+                                            <div class="dropdown-item" onclick="changeStatus(event, 'Open')">Open</div>
+                                            <div class="dropdown-item" onclick="changeStatus(event, 'Close')">Close</div>
+                                            <div class="dropdown-item" onclick="changeStatus(event, 'Hold')">Hold</div>
+                                        </div>
+                                    </div>    
+                                    <i class="bi bi-three-dots-vertical menu-icon"></i>
+                                </div>
+                            
+                                <!-- Internship Title & Location -->
+                                <h2 class="internship-title">UX/UI Designer Trainee</h2>
+                                <p class="location"><i class="bi bi-geo-alt-fill"></i> 287 Si Lom Rd, Liberty Square Building</p>
+                            
+                                <!-- Stats Section -->
+                                <div class="stats-container">
+                                    <div class="stats-box">
+                                        <p class="stats-number">42</p>
+                                        <p class="stats-text">Candidates applied</p>
+                                    </div>
+                                    <div class="stats-box">
+                                        <p class="stats-number">8</p>
+                                        <p class="stats-text">Candidate pending</p>
+                                    </div>
+                                </div>
+                            
+                                <!-- Tags & View Details -->
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <span class="tag">IT</span>
+                                        <span class="tag">10 Position</span>
+                                    </div>
+                                    <a href="#" class="view-details">View Details <i class="bi bi-chevron-right"></i></a>
+                                </div>
+                            </div>
+                            
+                            
+                            
+                        </div>
+                        <div class="col-md-4">
+                            <div class="internship-card">
+                                <!-- Status Dropdown Button -->
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="status-dropdown-container" style="position:relative;">
+                                        <button class="status-container status-open" onclick="toggleStatusDropdownCard(event)">
+                                            <span>• Open</span>
+                                            <i class="bi bi-chevron-down"></i>
+                                        </button>
+                                        <!-- Status Dropdown Menu -->
+                                        <div class="dropdown-menu status-dropdown-menu" style="position:absolute;">
+                                            <div class="dropdown-item" onclick="changeStatus(event, 'Open')">Open</div>
+                                            <div class="dropdown-item" onclick="changeStatus(event, 'Close')">Close</div>
+                                            <div class="dropdown-item" onclick="changeStatus(event, 'Hold')">Hold</div>
+                                        </div>
+                                    </div>    
+                                    <i class="bi bi-three-dots-vertical menu-icon"></i>
+                                </div>
+                            
+                                <!-- Internship Title & Location -->
+                                <h2 class="internship-title">UX/UI Designer Trainee</h2>
+                                <p class="location"><i class="bi bi-geo-alt-fill"></i> 287 Si Lom Rd, Liberty Square Building</p>
+                            
+                                <!-- Stats Section -->
+                                <div class="stats-container">
+                                    <div class="stats-box">
+                                        <p class="stats-number">42</p>
+                                        <p class="stats-text">Candidates applied</p>
+                                    </div>
+                                    <div class="stats-box">
+                                        <p class="stats-number">8</p>
+                                        <p class="stats-text">Candidate pending</p>
+                                    </div>
+                                </div>
+                            
+                                <!-- Tags & View Details -->
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <span class="tag">IT</span>
+                                        <span class="tag">10 Position</span>
+                                    </div>
+                                    <a href="#" class="view-details">View Details <i class="bi bi-chevron-right"></i></a>
+                                </div>
+                            </div>
+                            
+                            
+                            
+                        </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="internship-card">
-                            <!-- Status Dropdown Button -->
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="status-dropdown-container" style="position:relative;">
-                                    <button class="status-container status-open" onclick="toggleStatusDropdownCard(event)">
-                                        <span>• Open</span>
-                                        <i class="bi bi-chevron-down"></i>
-                                    </button>
-                                    <!-- Status Dropdown Menu -->
-                                    <div class="dropdown-menu status-dropdown-menu" style="position:absolute;">
-                                        <div class="dropdown-item" onclick="changeStatus(event, 'Open')">Open</div>
-                                        <div class="dropdown-item" onclick="changeStatus(event, 'Close')">Close</div>
-                                        <div class="dropdown-item" onclick="changeStatus(event, 'Hold')">Hold</div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="internship-card">
+                                <!-- Status Dropdown Button -->
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="status-dropdown-container" style="position:relative;">
+                                        <button class="status-container status-open" onclick="toggleStatusDropdownCard(event)">
+                                            <span>• Open</span>
+                                            <i class="bi bi-chevron-down"></i>
+                                        </button>
+                                        <!-- Status Dropdown Menu -->
+                                        <div class="dropdown-menu status-dropdown-menu" style="position:absolute;">
+                                            <div class="dropdown-item" onclick="changeStatus(event, 'Open')">Open</div>
+                                            <div class="dropdown-item" onclick="changeStatus(event, 'Close')">Close</div>
+                                            <div class="dropdown-item" onclick="changeStatus(event, 'Hold')">Hold</div>
+                                        </div>
+                                    </div>    
+                                    <i class="bi bi-three-dots-vertical menu-icon"></i>
+                                </div>
+                            
+                                <!-- Internship Title & Location -->
+                                <h2 class="internship-title">UX/UI Designer Trainee</h2>
+                                <p class="location"><i class="bi bi-geo-alt-fill"></i> 287 Si Lom Rd, Liberty Square Building</p>
+                            
+                                <!-- Stats Section -->
+                                <div class="stats-container">
+                                    <div class="stats-box">
+                                        <p class="stats-number">42</p>
+                                        <p class="stats-text">Candidates applied</p>
                                     </div>
-                                </div>    
-                                <i class="bi bi-three-dots-vertical menu-icon"></i>
-                            </div>
-                        
-                            <!-- Internship Title & Location -->
-                            <h2 class="internship-title">UX/UI Designer Trainee</h2>
-                            <p class="location"><i class="bi bi-geo-alt-fill"></i> 287 Si Lom Rd, Liberty Square Building</p>
-                        
-                            <!-- Stats Section -->
-                            <div class="stats-container">
-                                <div class="stats-box">
-                                    <p class="stats-number">42</p>
-                                    <p class="stats-text">Candidates applied</p>
+                                    <div class="stats-box">
+                                        <p class="stats-number">8</p>
+                                        <p class="stats-text">Candidate pending</p>
+                                    </div>
                                 </div>
-                                <div class="stats-box">
-                                    <p class="stats-number">8</p>
-                                    <p class="stats-text">Candidate pending</p>
+                            
+                                <!-- Tags & View Details -->
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <span class="tag">IT</span>
+                                        <span class="tag">10 Position</span>
+                                    </div>
+                                    <a href="#" class="view-details">View Details <i class="bi bi-chevron-right"></i></a>
                                 </div>
                             </div>
-                        
-                            <!-- Tags & View Details -->
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <span class="tag">IT</span>
-                                    <span class="tag">10 Position</span>
-                                </div>
-                                <a href="#" class="view-details">View Details <i class="bi bi-chevron-right"></i></a>
-                            </div>
+                            
+                            
+                            
                         </div>
-                        
-                        
-                        
+                        <div class="col-md-4">
+                            <div class="internship-card">
+                                <!-- Status Dropdown Button -->
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="status-dropdown-container" style="position:relative;">
+                                        <button class="status-container status-open" onclick="toggleStatusDropdownCard(event)">
+                                            <span>• Open</span>
+                                            <i class="bi bi-chevron-down"></i>
+                                        </button>
+                                        <!-- Status Dropdown Menu -->
+                                        <div class="dropdown-menu status-dropdown-menu" style="position:absolute;">
+                                            <div class="dropdown-item" onclick="changeStatus(event, 'Open')">Open</div>
+                                            <div class="dropdown-item" onclick="changeStatus(event, 'Close')">Close</div>
+                                            <div class="dropdown-item" onclick="changeStatus(event, 'Hold')">Hold</div>
+                                        </div>
+                                    </div>    
+                                    <i class="bi bi-three-dots-vertical menu-icon"></i>
+                                </div>
+                            
+                                <!-- Internship Title & Location -->
+                                <h2 class="internship-title">UX/UI Designer Trainee</h2>
+                                <p class="location"><i class="bi bi-geo-alt-fill"></i> 287 Si Lom Rd, Liberty Square Building</p>
+                            
+                                <!-- Stats Section -->
+                                <div class="stats-container">
+                                    <div class="stats-box">
+                                        <p class="stats-number">42</p>
+                                        <p class="stats-text">Candidates applied</p>
+                                    </div>
+                                    <div class="stats-box">
+                                        <p class="stats-number">8</p>
+                                        <p class="stats-text">Candidate pending</p>
+                                    </div>
+                                </div>
+                            
+                                <!-- Tags & View Details -->
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <span class="tag">IT</span>
+                                        <span class="tag">10 Position</span>
+                                    </div>
+                                    <a href="#" class="view-details">View Details <i class="bi bi-chevron-right"></i></a>
+                                </div>
+                            </div>
+                            
+                            
+                            
+                        </div>
+                        <div class="col-md-4">
+                            <div class="internship-card">
+                                <!-- Status Dropdown Button -->
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="status-dropdown-container" style="position:relative;">
+                                        <button class="status-container status-open" onclick="toggleStatusDropdownCard(event)">
+                                            <span>• Open</span>
+                                            <i class="bi bi-chevron-down"></i>
+                                        </button>
+                                        <!-- Status Dropdown Menu -->
+                                        <div class="dropdown-menu status-dropdown-menu" style="position:absolute;">
+                                            <div class="dropdown-item" onclick="changeStatus(event, 'Open')">Open</div>
+                                            <div class="dropdown-item" onclick="changeStatus(event, 'Close')">Close</div>
+                                            <div class="dropdown-item" onclick="changeStatus(event, 'Hold')">Hold</div>
+                                        </div>
+                                    </div>    
+                                    <i class="bi bi-three-dots-vertical menu-icon"></i>
+                                </div>
+                            
+                                <!-- Internship Title & Location -->
+                                <h2 class="internship-title">UX/UI Designer Trainee</h2>
+                                <p class="location"><i class="bi bi-geo-alt-fill"></i> 287 Si Lom Rd, Liberty Square Building</p>
+                            
+                                <!-- Stats Section -->
+                                <div class="stats-container">
+                                    <div class="stats-box">
+                                        <p class="stats-number">42</p>
+                                        <p class="stats-text">Candidates applied</p>
+                                    </div>
+                                    <div class="stats-box">
+                                        <p class="stats-number">8</p>
+                                        <p class="stats-text">Candidate pending</p>
+                                    </div>
+                                </div>
+                            
+                                <!-- Tags & View Details -->
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <span class="tag">IT</span>
+                                        <span class="tag">10 Position</span>
+                                    </div>
+                                    <a href="#" class="view-details">View Details <i class="bi bi-chevron-right"></i></a>
+                                </div>
+                            </div>
+                            
+                            
+                            
+                        </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="internship-card">
-                            <!-- Status Dropdown Button -->
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="status-dropdown-container" style="position:relative;">
-                                    <button class="status-container status-open" onclick="toggleStatusDropdownCard(event)">
-                                        <span>• Open</span>
-                                        <i class="bi bi-chevron-down"></i>
-                                    </button>
-                                    <!-- Status Dropdown Menu -->
-                                    <div class="dropdown-menu status-dropdown-menu" style="position:absolute;">
-                                        <div class="dropdown-item" onclick="changeStatus(event, 'Open')">Open</div>
-                                        <div class="dropdown-item" onclick="changeStatus(event, 'Close')">Close</div>
-                                        <div class="dropdown-item" onclick="changeStatus(event, 'Hold')">Hold</div>
+                </div>
+                <div class="row internship-page" data-page="3" style="display: none;">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="internship-card">
+                                <!-- Status Dropdown Button -->
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="status-dropdown-container" style="position:relative;">
+                                        <button class="status-container status-open" onclick="toggleStatusDropdownCard(event)">
+                                            <span>• Open</span>
+                                            <i class="bi bi-chevron-down"></i>
+                                        </button>
+                                        <!-- Status Dropdown Menu -->
+                                        <div class="dropdown-menu status-dropdown-menu" style="position:absolute;">
+                                            <div class="dropdown-item" onclick="changeStatus(event, 'Open')">Open</div>
+                                            <div class="dropdown-item" onclick="changeStatus(event, 'Close')">Close</div>
+                                            <div class="dropdown-item" onclick="changeStatus(event, 'Hold')">Hold</div>
+                                        </div>
+                                    </div>    
+                                    <i class="bi bi-three-dots-vertical menu-icon"></i>
+                                </div>
+                            
+                                <!-- Internship Title & Location -->
+                                <h2 class="internship-title">UX/UI Designer Trainee</h2>
+                                <p class="location"><i class="bi bi-geo-alt-fill"></i> 287 Si Lom Rd, Liberty Square Building</p>
+                            
+                                <!-- Stats Section -->
+                                <div class="stats-container">
+                                    <div class="stats-box">
+                                        <p class="stats-number">42</p>
+                                        <p class="stats-text">Candidates applied</p>
                                     </div>
-                                </div>    
-                                <i class="bi bi-three-dots-vertical menu-icon"></i>
-                            </div>
-                        
-                            <!-- Internship Title & Location -->
-                            <h2 class="internship-title">UX/UI Designer Trainee</h2>
-                            <p class="location"><i class="bi bi-geo-alt-fill"></i> 287 Si Lom Rd, Liberty Square Building</p>
-                        
-                            <!-- Stats Section -->
-                            <div class="stats-container">
-                                <div class="stats-box">
-                                    <p class="stats-number">42</p>
-                                    <p class="stats-text">Candidates applied</p>
+                                    <div class="stats-box">
+                                        <p class="stats-number">8</p>
+                                        <p class="stats-text">Candidate pending</p>
+                                    </div>
                                 </div>
-                                <div class="stats-box">
-                                    <p class="stats-number">8</p>
-                                    <p class="stats-text">Candidate pending</p>
+                            
+                                <!-- Tags & View Details -->
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <span class="tag">IT</span>
+                                        <span class="tag">10 Position</span>
+                                    </div>
+                                    <a href="#" class="view-details">View Details <i class="bi bi-chevron-right"></i></a>
                                 </div>
                             </div>
-                        
-                            <!-- Tags & View Details -->
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <span class="tag">IT</span>
-                                    <span class="tag">10 Position</span>
+                            
+                            
+                            
+                        </div>
+                        <div class="col-md-4">
+                            <div class="internship-card">
+                                <!-- Status Dropdown Button -->
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="status-dropdown-container" style="position:relative;">
+                                        <button class="status-container status-open" onclick="toggleStatusDropdownCard(event)">
+                                            <span>• Open</span>
+                                            <i class="bi bi-chevron-down"></i>
+                                        </button>
+                                        <!-- Status Dropdown Menu -->
+                                        <div class="dropdown-menu status-dropdown-menu" style="position:absolute;">
+                                            <div class="dropdown-item" onclick="changeStatus(event, 'Open')">Open</div>
+                                            <div class="dropdown-item" onclick="changeStatus(event, 'Close')">Close</div>
+                                            <div class="dropdown-item" onclick="changeStatus(event, 'Hold')">Hold</div>
+                                        </div>
+                                    </div>    
+                                    <i class="bi bi-three-dots-vertical menu-icon"></i>
                                 </div>
-                                <a href="#" class="view-details">View Details <i class="bi bi-chevron-right"></i></a>
+                            
+                                <!-- Internship Title & Location -->
+                                <h2 class="internship-title">UX/UI Designer Trainee</h2>
+                                <p class="location"><i class="bi bi-geo-alt-fill"></i> 287 Si Lom Rd, Liberty Square Building</p>
+                            
+                                <!-- Stats Section -->
+                                <div class="stats-container">
+                                    <div class="stats-box">
+                                        <p class="stats-number">42</p>
+                                        <p class="stats-text">Candidates applied</p>
+                                    </div>
+                                    <div class="stats-box">
+                                        <p class="stats-number">8</p>
+                                        <p class="stats-text">Candidate pending</p>
+                                    </div>
+                                </div>
+                            
+                                <!-- Tags & View Details -->
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <span class="tag">IT</span>
+                                        <span class="tag">10 Position</span>
+                                    </div>
+                                    <a href="#" class="view-details">View Details <i class="bi bi-chevron-right"></i></a>
+                                </div>
+                            </div>
+                            
+                            
+                            
+                        </div>
+                        <div class="col-md-4">
+                            <div class="internship-card">
+                                <!-- Status Dropdown Button -->
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="status-dropdown-container" style="position:relative;">
+                                        <button class="status-container status-open" onclick="toggleStatusDropdownCard(event)">
+                                            <span>• Open</span>
+                                            <i class="bi bi-chevron-down"></i>
+                                        </button>
+                                        <!-- Status Dropdown Menu -->
+                                        <div class="dropdown-menu status-dropdown-menu" style="position:absolute;">
+                                            <div class="dropdown-item" onclick="changeStatus(event, 'Open')">Open</div>
+                                            <div class="dropdown-item" onclick="changeStatus(event, 'Close')">Close</div>
+                                            <div class="dropdown-item" onclick="changeStatus(event, 'Hold')">Hold</div>
+                                        </div>
+                                    </div>    
+                                    <i class="bi bi-three-dots-vertical menu-icon"></i>
+                                </div>
+                            
+                                <!-- Internship Title & Location -->
+                                <h2 class="internship-title">UX/UI Designer Trainee</h2>
+                                <p class="location"><i class="bi bi-geo-alt-fill"></i> 287 Si Lom Rd, Liberty Square Building</p>
+                            
+                                <!-- Stats Section -->
+                                <div class="stats-container">
+                                    <div class="stats-box">
+                                        <p class="stats-number">42</p>
+                                        <p class="stats-text">Candidates applied</p>
+                                    </div>
+                                    <div class="stats-box">
+                                        <p class="stats-number">8</p>
+                                        <p class="stats-text">Candidate pending</p>
+                                    </div>
+                                </div>
+                            
+                                <!-- Tags & View Details -->
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <span class="tag">IT</span>
+                                        <span class="tag">10 Position</span>
+                                    </div>
+                                    <a href="#" class="view-details">View Details <i class="bi bi-chevron-right"></i></a>
+                                </div>
+                            </div>
+                            
+                            
+                            
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="internship-card">
+                                <!-- Status Dropdown Button -->
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="status-dropdown-container" style="position:relative;">
+                                        <button class="status-container status-open" onclick="toggleStatusDropdownCard(event)">
+                                            <span>• Open</span>
+                                            <i class="bi bi-chevron-down"></i>
+                                        </button>
+                                        <!-- Status Dropdown Menu -->
+                                        <div class="dropdown-menu status-dropdown-menu" style="position:absolute;">
+                                            <div class="dropdown-item" onclick="changeStatus(event, 'Open')">Open</div>
+                                            <div class="dropdown-item" onclick="changeStatus(event, 'Close')">Close</div>
+                                            <div class="dropdown-item" onclick="changeStatus(event, 'Hold')">Hold</div>
+                                        </div>
+                                    </div>    
+                                    <i class="bi bi-three-dots-vertical menu-icon"></i>
+                                </div>
+                            
+                                <!-- Internship Title & Location -->
+                                <h2 class="internship-title">UX/UI Designer Trainee</h2>
+                                <p class="location"><i class="bi bi-geo-alt-fill"></i> 287 Si Lom Rd, Liberty Square Building</p>
+                            
+                                <!-- Stats Section -->
+                                <div class="stats-container">
+                                    <div class="stats-box">
+                                        <p class="stats-number">42</p>
+                                        <p class="stats-text">Candidates applied</p>
+                                    </div>
+                                    <div class="stats-box">
+                                        <p class="stats-number">8</p>
+                                        <p class="stats-text">Candidate pending</p>
+                                    </div>
+                                </div>
+                            
+                                <!-- Tags & View Details -->
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <span class="tag">IT</span>
+                                        <span class="tag">10 Position</span>
+                                    </div>
+                                    <a href="#" class="view-details">View Details <i class="bi bi-chevron-right"></i></a>
+                                </div>
+                            </div>
+                            
+                            
+                            
+                        </div>
+                        <div class="col-md-4">
+                            <div class="internship-card">
+                                <!-- Status Dropdown Button -->
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="status-dropdown-container" style="position:relative;">
+                                        <button class="status-container status-open" onclick="toggleStatusDropdownCard(event)">
+                                            <span>• Open</span>
+                                            <i class="bi bi-chevron-down"></i>
+                                        </button>
+                                        <!-- Status Dropdown Menu -->
+                                        <div class="dropdown-menu status-dropdown-menu" style="position:absolute;">
+                                            <div class="dropdown-item" onclick="changeStatus(event, 'Open')">Open</div>
+                                            <div class="dropdown-item" onclick="changeStatus(event, 'Close')">Close</div>
+                                            <div class="dropdown-item" onclick="changeStatus(event, 'Hold')">Hold</div>
+                                        </div>
+                                    </div>    
+                                    <i class="bi bi-three-dots-vertical menu-icon"></i>
+                                </div>
+                            
+                                <!-- Internship Title & Location -->
+                                <h2 class="internship-title">UX/UI Designer Trainee</h2>
+                                <p class="location"><i class="bi bi-geo-alt-fill"></i> 287 Si Lom Rd, Liberty Square Building</p>
+                            
+                                <!-- Stats Section -->
+                                <div class="stats-container">
+                                    <div class="stats-box">
+                                        <p class="stats-number">42</p>
+                                        <p class="stats-text">Candidates applied</p>
+                                    </div>
+                                    <div class="stats-box">
+                                        <p class="stats-number">8</p>
+                                        <p class="stats-text">Candidate pending</p>
+                                    </div>
+                                </div>
+                            
+                                <!-- Tags & View Details -->
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <span class="tag">IT</span>
+                                        <span class="tag">10 Position</span>
+                                    </div>
+                                    <a href="#" class="view-details">View Details <i class="bi bi-chevron-right"></i></a>
+                                </div>
+                            </div>
+                            
+                            
+                            
+                        </div>
+                        <div class="col-md-4">
+                            <div class="internship-card">
+                                <!-- Status Dropdown Button -->
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="status-dropdown-container" style="position:relative;">
+                                        <button class="status-container status-open" onclick="toggleStatusDropdownCard(event)">
+                                            <span>• Open</span>
+                                            <i class="bi bi-chevron-down"></i>
+                                        </button>
+                                        <!-- Status Dropdown Menu -->
+                                        <div class="dropdown-menu status-dropdown-menu" style="position:absolute;">
+                                            <div class="dropdown-item" onclick="changeStatus(event, 'Open')">Open</div>
+                                            <div class="dropdown-item" onclick="changeStatus(event, 'Close')">Close</div>
+                                            <div class="dropdown-item" onclick="changeStatus(event, 'Hold')">Hold</div>
+                                        </div>
+                                    </div>    
+                                    <i class="bi bi-three-dots-vertical menu-icon"></i>
+                                </div>
+                            
+                                <!-- Internship Title & Location -->
+                                <h2 class="internship-title">UX/UI Designer Trainee</h2>
+                                <p class="location"><i class="bi bi-geo-alt-fill"></i> 287 Si Lom Rd, Liberty Square Building</p>
+                            
+                                <!-- Stats Section -->
+                                <div class="stats-container">
+                                    <div class="stats-box">
+                                        <p class="stats-number">42</p>
+                                        <p class="stats-text">Candidates applied</p>
+                                    </div>
+                                    <div class="stats-box">
+                                        <p class="stats-number">8</p>
+                                        <p class="stats-text">Candidate pending</p>
+                                    </div>
+                                </div>
+                            
+                                <!-- Tags & View Details -->
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <span class="tag">IT</span>
+                                        <span class="tag">10 Position</span>
+                                    </div>
+                                    <a href="#" class="view-details">View Details <i class="bi bi-chevron-right"></i></a>
+                                </div>
+                            </div>
+                            
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+                <div id="pagination-container" class="d-flex justify-content-end mt-4">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" id="prev-page" aria-disabled="true">
+                                    <span>&lsaquo; Previous</span>
+                                </a>
+                            </li>
+                            <li class="page-item active"><a class="page-link" href="#" data-page="1">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#" data-page="2">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#" data-page="3">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#" id="next-page">
+                                    <span>Next &rsaquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div> 
+            </div>
+
+        </div>
+
+<!-- Internship Details Page (Initially Hidden) -->
+<!-- Internship Details Page -->
+
+</div>
+<div id="internship-details-page" style="display: none;width:100%;height:100vh;">
+    <button class="back-btn" onclick="goBackToInternshipList()"><img src="../assets/icon/less_than.png" alt=""> Back to Internship Program</button>
+    
+    <h1 id="program-title">Program Title</h1>
+    <div class="card-body details-card">
+        <div style="width:100%; padding:0; margin:0;">
+            <!-- Nav Tabs -->
+            <ul class="nav nav-tabs mt-0">
+                <li class="nav-item">
+                    <a class="nav-link active" id="description-tab" style="cursor:pointer;">
+                        <i class="fa-solid fa-pen" style="margin-right:5px;"></i>Description
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="application-tab" style="cursor:pointer;">
+                        <i class="fa-regular fa-user" style="margin-right:5px;"></i>Application
+                    </a>
+                </li>
+            </ul>           
+        </div>
+    
+        <!-- Tab Content -->
+        <div class="tab-content mt-3">
+            <!-- Description Tab -->
+            <div class="tab-pane" id="description-content" style="display: block;">
+                <div style="padding:0; margin:0; margin-bottom:20px; display: flex; justify-content: space-between;">
+                    <h4>Program Description</h4>
+                    <button style="background-color:#474BC2; color:white; padding:10px; border-radius:4px; border:none;">
+                        <img src="../assets/icon/edit-alt.png" alt=""> Edit
+                    </button>
+                </div>
+                <hr />
+                <div class="row" style="margin:0; padding:0;">
+                    <div class="col-md-6 text-start" style="margin:0; padding:0;">
+                        <p style="font-size:12px; color:grey;">Description</p>
+                        <p id="program-description" style="font-size:18px;">Loading...</p>
+                        <p style="font-size:12px; color:grey;"> Location</p> 
+                        <span style="font-size:18px;" id="program-location"></span>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p style="font-size:12px; color:grey;">Category</p> 
+                                <span class="tag" id="program-category"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <p style="font-size:12px; color:grey;">Number of open positions</p> 
+                                <span class="tag" id="program-positions"></span>
                             </div>
                         </div>
-                        
-                        
-                        
+                    </div>
+                    <div class="col-md-6" style="margin:0; padding:0;">
+                        <img src="../assets/img/Luffy _ Desktop Wallpaper.jpg" style="width:100%; height:100%; border-radius:4px; border:2px solid #474BC2;" alt="">
                     </div>
                 </div>
             </div>
-            <div class="row internship-page" data-page="2" style="display: none;">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="internship-card">
-                            <!-- Status Dropdown Button -->
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="status-dropdown-container" style="position:relative;">
-                                    <button class="status-container status-open" onclick="toggleStatusDropdownCard(event)">
-                                        <span>• Open</span>
-                                        <i class="bi bi-chevron-down"></i>
-                                    </button>
-                                    <!-- Status Dropdown Menu -->
-                                    <div class="dropdown-menu status-dropdown-menu" style="position:absolute;">
-                                        <div class="dropdown-item" onclick="changeStatus(event, 'Open')">Open</div>
-                                        <div class="dropdown-item" onclick="changeStatus(event, 'Close')">Close</div>
-                                        <div class="dropdown-item" onclick="changeStatus(event, 'Hold')">Hold</div>
-                                    </div>
-                                </div>    
-                                <i class="bi bi-three-dots-vertical menu-icon"></i>
-                            </div>
-                        
-                            <!-- Internship Title & Location -->
-                            <h2 class="internship-title">Web Developer</h2>
-                            <p class="location"><i class="bi bi-geo-alt-fill"></i> 287 Si Lom Rd, Liberty Square Building</p>
-                        
-                            <!-- Stats Section -->
-                            <div class="stats-container">
-                                <div class="stats-box">
-                                    <p class="stats-number">42</p>
-                                    <p class="stats-text">Candidates applied</p>
-                                </div>
-                                <div class="stats-box">
-                                    <p class="stats-number">8</p>
-                                    <p class="stats-text">Candidate pending</p>
-                                </div>
-                            </div>
-                        
-                            <!-- Tags & View Details -->
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <span class="tag">IT</span>
-                                    <span class="tag">10 Position</span>
-                                </div>
-                                <a href="#" class="view-details">View Details <i class="bi bi-chevron-right"></i></a>
-                            </div>
-                        </div>
-                        
-                        
-                        
-                    </div>
-                    <div class="col-md-4">
-                        <div class="internship-card">
-                            <!-- Status Dropdown Button -->
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="status-dropdown-container" style="position:relative;">
-                                    <button class="status-container status-open" onclick="toggleStatusDropdownCard(event)">
-                                        <span>• Open</span>
-                                        <i class="bi bi-chevron-down"></i>
-                                    </button>
-                                    <!-- Status Dropdown Menu -->
-                                    <div class="dropdown-menu status-dropdown-menu" style="position:absolute;">
-                                        <div class="dropdown-item" onclick="changeStatus(event, 'Open')">Open</div>
-                                        <div class="dropdown-item" onclick="changeStatus(event, 'Close')">Close</div>
-                                        <div class="dropdown-item" onclick="changeStatus(event, 'Hold')">Hold</div>
-                                    </div>
-                                </div>    
-                                <i class="bi bi-three-dots-vertical menu-icon"></i>
-                            </div>
-                        
-                            <!-- Internship Title & Location -->
-                            <h2 class="internship-title">UX/UI Designer Trainee</h2>
-                            <p class="location"><i class="bi bi-geo-alt-fill"></i> 287 Si Lom Rd, Liberty Square Building</p>
-                        
-                            <!-- Stats Section -->
-                            <div class="stats-container">
-                                <div class="stats-box">
-                                    <p class="stats-number">42</p>
-                                    <p class="stats-text">Candidates applied</p>
-                                </div>
-                                <div class="stats-box">
-                                    <p class="stats-number">8</p>
-                                    <p class="stats-text">Candidate pending</p>
-                                </div>
-                            </div>
-                        
-                            <!-- Tags & View Details -->
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <span class="tag">IT</span>
-                                    <span class="tag">10 Position</span>
-                                </div>
-                                <a href="#" class="view-details">View Details <i class="bi bi-chevron-right"></i></a>
-                            </div>
-                        </div>
-                        
-                        
-                        
-                    </div>
-                    <div class="col-md-4">
-                        <div class="internship-card">
-                            <!-- Status Dropdown Button -->
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="status-dropdown-container" style="position:relative;">
-                                    <button class="status-container status-open" onclick="toggleStatusDropdownCard(event)">
-                                        <span>• Open</span>
-                                        <i class="bi bi-chevron-down"></i>
-                                    </button>
-                                    <!-- Status Dropdown Menu -->
-                                    <div class="dropdown-menu status-dropdown-menu" style="position:absolute;">
-                                        <div class="dropdown-item" onclick="changeStatus(event, 'Open')">Open</div>
-                                        <div class="dropdown-item" onclick="changeStatus(event, 'Close')">Close</div>
-                                        <div class="dropdown-item" onclick="changeStatus(event, 'Hold')">Hold</div>
-                                    </div>
-                                </div>    
-                                <i class="bi bi-three-dots-vertical menu-icon"></i>
-                            </div>
-                        
-                            <!-- Internship Title & Location -->
-                            <h2 class="internship-title">UX/UI Designer Trainee</h2>
-                            <p class="location"><i class="bi bi-geo-alt-fill"></i> 287 Si Lom Rd, Liberty Square Building</p>
-                        
-                            <!-- Stats Section -->
-                            <div class="stats-container">
-                                <div class="stats-box">
-                                    <p class="stats-number">42</p>
-                                    <p class="stats-text">Candidates applied</p>
-                                </div>
-                                <div class="stats-box">
-                                    <p class="stats-number">8</p>
-                                    <p class="stats-text">Candidate pending</p>
-                                </div>
-                            </div>
-                        
-                            <!-- Tags & View Details -->
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <span class="tag">IT</span>
-                                    <span class="tag">10 Position</span>
-                                </div>
-                                <a href="#" class="view-details">View Details <i class="bi bi-chevron-right"></i></a>
-                            </div>
-                        </div>
-                        
-                        
-                        
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="internship-card">
-                            <!-- Status Dropdown Button -->
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="status-dropdown-container" style="position:relative;">
-                                    <button class="status-container status-open" onclick="toggleStatusDropdownCard(event)">
-                                        <span>• Open</span>
-                                        <i class="bi bi-chevron-down"></i>
-                                    </button>
-                                    <!-- Status Dropdown Menu -->
-                                    <div class="dropdown-menu status-dropdown-menu" style="position:absolute;">
-                                        <div class="dropdown-item" onclick="changeStatus(event, 'Open')">Open</div>
-                                        <div class="dropdown-item" onclick="changeStatus(event, 'Close')">Close</div>
-                                        <div class="dropdown-item" onclick="changeStatus(event, 'Hold')">Hold</div>
-                                    </div>
-                                </div>    
-                                <i class="bi bi-three-dots-vertical menu-icon"></i>
-                            </div>
-                        
-                            <!-- Internship Title & Location -->
-                            <h2 class="internship-title">UX/UI Designer Trainee</h2>
-                            <p class="location"><i class="bi bi-geo-alt-fill"></i> 287 Si Lom Rd, Liberty Square Building</p>
-                        
-                            <!-- Stats Section -->
-                            <div class="stats-container">
-                                <div class="stats-box">
-                                    <p class="stats-number">42</p>
-                                    <p class="stats-text">Candidates applied</p>
-                                </div>
-                                <div class="stats-box">
-                                    <p class="stats-number">8</p>
-                                    <p class="stats-text">Candidate pending</p>
-                                </div>
-                            </div>
-                        
-                            <!-- Tags & View Details -->
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <span class="tag">IT</span>
-                                    <span class="tag">10 Position</span>
-                                </div>
-                                <a href="#" class="view-details">View Details <i class="bi bi-chevron-right"></i></a>
-                            </div>
-                        </div>
-                        
-                        
-                        
-                    </div>
-                    <div class="col-md-4">
-                        <div class="internship-card">
-                            <!-- Status Dropdown Button -->
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="status-dropdown-container" style="position:relative;">
-                                    <button class="status-container status-open" onclick="toggleStatusDropdownCard(event)">
-                                        <span>• Open</span>
-                                        <i class="bi bi-chevron-down"></i>
-                                    </button>
-                                    <!-- Status Dropdown Menu -->
-                                    <div class="dropdown-menu status-dropdown-menu" style="position:absolute;">
-                                        <div class="dropdown-item" onclick="changeStatus(event, 'Open')">Open</div>
-                                        <div class="dropdown-item" onclick="changeStatus(event, 'Close')">Close</div>
-                                        <div class="dropdown-item" onclick="changeStatus(event, 'Hold')">Hold</div>
-                                    </div>
-                                </div>    
-                                <i class="bi bi-three-dots-vertical menu-icon"></i>
-                            </div>
-                        
-                            <!-- Internship Title & Location -->
-                            <h2 class="internship-title">UX/UI Designer Trainee</h2>
-                            <p class="location"><i class="bi bi-geo-alt-fill"></i> 287 Si Lom Rd, Liberty Square Building</p>
-                        
-                            <!-- Stats Section -->
-                            <div class="stats-container">
-                                <div class="stats-box">
-                                    <p class="stats-number">42</p>
-                                    <p class="stats-text">Candidates applied</p>
-                                </div>
-                                <div class="stats-box">
-                                    <p class="stats-number">8</p>
-                                    <p class="stats-text">Candidate pending</p>
-                                </div>
-                            </div>
-                        
-                            <!-- Tags & View Details -->
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <span class="tag">IT</span>
-                                    <span class="tag">10 Position</span>
-                                </div>
-                                <a href="#" class="view-details">View Details <i class="bi bi-chevron-right"></i></a>
-                            </div>
-                        </div>
-                        
-                        
-                        
-                    </div>
-                    <div class="col-md-4">
-                        <div class="internship-card">
-                            <!-- Status Dropdown Button -->
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="status-dropdown-container" style="position:relative;">
-                                    <button class="status-container status-open" onclick="toggleStatusDropdownCard(event)">
-                                        <span>• Open</span>
-                                        <i class="bi bi-chevron-down"></i>
-                                    </button>
-                                    <!-- Status Dropdown Menu -->
-                                    <div class="dropdown-menu status-dropdown-menu" style="position:absolute;">
-                                        <div class="dropdown-item" onclick="changeStatus(event, 'Open')">Open</div>
-                                        <div class="dropdown-item" onclick="changeStatus(event, 'Close')">Close</div>
-                                        <div class="dropdown-item" onclick="changeStatus(event, 'Hold')">Hold</div>
-                                    </div>
-                                </div>    
-                                <i class="bi bi-three-dots-vertical menu-icon"></i>
-                            </div>
-                        
-                            <!-- Internship Title & Location -->
-                            <h2 class="internship-title">UX/UI Designer Trainee</h2>
-                            <p class="location"><i class="bi bi-geo-alt-fill"></i> 287 Si Lom Rd, Liberty Square Building</p>
-                        
-                            <!-- Stats Section -->
-                            <div class="stats-container">
-                                <div class="stats-box">
-                                    <p class="stats-number">42</p>
-                                    <p class="stats-text">Candidates applied</p>
-                                </div>
-                                <div class="stats-box">
-                                    <p class="stats-number">8</p>
-                                    <p class="stats-text">Candidate pending</p>
-                                </div>
-                            </div>
-                        
-                            <!-- Tags & View Details -->
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <span class="tag">IT</span>
-                                    <span class="tag">10 Position</span>
-                                </div>
-                                <a href="#" class="view-details">View Details <i class="bi bi-chevron-right"></i></a>
-                            </div>
-                        </div>
-                        
-                        
-                        
-                    </div>
-                </div>
-            </div>
-            <div class="row internship-page" data-page="3" style="display: none;">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="internship-card">
-                            <!-- Status Dropdown Button -->
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="status-dropdown-container" style="position:relative;">
-                                    <button class="status-container status-open" onclick="toggleStatusDropdownCard(event)">
-                                        <span>• Open</span>
-                                        <i class="bi bi-chevron-down"></i>
-                                    </button>
-                                    <!-- Status Dropdown Menu -->
-                                    <div class="dropdown-menu status-dropdown-menu" style="position:absolute;">
-                                        <div class="dropdown-item" onclick="changeStatus(event, 'Open')">Open</div>
-                                        <div class="dropdown-item" onclick="changeStatus(event, 'Close')">Close</div>
-                                        <div class="dropdown-item" onclick="changeStatus(event, 'Hold')">Hold</div>
-                                    </div>
-                                </div>    
-                                <i class="bi bi-three-dots-vertical menu-icon"></i>
-                            </div>
-                        
-                            <!-- Internship Title & Location -->
-                            <h2 class="internship-title">UX/UI Designer Trainee</h2>
-                            <p class="location"><i class="bi bi-geo-alt-fill"></i> 287 Si Lom Rd, Liberty Square Building</p>
-                        
-                            <!-- Stats Section -->
-                            <div class="stats-container">
-                                <div class="stats-box">
-                                    <p class="stats-number">42</p>
-                                    <p class="stats-text">Candidates applied</p>
-                                </div>
-                                <div class="stats-box">
-                                    <p class="stats-number">8</p>
-                                    <p class="stats-text">Candidate pending</p>
-                                </div>
-                            </div>
-                        
-                            <!-- Tags & View Details -->
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <span class="tag">IT</span>
-                                    <span class="tag">10 Position</span>
-                                </div>
-                                <a href="#" class="view-details">View Details <i class="bi bi-chevron-right"></i></a>
-                            </div>
-                        </div>
-                        
-                        
-                        
-                    </div>
-                    <div class="col-md-4">
-                        <div class="internship-card">
-                            <!-- Status Dropdown Button -->
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="status-dropdown-container" style="position:relative;">
-                                    <button class="status-container status-open" onclick="toggleStatusDropdownCard(event)">
-                                        <span>• Open</span>
-                                        <i class="bi bi-chevron-down"></i>
-                                    </button>
-                                    <!-- Status Dropdown Menu -->
-                                    <div class="dropdown-menu status-dropdown-menu" style="position:absolute;">
-                                        <div class="dropdown-item" onclick="changeStatus(event, 'Open')">Open</div>
-                                        <div class="dropdown-item" onclick="changeStatus(event, 'Close')">Close</div>
-                                        <div class="dropdown-item" onclick="changeStatus(event, 'Hold')">Hold</div>
-                                    </div>
-                                </div>    
-                                <i class="bi bi-three-dots-vertical menu-icon"></i>
-                            </div>
-                        
-                            <!-- Internship Title & Location -->
-                            <h2 class="internship-title">UX/UI Designer Trainee</h2>
-                            <p class="location"><i class="bi bi-geo-alt-fill"></i> 287 Si Lom Rd, Liberty Square Building</p>
-                        
-                            <!-- Stats Section -->
-                            <div class="stats-container">
-                                <div class="stats-box">
-                                    <p class="stats-number">42</p>
-                                    <p class="stats-text">Candidates applied</p>
-                                </div>
-                                <div class="stats-box">
-                                    <p class="stats-number">8</p>
-                                    <p class="stats-text">Candidate pending</p>
-                                </div>
-                            </div>
-                        
-                            <!-- Tags & View Details -->
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <span class="tag">IT</span>
-                                    <span class="tag">10 Position</span>
-                                </div>
-                                <a href="#" class="view-details">View Details <i class="bi bi-chevron-right"></i></a>
-                            </div>
-                        </div>
-                        
-                        
-                        
-                    </div>
-                    <div class="col-md-4">
-                        <div class="internship-card">
-                            <!-- Status Dropdown Button -->
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="status-dropdown-container" style="position:relative;">
-                                    <button class="status-container status-open" onclick="toggleStatusDropdownCard(event)">
-                                        <span>• Open</span>
-                                        <i class="bi bi-chevron-down"></i>
-                                    </button>
-                                    <!-- Status Dropdown Menu -->
-                                    <div class="dropdown-menu status-dropdown-menu" style="position:absolute;">
-                                        <div class="dropdown-item" onclick="changeStatus(event, 'Open')">Open</div>
-                                        <div class="dropdown-item" onclick="changeStatus(event, 'Close')">Close</div>
-                                        <div class="dropdown-item" onclick="changeStatus(event, 'Hold')">Hold</div>
-                                    </div>
-                                </div>    
-                                <i class="bi bi-three-dots-vertical menu-icon"></i>
-                            </div>
-                        
-                            <!-- Internship Title & Location -->
-                            <h2 class="internship-title">UX/UI Designer Trainee</h2>
-                            <p class="location"><i class="bi bi-geo-alt-fill"></i> 287 Si Lom Rd, Liberty Square Building</p>
-                        
-                            <!-- Stats Section -->
-                            <div class="stats-container">
-                                <div class="stats-box">
-                                    <p class="stats-number">42</p>
-                                    <p class="stats-text">Candidates applied</p>
-                                </div>
-                                <div class="stats-box">
-                                    <p class="stats-number">8</p>
-                                    <p class="stats-text">Candidate pending</p>
-                                </div>
-                            </div>
-                        
-                            <!-- Tags & View Details -->
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <span class="tag">IT</span>
-                                    <span class="tag">10 Position</span>
-                                </div>
-                                <a href="#" class="view-details">View Details <i class="bi bi-chevron-right"></i></a>
-                            </div>
-                        </div>
-                        
-                        
-                        
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="internship-card">
-                            <!-- Status Dropdown Button -->
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="status-dropdown-container" style="position:relative;">
-                                    <button class="status-container status-open" onclick="toggleStatusDropdownCard(event)">
-                                        <span>• Open</span>
-                                        <i class="bi bi-chevron-down"></i>
-                                    </button>
-                                    <!-- Status Dropdown Menu -->
-                                    <div class="dropdown-menu status-dropdown-menu" style="position:absolute;">
-                                        <div class="dropdown-item" onclick="changeStatus(event, 'Open')">Open</div>
-                                        <div class="dropdown-item" onclick="changeStatus(event, 'Close')">Close</div>
-                                        <div class="dropdown-item" onclick="changeStatus(event, 'Hold')">Hold</div>
-                                    </div>
-                                </div>    
-                                <i class="bi bi-three-dots-vertical menu-icon"></i>
-                            </div>
-                        
-                            <!-- Internship Title & Location -->
-                            <h2 class="internship-title">UX/UI Designer Trainee</h2>
-                            <p class="location"><i class="bi bi-geo-alt-fill"></i> 287 Si Lom Rd, Liberty Square Building</p>
-                        
-                            <!-- Stats Section -->
-                            <div class="stats-container">
-                                <div class="stats-box">
-                                    <p class="stats-number">42</p>
-                                    <p class="stats-text">Candidates applied</p>
-                                </div>
-                                <div class="stats-box">
-                                    <p class="stats-number">8</p>
-                                    <p class="stats-text">Candidate pending</p>
-                                </div>
-                            </div>
-                        
-                            <!-- Tags & View Details -->
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <span class="tag">IT</span>
-                                    <span class="tag">10 Position</span>
-                                </div>
-                                <a href="#" class="view-details">View Details <i class="bi bi-chevron-right"></i></a>
-                            </div>
-                        </div>
-                        
-                        
-                        
-                    </div>
-                    <div class="col-md-4">
-                        <div class="internship-card">
-                            <!-- Status Dropdown Button -->
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="status-dropdown-container" style="position:relative;">
-                                    <button class="status-container status-open" onclick="toggleStatusDropdownCard(event)">
-                                        <span>• Open</span>
-                                        <i class="bi bi-chevron-down"></i>
-                                    </button>
-                                    <!-- Status Dropdown Menu -->
-                                    <div class="dropdown-menu status-dropdown-menu" style="position:absolute;">
-                                        <div class="dropdown-item" onclick="changeStatus(event, 'Open')">Open</div>
-                                        <div class="dropdown-item" onclick="changeStatus(event, 'Close')">Close</div>
-                                        <div class="dropdown-item" onclick="changeStatus(event, 'Hold')">Hold</div>
-                                    </div>
-                                </div>    
-                                <i class="bi bi-three-dots-vertical menu-icon"></i>
-                            </div>
-                        
-                            <!-- Internship Title & Location -->
-                            <h2 class="internship-title">UX/UI Designer Trainee</h2>
-                            <p class="location"><i class="bi bi-geo-alt-fill"></i> 287 Si Lom Rd, Liberty Square Building</p>
-                        
-                            <!-- Stats Section -->
-                            <div class="stats-container">
-                                <div class="stats-box">
-                                    <p class="stats-number">42</p>
-                                    <p class="stats-text">Candidates applied</p>
-                                </div>
-                                <div class="stats-box">
-                                    <p class="stats-number">8</p>
-                                    <p class="stats-text">Candidate pending</p>
-                                </div>
-                            </div>
-                        
-                            <!-- Tags & View Details -->
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <span class="tag">IT</span>
-                                    <span class="tag">10 Position</span>
-                                </div>
-                                <a href="#" class="view-details">View Details <i class="bi bi-chevron-right"></i></a>
-                            </div>
-                        </div>
-                        
-                        
-                        
-                    </div>
-                    <div class="col-md-4">
-                        <div class="internship-card">
-                            <!-- Status Dropdown Button -->
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="status-dropdown-container" style="position:relative;">
-                                    <button class="status-container status-open" onclick="toggleStatusDropdownCard(event)">
-                                        <span>• Open</span>
-                                        <i class="bi bi-chevron-down"></i>
-                                    </button>
-                                    <!-- Status Dropdown Menu -->
-                                    <div class="dropdown-menu status-dropdown-menu" style="position:absolute;">
-                                        <div class="dropdown-item" onclick="changeStatus(event, 'Open')">Open</div>
-                                        <div class="dropdown-item" onclick="changeStatus(event, 'Close')">Close</div>
-                                        <div class="dropdown-item" onclick="changeStatus(event, 'Hold')">Hold</div>
-                                    </div>
-                                </div>    
-                                <i class="bi bi-three-dots-vertical menu-icon"></i>
-                            </div>
-                        
-                            <!-- Internship Title & Location -->
-                            <h2 class="internship-title">UX/UI Designer Trainee</h2>
-                            <p class="location"><i class="bi bi-geo-alt-fill"></i> 287 Si Lom Rd, Liberty Square Building</p>
-                        
-                            <!-- Stats Section -->
-                            <div class="stats-container">
-                                <div class="stats-box">
-                                    <p class="stats-number">42</p>
-                                    <p class="stats-text">Candidates applied</p>
-                                </div>
-                                <div class="stats-box">
-                                    <p class="stats-number">8</p>
-                                    <p class="stats-text">Candidate pending</p>
-                                </div>
-                            </div>
-                        
-                            <!-- Tags & View Details -->
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <span class="tag">IT</span>
-                                    <span class="tag">10 Position</span>
-                                </div>
-                                <a href="#" class="view-details">View Details <i class="bi bi-chevron-right"></i></a>
-                            </div>
-                        </div>
-                        
-                        
-                        
-                    </div>
-                </div>
-            </div>
-            <div id="pagination-container" class="d-flex justify-content-center mt-4">
-                <nav aria-label="Page navigation">
-                    <ul class="pagination">
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#" id="prev-page" aria-disabled="true">
-                                <span>&lsaquo; Previous</span>
-                            </a>
-                        </li>
-                        <li class="page-item active"><a class="page-link" href="#" data-page="1">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#" data-page="2">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#" data-page="3">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" id="next-page">
-                                <span>Next &rsaquo;</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-            
-            
         
+            <!-- Application Tab -->
+            <div class="tab-pane" id="application-content" style="display: none;">
+                <div id="application-container">
+                    <div class="header d-flex justify-content-between mt-3 mb-5" >
+                        <div><h2>Application</h2></div>
+                        <div class="d-flex gap-3" >
+                            <div class="search-container" style="width:350px; border:1px solid grey; border-radius:4px;">
+                                <i class="bi bi-search search-icon"></i>
+                                <input type="text" class="search-input" placeholder="Search for name of email here...">
+                            </div>
+                            <button class="btn btn-light" style="width:50px; border:1px solid grey;"><i class="bi bi-gear"></i></button>
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="kanban-board">
+                        <div class="column">
+                            <div class="badge-header status-pending d-flex justify-content-between mb-3">Pending <span class="badge">18</span></div>
+                             <!-- Thomas Shelby (Peaky Blinders) -->
+    <div class="card applicant-card">
+        <div class="card-body">
+            <div class="d-flex align-items-center">
+                <img src="https://i.pravatar.cc/40?img=1" alt="Profile" class="profile-icon">
+                <div>
+                    <h6 class="applicant-name">Thomas Shelby</h6>
+                    <p class="applicant-email">thomas.shelby@peaky.co.uk</p>
+                </div>
+            </div>
+            <hr>
+            <div class="file-list">
+                <div class="file-item">
+                    <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
+                    <span>Business_Plan.pdf</span>
+                </div>
+                <div class="file-item">
+                    <img src="https://cdn-icons-png.flaticon.com/512/732/732220.png" alt="Excel" class="file-icon">
+                    <span>Peaky_Investments.xlsx</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Arthur Shelby (Peaky Blinders) -->
+    <div class="card applicant-card">
+        <div class="card-body">
+            <div class="d-flex align-items-center">
+                <img src="https://i.pravatar.cc/40?img=2" alt="Profile" class="profile-icon">
+                <div>
+                    <h6 class="applicant-name">Arthur Shelby</h6>
+                    <p class="applicant-email">arthur.shelby@peaky.co.uk</p>
+                </div>
+            </div>
+            <hr>
+            <div class="file-list">
+                <div class="file-item">
+                    <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
+                    <span>Boxing_Training_Manual.pdf</span>
+                </div>
+                <div class="file-item">
+                    <img src="https://cdn-icons-png.flaticon.com/512/136/136524.png" alt="Word" class="file-icon">
+                    <span>Bar_Fight_Tips.docx</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Walter White (Breaking Bad) -->
+    <div class="card applicant-card">
+        <div class="card-body">
+            <div class="d-flex align-items-center">
+                <img src="https://i.pravatar.cc/40?img=3" alt="Profile" class="profile-icon">
+                <div>
+                    <h6 class="applicant-name">Walter White</h6>
+                    <p class="applicant-email">walter.white@breakingbad.com</p>
+                </div>
+            </div>
+            <hr>
+            <div class="file-list">
+                <div class="file-item">
+                    <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
+                    <span>Chemical_Formula.pdf</span>
+                </div>
+                <div class="file-item">
+                    <img src="https://cdn-icons-png.flaticon.com/512/732/732220.png" alt="Excel" class="file-icon">
+                    <span>Blue_Meth_Production.xlsx</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Jesse Pinkman (Breaking Bad) -->
+    <div class="card applicant-card">
+        <div class="card-body">
+            <div class="d-flex align-items-center">
+                <img src="https://i.pravatar.cc/40?img=4" alt="Profile" class="profile-icon">
+                <div>
+                    <h6 class="applicant-name">Jesse Pinkman</h6>
+                    <p class="applicant-email">jesse.pinkman@breakingbad.com</p>
+                </div>
+            </div>
+            <hr>
+            <div class="file-list">
+                <div class="file-item">
+                    <img src="https://cdn-icons-png.flaticon.com/512/136/136524.png" alt="Word" class="file-icon">
+                    <span>Yo_Manual.docx</span>
+                </div>
+                <div class="file-item">
+                    <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
+                    <span>Street_Rules.pdf</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Polly Gray (Peaky Blinders) -->
+    <div class="card applicant-card">
+        <div class="card-body">
+            <div class="d-flex align-items-center">
+                <img src="https://i.pravatar.cc/40?img=5" alt="Profile" class="profile-icon">
+                <div>
+                    <h6 class="applicant-name">Polly Gray</h6>
+                    <p class="applicant-email">polly.gray@peaky.co.uk</p>
+                </div>
+            </div>
+            <hr>
+            <div class="file-list">
+                <div class="file-item">
+                    <img src="https://cdn-icons-png.flaticon.com/512/136/136524.png" alt="Word" class="file-icon">
+                    <span>Finance_Tips.docx</span>
+                </div>
+                <div class="file-item">
+                    <img src="https://cdn-icons-png.flaticon.com/512/732/732220.png" alt="Excel" class="file-icon">
+                    <span>Peaky_Accounts.xlsx</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gustavo Fring (Breaking Bad) -->
+    <div class="card applicant-card">
+        <div class="card-body">
+            <div class="d-flex align-items-center">
+                <img src="https://i.pravatar.cc/40?img=6" alt="Profile" class="profile-icon">
+                <div>
+                    <h6 class="applicant-name">Gustavo Fring</h6>
+                    <p class="applicant-email">gus.fring@lospollos.com</p>
+                </div>
+            </div>
+            <hr>
+            <div class="file-list">
+                <div class="file-item">
+                    <img src="https://cdn-icons-png.flaticon.com/512/136/136524.png" alt="Word" class="file-icon">
+                    <span>Fast_Food_Business.docx</span>
+                </div>
+                <div class="file-item">
+                    <img src="https://cdn-icons-png.flaticon.com/512/732/732220.png" alt="Excel" class="file-icon">
+                    <span>Los_Pollos_Hermanos.xlsx</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                        </div>
+                        <div class="column">
+                            <div class="badge-header status-request d-flex justify-content-between mb-3">Request Internship Application <span class="badge">5</span></div>
+                            <div class="card">Captain Hook - Documents.pdf</div>
+                        </div>
+                        <div class="column">
+                            <div class="badge-header status-document d-flex justify-content-between mb-3">Request Internship Document <span class="badge">3</span></div>
+                            <div class="card">Hector Barbozza - Assistance.pdf</div>
+                        </div>
+                        <div class="column">
+                            <div class="badge-header status-acceptance d-flex justify-content-between mb-3">Acceptance Terms <span class="badge">1</span></div>
+                            <div class="card">Carina Smith - Agreement.pdf</div>
+                        </div>
+                        <div class="column">
+                            <div class="badge-header status-success d-flex justify-content-between mb-3">Success <span class="badge">2</span></div>
+                            <div class="card">Gordon Ramsay - Approved</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         
     </div>
+    
+    
+    
+    
+</div> 
 </div>
 
     <!-- Bootstrap JS -->
@@ -1673,6 +2299,8 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+
+
  function toggleSidebar() {
         document.getElementById("createProgramSidebar").classList.toggle("show");
     }
@@ -1707,6 +2335,32 @@ document.addEventListener("DOMContentLoaded", function () {
         function toggleDropdown() {
         document.getElementById("dropdown-menu").classList.toggle("show");
     }
+
+    document.addEventListener("DOMContentLoaded", function () {
+    const openSidebar = document.getElementById("open-create-program");
+    const closeSidebar = document.getElementById("close-create-program");
+    const sidebar = document.getElementById("create-program-sidebar");
+    const overlay = document.getElementById("overlay");
+
+    // Open Sidebar
+    openSidebar.addEventListener("click", function () {
+        sidebar.classList.add("show");
+        overlay.style.display = "block"; // Show overlay
+    });
+
+    // Close Sidebar
+    closeSidebar.addEventListener("click", function () {
+        sidebar.classList.remove("show");
+        overlay.style.display = "none"; // Hide overlay
+    });
+
+    // Close sidebar if user clicks on overlay
+    overlay.addEventListener("click", function () {
+        sidebar.classList.remove("show");
+        overlay.style.display = "none";
+    });
+});
+
 
     function selectCategory(category) {
         document.getElementById("selected-category").innerText = category;
@@ -1798,6 +2452,46 @@ document.addEventListener("click", function (event) {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
+    const viewDetailsButtons = document.querySelectorAll(".view-details");
+
+    viewDetailsButtons.forEach(button => {
+        button.addEventListener("click", function (event) {
+            event.preventDefault();
+
+            // Find the closest internship card
+            const card = this.closest(".internship-card");
+
+            if (!card) return; // Ensure card exists before proceeding
+
+            // Extract Data
+            const title = card.querySelector(".internship-title")?.innerText || "N/A";
+            const location = card.querySelector(".location")?.innerText || "N/A";
+            const category = card.querySelector(".tag")?.innerText || "N/A";
+            const positions = card.querySelectorAll(".tag")[1]?.innerText || "N/A";
+            const description = `This is a sample description for is is a sample description for is is a sample description for is is a sample description for is is a sample description for  ${title}`; // Placeholder text
+
+            // Update Details Page Content
+            document.getElementById("program-title").innerText = title;
+            document.getElementById("program-location").innerText = location;
+            document.getElementById("program-category").innerText = category;
+            document.getElementById("program-positions").innerText = positions;
+            document.getElementById("program-description").innerText = description;
+
+            // Hide Internship Cards and Show Full Dashboard Details
+            document.getElementById("area_of_details").style.display = "none";
+            document.getElementById("internship-details-page").style.display = "block";
+        });
+    });
+});
+
+
+function goBackToInternshipList() {
+    document.getElementById("internship-details-page").style.display = "none";
+    document.getElementById("area_of_details").style.display = "block";
+}
+
+
+document.addEventListener("DOMContentLoaded", function () {
     let currentPage = 1;
     const totalPages = document.querySelectorAll(".internship-page").length;
 
@@ -1834,6 +2528,64 @@ document.addEventListener("DOMContentLoaded", function () {
 
     showPage(currentPage);
 });
+document.addEventListener("DOMContentLoaded", function () {
+    const viewDetailsButtons = document.querySelectorAll(".view-details");
+    const descriptionTab = document.getElementById("description-tab");
+    const applicationTab = document.getElementById("application-tab");
+    const descriptionContent = document.getElementById("description-content");
+    const applicationContent = document.getElementById("application-content");
+
+    function showDescription() {
+        descriptionContent.style.display = "block";
+        applicationContent.style.display = "none";
+        descriptionTab.classList.add("active");
+        applicationTab.classList.remove("active");
+    }
+
+    function showApplication() {
+        applicationContent.style.display = "block";
+        descriptionContent.style.display = "none";
+        applicationTab.classList.add("active");
+        descriptionTab.classList.remove("active");
+    }
+
+    // Ensure Description tab is active when View Details is clicked
+    viewDetailsButtons.forEach(button => {
+        button.addEventListener("click", function (event) {
+            event.preventDefault();
+
+            // Find the closest internship card
+            const card = this.closest(".internship-card");
+            if (!card) return; 
+
+            // Extract Data
+            const title = card.querySelector(".internship-title")?.innerText || "N/A";
+            const location = card.querySelector(".location")?.innerText || "N/A";
+            const category = card.querySelector(".tag")?.innerText || "N/A";
+            const positions = card.querySelectorAll(".tag")[1]?.innerText || "N/A";
+            const description = `This is a sample description for ${title}`;
+
+            // Update Details Page Content
+            document.getElementById("program-title").innerText = title;
+            document.getElementById("program-location").innerText = location;
+            document.getElementById("program-category").innerText = category;
+            document.getElementById("program-positions").innerText = positions;
+            document.getElementById("program-description").innerText = description;
+
+            // Hide Internship Cards and Show Full Dashboard Details
+            document.getElementById("area_of_details").style.display = "none";
+            document.getElementById("internship-details-page").style.display = "block";
+
+            // Activate the "Description" tab and add underline
+            showDescription();
+        });
+    });
+
+    // Tab Click Events
+    descriptionTab.addEventListener("click", showDescription);
+    applicationTab.addEventListener("click", showApplication);
+});
+
 
 
 
