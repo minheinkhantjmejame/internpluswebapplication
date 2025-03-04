@@ -781,6 +781,11 @@
     color: black;
 }
 
+.scroll-container {
+    overflow-x: auto; /* Enables horizontal scrolling */
+    white-space: nowrap; /* Prevents columns from wrapping */
+    padding-bottom: 10px; /* Prevents content from being cut off */
+}
 
 .kanban-board {
     display: flex;
@@ -792,7 +797,8 @@
     background: #F3F5FC;
     border-radius: 8px;
     padding: 10px;
-    min-width: 200px;
+    min-width: 300px;
+    white-space: normal;
 }
 
 .card {
@@ -822,6 +828,24 @@
 .status-request .badge{
     background-color:#4EA6FF;
 }
+
+.status-fail{
+    padding:10px;
+    background-color:#FFB9B9;
+    border-radius:4px; 
+    
+}
+
+.status-fail .badge{
+    background-color:#980C0C;
+}
+
+.fail .card-body .badge{
+    color:#980C0C;
+    background-color:#FFB9B9;
+}
+
+
 
 .status-document{
     padding:10px;
@@ -853,6 +877,11 @@
 
 .status-success .badge{
     background-color:#4FD8A3;
+}
+
+.success .card-body .badge{
+    color:#359C22;
+    background-color:#b9efaf;
 }
 
 .applicant-card {
@@ -890,7 +919,7 @@
 .file-item {
     display: flex;
     align-items: center;
-    margin-top: 5px;
+    margin-top:10px;
 }
 
 .file-icon {
@@ -900,8 +929,194 @@
 }
 
 
+/* Edit description  */
+/* Layout Styles */
+.image-preview-container {
+    width: 100%;
+    text-align: center;
+}
+
+.image-preview {
+    width: 80%;
+    height: auto;
+    max-height: 180px;
+    border-radius: 6px;
+    border: 2px solid #474BC2;
+}
+
+.save-btn {
+    background-color: #474BC2;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    border: none;
+}
+
+.form-control {
+    font-size: 14px;
+    padding: 10px;
+}
 
 
+/* Edit description  */
+
+
+/* application settings  */
+/* Sidebar Panel */
+
+/* Overlay to dim the background when settings panel is open */
+.settings-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    z-index: 999; /* Below the settings panel */
+    display: none; /* Initially hidden */
+}
+
+/* Ensure the application settings panel is above the overlay */
+.application-settings-panel {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 450px; /* Adjust width to fit the contents */
+    height: 100vh;
+    background: white;
+    z-index: 1000; /* Above overlay */
+    box-shadow: -5px 0 10px rgba(0, 0, 0, 0.2);
+    display: none; /* Initially hidden */
+}
+
+/* 🔹 Application Settings Panel */
+.settings-panel {
+    position: fixed;
+    top: 0;
+    right: -450px; /* Initially hidden */
+    width: 450px; /* Keep consistent width */
+    height: 100vh;
+    background: white;
+    padding: 20px;
+    transition: right 0.3s ease-in-out;
+    z-index: 1000;
+    overflow-y: auto; /* Enable scrolling for small screens */
+    display: flex;
+    flex-direction: column; /* ✅ Makes footer push to the bottom */
+}
+
+
+    .settings-panel.show {
+        right: 0;
+    }
+
+    .settings-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .close-btn {
+        background: none;
+        border: none;
+        font-size: 18px;
+        cursor: pointer;
+    }
+
+    .settings-section {
+        margin-top: 15px;
+        padding: 10px;
+        border-radius: 4px;
+    }
+
+    .settings-section label {
+        font-size: 14px;
+        margin-top: 5px;
+    }
+
+    .settings-panel label {
+        font-size: 14px;
+        margin-top: 5px;
+    }
+
+    .settings-panel input,.settings-panel select{
+        border-radius:4px;
+        border:1px solid grey !important;
+        box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .settings-section .badge{
+        color:#000;
+    }
+
+
+
+    .settings-section input,
+    .settings-section select {
+        width: auto;
+        padding: 5px;
+        margin-top: 5px;
+
+    }
+
+    .pending { background: #FDE68A; }
+    .request { background: #BFDBFE; }
+    .document { background: #E9D5FF; }
+    .acceptance { background: #FECACA; }
+    .success { background: #BBF7D0; }
+
+    #application-settings-panel input {
+        border: 1px solid black;
+        width: 100px;
+    }
+
+    .settings-content {
+    flex-grow: 1; /* ✅ Makes content take up all available space */
+    padding-bottom: 20px; /* Prevents content from being cut off */
+}
+
+    .settings-footer {
+        display: flex;
+        justify-content: end;
+        margin-bottom:30px;
+        gap:20px;
+    }
+
+    .btn-default {
+        background: #D1D5DB;
+        padding: 8px 20px;
+        border: none;
+        cursor: pointer;
+    }
+
+    .btn-save {
+        background: #4F46E5;
+        color: white;
+        padding: 8px 20px;
+        border: none;
+        cursor: pointer;
+    }
+
+/* Scrollbar */
+.settings-panel::-webkit-scrollbar {
+    width: 4px;
+}
+
+.settings-panel::-webkit-scrollbar-thumb {
+    background: grey;
+}
+
+/* .settings-panel::-webkit-scrollbar-thumb {
+    background: ;
+    
+} */
+
+/* .settings-panel::-webkit-scrollbar-thumb:hover {
+    background: #555;
+} */
+/* application settings  */
         
 
         
@@ -914,6 +1129,7 @@
 
 </head>
 <body>
+    <div id="settings-overlay" class="settings-overlay" onclick="closeSettingsPanel()"></div>
     <div class="row mb-0">
         <div class="col-md-3" style="background-color:#F3F5FC;border-right:2px solid #fff;border-bottom:2px solid #fff;">
             <a class="navbar-brand fw-bold" href="#" style="font-size:40px; margin-left:20px;">INTERNPLUS</a>
@@ -1049,7 +1265,7 @@
 
             
             <div class="row mt-3">
-                <div class="col-md-6">
+                <div class="col-md-8">
                     <div class="container-fluid">
                         <div class="row align-items-center">
                             <!-- Search Box (6 columns) -->
@@ -1103,7 +1319,7 @@
                     
 
                 </div>
-                <div class="col-md-6 text-end" >
+                <div class="col-md-4 text-end" >
                     <button style="border:1px solid #000;background-color:#fff; padding:10px;"><img src="../assets/icon/filter.png" alt=""> General Setting</button>
                 </div>
             </div>
@@ -2038,9 +2254,9 @@
             <div class="tab-pane" id="description-content" style="display: block;">
                 <div style="padding:0; margin:0; margin-bottom:20px; display: flex; justify-content: space-between;">
                     <h4>Program Description</h4>
-                    <button style="background-color:#474BC2; color:white; padding:10px; border-radius:4px; border:none;">
+                    <button id="edit-btn" style="background-color:#474BC2; color:white; padding:10px; border-radius:4px; border:none;" onclick="toggleEditBox()">
                         <img src="../assets/icon/edit-alt.png" alt=""> Edit
-                    </button>
+                    </button>                    
                 </div>
                 <hr />
                 <div class="row" style="margin:0; padding:0;">
@@ -2065,6 +2281,56 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Editable Description Form (Hidden Initially) -->
+            <div id="edit-description-box" class="tab-pane" style="display: none;">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4>Edit Description</h4>
+                    <button class="btn btn-primary save-btn" onclick="saveDescription()">Save</button>
+                </div>
+                <hr />
+            
+                <div class="row">
+                    <!-- Left Column -->
+                    <div class="col-md-6">
+                        <!-- Description -->
+                        <label for="edit-description">Description:</label>
+                        <textarea id="edit-description" class="form-control" rows="4"></textarea>
+            
+                        <!-- Location -->
+                        <label for="edit-location" class="mt-3">Location:</label>
+                        <input type="text" id="edit-location" class="form-control" />
+            
+                        <!-- Category & Positions -->
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <label for="edit-category">Category:</label>
+                                <select id="edit-category" class="form-control">
+                                    <option>IT</option>
+                                    <option>Finance</option>
+                                    <option>Marketing</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="edit-positions">Number of open positions:</label>
+                                <input type="number" id="edit-positions" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+            
+                    <!-- Right Column -->
+                    <div class="col-md-6 d-flex flex-column align-items-center">
+                        <label for="edit-image" class="mb-2">Image:</label>
+                        <div class="image-preview-container">
+                            <img id="image-preview" src="../assets/img/Luffy _ Desktop Wallpaper.jpg" alt="Preview" class="image-preview">
+                        </div>
+                        <input type="file" id="edit-image" class="form-control mt-2" accept="image/*" onchange="previewImage(event)">
+                        <input type="text" id="image-filename" class="form-control mt-2" readonly>
+                    </div>
+                </div>
+            </div>
+            
+
         
             <!-- Application Tab -->
             <div class="tab-pane" id="application-content" style="display: none;">
@@ -2076,174 +2342,469 @@
                                 <i class="bi bi-search search-icon"></i>
                                 <input type="text" class="search-input" placeholder="Search for name of email here...">
                             </div>
-                            <button class="btn btn-light" style="width:50px; border:1px solid grey;"><i class="bi bi-gear"></i></button>
+                            <button class="btn btn-light gear" style="width:50px; border:1px solid grey;"><i class="bi bi-gear"></i></button>
+                        </div>      
+                    </div>
+                    <!-- Application Settings Panel (Hidden by Default) -->
+                    <div id="application-settings-panel" class="settings-panel">
+                        <div class="settings-header">
+                            <h2>Application Settings</h2>
+                            <button class="close-btn" onclick="closeSettingsPanel()">✖</button>
+                        </div>
+                    <div class="settings-content">
+                        <p>Set up due date & processing time</p>
+                    
+                        <div class="settings-section pending">
+                            <span class="badge">Pending</span>                              
+                        </div>
+                        <label style="font-size:14px;">Processing takes (days)</label><br>
+                        <input type="number" id="pending-processing" value="3">
+                    
+                        <div class="settings-section request">
+                            <span class="badge">Request Internship Application</span>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-7">
+                                <label style="font-size:14px;">Due date</label><br/>
+                                <input type="number" id="request-due" style="margin-right:20px;" value="2">
+                                <select id="request-duration" style="padding:0 15px;">
+                                    <option>days</option>
+                                    <option>weeks</option>
+                                </select>
+                            </div>
+                            <div class="col-md-5" style="margin-top:3px;">
+                                <label style="font-size:14px; display:inline;">Processing takes (days)</label><br/>
+                                <input type="number" id="request-processing" value="3">
+                            </div>
+                        </div>
+
+                    
+                        <div class="settings-section document">
+                            <span class="badge">Request Internship Document</span>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-7">
+                                <label style="font-size:14px;">Due date</label><br/>
+                                <input type="number" id="document-due" style="margin-right:20px;" value="2">
+                                <select id="document-duration" style="padding:0 15px;">
+                                    <option>days</option>
+                                    <option>weeks</option>
+                                </select>
+                            </div>
+                            <div class="col-md-5">
+                                <label style="font-size:14px;">Processing takes (days)</label><br/>
+                                <input type="number" id="document-processing" value="2">
+                            </div>
                         </div>
                         
+
+
+                    
+                        <div class="settings-section acceptance">
+                            <span class="badge">Acceptance Terms</span>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-7">
+                                <label style="font-size:14px;">Due date</label><br/>
+                                <input type="number" id="acceptance-due" style="margin-right:20px;"  value="2">
+                                <select id="acceptance-duration" style="padding:0 15px;">
+                                    <option>days</option>
+                                    <option>weeks</option>
+                                </select>
+                            </div>
+                            <div class="col-md-5">
+                                <label style="font-size:14px;">Processing takes (days)</label><br/>
+                                <input type="number" id="acceptance-processing" value="1">
+                            </div>
+                        </div>
+
+
+
+                    
+                        <div class="settings-section success">
+                            <span class="badge">Success</span>
+                        </div>
+                        <div>
+                            <label style="font-size:14px;">Delete within</label><br/>
+                            <input type="number" id="success-delete" style="margin-right:20px;"  value="7">
+                            <select id="success-duration" style="padding:0 15px;">
+                                <option>days</option>
+                                <option>weeks</option>
+                            </select>
+
+                        </div>
                     </div>
                     
-                    <div class="kanban-board">
-                        <div class="column">
-                            <div class="badge-header status-pending d-flex justify-content-between mb-3">Pending <span class="badge">18</span></div>
-                             <!-- Thomas Shelby (Peaky Blinders) -->
-    <div class="card applicant-card">
-        <div class="card-body">
-            <div class="d-flex align-items-center">
-                <img src="https://i.pravatar.cc/40?img=1" alt="Profile" class="profile-icon">
-                <div>
-                    <h6 class="applicant-name">Thomas Shelby</h6>
-                    <p class="applicant-email">thomas.shelby@peaky.co.uk</p>
-                </div>
-            </div>
-            <hr>
-            <div class="file-list">
-                <div class="file-item">
-                    <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
-                    <span>Business_Plan.pdf</span>
-                </div>
-                <div class="file-item">
-                    <img src="https://cdn-icons-png.flaticon.com/512/732/732220.png" alt="Excel" class="file-icon">
-                    <span>Peaky_Investments.xlsx</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Arthur Shelby (Peaky Blinders) -->
-    <div class="card applicant-card">
-        <div class="card-body">
-            <div class="d-flex align-items-center">
-                <img src="https://i.pravatar.cc/40?img=2" alt="Profile" class="profile-icon">
-                <div>
-                    <h6 class="applicant-name">Arthur Shelby</h6>
-                    <p class="applicant-email">arthur.shelby@peaky.co.uk</p>
-                </div>
-            </div>
-            <hr>
-            <div class="file-list">
-                <div class="file-item">
-                    <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
-                    <span>Boxing_Training_Manual.pdf</span>
-                </div>
-                <div class="file-item">
-                    <img src="https://cdn-icons-png.flaticon.com/512/136/136524.png" alt="Word" class="file-icon">
-                    <span>Bar_Fight_Tips.docx</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Walter White (Breaking Bad) -->
-    <div class="card applicant-card">
-        <div class="card-body">
-            <div class="d-flex align-items-center">
-                <img src="https://i.pravatar.cc/40?img=3" alt="Profile" class="profile-icon">
-                <div>
-                    <h6 class="applicant-name">Walter White</h6>
-                    <p class="applicant-email">walter.white@breakingbad.com</p>
-                </div>
-            </div>
-            <hr>
-            <div class="file-list">
-                <div class="file-item">
-                    <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
-                    <span>Chemical_Formula.pdf</span>
-                </div>
-                <div class="file-item">
-                    <img src="https://cdn-icons-png.flaticon.com/512/732/732220.png" alt="Excel" class="file-icon">
-                    <span>Blue_Meth_Production.xlsx</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Jesse Pinkman (Breaking Bad) -->
-    <div class="card applicant-card">
-        <div class="card-body">
-            <div class="d-flex align-items-center">
-                <img src="https://i.pravatar.cc/40?img=4" alt="Profile" class="profile-icon">
-                <div>
-                    <h6 class="applicant-name">Jesse Pinkman</h6>
-                    <p class="applicant-email">jesse.pinkman@breakingbad.com</p>
-                </div>
-            </div>
-            <hr>
-            <div class="file-list">
-                <div class="file-item">
-                    <img src="https://cdn-icons-png.flaticon.com/512/136/136524.png" alt="Word" class="file-icon">
-                    <span>Yo_Manual.docx</span>
-                </div>
-                <div class="file-item">
-                    <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
-                    <span>Street_Rules.pdf</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Polly Gray (Peaky Blinders) -->
-    <div class="card applicant-card">
-        <div class="card-body">
-            <div class="d-flex align-items-center">
-                <img src="https://i.pravatar.cc/40?img=5" alt="Profile" class="profile-icon">
-                <div>
-                    <h6 class="applicant-name">Polly Gray</h6>
-                    <p class="applicant-email">polly.gray@peaky.co.uk</p>
-                </div>
-            </div>
-            <hr>
-            <div class="file-list">
-                <div class="file-item">
-                    <img src="https://cdn-icons-png.flaticon.com/512/136/136524.png" alt="Word" class="file-icon">
-                    <span>Finance_Tips.docx</span>
-                </div>
-                <div class="file-item">
-                    <img src="https://cdn-icons-png.flaticon.com/512/732/732220.png" alt="Excel" class="file-icon">
-                    <span>Peaky_Accounts.xlsx</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Gustavo Fring (Breaking Bad) -->
-    <div class="card applicant-card">
-        <div class="card-body">
-            <div class="d-flex align-items-center">
-                <img src="https://i.pravatar.cc/40?img=6" alt="Profile" class="profile-icon">
-                <div>
-                    <h6 class="applicant-name">Gustavo Fring</h6>
-                    <p class="applicant-email">gus.fring@lospollos.com</p>
-                </div>
-            </div>
-            <hr>
-            <div class="file-list">
-                <div class="file-item">
-                    <img src="https://cdn-icons-png.flaticon.com/512/136/136524.png" alt="Word" class="file-icon">
-                    <span>Fast_Food_Business.docx</span>
-                </div>
-                <div class="file-item">
-                    <img src="https://cdn-icons-png.flaticon.com/512/732/732220.png" alt="Excel" class="file-icon">
-                    <span>Los_Pollos_Hermanos.xlsx</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
+                        <div class="settings-footer">
+                            <button class="btn-default" onclick="resetDefaults()">Defaults</button>
+                            <button class="btn-save" onclick="saveSettings()">Save</button>
                         </div>
-                        <div class="column">
-                            <div class="badge-header status-request d-flex justify-content-between mb-3">Request Internship Application <span class="badge">5</span></div>
-                            <div class="card">Captain Hook - Documents.pdf</div>
-                        </div>
-                        <div class="column">
-                            <div class="badge-header status-document d-flex justify-content-between mb-3">Request Internship Document <span class="badge">3</span></div>
-                            <div class="card">Hector Barbozza - Assistance.pdf</div>
-                        </div>
-                        <div class="column">
-                            <div class="badge-header status-acceptance d-flex justify-content-between mb-3">Acceptance Terms <span class="badge">1</span></div>
-                            <div class="card">Carina Smith - Agreement.pdf</div>
-                        </div>
-                        <div class="column">
-                            <div class="badge-header status-success d-flex justify-content-between mb-3">Success <span class="badge">2</span></div>
-                            <div class="card">Gordon Ramsay - Approved</div>
+                    </div>
+
+                    <div clas="scroll-container">
+                        <div class="kanban-board">
+                            <div class="column">
+                                <div class="badge-header status-pending d-flex justify-content-between mb-3">Pending <span class="badge">18</span></div>
+                                <!-- Thomas Shelby (Peaky Blinders) -->
+        <div class="card applicant-card">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <img src="https://i.pravatar.cc/40?img=1" alt="Profile" class="profile-icon">
+                    <div>
+                        <h6 class="applicant-name">Thomas Shelby</h6>
+                        <p class="applicant-email">thomas.shelby@peaky.co.uk</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="file-list">
+                    <div class="file-item">
+                        <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
+                        <span>Tom_Resume.pdf</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Arthur Shelby (Peaky Blinders) -->
+        <div class="card applicant-card">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <img src="https://i.pravatar.cc/40?img=2" alt="Profile" class="profile-icon">
+                    <div>
+                        <h6 class="applicant-name">Arthur Shelby</h6>
+                        <p class="applicant-email">arthur.shelby@peaky.co.uk</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="file-list">
+                    <div class="file-item">
+                        <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
+                        <span>Authur_Portfolio.pdf</span>
+                    </div>
+                    <div class="file-item">
+                        <img src="https://cdn-icons-png.flaticon.com/512/136/136524.png" alt="Word" class="file-icon">
+                        <span>Resume.docx</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Walter White (Breaking Bad) -->
+        <div class="card applicant-card">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <img src="https://i.pravatar.cc/40?img=3" alt="Profile" class="profile-icon">
+                    <div>
+                        <h6 class="applicant-name">Walter White</h6>
+                        <p class="applicant-email">walter.white@breakingbad.com</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="file-list">
+                    <div class="file-item">
+                        <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
+                        <span>Mrs_White_Resume.pdf</span>
+                    </div>
+                    <div class="file-item">
+                        <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
+                        <span>Portfolio.pdf</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Jesse Pinkman (Breaking Bad) -->
+        <div class="card applicant-card">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <img src="https://i.pravatar.cc/40?img=4" alt="Profile" class="profile-icon">
+                    <div>
+                        <h6 class="applicant-name">Jesse Pinkman</h6>
+                        <p class="applicant-email">jesse.pinkman@breakingbad.com</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="file-list">
+                    <div class="file-item">
+                        <img src="https://cdn-icons-png.flaticon.com/512/136/136524.png" alt="Word" class="file-icon">
+                        <span>My_Portfolio.docx</span>
+                    </div>
+                    <div class="file-item">
+                        <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
+                        <span>My_Resume.pdf</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Polly Gray (Peaky Blinders) -->
+        <div class="card applicant-card">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <img src="https://i.pravatar.cc/40?img=5" alt="Profile" class="profile-icon">
+                    <div>
+                        <h6 class="applicant-name">Polly Gray</h6>
+                        <p class="applicant-email">polly.gray@peaky.co.uk</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="file-list">
+                    <div class="file-item">
+                        <img src="https://cdn-icons-png.flaticon.com/512/136/136524.png" alt="Word" class="file-icon">
+                        <span>Portfolio.docx</span>
+                    </div>
+                    <div class="file-item">
+                        <img src="https://cdn-icons-png.flaticon.com/512/136/136524.png" alt="Word" class="file-icon">
+                        <span>Resume.docx</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gustavo Fring (Breaking Bad) -->
+        <div class="card applicant-card">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <img src="https://i.pravatar.cc/40?img=6" alt="Profile" class="profile-icon">
+                    <div>
+                        <h6 class="applicant-name">Gustavo Fring</h6>
+                        <p class="applicant-email">gus.fring@lospollos.com</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="file-list">
+                    <div class="file-item">
+                        <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
+                        <span>My_Resume.pdf</span>
+                    </div>
+                    <div class="file-item">
+                        <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
+                        <span>Portfolio.pdf</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+                            </div>
+                            <div class="column">
+                                <div class="badge-header status-request d-flex justify-content-between mb-3">Request Internship Application <span class="badge">5</span></div>
+                                <div class="card applicant-card">
+                                    <div class="card-body">
+                                        <!-- Profile Section -->
+                                        <div class="d-flex align-items-center">
+                                            <img src="https://i.pravatar.cc/40?img=6" alt="Profile" class="profile-icon">
+                                            <div>
+                                                <h6 class="applicant-name">Michel Jone</h6>
+                                                <p class="applicant-email">micheljone_03@gmail.com</p>
+                                            </div>
+                                        </div>
+                                
+                                        <!-- Horizontal Line -->
+                                        <hr>
+                                
+                                        <!-- File List -->
+                                        <div class="file-list">
+                                            <div class="file-item">
+                                                <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
+                                                <span>Test.pdf</span>
+                                            </div>
+                                            <div class="file-item">
+                                                <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
+                                                <span>Presentation.pdf</span>
+                                            </div>
+                                            <div class="file-item">
+                                                <img src="https://cdn-icons-png.flaticon.com/512/1365/1365499.png" alt="MP4" class="file-icon">
+                                                <span>VideoIntroduce.mp4</span>
+                                            </div>
+                                            <div class="file-item">
+                                                <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
+                                                <span>CopyOfIDCard.pdf</span>
+                                            </div>
+                                            <div class="file-item">
+                                                <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
+                                                <span>HouseRegis.pdf</span>
+                                            </div>
+                                            <div class="file-item">
+                                                <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
+                                                <span>Transcript.pdf</span>
+                                            </div>
+                                            <div class="file-item">
+                                                <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
+                                                <span>ResumeCH.pdf</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card applicant-card">
+                                    <div class="card-body">
+                                        <!-- Profile Section -->
+                                        <div class="d-flex align-items-center">
+                                            <img src="https://i.pravatar.cc/40?img=7" alt="Profile" class="profile-icon">
+                                            <div>
+                                                <h6 class="applicant-name">Gary David</h6>
+                                                <p class="applicant-email">gary.david@gamil.com</p>
+                                            </div>
+                                        </div>
+                                
+                                        <!-- Horizontal Line -->
+                                        <hr>
+                                
+                                        <!-- File List -->
+                                        <div class="file-list">
+                                            <div class="file-item">
+                                                <img src="https://cdn-icons-png.flaticon.com/512/737/737261.png" alt="ZIP" class="file-icon">
+                                                <span>Test.zip</span>
+                                            </div>
+                                            <div class="file-item">
+                                                <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
+                                                <span>Presentation.pdf</span>
+                                            </div>
+                                            <div class="file-item">
+                                                <img src="https://cdn-icons-png.flaticon.com/512/1365/1365499.png" alt="MP4" class="file-icon">
+                                                <span>VideoIntroduce.mp4</span>
+                                            </div>
+                                            <div class="file-item">
+                                                <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
+                                                <span>CopyOfIDCard.pdf</span>
+                                            </div>
+                                            <div class="file-item">
+                                                <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
+                                                <span>HouseRegis.pdf</span>
+                                            </div>
+                                            <div class="file-item">
+                                                <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
+                                                <span>Transcript.pdf</span>
+                                            </div>
+                                            <div class="file-item">
+                                                <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
+                                                <span>ResumeCH.pdf</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div class="column">
+                                <div class="badge-header status-document d-flex justify-content-between mb-3">Request Internship Document <span class="badge">3</span></div>
+                                <div class="card applicant-card">
+                                    <div class="card-body">
+                                        <!-- Profile Section -->
+                                        <div class="d-flex align-items-center">
+                                            <img src="https://i.pravatar.cc/40?img=21" alt="Profile" class="profile-icon">
+                                            <div>
+                                                <h6 class="applicant-name">Jacob Mercer</h6>
+                                                <p class="applicant-email">jacob.mercer92@email.com</p>
+                                            </div>
+                                        </div>
+                                
+                                        <!-- Horizontal Line -->
+                                        <hr>
+                                
+                                        <!-- File List -->
+                                        <div class="file-list">
+                                            <div class="file-item">
+                                                <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
+                                                <span>assistance.pdf</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                    <div class="card applicant-card">
+                                        <div class="card-body">
+                                            <!-- Profile Section -->
+                                            <div class="d-flex align-items-center">
+                                                <img src="https://i.pravatar.cc/40?img=22" alt="Profile" class="profile-icon">
+                                                <div>
+                                                    <h6 class="applicant-name">Olivia Carter</h6>
+                                                    <p class="applicant-email">olivia.carter88@email.com</p>
+                                                </div>
+                                            </div>
+                                    
+                                            <!-- Horizontal Line -->
+                                            <hr>
+                                    
+                                            <!-- File List -->
+                                            <div class="file-list">
+                                                <div class="file-item">
+                                                    <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
+                                                    <span>assistance.pdf</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card applicant-card">
+                                        <div class="card-body">
+                                            <!-- Profile Section -->
+                                            <div class="d-flex align-items-center">
+                                                <img src="https://i.pravatar.cc/40?img=23" alt="Profile" class="profile-icon">
+                                                <div>
+                                                    <h6 class="applicant-name">Ethan Reynolds</h6>
+                                                    <p class="applicant-email">ethan.reynolds72@email.com</p>
+                                                </div>
+                                            </div>
+                                    
+                                            <!-- Horizontal Line -->
+                                            <hr>
+                                    
+                                            <!-- File List -->
+                                            <div class="file-list">
+                                                <div class="file-item">
+                                                    <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
+                                                    <span>assistance.pdf</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                            <div class="column">
+                                <div class="badge-header status-acceptance d-flex justify-content-between mb-3">Acceptance Terms <span class="badge">1</span></div>
+                                <div class="card applicant-card">
+                                    <div class="d-flex align-items-center">
+                                        <img src="https://i.pravatar.cc/40?img=15" alt="Profile" class="profile-icon">
+                                        <div>
+                                            <h6 class="applicant-name">Noah Bennett</h6>
+                                            <p class="applicant-email">noah.bennett45@email.com</p>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="column fail">
+                                <div class="badge-header status-fail d-flex justify-content-between mb-3">Fail <span class="badge">1</span></div>
+                                <div class="card applicant-card">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center">
+                                            <img src="https://i.pravatar.cc/40?img=23" alt="Profile" class="profile-icon">
+                                            <div>
+                                                <h6 class="applicant-name">Johson Rain</h6>
+                                                <p class="applicant-email">johson.rain@email.com</p>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div  style=" display:flex;justify-content: end;"><span class="badge">Fail</span></div>
+                                        
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="column success">
+                                <div class="badge-header status-success d-flex justify-content-between mb-3">Success <span class="badge">1</span></div>
+                                <div class="card applicant-card">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center">
+                                            <img src="https://i.pravatar.cc/40?img=23" alt="Profile" class="profile-icon">
+                                            <div>
+                                                <h6 class="applicant-name">Liam Patterson</h6>
+                                                <p class="applicant-email">liam.patterson@email.com</p>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div  style=" display:flex;justify-content: end;"><span class="badge">Success</span></div>
+                                    </div>
+                                </div> 
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -2534,20 +3095,27 @@ document.addEventListener("DOMContentLoaded", function () {
     const applicationTab = document.getElementById("application-tab");
     const descriptionContent = document.getElementById("description-content");
     const applicationContent = document.getElementById("application-content");
+    const editDescriptionBox = document.getElementById("edit-description-box");
+    const editButton = document.getElementById("edit-btn");
 
     function showDescription() {
         descriptionContent.style.display = "block";
         applicationContent.style.display = "none";
+        editDescriptionBox.style.display = "none"; // Ensure edit box is hidden
         descriptionTab.classList.add("active");
         applicationTab.classList.remove("active");
+        editButton.innerText = "Edit"; // Reset button text
     }
 
     function showApplication() {
         applicationContent.style.display = "block";
         descriptionContent.style.display = "none";
+        editDescriptionBox.style.display = "none"; // 🔥 Ensure edit box is hidden
         applicationTab.classList.add("active");
         descriptionTab.classList.remove("active");
+        editButton.innerText = "Edit"; // Reset button text
     }
+
 
     // Ensure Description tab is active when View Details is clicked
     viewDetailsButtons.forEach(button => {
@@ -2585,6 +3153,116 @@ document.addEventListener("DOMContentLoaded", function () {
     descriptionTab.addEventListener("click", showDescription);
     applicationTab.addEventListener("click", showApplication);
 });
+
+
+function toggleEditBox() {
+    let editBox = document.getElementById("edit-description-box");
+    let descriptionContent = document.getElementById("description-content");
+    let editBtn = document.getElementById("edit-btn");
+
+    // Ensure edit box only works in the description tab
+    if (document.getElementById("description-tab").classList.contains("active")) {
+        if (editBox.style.display === "none" || editBox.style.display === "") {
+            editBox.style.display = "block";
+            descriptionContent.style.display = "none";
+            editBtn.innerText = "Cancel";
+        } else {
+            editBox.style.display = "none";
+            descriptionContent.style.display = "block";
+            editBtn.innerText = "Edit";
+        }
+    }
+}
+
+
+
+function previewImage(event) {
+    let reader = new FileReader();
+    reader.onload = function () {
+        let output = document.getElementById("image-preview");
+        output.src = reader.result;
+    };
+    reader.readAsDataURL(event.target.files[0]);
+}
+
+function saveDescription() {
+    // Get updated values
+    let newDescription = document.getElementById("edit-description").value;
+    let newLocation = document.getElementById("edit-location").value;
+    let newCategory = document.getElementById("edit-category").value;
+    let newPositions = document.getElementById("edit-positions").value;
+    let newImage = document.getElementById("edit-image").files[0];
+
+    // Update the display text
+    document.getElementById("program-description").innerText = newDescription;
+    document.getElementById("program-location").innerText = newLocation;
+    document.getElementById("program-category").innerText = newCategory;
+    document.getElementById("program-positions").innerText = newPositions;
+
+    // If a new image is selected, update it
+    if (newImage) {
+        let reader = new FileReader();
+        reader.onload = function (e) {
+            document.querySelector("#description-content img").src = e.target.result;
+        };
+        reader.readAsDataURL(newImage);
+    }
+
+    // Hide edit box & show description
+    document.getElementById("edit-description-box").style.display = "none";
+    document.getElementById("description-content").style.display = "block";
+
+    // Reset edit button text
+    document.getElementById("edit-btn").innerText = "Edit";
+}
+
+// Open Settings Panel
+function openSettingsPanel() {
+    document.getElementById("application-settings-panel").classList.add("show");
+    document.getElementById("settings-overlay").style.display = "block";
+}
+
+// Close Settings Panel
+function closeSettingsPanel() {
+    document.getElementById("application-settings-panel").classList.remove("show");
+    document.getElementById("settings-overlay").style.display = "none"; // Hide new overlay
+}
+
+// Reset to Default Values
+function resetDefaults() {
+    document.getElementById("pending-processing").value = 3;
+    document.getElementById("request-due").value = 2;
+    document.getElementById("request-processing").value = 3;
+    document.getElementById("document-due").value = 2;
+    document.getElementById("document-processing").value = 2;
+    document.getElementById("acceptance-due").value = 2;
+    document.getElementById("acceptance-processing").value = 1;
+    document.getElementById("success-delete").value = 7;
+}
+
+// Save Settings (You can extend this to save to localStorage or an API)
+function saveSettings() {
+    let settings = {
+        pendingProcessing: document.getElementById("pending-processing").value,
+        requestDue: document.getElementById("request-due").value,
+        requestProcessing: document.getElementById("request-processing").value,
+        documentDue: document.getElementById("document-due").value,
+        documentProcessing: document.getElementById("document-processing").value,
+        acceptanceDue: document.getElementById("acceptance-due").value,
+        acceptanceProcessing: document.getElementById("acceptance-processing").value,
+        successDelete: document.getElementById("success-delete").value,
+    };
+
+    console.log("Settings Saved:", settings);
+    closeSettingsPanel();
+}
+
+// Attach event to gear button
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelector(".gear").addEventListener("click", openSettingsPanel);
+});
+
+
 
 
 
