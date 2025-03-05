@@ -51,6 +51,11 @@
         .dashboard-content {
             padding: 20px;
         }
+
+        .badge-box{
+            background-color:#B1BBE7;
+            border-radius:4px;
+        }
         
         
     </style>
@@ -130,6 +135,156 @@
 
 
     <div class="col-md-9 dashboard-content">
+        <div class="container-fluid">
+            <div class="d-flex justify-content-between mb-3">
+                <h2 class="mb-0">Candidates</h2>
+            
+                <!-- Summary Badges -->
+                <div class="d-flex gap-3">
+                    <div class="badge-box p-3  text-start d-flex flex-column justify-content-center" style="width: 120px; height: 80px;">
+                        <p class="mb-1">Succeeded</p>
+                        <h4 class="mb-0">24</h4>
+                    </div>
+                    <div class="badge-box p-3  text-start d-flex flex-column justify-content-center" style="width: 120px; height: 80px;">
+                        <p class="mb-1">In-progress</p>
+                        <h4 class="mb-0">53</h4>
+                    </div>
+                    <div class="badge-box p-3  text-start d-flex flex-column justify-content-center" style="width: 120px; height: 80px;">
+                        <p class="mb-1">Failed</p>
+                        <h4 class="mb-0">76</h4>
+                    </div>
+                </div>
+                
+            </div>
+            
+            
+            <!-- Search & Filters Row -->
+            <div class="d-flex align-items-center gap-3 mb-3">
+                <div class="input-group" style="width: 300px;">
+                    <span class="input-group-text bg-white"><i class="bi bi-search"></i></span>
+                    <input type="text" class="form-control border-start-0" placeholder="Search for candidates">
+                </div>
+                
+                <div class="dropdown">
+                    <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        <i class="bi bi-chat-dots"></i> All Program
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item active" href="#">All</a></li>
+                        <li><a class="dropdown-item" href="#">HR Trainee</a></li>
+                        <li><a class="dropdown-item" href="#">Software Tester</a></li>
+                        <li><a class="dropdown-item" href="#">Marketing Trainee</a></li>
+                        <!-- Add other options here -->
+                    </ul>
+                </div>
+        
+                <div class="dropdown">
+                    <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        <i class="bi bi-circle-half"></i> All Step
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item active" href="#">All</a></li>
+                        <li><a class="dropdown-item" href="#">Pending</a></li>
+                        <li><a class="dropdown-item" href="#">Request Internship Application</a></li>
+                        <li><a class="dropdown-item" href="#">Success</a></li>
+                        <!-- Add other options here -->
+                    </ul>
+                </div>
+        
+                <button class="btn btn-light ms-auto">
+                    <i class="bi bi-sliders"></i> General Setting
+                </button>
+            </div>
+            
+
+            
+            <!-- Candidates Table -->
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Internship ID</th>
+                            <th>First name</th>
+                            <th>Last name</th>
+                            <th>Email address</th>
+                            <th>Phone number</th>
+                            <th>Internship Period</th>
+                            <th>Type</th>
+                            <th>Program</th>
+                            <th>Step</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>112987600</td>
+                            <td>Peter</td>
+                            <td>Pan</td>
+                            <td>pppan2000@gmail.com</td>
+                            <td>0874452710</td>
+                            <td>2 Dec 2024 - 30 Mar 2025</td>
+                            <td>Work From Home</td>
+                            <td>Software Tester</td>
+                            <td><span class="badge bg-warning text-dark">Pending</span></td>
+                        </tr>
+                        <tr>
+                            <td>161287621</td>
+                            <td>Ron</td>
+                            <td>Wisley</td>
+                            <td>badron@gmail.com</td>
+                            <td>0819452713</td>
+                            <td>20 Jan 2025 - 30 May 2025</td>
+                            <td>Hybrid</td>
+                            <td>HR Trainee</td>
+                            <td><span class="badge bg-danger">Fail</span></td>
+                        </tr>
+                        <tr>
+                            <td>112987200</td>
+                            <td>Tom</td>
+                            <td>Holland</td>
+                            <td>spidertom@gmail.com</td>
+                            <td>0867912710</td>
+                            <td>20 Jan 2025 - 1 Jun 2025</td>
+                            <td>Hybrid</td>
+                            <td>HR Trainee</td>
+                            <td><span class="badge bg-warning text-dark">Pending</span></td>
+                        </tr>
+                        <tr>
+                            <td>112987600</td>
+                            <td>Sabrina</td>
+                            <td>Carpenter</td>
+                            <td>shortsweet@gmail.com</td>
+                            <td>0823627119</td>
+                            <td>1 Dec 2024 - 25 Mar 2025</td>
+                            <td>Work From Home</td>
+                            <td>UX/UI Designer</td>
+                            <td><span class="badge bg-primary">Request Internship Application</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Pagination -->
+            <div class="d-flex justify-content-between align-items-center mt-3">
+                <div>
+                    <label>Candidates per page</label>
+                    <select class="form-select d-inline-block w-auto">
+                        <option>8</option>
+                        <option>16</option>
+                        <option>32</option>
+                    </select>
+                </div>
+                <nav>
+                    <ul class="pagination mb-0">
+                        <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item disabled"><span class="page-link">...</span></li>
+                        <li class="page-item"><a class="page-link" href="#">20</a></li>
+                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
         
     </div>
 </div>
