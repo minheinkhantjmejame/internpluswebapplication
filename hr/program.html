@@ -781,11 +781,43 @@
     color: black;
 }
 
+
 .scroll-container {
     overflow-x: auto; /* Enables horizontal scrolling */
-    white-space: nowrap; /* Prevents columns from wrapping */
-    padding-bottom: 10px; /* Prevents content from being cut off */
+    overflow-y: auto; /* Enables vertical scrolling */
+    white-space: nowrap; /* Prevents wrapping */
+    max-height: calc(100vh - 50px); /* Adjusts height to fit within viewport */
+    position: relative;
+    padding-bottom: 20px; /* Prevents content from covering the scrollbar */
 }
+
+/* ✅ Fixed Scrollbar Area */
+.fixed-scrollbar {
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    background: white;
+    z-index: 10; /* Ensures scrollbar is above content */
+    height: 20px; /* Space for scrollbar */
+}
+
+/* ✅ Always Show Scrollbar */
+.scroll-container::-webkit-scrollbar {
+    height: 10px; /* Makes scrollbar noticeable */
+    background-color: #f1f1f1;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 5px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+}
+
+
+
 
 .kanban-board {
     display: flex;
@@ -808,6 +840,8 @@
     margin-top: 5px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
+
+
 
 .status-pending{
     padding:10px;
@@ -931,17 +965,73 @@
 
 /* Edit description  */
 /* Layout Styles */
-.image-preview-container {
+
+#edit-description-box label{
+    font-size:14px;
+
+}
+
+#edit-description-box textarea,#edit-description-box input,#edit-description-box .image-preview-container{
+    border:1px solid grey;
+    border-radius:4px;
+    color:grey;
+}
+.image-preview {
     width: 100%;
-    text-align: center;
+    height:100%;
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+/* 🔹 Label */
+.image-upload-label {
+    font-size: 14px;
+    margin-top: 10px;
+    color: #666;
+    text-align:start;
+    align-self: self-start;
+}
+
+/* 🔹 Custom Input Box */
+.image-input-container {
+    display: flex;
+    align-items: center;
+    border-radius: 4px;
+    overflow: hidden;
+    width: 100%;
+    height: 40px;
+    background-color: #f8f9fc;
+    cursor: pointer;
+}
+
+/* 🔹 Icon Side */
+.image-icon {
+    background-color: #4c47fe;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-icon i {
+    font-size: 20px;
+    color: white;
+}
+
+/* 🔹 Input Box for File Name */
+.image-filename {
+    border: none;
+    flex-grow: 1;
+    padding: 10px;
+    outline: none;
+    font-size: 14px;
+    background: transparent;
 }
 
 .image-preview {
-    width: 80%;
+    width: 100%;
     height: auto;
-    max-height: 180px;
-    border-radius: 6px;
-    border: 2px solid #474BC2;
+    border-radius: 4px;
 }
 
 .save-btn {
@@ -1099,6 +1189,14 @@
         cursor: pointer;
     }
 
+    #applicant-status {
+    color: black !important; /* Ensures the text color is black */
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+
 /* Scrollbar */
 .settings-panel::-webkit-scrollbar {
     width: 4px;
@@ -1180,18 +1278,18 @@
             
             <p class="text-muted mt-3">RECRUITMENT</p>
             <a class="nav-link text-dark" href="./program.html"><img src="../assets/icon/suitcase.png" alt=""> Program</a>
-            <a class="nav-link text-dark" href="#candidates"><img src="../assets/icon/users.png" alt=""> Candidates</a>
-            <a class="nav-link text-dark" href="#test_forms"><img src="../assets/icon/book-library.png" alt=""> Test & Forms</a>
+            <a class="nav-link text-dark" href="./candidates.html"><img src="../assets/icon/users.png" alt=""> Candidates</a>
+            <a class="nav-link text-dark" href="./test_forms.html"><img src="../assets/icon/book-library.png" alt=""> Test & Forms</a>
             
             <p class="text-muted mt-3">ORGANIZED</p>
-            <a class="nav-link text-dark" href="#intern"><img src="../assets/icon/user.png" alt=""> Interns</a>
-            <a class="nav-link text-dark" href="#time_attendance"> <img src="../assets/icon/clock.png" alt=""> Time Attendance</a>
-            <a class="nav-link text-dark" href="#assignment_sheet"> <img src="../assets/icon/paste.png" alt=""> Assignment Sheet</a>
-            <a class="nav-link text-dark" href="#report"> <img src="../assets/icon/document.png" alt="">Report</a>
+            <a class="nav-link text-dark" href="./interns.html"><img src="../assets/icon/user.png" alt=""> Interns</a>
+            <a class="nav-link text-dark" href="./time_attendance.html"> <img src="../assets/icon/clock.png" alt=""> Time Attendance</a>
+            <a class="nav-link text-dark" href="./assignment_sheet.html"> <img src="../assets/icon/paste.png" alt=""> Assignment Sheet</a>
+            <a class="nav-link text-dark" href="./report.html"> <img src="../assets/icon/document.png" alt="">Report</a>
 
             <p class="text-muted mt-3">RESIGNATION</p>
-            <a class="nav-link text-dark" href="#offboard"><img src="../assets/icon/box.png" alt=""> Offboard</a>
-            <a class="nav-link text-dark" href="#payroll"><img src="../assets/icon/wallet.png" alt="">Payroll</a>
+            <a class="nav-link text-dark" href="./offboard.html"><img src="../assets/icon/box.png" alt=""> Offboard</a>
+            <a class="nav-link text-dark" href="./payroll.html"><img src="../assets/icon/wallet.png" alt="">Payroll</a>
         </nav>
     </div>
 
@@ -2305,7 +2403,7 @@
                         <div class="row mt-3">
                             <div class="col-md-6">
                                 <label for="edit-category">Category:</label>
-                                <select id="edit-category" class="form-control">
+                                <select id="edit-category" class="form-control" style="border:1px solid grey;">
                                     <option>IT</option>
                                     <option>Finance</option>
                                     <option>Marketing</option>
@@ -2319,14 +2417,27 @@
                     </div>
             
                     <!-- Right Column -->
-                    <div class="col-md-6 d-flex flex-column align-items-center">
-                        <label for="edit-image" class="mb-2">Image:</label>
+                    <div class="col-md-6 d-flex flex-column align-items-center mt-2">
+                        <!-- Image Preview Box -->
                         <div class="image-preview-container">
                             <img id="image-preview" src="../assets/img/Luffy _ Desktop Wallpaper.jpg" alt="Preview" class="image-preview">
                         </div>
-                        <input type="file" id="edit-image" class="form-control mt-2" accept="image/*" onchange="previewImage(event)">
-                        <input type="text" id="image-filename" class="form-control mt-2" readonly>
+                    
+                        <!-- Label -->
+                        <label for="edit-image" class="image-upload-label">Image</label>
+                    
+                        <!-- File Upload Input (Hidden) -->
+                        <input type="file" id="edit-image" class="image-input" accept="image/*" onchange="previewImage(event)" hidden>
+                    
+                        <!-- Custom File Upload Box -->
+                        <div class="image-input-container" onclick="document.getElementById('edit-image').click();">
+                            <div class="image-icon">
+                                <i class="bi bi-image"></i>
+                            </div>
+                            <input type="text" id="image-filename" style="border:none;" class="image-filename" placeholder="" readonly>
+                        </div>
                     </div>
+                    
                 </div>
             </div>
             
@@ -2335,12 +2446,13 @@
             <!-- Application Tab -->
             <div class="tab-pane" id="application-content" style="display: none;">
                 <div id="application-container">
+                    <div id="applicant-list">
                     <div class="header d-flex justify-content-between mt-3 mb-5" >
                         <div><h2>Application</h2></div>
                         <div class="d-flex gap-3" >
                             <div class="search-container" style="width:350px; border:1px solid grey; border-radius:4px;">
                                 <i class="bi bi-search search-icon"></i>
-                                <input type="text" class="search-input" placeholder="Search for name of email here...">
+                                <input type="text" id="search-input" class="search-input" placeholder="Search for name or email here...">
                             </div>
                             <button class="btn btn-light gear" style="width:50px; border:1px solid grey;"><i class="bi bi-gear"></i></button>
                         </div>      
@@ -2442,373 +2554,467 @@
                             <button class="btn-save" onclick="saveSettings()">Save</button>
                         </div>
                     </div>
-
-                    <div clas="scroll-container">
-                        <div class="kanban-board">
-                            <div class="column">
-                                <div class="badge-header status-pending d-flex justify-content-between mb-3">Pending <span class="badge">18</span></div>
-                                <!-- Thomas Shelby (Peaky Blinders) -->
-        <div class="card applicant-card">
-            <div class="card-body">
-                <div class="d-flex align-items-center">
-                    <img src="https://i.pravatar.cc/40?img=1" alt="Profile" class="profile-icon">
-                    <div>
-                        <h6 class="applicant-name">Thomas Shelby</h6>
-                        <p class="applicant-email">thomas.shelby@peaky.co.uk</p>
+                    <div class="scroll-wrapper">
+                        <div clas="scroll-container">
+                            <div class="kanban-board">
+                                <div class="column">
+                                    <div class="badge-header status-pending d-flex justify-content-between mb-3">Pending <span class="badge">18</span></div>
+                                    <!-- Thomas Shelby (Peaky Blinders) -->
+            <div class="card applicant-card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <img src="https://i.pravatar.cc/40?img=1" alt="Profile" class="profile-icon">
+                        <div>
+                            <h6 class="applicant-name">Thomas Shelby</h6>
+                            <p class="applicant-email">thomas.shelby@peaky.co.uk</p>
+                        </div>
                     </div>
-                </div>
-                <hr>
-                <div class="file-list">
-                    <div class="file-item">
-                        <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
-                        <span>Tom_Resume.pdf</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Arthur Shelby (Peaky Blinders) -->
-        <div class="card applicant-card">
-            <div class="card-body">
-                <div class="d-flex align-items-center">
-                    <img src="https://i.pravatar.cc/40?img=2" alt="Profile" class="profile-icon">
-                    <div>
-                        <h6 class="applicant-name">Arthur Shelby</h6>
-                        <p class="applicant-email">arthur.shelby@peaky.co.uk</p>
-                    </div>
-                </div>
-                <hr>
-                <div class="file-list">
-                    <div class="file-item">
-                        <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
-                        <span>Authur_Portfolio.pdf</span>
-                    </div>
-                    <div class="file-item">
-                        <img src="https://cdn-icons-png.flaticon.com/512/136/136524.png" alt="Word" class="file-icon">
-                        <span>Resume.docx</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Walter White (Breaking Bad) -->
-        <div class="card applicant-card">
-            <div class="card-body">
-                <div class="d-flex align-items-center">
-                    <img src="https://i.pravatar.cc/40?img=3" alt="Profile" class="profile-icon">
-                    <div>
-                        <h6 class="applicant-name">Walter White</h6>
-                        <p class="applicant-email">walter.white@breakingbad.com</p>
-                    </div>
-                </div>
-                <hr>
-                <div class="file-list">
-                    <div class="file-item">
-                        <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
-                        <span>Mrs_White_Resume.pdf</span>
-                    </div>
-                    <div class="file-item">
-                        <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
-                        <span>Portfolio.pdf</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Jesse Pinkman (Breaking Bad) -->
-        <div class="card applicant-card">
-            <div class="card-body">
-                <div class="d-flex align-items-center">
-                    <img src="https://i.pravatar.cc/40?img=4" alt="Profile" class="profile-icon">
-                    <div>
-                        <h6 class="applicant-name">Jesse Pinkman</h6>
-                        <p class="applicant-email">jesse.pinkman@breakingbad.com</p>
-                    </div>
-                </div>
-                <hr>
-                <div class="file-list">
-                    <div class="file-item">
-                        <img src="https://cdn-icons-png.flaticon.com/512/136/136524.png" alt="Word" class="file-icon">
-                        <span>My_Portfolio.docx</span>
-                    </div>
-                    <div class="file-item">
-                        <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
-                        <span>My_Resume.pdf</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Polly Gray (Peaky Blinders) -->
-        <div class="card applicant-card">
-            <div class="card-body">
-                <div class="d-flex align-items-center">
-                    <img src="https://i.pravatar.cc/40?img=5" alt="Profile" class="profile-icon">
-                    <div>
-                        <h6 class="applicant-name">Polly Gray</h6>
-                        <p class="applicant-email">polly.gray@peaky.co.uk</p>
-                    </div>
-                </div>
-                <hr>
-                <div class="file-list">
-                    <div class="file-item">
-                        <img src="https://cdn-icons-png.flaticon.com/512/136/136524.png" alt="Word" class="file-icon">
-                        <span>Portfolio.docx</span>
-                    </div>
-                    <div class="file-item">
-                        <img src="https://cdn-icons-png.flaticon.com/512/136/136524.png" alt="Word" class="file-icon">
-                        <span>Resume.docx</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Gustavo Fring (Breaking Bad) -->
-        <div class="card applicant-card">
-            <div class="card-body">
-                <div class="d-flex align-items-center">
-                    <img src="https://i.pravatar.cc/40?img=6" alt="Profile" class="profile-icon">
-                    <div>
-                        <h6 class="applicant-name">Gustavo Fring</h6>
-                        <p class="applicant-email">gus.fring@lospollos.com</p>
-                    </div>
-                </div>
-                <hr>
-                <div class="file-list">
-                    <div class="file-item">
-                        <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
-                        <span>My_Resume.pdf</span>
-                    </div>
-                    <div class="file-item">
-                        <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
-                        <span>Portfolio.pdf</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-                            </div>
-                            <div class="column">
-                                <div class="badge-header status-request d-flex justify-content-between mb-3">Request Internship Application <span class="badge">5</span></div>
-                                <div class="card applicant-card">
-                                    <div class="card-body">
-                                        <!-- Profile Section -->
-                                        <div class="d-flex align-items-center">
-                                            <img src="https://i.pravatar.cc/40?img=6" alt="Profile" class="profile-icon">
-                                            <div>
-                                                <h6 class="applicant-name">Michel Jone</h6>
-                                                <p class="applicant-email">micheljone_03@gmail.com</p>
-                                            </div>
-                                        </div>
-                                
-                                        <!-- Horizontal Line -->
-                                        <hr>
-                                
-                                        <!-- File List -->
-                                        <div class="file-list">
-                                            <div class="file-item">
-                                                <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
-                                                <span>Test.pdf</span>
-                                            </div>
-                                            <div class="file-item">
-                                                <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
-                                                <span>Presentation.pdf</span>
-                                            </div>
-                                            <div class="file-item">
-                                                <img src="https://cdn-icons-png.flaticon.com/512/1365/1365499.png" alt="MP4" class="file-icon">
-                                                <span>VideoIntroduce.mp4</span>
-                                            </div>
-                                            <div class="file-item">
-                                                <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
-                                                <span>CopyOfIDCard.pdf</span>
-                                            </div>
-                                            <div class="file-item">
-                                                <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
-                                                <span>HouseRegis.pdf</span>
-                                            </div>
-                                            <div class="file-item">
-                                                <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
-                                                <span>Transcript.pdf</span>
-                                            </div>
-                                            <div class="file-item">
-                                                <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
-                                                <span>ResumeCH.pdf</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card applicant-card">
-                                    <div class="card-body">
-                                        <!-- Profile Section -->
-                                        <div class="d-flex align-items-center">
-                                            <img src="https://i.pravatar.cc/40?img=7" alt="Profile" class="profile-icon">
-                                            <div>
-                                                <h6 class="applicant-name">Gary David</h6>
-                                                <p class="applicant-email">gary.david@gamil.com</p>
-                                            </div>
-                                        </div>
-                                
-                                        <!-- Horizontal Line -->
-                                        <hr>
-                                
-                                        <!-- File List -->
-                                        <div class="file-list">
-                                            <div class="file-item">
-                                                <img src="https://cdn-icons-png.flaticon.com/512/737/737261.png" alt="ZIP" class="file-icon">
-                                                <span>Test.zip</span>
-                                            </div>
-                                            <div class="file-item">
-                                                <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
-                                                <span>Presentation.pdf</span>
-                                            </div>
-                                            <div class="file-item">
-                                                <img src="https://cdn-icons-png.flaticon.com/512/1365/1365499.png" alt="MP4" class="file-icon">
-                                                <span>VideoIntroduce.mp4</span>
-                                            </div>
-                                            <div class="file-item">
-                                                <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
-                                                <span>CopyOfIDCard.pdf</span>
-                                            </div>
-                                            <div class="file-item">
-                                                <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
-                                                <span>HouseRegis.pdf</span>
-                                            </div>
-                                            <div class="file-item">
-                                                <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
-                                                <span>Transcript.pdf</span>
-                                            </div>
-                                            <div class="file-item">
-                                                <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
-                                                <span>ResumeCH.pdf</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                            </div>
-                            <div class="column">
-                                <div class="badge-header status-document d-flex justify-content-between mb-3">Request Internship Document <span class="badge">3</span></div>
-                                <div class="card applicant-card">
-                                    <div class="card-body">
-                                        <!-- Profile Section -->
-                                        <div class="d-flex align-items-center">
-                                            <img src="https://i.pravatar.cc/40?img=21" alt="Profile" class="profile-icon">
-                                            <div>
-                                                <h6 class="applicant-name">Jacob Mercer</h6>
-                                                <p class="applicant-email">jacob.mercer92@email.com</p>
-                                            </div>
-                                        </div>
-                                
-                                        <!-- Horizontal Line -->
-                                        <hr>
-                                
-                                        <!-- File List -->
-                                        <div class="file-list">
-                                            <div class="file-item">
-                                                <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
-                                                <span>assistance.pdf</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                    <div class="card applicant-card">
-                                        <div class="card-body">
-                                            <!-- Profile Section -->
-                                            <div class="d-flex align-items-center">
-                                                <img src="https://i.pravatar.cc/40?img=22" alt="Profile" class="profile-icon">
-                                                <div>
-                                                    <h6 class="applicant-name">Olivia Carter</h6>
-                                                    <p class="applicant-email">olivia.carter88@email.com</p>
-                                                </div>
-                                            </div>
-                                    
-                                            <!-- Horizontal Line -->
-                                            <hr>
-                                    
-                                            <!-- File List -->
-                                            <div class="file-list">
-                                                <div class="file-item">
-                                                    <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
-                                                    <span>assistance.pdf</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="card applicant-card">
-                                        <div class="card-body">
-                                            <!-- Profile Section -->
-                                            <div class="d-flex align-items-center">
-                                                <img src="https://i.pravatar.cc/40?img=23" alt="Profile" class="profile-icon">
-                                                <div>
-                                                    <h6 class="applicant-name">Ethan Reynolds</h6>
-                                                    <p class="applicant-email">ethan.reynolds72@email.com</p>
-                                                </div>
-                                            </div>
-                                    
-                                            <!-- Horizontal Line -->
-                                            <hr>
-                                    
-                                            <!-- File List -->
-                                            <div class="file-list">
-                                                <div class="file-item">
-                                                    <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
-                                                    <span>assistance.pdf</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                            </div>
-                            <div class="column">
-                                <div class="badge-header status-acceptance d-flex justify-content-between mb-3">Acceptance Terms <span class="badge">1</span></div>
-                                <div class="card applicant-card">
-                                    <div class="d-flex align-items-center">
-                                        <img src="https://i.pravatar.cc/40?img=15" alt="Profile" class="profile-icon">
-                                        <div>
-                                            <h6 class="applicant-name">Noah Bennett</h6>
-                                            <p class="applicant-email">noah.bennett45@email.com</p>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                            <div class="column fail">
-                                <div class="badge-header status-fail d-flex justify-content-between mb-3">Fail <span class="badge">1</span></div>
-                                <div class="card applicant-card">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-center">
-                                            <img src="https://i.pravatar.cc/40?img=23" alt="Profile" class="profile-icon">
-                                            <div>
-                                                <h6 class="applicant-name">Johson Rain</h6>
-                                                <p class="applicant-email">johson.rain@email.com</p>
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <div  style=" display:flex;justify-content: end;"><span class="badge">Fail</span></div>
-                                        
-                                    </div>
-                                </div> 
-                            </div>
-                            <div class="column success">
-                                <div class="badge-header status-success d-flex justify-content-between mb-3">Success <span class="badge">1</span></div>
-                                <div class="card applicant-card">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-center">
-                                            <img src="https://i.pravatar.cc/40?img=23" alt="Profile" class="profile-icon">
-                                            <div>
-                                                <h6 class="applicant-name">Liam Patterson</h6>
-                                                <p class="applicant-email">liam.patterson@email.com</p>
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <div  style=" display:flex;justify-content: end;"><span class="badge">Success</span></div>
-                                    </div>
-                                </div> 
-                            </div>
+                    <hr>
+                    <div class="file-list">
+                        <div class="file-item">
+                            <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
+                            <span>Tom_Resume.pdf</span>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Arthur Shelby (Peaky Blinders) -->
+            <div class="card applicant-card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <img src="https://i.pravatar.cc/40?img=2" alt="Profile" class="profile-icon">
+                        <div>
+                            <h6 class="applicant-name">Arthur Shelby</h6>
+                            <p class="applicant-email">arthur.shelby@peaky.co.uk</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="file-list">
+                        <div class="file-item">
+                            <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
+                            <span>Authur_Portfolio.pdf</span>
+                        </div>
+                        <div class="file-item">
+                            <img src="https://cdn-icons-png.flaticon.com/512/136/136524.png" alt="Word" class="file-icon">
+                            <span>Resume.docx</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Walter White (Breaking Bad) -->
+            <div class="card applicant-card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <img src="https://i.pravatar.cc/40?img=3" alt="Profile" class="profile-icon">
+                        <div>
+                            <h6 class="applicant-name">Walter White</h6>
+                            <p class="applicant-email">walter.white@breakingbad.com</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="file-list">
+                        <div class="file-item">
+                            <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
+                            <span>Mrs_White_Resume.pdf</span>
+                        </div>
+                        <div class="file-item">
+                            <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
+                            <span>Portfolio.pdf</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Jesse Pinkman (Breaking Bad) -->
+            <div class="card applicant-card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <img src="https://i.pravatar.cc/40?img=4" alt="Profile" class="profile-icon">
+                        <div>
+                            <h6 class="applicant-name">Jesse Pinkman</h6>
+                            <p class="applicant-email">jesse.pinkman@breakingbad.com</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="file-list">
+                        <div class="file-item">
+                            <img src="https://cdn-icons-png.flaticon.com/512/136/136524.png" alt="Word" class="file-icon">
+                            <span>My_Portfolio.docx</span>
+                        </div>
+                        <div class="file-item">
+                            <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
+                            <span>My_Resume.pdf</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Polly Gray (Peaky Blinders) -->
+            <div class="card applicant-card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <img src="https://i.pravatar.cc/40?img=5" alt="Profile" class="profile-icon">
+                        <div>
+                            <h6 class="applicant-name">Polly Gray</h6>
+                            <p class="applicant-email">polly.gray@peaky.co.uk</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="file-list">
+                        <div class="file-item">
+                            <img src="https://cdn-icons-png.flaticon.com/512/136/136524.png" alt="Word" class="file-icon">
+                            <span>Portfolio.docx</span>
+                        </div>
+                        <div class="file-item">
+                            <img src="https://cdn-icons-png.flaticon.com/512/136/136524.png" alt="Word" class="file-icon">
+                            <span>Resume.docx</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gustavo Fring (Breaking Bad) -->
+            <div class="card applicant-card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <img src="https://i.pravatar.cc/40?img=6" alt="Profile" class="profile-icon">
+                        <div>
+                            <h6 class="applicant-name">Gustavo Fring</h6>
+                            <p class="applicant-email">gus.fring@lospollos.com</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="file-list">
+                        <div class="file-item">
+                            <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
+                            <span>My_Resume.pdf</span>
+                        </div>
+                        <div class="file-item">
+                            <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
+                            <span>Portfolio.pdf</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                                </div>
+                                <div class="column">
+                                    <div class="badge-header status-request d-flex justify-content-between mb-3">Request Internship Application <span class="badge">5</span></div>
+                                    <div class="card applicant-card">
+                                        <div class="card-body">
+                                            <!-- Profile Section -->
+                                            <div class="d-flex align-items-center">
+                                                <img src="https://i.pravatar.cc/40?img=6" alt="Profile" class="profile-icon">
+                                                <div>
+                                                    <h6 class="applicant-name">Michel Jone</h6>
+                                                    <p class="applicant-email">micheljone_03@gmail.com</p>
+                                                </div>
+                                            </div>
+                                    
+                                            <!-- Horizontal Line -->
+                                            <hr>
+                                    
+                                            <!-- File List -->
+                                            <div class="file-list">
+                                                <div class="file-item">
+                                                    <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
+                                                    <span>Test.pdf</span>
+                                                </div>
+                                                <div class="file-item">
+                                                    <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
+                                                    <span>Presentation.pdf</span>
+                                                </div>
+                                                <div class="file-item">
+                                                    <img src="https://cdn-icons-png.flaticon.com/512/1365/1365499.png" alt="MP4" class="file-icon">
+                                                    <span>VideoIntroduce.mp4</span>
+                                                </div>
+                                                <div class="file-item">
+                                                    <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
+                                                    <span>CopyOfIDCard.pdf</span>
+                                                </div>
+                                                <div class="file-item">
+                                                    <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
+                                                    <span>HouseRegis.pdf</span>
+                                                </div>
+                                                <div class="file-item">
+                                                    <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
+                                                    <span>Transcript.pdf</span>
+                                                </div>
+                                                <div class="file-item">
+                                                    <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
+                                                    <span>ResumeCH.pdf</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card applicant-card">
+                                        <div class="card-body">
+                                            <!-- Profile Section -->
+                                            <div class="d-flex align-items-center">
+                                                <img src="https://i.pravatar.cc/40?img=7" alt="Profile" class="profile-icon">
+                                                <div>
+                                                    <h6 class="applicant-name">Gary David</h6>
+                                                    <p class="applicant-email">gary.david@gamil.com</p>
+                                                </div>
+                                            </div>
+                                    
+                                            <!-- Horizontal Line -->
+                                            <hr>
+                                    
+                                            <!-- File List -->
+                                            <div class="file-list">
+                                                <div class="file-item">
+                                                    <img src="https://cdn-icons-png.flaticon.com/512/737/737261.png" alt="ZIP" class="file-icon">
+                                                    <span>Test.zip</span>
+                                                </div>
+                                                <div class="file-item">
+                                                    <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
+                                                    <span>Presentation.pdf</span>
+                                                </div>
+                                                <div class="file-item">
+                                                    <img src="https://cdn-icons-png.flaticon.com/512/1365/1365499.png" alt="MP4" class="file-icon">
+                                                    <span>VideoIntroduce.mp4</span>
+                                                </div>
+                                                <div class="file-item">
+                                                    <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
+                                                    <span>CopyOfIDCard.pdf</span>
+                                                </div>
+                                                <div class="file-item">
+                                                    <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
+                                                    <span>HouseRegis.pdf</span>
+                                                </div>
+                                                <div class="file-item">
+                                                    <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
+                                                    <span>Transcript.pdf</span>
+                                                </div>
+                                                <div class="file-item">
+                                                    <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
+                                                    <span>ResumeCH.pdf</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="column">
+                                    <div class="badge-header status-document d-flex justify-content-between mb-3">Request Internship Document <span class="badge">3</span></div>
+                                    <div class="card applicant-card">
+                                        <div class="card-body">
+                                            <!-- Profile Section -->
+                                            <div class="d-flex align-items-center">
+                                                <img src="https://i.pravatar.cc/40?img=21" alt="Profile" class="profile-icon">
+                                                <div>
+                                                    <h6 class="applicant-name">Jacob Mercer</h6>
+                                                    <p class="applicant-email">jacob.mercer92@email.com</p>
+                                                </div>
+                                            </div>
+                                    
+                                            <!-- Horizontal Line -->
+                                            <hr>
+                                    
+                                            <!-- File List -->
+                                            <div class="file-list">
+                                                <div class="file-item">
+                                                    <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
+                                                    <span>assistance.pdf</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div class="card applicant-card">
+                                            <div class="card-body">
+                                                <!-- Profile Section -->
+                                                <div class="d-flex align-items-center">
+                                                    <img src="https://i.pravatar.cc/40?img=22" alt="Profile" class="profile-icon">
+                                                    <div>
+                                                        <h6 class="applicant-name">Olivia Carter</h6>
+                                                        <p class="applicant-email">olivia.carter88@email.com</p>
+                                                    </div>
+                                                </div>
+                                        
+                                                <!-- Horizontal Line -->
+                                                <hr>
+                                        
+                                                <!-- File List -->
+                                                <div class="file-list">
+                                                    <div class="file-item">
+                                                        <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
+                                                        <span>assistance.pdf</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="card applicant-card">
+                                            <div class="card-body">
+                                                <!-- Profile Section -->
+                                                <div class="d-flex align-items-center">
+                                                    <img src="https://i.pravatar.cc/40?img=23" alt="Profile" class="profile-icon">
+                                                    <div>
+                                                        <h6 class="applicant-name">Ethan Reynolds</h6>
+                                                        <p class="applicant-email">ethan.reynolds72@email.com</p>
+                                                    </div>
+                                                </div>
+                                        
+                                                <!-- Horizontal Line -->
+                                                <hr>
+                                        
+                                                <!-- File List -->
+                                                <div class="file-list">
+                                                    <div class="file-item">
+                                                        <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF" class="file-icon">
+                                                        <span>assistance.pdf</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+                                <div class="column">
+                                    <div class="badge-header status-acceptance d-flex justify-content-between mb-3">Acceptance Terms <span class="badge">1</span></div>
+                                    <div class="card applicant-card">
+                                        <div class="d-flex align-items-center">
+                                            <img src="https://i.pravatar.cc/40?img=15" alt="Profile" class="profile-icon">
+                                            <div>
+                                                <h6 class="applicant-name">Noah Bennett</h6>
+                                                <p class="applicant-email">noah.bennett45@email.com</p>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                                <div class="column fail">
+                                    <div class="badge-header status-fail d-flex justify-content-between mb-3">Fail <span class="badge">1</span></div>
+                                    <div class="card applicant-card">
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-center">
+                                                <img src="https://i.pravatar.cc/40?img=23" alt="Profile" class="profile-icon">
+                                                <div>
+                                                    <h6 class="applicant-name">Johson Rain</h6>
+                                                    <p class="applicant-email">johson.rain@email.com</p>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div  style=" display:flex;justify-content: end;"><span class="badge">Fail</span></div>
+                                            
+                                        </div>
+                                    </div> 
+                                </div>
+                                <div class="column">
+                                    <div class="badge-header status-success d-flex justify-content-between mb-3">Success <span class="badge">1</span></div>
+                                    <div class="card applicant-card">
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-center">
+                                                <img src="https://i.pravatar.cc/40?img=23" alt="Profile" class="profile-icon">
+                                                <div>
+                                                    <h6 class="applicant-name">Liam Patterson</h6>
+                                                    <p class="applicant-email">liam.patterson@email.com</p>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div  style=" display:flex;justify-content: end;"><span class="badge success">Success</span></div>
+                                        </div>
+                                    </div> 
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- <div class="fixed-scrollbar">
+                            <div class="scroll-helper"></div>
+                        </div> -->
+                    </div>
+                    </div>
+                </div>
+        <!-- Applicant Details Section (Initially Hidden) -->
+        <div id="applicant-details" style="display: none;">
+            <!-- Header Section -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div class="d-flex align-items-center gap-3">
+                    <img id="applicant-profile" src="" alt="Profile" class="profile-img">
+                    <div>
+                        <h4 id="applicant-name">Applicant Name</h4>
+                        <p id="applicant-id" class="text-muted">Internship ID: 121212121</p>
+                    </div>
+                    <span id="applicant-status" class="badge"></span>
+                </div>
+                <button id="back-btn" class="btn" style="background-color:#B1BBE7; color:black;border-radius:4px;"> <img src="../assets/icon/less_than.png" alt=""> Back</button>
+            </div>
+        
+            <!-- Cards Section -->
+            <div class="row">
+                <!-- Left Side: Application Information & Skill Test -->
+                <div class="col-md-5">
+                    <!-- Application Information -->
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Application Information</h5>
+                            <p>Email: <span id="applicant-email">applicant@example.com</span></p>
+                            <p>Phone: <span id="applicant-phone">+123456789</span></p>
+                            <p>Position: <span id="applicant-position">Software Tester</span></p>
+                            <p>Location: <span id="applicant-location">Remote</span></p>
+                        </div>
+                    </div>
+        
+                    <!-- Skill Test -->
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5 class="card-title mt-0">Uploaded Files</h5>
+                                <button class="btn" style="background-color:#474BC2; border-radius:4px; padding:5px; color:white; margin-top: 0;">Download All</button>
+                            </div>
+                            <div id="uploaded-files">
+                                <p>No files uploaded.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+        
+                <!-- Right Side: Uploaded Files & Approval -->
+                <div class="col-md-7">
+                    <!-- Uploaded Files -->
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Skill Test</h5>
+                            <p>Topic: <span id="test-topic">1, 2</span></p>
+                            <p>Answer Type: PDF File</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <p class="mb-0">Test.pdf (1MB)</p>
+                                <button class="btn btn-primary btn-sm">Download</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Approval Section -->
+                    <!-- <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Approval</h5>
+                            <div class="d-flex gap-2">
+                                <button class="btn" style="border:1px solid black;background-color:white; color:black; padding:5px;">Approve</button>
+                                <button class="btn" style="border:none;background-color:#474BC2; color:white;padding:5px;">Reject</button>
+                            </div>
+                            <textarea class="form-control mt-2" placeholder="Add a note"></textarea>
+                            <button class="btn btn-primary mt-2" style="align-self: self-end;">Confirm</button>
+                        </div>
+                    </div> -->
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Approval</h5>
+                            <div class="d-flex gap-2 align-items-center">
+                                <button class="btn" style="border:1px solid black;background-color:white; color:black; padding:5px;">Approve</button>
+                                <button class="btn" style="border:none;background-color:#474BC2; color:white;padding:6px;">Reject</button>
+                                <input type="text" class="form-control border-0 border-bottom" placeholder="Add a note" style="flex: 1; min-width: 200px; outline: none; box-shadow: none;">
+                            </div>
+                            <div class="d-flex justify-content-end mt-2">
+                                <button class="btn btn-primary mt-2" style="border:none;background-color:#474BC2; color:white;padding:5px 10px;align-self: self-end;">Confirm</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        
         </div>
         
     </div>
@@ -2923,6 +3129,8 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
+
+
     function selectCategory(category) {
         document.getElementById("selected-category").innerText = category;
         document.querySelectorAll(".dropdown-item").forEach(item => {
@@ -3011,6 +3219,26 @@ document.addEventListener("click", function (event) {
         }
     });
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.getElementById("search-input");
+    const applicantCards = document.querySelectorAll(".applicant-card");
+
+    searchInput.addEventListener("input", function () {
+        const query = searchInput.value.trim().toLowerCase(); // Get input value in lowercase
+
+        applicantCards.forEach(card => {
+            const email = card.querySelector(".applicant-email").innerText.toLowerCase();
+
+            if (email.includes(query)) {
+                card.style.display = "block"; // Show if email matches
+            } else {
+                card.style.display = "none"; // Hide if no match
+            }
+        });
+    });
+});
+
 
 document.addEventListener("DOMContentLoaded", function () {
     const viewDetailsButtons = document.querySelectorAll(".view-details");
@@ -3177,13 +3405,17 @@ function toggleEditBox() {
 
 
 function previewImage(event) {
-    let reader = new FileReader();
-    reader.onload = function () {
-        let output = document.getElementById("image-preview");
-        output.src = reader.result;
-    };
-    reader.readAsDataURL(event.target.files[0]);
+    const file = event.target.files[0];
+    if (file) {
+        document.getElementById('image-filename').value = file.name; // Update filename field
+        const reader = new FileReader();
+        reader.onload = function() {
+            document.getElementById('image-preview').src = reader.result;
+        };
+        reader.readAsDataURL(file);
+    }
 }
+
 
 function saveDescription() {
     // Get updated values
@@ -3262,10 +3494,98 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelector(".gear").addEventListener("click", openSettingsPanel);
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+    function updateBadgeCounts() {
+        // Get all columns
+        let columns = document.querySelectorAll(".column");
 
+        columns.forEach(column => {
+            // Find the badge inside the badge-header
+            let badge = column.querySelector(".badge-header .badge");
+            
+            // Count the number of applicant cards inside the column
+            let count = column.querySelectorAll(".applicant-card").length;
 
+            // Update the badge number
+            if (badge) {
+                badge.innerText = count;
+            }
+        });
+    }
 
+    // Run the function on page load
+    updateBadgeCounts();
 
+    // Run the function every time an applicant is added or removed (optional)
+    const observer = new MutationObserver(updateBadgeCounts);
+    columns.forEach(column => {
+        observer.observe(column, { childList: true });
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    const applicantCards = document.querySelectorAll(".applicant-card");
+    const applicantList = document.getElementById("applicant-list");
+    const applicantDetails = document.getElementById("applicant-details");
+    const uploadedFilesContainer = document.getElementById("uploaded-files");
+    const backBtn = document.getElementById("back-btn");
+
+    applicantCards.forEach(card => {
+        card.addEventListener("click", function () {
+            // Hide the applicant list and show the details panel
+            applicantList.style.display = "none";
+            applicantDetails.style.display = "block";
+
+            // Extract applicant details
+            const name = this.querySelector(".applicant-name").innerText;
+            const email = this.querySelector(".applicant-email").innerText;
+            const profileImage = this.querySelector(".profile-icon").src;
+
+            // Identify the status from the parent column
+            const column = this.closest(".column");
+            const statusHeader = column.querySelector(".badge-header").innerText.trim();
+
+            // Remove numbers from the status text (only keep words)
+            const statusText = statusHeader.replace(/[0-9]/g, '').trim();
+
+            // Define class mappings for badge colors
+            const statusClassMap = {
+                "Pending": "status-pending",
+                "Request Internship Application": "status-request",
+                "Request Internship Document": "status-document",
+                "Acceptance Terms": "status-acceptance",
+                "Fail": "status-fail",
+                "Success": "status-success"
+            };
+
+            // Set applicant details
+            document.getElementById("applicant-name").innerText = name;
+            document.getElementById("applicant-email").innerText = email;
+            document.getElementById("applicant-profile").src = profileImage;
+            document.getElementById("applicant-id").innerText = "Internship ID: 112987628";
+
+            // Update badge with text & color class (without number)
+            const badge = document.getElementById("applicant-status");
+            badge.innerText = statusText; // Show only the status name
+            badge.className = `badge ${statusClassMap[statusText] || "badge-secondary"}`; // Apply correct color
+            badge.style.color = "black"; // Make text black to fix previous issue
+
+            // ✅ Populate the uploaded files section
+            const fileList = this.querySelector(".file-list"); // Get the file list from the clicked card
+            if (fileList && fileList.innerHTML.trim() !== "") {
+                uploadedFilesContainer.innerHTML = fileList.innerHTML; // Copy the content to the uploaded files section
+            } else {
+                uploadedFilesContainer.innerHTML = "<p>No files uploaded.</p>"; // Show "No files uploaded" if empty
+            }
+        });
+    });
+
+    // Back button to show the list again
+    backBtn.addEventListener("click", function () {
+        applicantList.style.display = "block";
+        applicantDetails.style.display = "none";
+    });
+});
 
 
 
