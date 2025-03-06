@@ -733,3 +733,52 @@ body {
         font-size: 1.2rem; 
     }
 }
+
+/* HR CSS  */
+
+/* user(hr) profile details  */
+
+#profile_details .card{
+    border-radius:4px;
+    border:1px solid #B1BBE7;
+    box-shadow:none;
+    background-color:#F3F5FC;
+}
+
+#profile_details .card .badge{
+    border-radius:4px;
+    background-color:#D1D1F0;
+    color:#000;
+    font-weight:300;
+    
+}
+
+#profile_details .card span{
+    color:#C8C8C8;
+    font-size:14px;
+    
+}
+
+#profile_details .card .edit{
+    border:1px solid #C8C8C8;
+    background-color: none;
+}
+
+#profile_details #logout{
+    border-radius: 4px;
+    background-color:#474BC2;
+    color:#fff;
+}
+
+
+#profile_details #del_account{
+    border:1px solid #C8C8C8;
+    border-radius: 4px;
+    background-color:none;
+    color:#000;
+}
+
+/* user(hr) profile details  */
+
+
+/* HR CSS  */

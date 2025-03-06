@@ -83,3 +83,61 @@ async function translateText(text, targetLanguage) {
         return text; // Fallback to the original text if translation fails
     }
 }
+
+
+// HR JS 
+
+document.addEventListener("DOMContentLoaded", function () {
+    const profilePhoto = document.querySelector(".profile_photo");
+    const dashboardContent = document.querySelector(".dashboard-content");
+
+    profilePhoto.addEventListener("click", function () {
+        // Replace dashboard content with profile details
+        dashboardContent.innerHTML = `
+            <div class="container-fluid" id="profile_details">
+                <h2 class="mb-3">My Profile</h2>
+
+                <!-- Profile Summary -->
+                <div class="card p-4 w-50">
+                    <div class="d-flex align-items-center">
+                        <img src="../assets/img/user_sample_1.png" alt="Profile Photo" class="rounded-circle" width="80" height="80">
+                        <div class="ms-3">
+                            <h4 class="mb-0">Lhing W.</h4>
+                            <span class="badge">HR Manager</span>
+                        </div>
+                        <button class="btn edit ms-auto"><img src="../assets/icon/edit_pen.png" alt="">  Edit</button>
+                    </div>
+                </div>
+
+                <!-- Personal Information -->
+                <div class="card p-4 mt-3 w-50">
+                    <div class="d-flex justify-content-between mb-3">
+                        <h5>Personal Information</h5>
+                        <button class="btn edit"><img src="../assets/icon/edit_pen.png" alt=""> Edit</button>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <span>Full Name</span><p> Lhing Wang</p>
+                            <span>Team</span><p> Project Internplus</p>
+                            <span>Phone Number</span><p> 0898144676</p>
+                        </div>
+                        <div class="col-md-6">
+                            <span>Position</span><p>HR Manager</p>
+                            <span>Email</span><p>wanglhing@vennessplus.com</p>
+                            <span>Line ID</span><p>imlhingw21</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Buttons -->
+                <div class="mt-3">
+                    <button class="btn" id="logout">Logout</button>
+                    <button class="btn ms-2" id="del_account">Delete Account</button>
+                </div>
+            </div>
+        `;
+    });
+});
+
+
+// HR JS 
