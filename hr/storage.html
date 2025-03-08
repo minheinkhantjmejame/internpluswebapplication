@@ -29,6 +29,13 @@
 
             
         }
+
+        .card.folder-card{
+            box-shadow: none;
+            border:none;
+            border-radius:4px;
+            background-color:#D1D1F0;
+        }
         /* Default styling for sidebar links */
 /* Default sidebar link styling */
 .nav-link {
@@ -51,6 +58,115 @@
         .dashboard-content {
             padding: 20px;
         }
+
+        /* File Category Tabs */
+.file-category {
+    background-color: transparent;
+    border: none;
+    padding: 10px 15px;
+    font-weight: 500;
+    color: black;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.file-category.active {
+    background-color: white;
+    color: black;
+    font-weight: bold;
+}
+
+/* Search Box */
+.search-box {
+    background-color: white;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    padding: 0;
+    height: 45px;
+}
+
+.search-box .input-group-text {
+    background: none;
+    border: none;
+    color: #555;
+}
+
+.search-box input {
+    border: none;
+    box-shadow: none;
+    background-color: white;
+    height: 100%; /* Make input same height */
+}
+
+.search-box input:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+/* General Settings Button */
+.general-setting-btn {
+    background-color: white;
+    border: 1px solid #C8C8C8;
+    height: 45px;
+    padding: 5px 15px;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    margin-left: 10px;
+}
+
+.general-setting-btn:hover {
+    background-color: #F3F5FC;
+}
+
+/* Table Design */
+.table-container {
+    background-color: #F3F5FC;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.table thead {
+    background-color: white;
+}
+
+.table th {
+    font-weight: 600;
+    padding: 12px;
+    text-align: left;
+}
+
+.table tbody tr {
+    background-color: white;
+    border-bottom: 1px solid #ccc;
+}
+
+.table td {
+    padding: 12px;
+    text-align: left;
+    background-color:#F3F5FC;
+}
+
+/* Dropdown Menu */
+.action-btn::after {
+    display: none;
+}
+
+.action-btn {
+    border: none;
+    background: none;
+    font-size: 1.4rem;
+    color: black;
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    min-width: 180px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
         
         
     </style>
@@ -130,7 +246,84 @@
 
 
     <div class="col-md-9 dashboard-content">
+        <h2 class="mb-0">Storage</h2>
+        <div class="row" style="margin-left:5px;">
+            <div class="card folder-card col-md-3" style="padding:20px;">
+                <img src="../assets/icon/add.png" style="width:30px;height:30px; align-self: self-end;" alt="">
+                <img src="../assets/icon/folder-add.png" style="width:50px;height:50px;" alt="">
+                <p class="mb-0" style="font-size:20px;">New Folder</p>
+            </div>
+        </div>
+        <h3 class="mb-0 mt-4">Recent uploaded</h3>
+        <div class="row" id="recentUploadsContainer" style="margin-left:5px;">
+            <!-- Recent uploaded files will be loaded here -->
+        </div>
         
+
+        <h3 class="">All files</h3>
+        <!-- File Category Tabs -->
+        <div class="d-flex align-items-center">
+            <!-- File Category Buttons with Equal Height and Width -->
+            <div class="d-flex p-1" style="background-color:#F3F5FC; border-radius:4px; height:45px; width:auto;">
+                <button class="btn file-category active me-2" data-category="all">View all</button>
+                <button class="btn file-category me-2" data-category="documents">Documents</button>
+                <button class="btn file-category me-2" data-category="pdfs">PDFs</button>
+                <button class="btn file-category me-2" data-category="zips">ZIPs</button>
+                <button class="btn file-category me-2" data-category="images">Images</button>
+                <button class="btn file-category" data-category="videos">Videos</button>
+            </div>
+        
+            <!-- Search Bar & General Settings Button -->
+            <div class="d-flex align-items-center ms-auto">
+                <div class="input-group search-box">
+                    <span class="input-group-text"><i class="bi bi-search"></i></span>
+                    <input type="text" id="searchInput" style="border:none;" class="form-control" placeholder="Search">
+                </div>
+                <button class="btn general-setting-btn" style="border:1px solid #C8C8C8; width:auto;">
+                    <i class="bi bi-sliders"></i> General Setting
+                </button>
+            </div>
+        </div>
+        
+        
+        <!-- File Table -->
+        <div class="table-container mt-3">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th><input type="checkbox"></th>
+                        <th>File name</th>
+                        <th>Uploaded by</th>
+                        <th>File source</th>
+                        <th>Date/Time</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="fileTableBody">
+                    <!-- Table Data Will Load Here via JavaScript -->
+                </tbody>
+            </table>
+        </div>
+        
+        
+        <!-- Pagination -->
+        <div class="d-flex justify-content-between align-items-center mt-3">
+            <div>
+                <label>Files per page</label>
+                <select id="filesPerPage" class="form-select d-inline-block w-auto">
+                    <option>6</option>
+                    <option>12</option>
+                    <option>24</option>
+                </select>
+            </div>
+            <nav>
+                <ul class="pagination mb-0" id="paginationContainer">
+                    <!-- Pagination Will Load Here -->
+                </ul>
+            </nav>
+        </div>
+        
+
     </div>
 </div>
 
@@ -175,9 +368,281 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+function getFileIcon(type) {
+        const icons = {
+            "PDF": "https://cdn-icons-png.flaticon.com/512/337/337946.png",
+            "JPG": "https://cdn-icons-png.flaticon.com/512/136/136524.png",
+            "JPEG": "https://cdn-icons-png.flaticon.com/512/136/136524.png",
+            "PNG": "https://cdn-icons-png.flaticon.com/512/136/136530.png",
+            "MP4": "https://cdn-icons-png.flaticon.com/512/136/136545.png",
+            "AVI": "https://cdn-icons-png.flaticon.com/512/136/136549.png",
+            "MOV": "https://cdn-icons-png.flaticon.com/512/136/136549.png",
+            "ZIP": "https://cdn-icons-png.flaticon.com/512/337/337946.png",
+            "RAR": "https://cdn-icons-png.flaticon.com/512/337/337946.png",
+            "DOCX": "https://cdn-icons-png.flaticon.com/512/281/281760.png",
+            "DOC": "https://cdn-icons-png.flaticon.com/512/281/281760.png",
+            "TXT": "https://cdn-icons-png.flaticon.com/512/136/136527.png"
+        };
+        return icons[type] || "https://cdn-icons-png.flaticon.com/512/716/716784.png"; // Default file icon
+    }
+
+    
+    const files = [
+    { name: "Peter_Resume", type: "PDF", size: "5.9 MB", uploadedBy: "Peter Pan", email: "pppan2000@gmail.com", profileImg: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png", fileSource: "Internship Program Application", date: "17 Dec 2024, 11:05:24" },
+    { name: "ExampleTag", type: "JPG", size: "3 MB", uploadedBy: "Doc Hudson", email: "justacup@gmail.com", profileImg: "https://cdn-icons-png.flaticon.com/512/149/149071.png", fileSource: "Report before lunch", date: "17 Dec 2024, 10:44:56" },
+    { name: "Design_Logo", type: "PNG", size: "2.5 MB", uploadedBy: "Lightning McQueen", email: "pistons1@gmail.com", profileImg: "https://cdn-icons-png.flaticon.com/512/4333/4333609.png", fileSource: "Graphic Design", date: "16 Dec 2024, 13:21:10" },
+    { name: "VideoTestimonialPotter", type: "MP4", size: "67 MB", uploadedBy: "Harry Potter", email: "harryp@gmail.com", profileImg: "https://cdn-icons-png.flaticon.com/512/2922/2922561.png", fileSource: "VDO Testimonial", date: "16 Dec 2024, 15:19:41" },
+    { name: "MarketingFinal", type: "ZIP", size: "9.3 MB", uploadedBy: "Lightning McQueen", email: "pistons1@gmail.com", profileImg: "https://cdn-icons-png.flaticon.com/512/847/847969.png", fileSource: "Assignment Task", date: "15 Dec 2024, 17:36:22" },
+
+    { name: "User_Agreement", type: "DOCX", size: "2.1 MB", uploadedBy: "Tony Stark", email: "tony@starkindustries.com", profileImg: "https://cdn-icons-png.flaticon.com/512/147/147144.png", fileSource: "Legal Document", date: "15 Dec 2024, 08:15:42" },
+    { name: "Product_Catalog", type: "PDF", size: "8.5 MB", uploadedBy: "Steve Rogers", email: "cap@avengers.com", profileImg: "https://cdn-icons-png.flaticon.com/512/145/145867.png", fileSource: "Sales Department", date: "14 Dec 2024, 13:45:30" },
+    { name: "Office_Presentation", type: "PPTX", size: "4.7 MB", uploadedBy: "Natasha Romanoff", email: "nat@shield.com", profileImg: "https://cdn-icons-png.flaticon.com/512/2922/2922510.png", fileSource: "Annual Meeting", date: "13 Dec 2024, 09:30:15" },
+    { name: "Invoice_2024", type: "XLSX", size: "3.2 MB", uploadedBy: "Bruce Wayne", email: "bruce@wayneenterprises.com", profileImg: "https://cdn-icons-png.flaticon.com/512/2922/2922506.png", fileSource: "Finance Reports", date: "12 Dec 2024, 10:22:19" },
+    { name: "Intern_Project", type: "ZIP", size: "12.4 MB", uploadedBy: "Clark Kent", email: "ckent@dailyplanet.com", profileImg: "https://cdn-icons-png.flaticon.com/512/2922/2922513.png", fileSource: "Internship Report", date: "11 Dec 2024, 15:00:45" },
+
+    { name: "Team_Photo", type: "JPG", size: "2.8 MB", uploadedBy: "Peter Parker", email: "spidey@nyc.com", profileImg: "https://cdn-icons-png.flaticon.com/512/2922/2922512.png", fileSource: "Team Event", date: "10 Dec 2024, 18:10:30" },
+    { name: "Training_Video", type: "MP4", size: "50 MB", uploadedBy: "Diana Prince", email: "wonder@themyscira.com", profileImg: "https://cdn-icons-png.flaticon.com/512/2922/2922507.png", fileSource: "Employee Training", date: "09 Dec 2024, 14:05:55" },
+    { name: "Company_Brochure", type: "PDF", size: "3.9 MB", uploadedBy: "Barry Allen", email: "flash@centralcity.com", profileImg: "https://cdn-icons-png.flaticon.com/512/2922/2922504.png", fileSource: "Marketing", date: "08 Dec 2024, 10:45:20" },
+    { name: "System_Architecture", type: "PNG", size: "1.7 MB", uploadedBy: "Victor Stone", email: "cyborg@justiceleague.com", profileImg: "https://cdn-icons-png.flaticon.com/512/2922/2922508.png", fileSource: "Development", date: "07 Dec 2024, 11:22:40" },
+    { name: "Research_Paper", type: "DOCX", size: "6.5 MB", uploadedBy: "Reed Richards", email: "reed@fantasticfour.com", profileImg: "https://cdn-icons-png.flaticon.com/512/2922/2922502.png", fileSource: "Research", date: "06 Dec 2024, 16:50:38" },
+
+    { name: "Employee_Handbook", type: "PDF", size: "4.2 MB", uploadedBy: "Charles Xavier", email: "professorx@xavierinstitute.com", profileImg: "https://cdn-icons-png.flaticon.com/512/2922/2922509.png", fileSource: "HR Department", date: "05 Dec 2024, 09:10:20" },
+    { name: "Security_Manual", type: "TXT", size: "2.3 MB", uploadedBy: "Nick Fury", email: "nfury@shield.com", profileImg: "https://cdn-icons-png.flaticon.com/512/2922/2922505.png", fileSource: "Security Division", date: "04 Dec 2024, 12:33:15" },
+    { name: "Project_Plan", type: "PPTX", size: "7.8 MB", uploadedBy: "Hank Pym", email: "hank@pymtech.com", profileImg: "https://cdn-icons-png.flaticon.com/512/2922/2922503.png", fileSource: "Engineering Team", date: "03 Dec 2024, 14:20:25" },
+    { name: "Legal_Disclaimer", type: "DOC", size: "1.9 MB", uploadedBy: "Matt Murdock", email: "daredevil@hellskitchen.com", profileImg: "https://cdn-icons-png.flaticon.com/512/2922/2922501.png", fileSource: "Legal", date: "02 Dec 2024, 15:45:30" },
+    { name: "Budget_Report", type: "XLSX", size: "3.6 MB", uploadedBy: "Bruce Banner", email: "hulk@science.com", profileImg: "https://cdn-icons-png.flaticon.com/512/2922/2922500.png", fileSource: "Finance", date: "01 Dec 2024, 17:25:50" }
+];
 
 
 
-    </script>
+
+document.addEventListener("DOMContentLoaded", function () {
+    const fileTableBody = document.getElementById("fileTableBody");
+    const paginationContainer = document.getElementById("paginationContainer");
+    const filesPerPageSelect = document.getElementById("filesPerPage");
+
+// More entries can be added similarly...
+
+
+
+    function loadTable() {
+        fileTableBody.innerHTML = "";
+
+        files.forEach(file => {
+            let fileIcon = getFileIcon(file.type); // Get correct file icon
+
+            let row = `
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <img src="${fileIcon}" width="25" height="25" class="me-2" 
+                                onerror="this.src='https://cdn-icons-png.flaticon.com/512/716/716784.png'; console.error('File icon missing:', '${fileIcon}')">
+                            <div>
+                                ${file.name} <br>
+                                <small>${file.type} - ${file.size}</small>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <img src="${file.profileImg}" width="30" height="30" class="rounded-circle me-2"
+                                onerror="this.src='https://cdn-icons-png.flaticon.com/512/847/847969.png'; console.error('Profile image missing:', '${file.profileImg}')">
+                            <div>
+                                ${file.uploadedBy} <br>
+                                <small>${file.email}</small>
+                            </div>
+                        </div>
+                    </td>
+                    <td>${file.fileSource}</td>
+                    <td>${file.date}</td>
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn action-btn" type="button" data-bs-toggle="dropdown">&#8942;</button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-download"></i> Download</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-folder-plus"></i> Add to folder</a></li>
+                                <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash"></i> Remove</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            `;
+            fileTableBody.innerHTML += row;
+        });
+    }
+
+    let currentPage = 1;
+    let rowsPerPage = parseInt(filesPerPageSelect.value);
+    let totalPages = Math.ceil(files.length / rowsPerPage);
+
+    function updatePagination() {
+        paginationContainer.innerHTML = "";
+        totalPages = Math.ceil(files.length / rowsPerPage);
+        
+        let pageNumbers = [];
+
+        // Pagination logic with dots
+        if (totalPages <= 3) {
+            for (let i = 1; i <= totalPages; i++) {
+                pageNumbers.push(i);
+            }
+        } else {
+            if (currentPage <= 2) {
+                pageNumbers = [1, 2, "...", totalPages];
+            } else if (currentPage >= totalPages - 1) {
+                pageNumbers = [1, "...", totalPages - 1, totalPages];
+            } else {
+                pageNumbers = [1, "...", currentPage, "...", totalPages];
+            }
+        }
+
+        // Previous Button
+        paginationContainer.innerHTML += `
+            <li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
+                <a class="page-link" href="#" onclick="changePage(${currentPage - 1}); return false;">Previous</a>
+            </li>
+        `;
+
+        // Page Number Buttons
+        pageNumbers.forEach(page => {
+            if (page === "...") {
+                paginationContainer.innerHTML += `<li class="page-item disabled"><a class="page-link">...</a></li>`;
+            } else {
+                paginationContainer.innerHTML += `
+                    <li class="page-item ${page === currentPage ? 'active' : ''}">
+                        <a class="page-link" href="#" onclick="changePage(${page}); return false;">${page}</a>
+                    </li>
+                `;
+            }
+        });
+
+        // Next Button
+        paginationContainer.innerHTML += `
+            <li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
+                <a class="page-link" href="#" onclick="changePage(${currentPage + 1}); return false;">Next</a>
+            </li>
+        `;
+    }
+
+    function loadTable() {
+        fileTableBody.innerHTML = "";
+        let start = (currentPage - 1) * rowsPerPage;
+        let end = start + rowsPerPage;
+        let paginatedFiles = files.slice(start, end);
+
+        paginatedFiles.forEach(file => {
+            let fileIcon = getFileIcon(file.type);
+
+            let row = `
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <img src="${fileIcon}" width="25" height="25" class="me-2" 
+                                onerror="this.src='https://cdn-icons-png.flaticon.com/512/716/716784.png'; console.error('File icon missing:', '${fileIcon}')">
+                            <div>
+                                ${file.name} <br>
+                                <small>${file.type} - ${file.size}</small>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <img src="${file.profileImg}" width="30" height="30" class="rounded-circle me-2"
+                                onerror="this.src='https://cdn-icons-png.flaticon.com/512/847/847969.png'; console.error('Profile image missing:', '${file.profileImg}')">
+                            <div>
+                                ${file.uploadedBy} <br>
+                                <small>${file.email}</small>
+                            </div>
+                        </div>
+                    </td>
+                    <td>${file.fileSource}</td>
+                    <td>${file.date}</td>
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn action-btn" type="button" data-bs-toggle="dropdown">&#8942;</button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-download"></i> Download</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-folder-plus"></i> Add to folder</a></li>
+                                <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash"></i> Remove</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            `;
+            fileTableBody.innerHTML += row;
+        });
+
+        updatePagination();
+    }
+
+    window.changePage = function (page) {
+        if (page < 1 || page > totalPages) return;
+        currentPage = page;
+        loadTable();
+    };
+
+    filesPerPageSelect.addEventListener("change", function () {
+        rowsPerPage = parseInt(this.value);
+        currentPage = 1;
+        loadTable();
+    });
+
+    loadTable();
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    const recentUploadsContainer = document.getElementById("recentUploadsContainer");
+
+    function parseDate(dateString) {
+        return new Date(dateString.replace(/(\d{2}) (\w{3}) (\d{4}), (\d{2}):(\d{2}):(\d{2})/, 
+            (match, day, month, year, hour, minute, second) => {
+                const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                return `${year}-${months.indexOf(month) + 1}-${day}T${hour}:${minute}:${second}`;
+            }));
+    }
+
+    function loadRecentUploads() {
+        recentUploadsContainer.innerHTML = ""; // Clear existing content
+
+        // Sort files by latest date
+        let sortedFiles = [...files].sort((a, b) => parseDate(b.date) - parseDate(a.date));
+
+        let recentFiles = sortedFiles.slice(0, 3); // Get 3 most recent uploads
+
+        recentFiles.forEach(file => {
+            let fileIcon = getFileIcon(file.type); // Get file icon
+
+            let recentFileHTML = `
+                <div class="col-md-4">
+                    <div class="card p-3" style="background-color:#F3F5FC; border:none; border-radius:10px;">
+                        <div class="d-flex justify-content-between">
+                            <img src="${fileIcon}" width="30" height="30" alt="File Icon">
+                            <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                &#8942;
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-download"></i> Download</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-folder-plus"></i> Add to folder</a></li>
+                                <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash"></i> Remove</a></li>
+                            </ul>
+                        </div>
+                        <a href="#" class="fw-bold text-decoration-none" style="color:#474BC2;">${file.name}</a>
+                        <p class="mb-0">${file.type} • ${file.size}</p>
+                        <small class="text-muted">${file.date}</small>
+                    </div>
+                </div>
+            `;
+
+            recentUploadsContainer.innerHTML += recentFileHTML;
+        });
+    }
+
+    loadRecentUploads(); // Call function to load recent files
+});
+
+
+</script>
 </body>
 </html>
