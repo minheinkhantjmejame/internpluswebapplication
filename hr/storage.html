@@ -100,8 +100,12 @@
 }
 .new-folder-footer {
     position: absolute;
+    right:10px;
     bottom: 20px;
     width: 100%;
+    display: flex;
+    justify-content: flex-end; /* Push button to the right */
+
 }
 .overlay {
     position: fixed;
@@ -317,11 +321,11 @@
                     <button id="closePanel" class="btn-close"></button>
                 </div>
                 <div class="new-folder-body">
-                    <label for="folderName">Folder Name</label>
-                    <input type="text" id="folderName" class="form-control" placeholder="Enter folder name">
+                    <label class="mb-2" for="folderName" style="font-size:14px;">Folder Name</label>
+                    <input type="text" id="folderName" class="form-control" style="border:1px solid #C8C8C8;" placeholder="Enter folder name">
                 </div>
-                <div class="new-folder-footer">
-                    <button id="createFolder" class="btn btn-primary">Create</button>
+                <div class="new-folder-footer align-self-end" style="align-items: end;">
+                    <button id="createFolder" class="btn btn-primary" style="background-color:#474BC2;">Create</button>
                 </div>
             </div>
 
