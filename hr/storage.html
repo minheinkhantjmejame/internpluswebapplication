@@ -76,6 +76,44 @@
     font-weight: bold;
 }
 
+/* Right-Side Panel  Add Folder*/
+.new-folder-panel {
+    position: fixed;
+    right: -400px; /* Hidden by default */
+    top: 0;
+    width: 400px;
+    height: 100vh;
+    background: white;
+    box-shadow: -3px 0 10px rgba(0, 0, 0, 0.2);
+    transition: right 0.3s ease-in-out;
+    padding: 20px;
+    z-index: 1050;
+}
+.new-folder-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.new-folder-body {
+    margin-top: 20px;
+}
+.new-folder-footer {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+}
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1049;
+    display: none;
+}
+
+
 /* Search Box */
 .search-box {
     background-color: white;
@@ -166,6 +204,28 @@
     min-width: 180px;
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
 }
+.page-link{
+    border:1px solid #C8C8C8;
+    background-color:transparent;
+    margin:5px;
+    color:black;
+    border-radius:4px;
+}
+.page-link.previous,.page-link.next{
+    border:none;
+    background-color:transparent;
+}
+
+/* Style for the active pagination button */
+.pagination .page-item.active .page-link {
+    background-color: #474BC2 !important;
+    border-color: transparent !important;
+    color: white !important; /* Ensures text is visible */
+}
+
+
+
+
 
         
         
@@ -247,13 +307,31 @@
 
     <div class="col-md-9 dashboard-content">
         <h2 class="mb-0">Storage</h2>
-        <div class="row" style="margin-left:5px;">
+        <div class="row" style="margin-left:5px; gap:5px;">
+
+                                    <!-- Right-Side New Folder Panel -->
+            <div id="newFolderPanel" class="new-folder-panel">
+                <div class="new-folder-header">
+                    <h4>Create New Folder</h4>
+                    <button id="closePanel" class="btn-close"></button>
+                </div>
+                <div class="new-folder-body">
+                    <label for="folderName">Folder Name</label>
+                    <input type="text" id="folderName" class="form-control" placeholder="Enter folder name">
+                </div>
+                <div class="new-folder-footer">
+                    <button id="createFolder" class="btn btn-primary">Create</button>
+                </div>
+            </div>
+
+            <!-- Background overlay -->
+            <div id="overlay" class="overlay"></div>
             <div class="card folder-card col-md-3" style="padding:20px;">
-                <img src="../assets/icon/add.png" style="width:30px;height:30px; align-self: self-end;" alt="">
+                <button class="btn align-self-end"><img src="../assets/icon/add.png" style="width:30px;height:30px;" alt=""></button>
                 <img src="../assets/icon/folder-add.png" style="width:50px;height:50px;" alt="">
                 <p class="mb-0" style="font-size:20px;">New Folder</p>
             </div>
-        </div>
+        </div> 
         <h3 class="mb-0 mt-4">Recent uploaded</h3>
         <div class="row" id="recentUploadsContainer" style="margin-left:5px;">
             <!-- Recent uploaded files will be loaded here -->
@@ -303,10 +381,7 @@
                     <!-- Table Data Will Load Here via JavaScript -->
                 </tbody>
             </table>
-        </div>
-        
-        
-        <!-- Pagination -->
+                    <!-- Pagination -->
         <div class="d-flex justify-content-between align-items-center mt-3">
             <div>
                 <label>Files per page</label>
@@ -322,6 +397,10 @@
                 </ul>
             </nav>
         </div>
+        </div>
+        
+        
+
         
 
     </div>
@@ -367,6 +446,66 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    const addFolderBtn = document.querySelector(".folder-card button");
+    const newFolderPanel = document.getElementById("newFolderPanel");
+    const overlay = document.getElementById("overlay");
+    const closePanelBtn = document.getElementById("closePanel");
+    const createFolderBtn = document.getElementById("createFolder");
+    const folderNameInput = document.getElementById("folderName");
+    const storageContainer = document.querySelector(".row[style*='margin-left:5px;']");
+
+    // Open the side panel
+    addFolderBtn.addEventListener("click", function () {
+        newFolderPanel.style.right = "0";
+        overlay.style.display = "block";
+    });
+
+    // Close the panel
+    closePanelBtn.addEventListener("click", function () {
+        newFolderPanel.style.right = "-400px";
+        overlay.style.display = "none";
+        folderNameInput.value = ""; // Clear input field
+    });
+
+    // Create the folder
+    createFolderBtn.addEventListener("click", function () {
+        let folderName = folderNameInput.value.trim();
+        if (folderName === "") {
+            alert("Please enter a folder name.");
+            return;
+        }
+
+        // Create new folder element dynamically
+        let newFolderHTML = document.createElement("div");
+        newFolderHTML.classList.add("card", "folder-card", "col-md-3");
+        newFolderHTML.style.padding = "20px";
+        newFolderHTML.innerHTML = `
+            <img src="../assets/icon/folder-open.png" style="width:50px;height:50px;" alt="">
+            <p class="mb-0" style="font-size:20px;">${folderName}</p>
+        `;
+
+        // Get the "New Folder" button card (always last)
+        let addFolderCard = storageContainer.querySelector(".folder-card:last-child");
+
+        // Insert new folder before "New Folder" button card
+        storageContainer.insertBefore(newFolderHTML, addFolderCard);
+
+        // Close the panel
+        newFolderPanel.style.right = "-400px";
+        overlay.style.display = "none";
+        folderNameInput.value = "";
+    });
+
+    // Close panel when clicking outside
+    overlay.addEventListener("click", function () {
+        newFolderPanel.style.right = "-400px";
+        overlay.style.display = "none";
+        folderNameInput.value = "";
+    });
+});
+
 
 function getFileIcon(type) {
         const icons = {
@@ -414,122 +553,39 @@ function getFileIcon(type) {
 ];
 
 
-
-
 document.addEventListener("DOMContentLoaded", function () {
     const fileTableBody = document.getElementById("fileTableBody");
     const paginationContainer = document.getElementById("paginationContainer");
     const filesPerPageSelect = document.getElementById("filesPerPage");
-
-// More entries can be added similarly...
-
-
-
-    function loadTable() {
-        fileTableBody.innerHTML = "";
-
-        files.forEach(file => {
-            let fileIcon = getFileIcon(file.type); // Get correct file icon
-
-            let row = `
-                <tr>
-                    <td><input type="checkbox"></td>
-                    <td>
-                        <div class="d-flex align-items-center">
-                            <img src="${fileIcon}" width="25" height="25" class="me-2" 
-                                onerror="this.src='https://cdn-icons-png.flaticon.com/512/716/716784.png'; console.error('File icon missing:', '${fileIcon}')">
-                            <div>
-                                ${file.name} <br>
-                                <small>${file.type} - ${file.size}</small>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="d-flex align-items-center">
-                            <img src="${file.profileImg}" width="30" height="30" class="rounded-circle me-2"
-                                onerror="this.src='https://cdn-icons-png.flaticon.com/512/847/847969.png'; console.error('Profile image missing:', '${file.profileImg}')">
-                            <div>
-                                ${file.uploadedBy} <br>
-                                <small>${file.email}</small>
-                            </div>
-                        </div>
-                    </td>
-                    <td>${file.fileSource}</td>
-                    <td>${file.date}</td>
-                    <td>
-                        <div class="dropdown">
-                            <button class="btn action-btn" type="button" data-bs-toggle="dropdown">&#8942;</button>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#"><i class="bi bi-download"></i> Download</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="bi bi-folder-plus"></i> Add to folder</a></li>
-                                <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash"></i> Remove</a></li>
-                            </ul>
-                        </div>
-                    </td>
-                </tr>
-            `;
-            fileTableBody.innerHTML += row;
-        });
-    }
+    const categoryButtons = document.querySelectorAll(".file-category");
 
     let currentPage = 1;
     let rowsPerPage = parseInt(filesPerPageSelect.value);
-    let totalPages = Math.ceil(files.length / rowsPerPage);
+    let filteredFiles = files; // Initially, show all files
 
-    function updatePagination() {
-        paginationContainer.innerHTML = "";
-        totalPages = Math.ceil(files.length / rowsPerPage);
-        
-        let pageNumbers = [];
-
-        // Pagination logic with dots
-        if (totalPages <= 3) {
-            for (let i = 1; i <= totalPages; i++) {
-                pageNumbers.push(i);
-            }
-        } else {
-            if (currentPage <= 2) {
-                pageNumbers = [1, 2, "...", totalPages];
-            } else if (currentPage >= totalPages - 1) {
-                pageNumbers = [1, "...", totalPages - 1, totalPages];
-            } else {
-                pageNumbers = [1, "...", currentPage, "...", totalPages];
-            }
+    // Function to filter files based on category
+    function filterFiles(category) {
+        if (category === "all") {
+            return files; // Return all files if "View all" is selected
         }
-
-        // Previous Button
-        paginationContainer.innerHTML += `
-            <li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
-                <a class="page-link" href="#" onclick="changePage(${currentPage - 1}); return false;">Previous</a>
-            </li>
-        `;
-
-        // Page Number Buttons
-        pageNumbers.forEach(page => {
-            if (page === "...") {
-                paginationContainer.innerHTML += `<li class="page-item disabled"><a class="page-link">...</a></li>`;
-            } else {
-                paginationContainer.innerHTML += `
-                    <li class="page-item ${page === currentPage ? 'active' : ''}">
-                        <a class="page-link" href="#" onclick="changePage(${page}); return false;">${page}</a>
-                    </li>
-                `;
-            }
-        });
-
-        // Next Button
-        paginationContainer.innerHTML += `
-            <li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
-                <a class="page-link" href="#" onclick="changePage(${currentPage + 1}); return false;">Next</a>
-            </li>
-        `;
+        // Map category to file type
+        const categoryToType = {
+            "documents": ["DOCX", "DOC", "TXT"],
+            "pdfs": ["PDF"],
+            "zips": ["ZIP", "RAR"],
+            "images": ["JPG", "JPEG", "PNG"],
+            "videos": ["MP4", "AVI", "MOV"]
+        };
+        const types = categoryToType[category] || [];
+        return files.filter(file => types.includes(file.type));
     }
 
-    function loadTable() {
+    // Function to load the table with filtered files
+    function loadTable(filesToLoad) {
         fileTableBody.innerHTML = "";
         let start = (currentPage - 1) * rowsPerPage;
         let end = start + rowsPerPage;
-        let paginatedFiles = files.slice(start, end);
+        let paginatedFiles = filesToLoad.slice(start, end);
 
         paginatedFiles.forEach(file => {
             let fileIcon = getFileIcon(file.type);
@@ -574,23 +630,96 @@ document.addEventListener("DOMContentLoaded", function () {
             fileTableBody.innerHTML += row;
         });
 
-        updatePagination();
+        updatePagination(filesToLoad);
     }
 
-    window.changePage = function (page) {
-        if (page < 1 || page > totalPages) return;
-        currentPage = page;
-        loadTable();
+    function updatePagination(filesToPaginate) {
+    paginationContainer.innerHTML = "";
+    let totalPages = Math.ceil(filesToPaginate.length / rowsPerPage);
+
+    // Function to generate page number buttons with ellipsis
+    const generatePageNumbers = () => {
+        let pageNumbers = [];
+
+        if (totalPages <= 3) {
+            // Show all pages if there are 3 or fewer
+            for (let i = 1; i <= totalPages; i++) {
+                pageNumbers.push(i);
+            }
+        } else {
+            if (currentPage <= 2) {
+                // Show first 2 pages, ellipsis, and last page
+                pageNumbers = [1, 2, "...", totalPages];
+            } else if (currentPage >= totalPages - 1) {
+                // Show first page, ellipsis, and last 2 pages
+                pageNumbers = [1, "...", totalPages - 1, totalPages];
+            } else {
+                // Show first page, ellipsis, current page, ellipsis, and last page
+                pageNumbers = [1, "...", currentPage, "...", totalPages];
+            }
+        }
+
+        return pageNumbers;
     };
 
+    // Previous Button
+    paginationContainer.innerHTML += `
+        <li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
+            <a class="page-link previous" href="#" onclick="changePage(${currentPage - 1}); return false;"><i class="bi bi-chevron-left"></i> Previous</a>
+        </li>
+    `;
+
+    // Page Number Buttons
+    const pageNumbers = generatePageNumbers();
+    pageNumbers.forEach(page => {
+        if (page === "...") {
+            paginationContainer.innerHTML += `<li class="page-item disabled"><a class="page-link">...</a></li>`;
+        } else {
+            paginationContainer.innerHTML += `
+                <li class="page-item ${page === currentPage ? 'active' : ''}">
+                    <a class="page-link" href="#" onclick="changePage(${page}); return false;">${page}</a>
+                </li>
+            `;
+        }
+    });
+
+    // Next Button
+    paginationContainer.innerHTML += `
+        <li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
+            <a class="page-link next" href="#" onclick="changePage(${currentPage + 1}); return false;">Next <i class="bi bi-chevron-right"></i></a>
+        </li>
+    `;
+}
+    // Function to handle page changes
+    window.changePage = function (page) {
+        if (page < 1 || page > Math.ceil(filteredFiles.length / rowsPerPage)) return;
+        currentPage = page;
+        loadTable(filteredFiles);
+    };
+
+    // Event listener for files per page change
     filesPerPageSelect.addEventListener("change", function () {
         rowsPerPage = parseInt(this.value);
         currentPage = 1;
-        loadTable();
+        loadTable(filteredFiles);
     });
 
-    loadTable();
+    // Event listeners for category buttons
+    categoryButtons.forEach(button => {
+        button.addEventListener("click", function () {
+            categoryButtons.forEach(btn => btn.classList.remove("active"));
+            this.classList.add("active");
+            const category = this.getAttribute("data-category");
+            filteredFiles = filterFiles(category);
+            currentPage = 1;
+            loadTable(filteredFiles);
+        });
+    });
+
+    // Initial load of the table
+    loadTable(filteredFiles);
 });
+
 
 document.addEventListener("DOMContentLoaded", function () {
     const recentUploadsContainer = document.getElementById("recentUploadsContainer");
@@ -617,9 +746,14 @@ document.addEventListener("DOMContentLoaded", function () {
             let recentFileHTML = `
                 <div class="col-md-4">
                     <div class="card p-3" style="background-color:#F3F5FC; border:none; border-radius:10px;">
-                        <div class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-between align-items-center">
                             <img src="${fileIcon}" width="30" height="30" alt="File Icon">
-                            <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                            <div>
+                                <a href="#" class="fw-bold text-decoration-none" style="color:#474BC2;">${file.name}</a>
+                                <p class="mb-0">${file.type} • ${file.size}</p>
+                                <small class="text-muted">${file.date}</small>
+                            </div>
+                            <button class="btn btn-light action-btn" type="button" data-bs-toggle="dropdown">
                                 &#8942;
                             </button>
                             <ul class="dropdown-menu">
@@ -628,9 +762,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                 <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash"></i> Remove</a></li>
                             </ul>
                         </div>
-                        <a href="#" class="fw-bold text-decoration-none" style="color:#474BC2;">${file.name}</a>
-                        <p class="mb-0">${file.type} • ${file.size}</p>
-                        <small class="text-muted">${file.date}</small>
+
                     </div>
                 </div>
             `;
