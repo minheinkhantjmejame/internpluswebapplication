@@ -471,11 +471,9 @@
 
     <!-- Hidden folder content section -->
 <div id="folderContent" class="col-md-9" style="display: none;">
-    <h2 id="folderNameHeading"></h2>
-    <button id="backToStorage" class="btn btn-primary">Back to Storage</button>
-    <div id="folderFiles">
-        <!-- Folder-specific content will be loaded here -->
-    </div>
+    
+
+
 </div>
 
 </div>
@@ -485,9 +483,11 @@
     <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
     <!-- Custom JS  -->
     <script src="../js/app.js"></script>
-    <script>
 
-document.addEventListener("DOMContentLoaded", function () {
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
     let sidebarLinks = document.querySelectorAll(".nav-link");
 
     // Get the last active link from localStorage
@@ -529,7 +529,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const createFolderBtn = document.getElementById("createFolder");
     const folderNameInput = document.getElementById("folderName");
     const storageContainer = document.querySelector(".row[style*='margin-left:5px;']");
-    const folderDropdown = document.querySelector(".sub-dropdown");
 
     let folders = []; // Array to store folder names
 
@@ -555,7 +554,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         // Add folder name to the array
-        folders.push(folderName);
+        folders.push({ name: folderName, files: [] });
 
         // Create new folder element dynamically
         let newFolderHTML = document.createElement("div");
@@ -583,8 +582,8 @@ document.addEventListener("DOMContentLoaded", function () {
         updateFolderDropdown();
 
         newFolderHTML.addEventListener("click", function () {
-        loadFolderContent(folderName);
-    });
+            loadFolderContent(folderName);
+        });
 
         // Close the panel
         newFolderPanel.style.right = "-400px";
@@ -600,86 +599,211 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     function loadFolderContent(folderName) {
-    const dashboardContent = document.querySelector(".dashboard-content");
-    const folderContentSection = document.getElementById("folderContent");
+        const dashboardContent = document.querySelector(".dashboard-content");
+        const folderContentSection = document.getElementById("folderContent");
 
-    // Hide dashboard content
-    dashboardContent.style.display = "none";
+        // Hide dashboard content
+        dashboardContent.style.display = "none";
 
-    // Update folder content section
-    folderContentSection.innerHTML = `
-        <h2>${folderName}</h2>
-        <button id="backToStorage" class="btn btn-primary">Back to Storage</button>
-        <div>
-            <p>This is the content of the folder: <strong>${folderName}</strong>.</p>
-        </div>
-    `;
+        // Find the folder
+        const folder = folders.find(f => f.name === folderName);
+        if (!folder) {
+            alert(`Folder "${folderName}" not found`);
+            return;
+        }
 
-    // Show the folder content section
-    folderContentSection.style.display = "block";
+        // Update folder content section
+        folderContentSection.innerHTML = `
+            <div style="display:flex;width:100%;justify-content:space-between;">
+                <button id="backToStorage" class="btn mt-3" style="border:none;background-color:none;font-size:14px;">
+                    <img src="../assets/icon/less_than.png" />Back to Storage
+                </button>
+                <button class="btn mt-3" style="background-color:#474BC2;color:white;border-radius:4px; align-self:self-end; margin-right:20px;">
+                    Edit Name
+                </button>
+            </div>
+            <h2 class="mt-3" style="margin-left:10px;">${folderName}</h2>
+            <div class="table-container mt-3">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox"></th>
+                            <th>File name</th>
+                            <th>Uploaded by</th>
+                            <th>File source</th>
+                            <th>Date/Time</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="folderFileTableBody">
+                        <!-- Table Data Will Load Here via JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        `;
 
-    // Add event listener to "Back to Storage" button
-    document.getElementById("backToStorage").addEventListener("click", function () {
-        goBackToStorage();
-    });
-}
+        // Show the folder content section
+        folderContentSection.style.display = "block";
 
-function goBackToStorage() {
-    const dashboardContent = document.querySelector(".dashboard-content");
-    const folderContentSection = document.getElementById("folderContent");
+        // Load files into the folder table
+        const folderFileTableBody = document.getElementById("folderFileTableBody");
+        folderFileTableBody.innerHTML = "";
 
-    // Hide the folder content section
-    folderContentSection.style.display = "none";
+        folder.files.forEach(file => {
+            let fileIcon = getFileIcon(file.type);
 
-    // Show the dashboard content
-    dashboardContent.style.display = "block";
-}
-
-
-    function updateFolderDropdown() {
-    const allSubDropdowns = document.querySelectorAll(".sub-dropdown");
-    allSubDropdowns.forEach(subDropdown => {
-        subDropdown.innerHTML = ""; // Clear existing items
-        
-        folders.forEach(folder => {
-            let folderItem = document.createElement("li");
-            folderItem.innerHTML = `
-                <a class="dropdown-item" href="#">
-                    <div style="display:flex;justify-content:space-between;align-items:center;">
-                        <span style="flex-grow:1;">${folder}</span>
+            let row = document.createElement("tr");
+            row.innerHTML = `
+                <td><input type="checkbox"></td>
+                <td>
+                    <div class="d-flex align-items-center">
+                        <img src="${fileIcon}" width="25" height="25" class="me-2">
+                        <div>
+                            ${file.name} <br>
+                            <small>${file.type} - ${file.size}</small>
+                        </div>
                     </div>
-                </a>`;
-            subDropdown.appendChild(folderItem);
+                </td>
+                <td>
+                    <div class="d-flex align-items-center">
+                        <img src="${file.profileImg}" width="30" height="30" class="rounded-circle me-2">
+                        <div>
+                            ${file.uploadedBy} <br>
+                            <small>${file.email}</small>
+                        </div>
+                    </div>
+                </td>
+                <td>${file.fileSource}</td>
+                <td>${file.date}</td>
+                <td>
+                    <div class="dropdown">
+                        <button class="btn action-btn" type="button" data-bs-toggle="dropdown">&#8942;</button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-download"></i> Download</a></li>
+                            <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash"></i> Remove</a></li>
+                        </ul>
+                    </div>
+                </td>
+            `;
+
+            folderFileTableBody.appendChild(row);
         });
-    });
-}
 
-
-
-});
-
-
-
-function getFileIcon(type) {
-        const icons = {
-            "PDF": "https://cdn-icons-png.flaticon.com/512/337/337946.png",
-            "JPG": "https://cdn-icons-png.flaticon.com/512/136/136524.png",
-            "JPEG": "https://cdn-icons-png.flaticon.com/512/136/136524.png",
-            "PNG": "https://cdn-icons-png.flaticon.com/512/136/136530.png",
-            "MP4": "https://cdn-icons-png.flaticon.com/512/136/136545.png",
-            "AVI": "https://cdn-icons-png.flaticon.com/512/136/136549.png",
-            "MOV": "https://cdn-icons-png.flaticon.com/512/136/136549.png",
-            "ZIP": "https://cdn-icons-png.flaticon.com/512/337/337946.png",
-            "RAR": "https://cdn-icons-png.flaticon.com/512/337/337946.png",
-            "DOCX": "https://cdn-icons-png.flaticon.com/512/281/281760.png",
-            "DOC": "https://cdn-icons-png.flaticon.com/512/281/281760.png",
-            "TXT": "https://cdn-icons-png.flaticon.com/512/136/136527.png"
-        };
-        return icons[type] || "https://cdn-icons-png.flaticon.com/512/716/716784.png"; // Default file icon
+        // Add event listener to "Back to Storage" button
+        document.getElementById("backToStorage").addEventListener("click", function () {
+            goBackToStorage();
+        });
     }
 
-    
-    const files = [
+    function goBackToStorage() {
+        const dashboardContent = document.querySelector(".dashboard-content");
+        const folderContentSection = document.getElementById("folderContent");
+
+        // Hide the folder content section
+        folderContentSection.style.display = "none";
+
+        // Show the dashboard content
+        dashboardContent.style.display = "block";
+    }
+
+    function updateFolderDropdown() {
+        const allSubDropdowns = document.querySelectorAll(".sub-dropdown");
+        allSubDropdowns.forEach(subDropdown => {
+            subDropdown.innerHTML = ""; // Clear existing items
+
+            folders.forEach(folder => {
+                let folderItem = document.createElement("li");
+                folderItem.innerHTML = `
+                    <a class="dropdown-item" href="#" data-folder="${folder.name}">
+                        <div style="display:flex;justify-content:space-between;align-items:center;">
+                            <span style="flex-grow:1;">${folder.name}</span>
+                        </div>
+                    </a>`;
+                
+                folderItem.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+
+                    const folderName = folder.name;
+                    const row = this.closest("tr"); // Get the row associated with the dropdown
+
+                    if (!row) {
+                        alert("Error: No file row found.");
+                        return;
+                    }
+
+                    // Get the file name from the row
+                    const fileName = row.querySelector("td:nth-child(2)").innerText.split("\n")[0].trim();
+
+                    // Find the file object in the `files` array
+                    const file = files.find(f => f.name.trim() === fileName);
+
+                    if (!file) {
+                        alert("Error: Could not find file.");
+                        return;
+                    }
+
+                    // Move the file to the folder
+                    addFileToFolder(file, folderName, row);
+                });
+
+                subDropdown.appendChild(folderItem);
+            });
+        });
+    }
+
+    function addFileToFolder(file, folderName, row) {
+        if (!file || !folderName || !row) {
+            alert("Error: No file, folder, or row selected.");
+            return;
+        }
+
+        // Find the folder object
+        let folder = folders.find(f => f.name === folderName);
+        if (!folder) {
+            alert(`Folder "${folderName}" not found`);
+            return;
+        }
+
+        // Prevent duplicate file entries
+        if (folder.files.some(f => f.name === file.name)) {
+            alert(`File "${file.name}" already exists in folder "${folderName}"`);
+            return;
+        }
+
+        // Add file to the folder
+        folder.files.push(file);
+
+        // Remove file from the main table (move the row)
+        row.remove();
+
+        alert(`File "${file.name}" added to folder "${folderName}"`);
+        loadFolderContent(folderName);
+    }
+
+    // Initial load of the folder dropdown
+    updateFolderDropdown();
+});
+
+function getFileIcon(type) {
+    const icons = {
+        "PDF": "https://cdn-icons-png.flaticon.com/512/337/337946.png",
+        "JPG": "https://cdn-icons-png.flaticon.com/512/136/136524.png",
+        "JPEG": "https://cdn-icons-png.flaticon.com/512/136/136524.png",
+        "PNG": "https://cdn-icons-png.flaticon.com/512/136/136530.png",
+        "MP4": "https://cdn-icons-png.flaticon.com/512/136/136545.png",
+        "AVI": "https://cdn-icons-png.flaticon.com/512/136/136549.png",
+        "MOV": "https://cdn-icons-png.flaticon.com/512/136/136549.png",
+        "ZIP": "https://cdn-icons-png.flaticon.com/512/337/337946.png",
+        "RAR": "https://cdn-icons-png.flaticon.com/512/337/337946.png",
+        "DOCX": "https://cdn-icons-png.flaticon.com/512/281/281760.png",
+        "DOC": "https://cdn-icons-png.flaticon.com/512/281/281760.png",
+        "TXT": "https://cdn-icons-png.flaticon.com/512/136/136527.png"
+    };
+    return icons[type] || "https://cdn-icons-png.flaticon.com/512/716/716784.png"; // Default file icon
+}
+
+const files = [
     { name: "Peter_Resume", type: "PDF", size: "5.9 MB", uploadedBy: "Peter Pan", email: "pppan2000@gmail.com", profileImg: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png", fileSource: "Internship Program Application", date: "17 Dec 2024, 11:05:24" },
     { name: "ExampleTag", type: "JPG", size: "3 MB", uploadedBy: "Doc Hudson", email: "justacup@gmail.com", profileImg: "https://cdn-icons-png.flaticon.com/512/149/149071.png", fileSource: "Report before lunch", date: "17 Dec 2024, 10:44:56" },
     { name: "Design_Logo", type: "PNG", size: "2.5 MB", uploadedBy: "Lightning McQueen", email: "pistons1@gmail.com", profileImg: "https://cdn-icons-png.flaticon.com/512/4333/4333609.png", fileSource: "Graphic Design", date: "16 Dec 2024, 13:21:10" },
@@ -704,7 +828,6 @@ function getFileIcon(type) {
     { name: "Legal_Disclaimer", type: "DOC", size: "1.9 MB", uploadedBy: "Matt Murdock", email: "daredevil@hellskitchen.com", profileImg: "https://cdn-icons-png.flaticon.com/512/2922/2922501.png", fileSource: "Legal", date: "02 Dec 2024, 15:45:30" },
     { name: "Budget_Report", type: "XLSX", size: "3.6 MB", uploadedBy: "Bruce Banner", email: "hulk@science.com", profileImg: "https://cdn-icons-png.flaticon.com/512/2922/2922500.png", fileSource: "Finance", date: "01 Dec 2024, 17:25:50" }
 ];
-
 
 document.addEventListener("DOMContentLoaded", function () {
     const fileTableBody = document.getElementById("fileTableBody");
@@ -768,21 +891,21 @@ document.addEventListener("DOMContentLoaded", function () {
                     </td>
                     <td>${file.fileSource}</td>
                     <td>${file.date}</td>
-<td>
-    <div class="dropdown">
-        <button class="btn action-btn" type="button" data-bs-toggle="dropdown">&#8942;</button>
-        <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#"><i class="bi bi-download"></i> Download</a></li>
-            <li>
-                <a class="dropdown-item" href="#" id="addToFolder"><i class="bi bi-folder-plus"></i> Add to folder</a>
-                <ul class="dropdown-menu sub-dropdown">
-                    
-                </ul>
-            </li>
-            <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash"></i> Remove</a></li>
-        </ul>
-    </div>
-</td>
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn action-btn" type="button" data-bs-toggle="dropdown">&#8942;</button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-download"></i> Download</a></li>
+                                <li>
+                                    <a class="dropdown-item" href="#" id="addToFolder"><i class="bi bi-folder-plus"></i> Add to folder</a>
+                                    <ul class="dropdown-menu sub-dropdown">
+                                        
+                                    </ul>
+                                </li>
+                                <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash"></i> Remove</a></li>
+                            </ul>
+                        </div>
+                    </td>
                 </tr>
             `;
             fileTableBody.innerHTML += row;
@@ -792,62 +915,63 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function updatePagination(filesToPaginate) {
-    paginationContainer.innerHTML = "";
-    let totalPages = Math.ceil(filesToPaginate.length / rowsPerPage);
+        paginationContainer.innerHTML = "";
+        let totalPages = Math.ceil(filesToPaginate.length / rowsPerPage);
 
-    // Function to generate page number buttons with ellipsis
-    const generatePageNumbers = () => {
-        let pageNumbers = [];
+        // Function to generate page number buttons with ellipsis
+        const generatePageNumbers = () => {
+            let pageNumbers = [];
 
-        if (totalPages <= 3) {
-            // Show all pages if there are 3 or fewer
-            for (let i = 1; i <= totalPages; i++) {
-                pageNumbers.push(i);
-            }
-        } else {
-            if (currentPage <= 2) {
-                // Show first 2 pages, ellipsis, and last page
-                pageNumbers = [1, 2, "...", totalPages];
-            } else if (currentPage >= totalPages - 1) {
-                // Show first page, ellipsis, and last 2 pages
-                pageNumbers = [1, "...", totalPages - 1, totalPages];
+            if (totalPages <= 3) {
+                // Show all pages if there are 3 or fewer
+                for (let i = 1; i <= totalPages; i++) {
+                    pageNumbers.push(i);
+                }
             } else {
-                // Show first page, ellipsis, current page, ellipsis, and last page
-                pageNumbers = [1, "...", currentPage, "...", totalPages];
+                if (currentPage <= 2) {
+                    // Show first 2 pages, ellipsis, and last page
+                    pageNumbers = [1, 2, "...", totalPages];
+                } else if (currentPage >= totalPages - 1) {
+                    // Show first page, ellipsis, and last 2 pages
+                    pageNumbers = [1, "...", totalPages - 1, totalPages];
+                } else {
+                    // Show first page, ellipsis, current page, ellipsis, and last page
+                    pageNumbers = [1, "...", currentPage, "...", totalPages];
+                }
             }
-        }
 
-        return pageNumbers;
-    };
+            return pageNumbers;
+        };
 
-    // Previous Button
-    paginationContainer.innerHTML += `
-        <li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
-            <a class="page-link previous" href="#" onclick="changePage(${currentPage - 1}); return false;"><i class="bi bi-chevron-left"></i> Previous</a>
-        </li>
-    `;
+        // Previous Button
+        paginationContainer.innerHTML += `
+            <li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
+                <a class="page-link previous" href="#" onclick="changePage(${currentPage - 1}); return false;"><i class="bi bi-chevron-left"></i> Previous</a>
+            </li>
+        `;
 
-    // Page Number Buttons
-    const pageNumbers = generatePageNumbers();
-    pageNumbers.forEach(page => {
-        if (page === "...") {
-            paginationContainer.innerHTML += `<li class="page-item disabled"><a class="page-link">...</a></li>`;
-        } else {
-            paginationContainer.innerHTML += `
-                <li class="page-item ${page === currentPage ? 'active' : ''}">
-                    <a class="page-link" href="#" onclick="changePage(${page}); return false;">${page}</a>
-                </li>
-            `;
-        }
-    });
+        // Page Number Buttons
+        const pageNumbers = generatePageNumbers();
+        pageNumbers.forEach(page => {
+            if (page === "...") {
+                paginationContainer.innerHTML += `<li class="page-item disabled"><a class="page-link">...</a></li>`;
+            } else {
+                paginationContainer.innerHTML += `
+                    <li class="page-item ${page === currentPage ? 'active' : ''}">
+                        <a class="page-link" href="#" onclick="changePage(${page}); return false;">${page}</a>
+                    </li>
+                `;
+            }
+        });
 
-    // Next Button
-    paginationContainer.innerHTML += `
-        <li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
-            <a class="page-link next" href="#" onclick="changePage(${currentPage + 1}); return false;">Next <i class="bi bi-chevron-right"></i></a>
-        </li>
-    `;
-}
+        // Next Button
+        paginationContainer.innerHTML += `
+            <li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
+                <a class="page-link next" href="#" onclick="changePage(${currentPage + 1}); return false;">Next <i class="bi bi-chevron-right"></i></a>
+            </li>
+        `;
+    }
+
     // Function to handle page changes
     window.changePage = function (page) {
         if (page < 1 || page > Math.ceil(filteredFiles.length / rowsPerPage)) return;
@@ -877,7 +1001,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // Initial load of the table
     loadTable(filteredFiles);
 });
-
 
 document.addEventListener("DOMContentLoaded", function () {
     const recentUploadsContainer = document.getElementById("recentUploadsContainer");
@@ -911,21 +1034,19 @@ document.addEventListener("DOMContentLoaded", function () {
                                 <p class="mb-0">${file.type} • ${file.size}</p>
                                 <small class="text-muted">${file.date}</small>
                             </div>
-    <div class="dropdown">
-        <button class="btn action-btn" type="button" data-bs-toggle="dropdown">&#8942;</button>
-        <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#"><i class="bi bi-download"></i> Download</a></li>
-            <li>
-                <a class="dropdown-item" href="#" id="addToFolder"><i class="bi bi-folder-plus"></i> Add to folder</a>
-                <ul class="dropdown-menu sub-dropdown">
-           
-                </ul>
-            </li>
-            <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash"></i> Remove</a></li>
-        </ul>
-    </div>
+                            <div class="dropdown">
+                                <button class="btn action-btn" type="button" data-bs-toggle="dropdown">&#8942;</button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#"><i class="bi bi-download"></i> Download</a></li>
+                                    <li>
+                                        <a class="dropdown-item" href="#" id="addToFolder"><i class="bi bi-folder-plus"></i> Add to folder</a>
+                                        <ul class="dropdown-menu sub-dropdown">
+                                        </ul>
+                                    </li>
+                                    <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash"></i> Remove</a></li>
+                                </ul>
+                            </div>
                         </div>
-
                     </div>
                 </div>
             `;
@@ -959,7 +1080,30 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+document.getElementById('uploadForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent form from reloading the page
 
-</script>
+    let fileInput = document.getElementById('fileInput');
+    if (fileInput.files.length === 0) {
+        alert("No file selected. Please choose a file to upload.");
+        return;
+    }
+
+    let formData = new FormData();
+    for (let i = 0; i < fileInput.files.length; i++) {
+        formData.append("files[]", fileInput.files[i]);
+    }
+
+    fetch('upload_endpoint.php', { // Replace with your backend endpoint
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => console.log("Upload successful:", data))
+    .catch(error => console.error("Error uploading file:", error));
+});
+    </script>
+
+
 </body>
 </html>
