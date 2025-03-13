@@ -139,5 +139,332 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+    const dashboardContent = document.querySelector(".dashboard-content");
+
+    // ✅ Event delegation: Listen for profile image click (Opens profile details)
+    document.addEventListener("click", function (event) {
+        if (event.target.closest(".profile_photo")) {
+            showProfile();
+        }
+    });
+
+    // ✅ Event delegation: Listen for Edit Profile button click (Opens edit form)
+    document.addEventListener("click", function (event) {
+        if (event.target.closest(".edit-profile-btn")) {
+            showEditProfile();
+        }
+    });
+
+    // ✅ Event delegation: Listen for Back to My Profile button click
+    document.addEventListener("click", function (event) {
+        if (event.target.closest(".back-profile-btn")) {
+            showProfile();
+        }
+    });
+
+    document.addEventListener("click", function (event) {
+        if (event.target.closest(".edit-personal-info-btn")) {
+            event.preventDefault();
+            showEditPersonalInfo();
+        } else if (event.target.closest(".back-profile-btn")) {
+            event.preventDefault();
+            restoreProfile();
+        }
+    });
+
+    function showProfile() {
+        let profileImage = localStorage.getItem("profileImage") || "../assets/img/user_sample_1.png";
+        let profileName = localStorage.getItem("profileName") || "Lhing W.";
+        let position = localStorage.getItem("position") || "HR Manager";
+        let fullName = localStorage.getItem("fullName") || "Lhing Wang";
+        let team = localStorage.getItem("team") || "Project Internplus";
+        let email = localStorage.getItem("email") || "wanglhing@vennessplus.com";
+        let phone = localStorage.getItem("phone") || "0898144676";
+        let lineID = localStorage.getItem("lineID") || "imlhingw21";
+
+        dashboardContent.innerHTML = `
+            <div class="container-fluid" id="profile_details">
+                <h2 class="mb-3">My Profile</h2>
+
+                <!-- Profile Summary -->
+                <div class="card p-4 w-50">
+                    <div class="d-flex align-items-center">
+                        <img src="${profileImage}" alt="Profile Photo" class="rounded-circle" width="80" height="80">
+                        <div class="ms-3">
+                            <h4 class="mb-0">${profileName}</h4>
+                            <span class="badge">${position}</span>
+                        </div>
+                        <button class="btn edit edit-profile-btn ms-auto"><img src="../assets/icon/edit_pen.png" alt="">  Edit</button>
+                    </div>
+                </div>
+
+                <!-- Personal Information -->
+                <div class="card p-4 mt-3 w-50">
+                    <div class="d-flex justify-content-between mb-3">
+                        <h5>Personal Information</h5>
+                        <button class="btn edit-personal-info-btn edit"><img src="../assets/icon/edit_pen.png" alt=""> Edit</button>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <span>Full Name</span><p>${fullName}</p>
+                            <span>Team</span><p>${team}</p>
+                            <span>Phone Number</span><p>${phone}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <span>Position</span><p>${position}</p>
+                            <span>Email</span><p>${email}</p>
+                            <span>Line ID</span><p>${lineID}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Buttons -->
+                <div class="mt-3">
+                    <button class="btn" id="logout">Logout</button>
+                    <button class="btn ms-2" id="del_account">Delete Account</button>
+                </div>
+            </div>
+        `;
+    }
+
+    function showEditProfile() {
+        dashboardContent.innerHTML = `
+            <div class="container-fluid d-flex flex-column align-items-start" style="width:auto; margin: auto;">
+                <a href="#" class="back-profile-btn d-flex align-items-center mb-3" style="text-decoration: none; color: black;">
+                    <i class="bi bi-arrow-left me-2"></i> Back to My Profile
+                </a>
+
+                <h2 class="mb-4">Edit Profile</h2>
+
+                <div class="d-flex gap-5">
+                    <div class="d-flex flex-column align-items-center">
+                        <img id="profilePreview" src="${localStorage.getItem("profileImage") || '../assets/img/user_sample_1.png'}" 
+                            alt="Profile Photo" class="rounded" width="180" height="180" style="border: 1px solid #ddd; object-fit: cover;">
+                        <button class="btn btn-primary mt-3 px-4 save-profile-btn" style="align-self: self-start; background-color:#474BC2;">Save</button>
+                    </div>
+
+                    <div class="w-100 mt-0">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Image</label>
+                            <div id="customFileInput" class="d-flex align-items-center py-0"
+                                style="cursor: pointer; border: 1px solid #C8C8C8; border-radius: 4px; height: 50px; width: 300px;">
+                                
+                                <div class="d-flex justify-content-center align-items-center" 
+                                    style="width: 40px; height: 100%; background-color: #474BC2;">
+                                    <i class="bi bi-image" style="font-size: 20px; color:white;"></i>
+                                </div>
+
+                                <span id="fileLabel" class="flex-grow-1 text-truncate mx-2">Choose a file</span>
+
+                                <input type="file" id="profileImageInput" class="d-none">
+                            </div>
+
+                            <small class="text-muted">*Supports size up to 10 MB</small>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Profile Name</label>
+                            <input type="text" id="profileName" class="form-control"  
+                                style="border:1px solid #C8C8C8; border-radius:4px;" 
+                                value="${localStorage.getItem("profileName") || 'Emma W.'}">
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Role</label>
+                            <select id="profileRole" class="form-select" style="border:1px solid #C8C8C8; border-radius:4px;">
+                                <option ${localStorage.getItem("position") === "HR Manager" ? "selected" : ""}>HR Manager</option>
+                                <option ${localStorage.getItem("position") === "HR" ? "selected" : ""}>HR</option>
+                                <option ${localStorage.getItem("position") === "Supervisor" ? "selected" : ""}>Supervisor</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        let selectedImage = null;
+
+        document.getElementById("customFileInput").addEventListener("click", function () {
+            document.getElementById("profileImageInput").click();
+        });
+
+        document.getElementById("profileImageInput").addEventListener("change", function (event) {
+            let file = event.target.files[0];
+            if (file) {
+                let reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById("profilePreview").src = e.target.result;
+                    selectedImage = e.target.result;
+                    document.getElementById("fileLabel").textContent = file.name;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        document.querySelector(".save-profile-btn").addEventListener("click", function () {
+            let newProfileName = document.getElementById("profileName").value;
+            let newProfileRole = document.getElementById("profileRole").value;
+
+            localStorage.setItem("profileName", newProfileName);
+            localStorage.setItem("position", newProfileRole);
+
+            if (selectedImage) {
+                localStorage.setItem("profileImage", selectedImage);
+
+                // Update the navigation bar profile image
+                let navProfileImg = document.getElementById("navProfileImage");
+                if (navProfileImg) {
+                    navProfileImg.src = selectedImage; // ✅ Updates immediately
+                }
+            }
+
+            showProfile();
+        });
+    }
+
+    // document.addEventListener("DOMContentLoaded", function () {
+    //     let storedProfileImage = localStorage.getItem("profileImage");
+    //     if (storedProfileImage) {
+    //         document.getElementById("navProfileImage").src = storedProfileImage;
+    //     }
+    // });
+
+    document.addEventListener("DOMContentLoaded", function () {
+    // Set initial profile image from localStorage or default
+    let storedProfileImage = localStorage.getItem("profileImage") || "../assets/img/user_sample_1.png";
+    let navProfileImage = document.getElementById("navProfileImage");
+    if (navProfileImage) {
+        navProfileImage.src = storedProfileImage;
+    }
+
+    // Function to update the profile image in the navigation bar
+    function updateNavProfileImage(newImageSrc) {
+        let navProfileImage = document.getElementById("navProfileImage");
+        if (navProfileImage) {
+            navProfileImage.src = newImageSrc;
+        }
+    }
+
+    // Event listener for saving the profile image
+    document.addEventListener("click", function (event) {
+        if (event.target.closest(".save-profile-btn")) {
+            let newProfileName = document.getElementById("profileName").value;
+            let newProfileRole = document.getElementById("profileRole").value;
+
+            localStorage.setItem("profileName", newProfileName);
+            localStorage.setItem("position", newProfileRole);
+
+            let selectedImage = document.getElementById("profilePreview").src;
+            if (selectedImage) {
+                localStorage.setItem("profileImage", selectedImage);
+                updateNavProfileImage(selectedImage); // Update the navigation bar profile image
+            }
+
+            showProfile();
+        }
+    });
+});
+
+function showEditPersonalInfo() {
+    const dashboardContent = document.querySelector(".dashboard-content");
+
+    dashboardContent.innerHTML = `
+        <div class="container-fluid edit-personal-info">
+            <div style="margin-bottom:5px;">
+                <a href="#" class="back-profile-btn" style="text-decoration: none; color: black;">
+                    <i class="bi bi-arrow-left"></i> Back to My Profile
+                </a>
+            </div>
+            <h2 class="mb-3">Edit Personal Information</h2>
+
+            <div class="w-50">
+                <h4>Personal Information</h4>
+                <div class="mb-3">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" id="fullName" class="form-control" value="${localStorage.getItem("fullName") || 'Lhing Wang'}">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Position</label>
+                    <select id="position" class="form-control">
+                        <option ${localStorage.getItem("position") === "HR Manager" ? "selected" : ""}>HR Manager</option>
+                        <option ${localStorage.getItem("position") === "HR" ? "selected" : ""}>HR</option>
+                        <option ${localStorage.getItem("position") === "Supervisor" ? "selected" : ""}>Supervisor</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Team</label>
+                    <input type="text" id="team" class="form-control" value="${localStorage.getItem("team") || 'Project Internplus'}">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" id="email" class="form-control" value="${localStorage.getItem("email") || 'wanglhing@vennessplus.com'}">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Phone Number</label>
+                    <input type="text" id="phone" class="form-control" value="${localStorage.getItem("phone") || '0898144676'}">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Line ID</label>
+                    <input type="text" id="lineID" class="form-control" value="${localStorage.getItem("lineID") || 'imlhingw21'}">
+                </div>
+
+                <button class="btn btn-primary save-profile-btn" style="background-color:#474BC2;">Save</button>
+            </div>
+        </div>
+    `;
+
+    // ✅ Event listener for Save button
+    document.querySelector(".save-profile-btn").addEventListener("click", function () {
+        let newFullName = document.getElementById("fullName").value;
+        let newPosition = document.getElementById("position").value;
+        let newTeam = document.getElementById("team").value;
+        let newEmail = document.getElementById("email").value;
+        let newPhone = document.getElementById("phone").value;
+        let newLineID = document.getElementById("lineID").value;
+
+        // ✅ Save updated information in localStorage
+        localStorage.setItem("fullName", newFullName);
+        localStorage.setItem("position", newPosition);
+        localStorage.setItem("team", newTeam);
+        localStorage.setItem("email", newEmail);
+        localStorage.setItem("phone", newPhone);
+        localStorage.setItem("lineID", newLineID);
+
+        // ✅ Go back to Profile page
+        showProfile();
+    });
+
+    // ✅ Event listener for Back button
+    document.querySelector(".back-profile-btn").addEventListener("click", function (event) {
+        event.preventDefault();
+        showProfile();
+    });
+}
+
+
+
+
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Retrieve profile image from localStorage
+    let storedProfileImage = localStorage.getItem("profileImage");
+
+    // If a profile image exists in localStorage, update the navbar profile image
+    if (storedProfileImage) {
+        let navProfileImg = document.getElementById("navProfileImage");
+        if (navProfileImg) {
+            navProfileImg.src = storedProfileImage;
+        }
+    }
+});
+
+
 
 // HR JS 
