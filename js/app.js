@@ -87,6 +87,187 @@ async function translateText(text, targetLanguage) {
 
 // HR JS 
 
+// packange checking function
+document.addEventListener("DOMContentLoaded", function () {
+    const standardButton = document.querySelector(".gpa-2"); // Standard package button
+    const dashboardContent = document.getElementById("dashboardContent");
+    const packageContent = document.getElementById("packageContent");
+
+    // Inject the package UI inside packageContent div
+    packageContent.innerHTML = `
+        <div class="mt-4">        
+            <div class="row gap-5">
+                <div class="col-md-6">
+                    <div class="">
+                        <h2>Package & Pricing</h2>
+                        <div class="d-flex">
+                            <div style="width:150px;height:150px; display:flex;justify-content:center;align-items:center;position:relative;">
+                                <div style="width:120px; height:120px; border-radius:50%; background-color:#474BC2;display:flex;justify-content:center;align-items:center;">
+                                    <img src="../assets/icon/battery_white.png" alt="">
+                                </div>
+                                <div style="width:120px;height:30px; border-radius:20px; background-color:#B1BBE7; position:absolute; bottom:0;">
+                                    <p style="display:flex;justify-content:center;align-items:center;margin-top:3px;">Standard</p>
+                                </div>
+                            </div>
+                            <div style="width:200px; height:150px; display:flex; justify-content:center; align-items:center;">
+                                <div style="width:100%; height:100%; display:flex; flex-direction:column; justify-content:center;">
+                                    <h4>Standard Package</h4>
+                                    <h5 class="mt-2">฿199 /month</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-5">
+                            <p>Suitable for large organizations or educational institutions that require a complete system.</p>
+                            <div class="d-flex justify-content-between w-50">
+                                <p><img src="../assets/icon/device.png" /> <span>5</span> devices</p>
+                                <p><img src="../assets/icon/user-circle.png" /><span>50</span> users</p>
+                            </div>
+
+                            <div class="d-flex justify-content-between">
+                                <p> Register for Interns</p>
+                                <div style="width:100px;height:30px;border-radius:10px;background-color:#B1BBE7; display:flex;justify-content:center;align-items:center;">
+                                    <i class="bi bi-check-square-fill"></i>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <p>Track internship status</p>
+                                <div style="width:100px;height:30px;border-radius:10px;background-color:#B1BBE7; display:flex;justify-content:center;align-items:center;">
+                                    <i class="bi bi-check-square-fill"></i>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <p>Storage space</p>
+                                <div style="width:100px;height:30px;border-radius:10px;background-color:#B1BBE7; display:flex;justify-content:center;align-items:center;">
+                                    <i class="bi bi-check-square-fill"></i>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <p>Preliminary results report</p>
+                                <div style="width:100px;height:30px;border-radius:10px;background-color:#B1BBE7; display:flex;justify-content:center;align-items:center;">
+                                    <i class="bi bi-check-square-fill"></i>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <p>Detailed report</p>
+                                <div style="width:100px;height:30px;border-radius:10px;background-color:#B1BBE7; display:flex;justify-content:center;align-items:center;">
+                                    <i class="bi bi-check-square-fill"></i>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <p>Notification system</p>
+                                <div style="width:100px;height:30px;border-radius:10px;background-color:#B1BBE7; display:flex;justify-content:center;align-items:center;">
+                                    <i class="bi bi-check-square-fill"></i>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <p>Maximum intern</p>
+                                <div style="width:100px;height:30px;border-radius:10px;background-color:#B1BBE7; display:flex;justify-content:center;align-items:center;">
+                                    50 users
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <p>Maximum administrator</p>
+                                <div style="width:100px;height:30px;border-radius:10px;background-color:#B1BBE7; display:flex;justify-content:center;align-items:center;">
+                                    5 devices
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                <div class="d-flex gap-5" >
+                    <div class="d-flex justify-content-cener align-items-center">
+                        <h5>Upgrade your package</h5>
+                    </div>
+                    <div class="d-flex mb-3">
+                        <button class="btn btn-outline-secondary active">Monthly</button>
+                        <button class="btn btn-outline-secondary ms-2">Yearly</button>
+                    </div>
+                </div>                
+                    <div class="card p-3 mb-2" style="box-shadow:none; border-radius:4px;">
+                        <div class="d-flex gap-2 mb-0">
+                            <div class="icon mb-0">
+                                <span class="icon-container" style="display: flex; background-color: #474bc2; border-radius: 50%; width: 50px; height: 50px; justify-content: center; align-items: center; overflow: hidden; margin: 0; padding: 0;">
+                                    <img src="../assets/icon/battery-v-50.png" style="width: 20px; height: 20px; display: block; margin: 0; padding: 0;" alt="">
+                                </span>                            
+                            </div>
+                            <div class="mb-0">                  
+                                <h5>Starter Package</h5>
+                                <p>Free</p>
+                            </div>
+                        </div>  
+                        <hr/>
+                        <p> <img src="../assets/icon/device.png" /> 1 device <img src="../assets/icon/user-circle.png" />  10 users</p>
+                    </div>
+                    <div class="card p-3 mb-2" style="box-shadow:none; border-radius:4px;">
+                        <div class="d-flex gap-2 mb-0">
+                            <div class="icon mb-0">
+                                <span class="icon-container" style="display: flex; background-color: #474bc2; border-radius: 50%; width: 50px; height: 50px; justify-content: center; align-items: center; overflow: hidden; margin: 0; padding: 0;">
+                                    <img src="../assets/icon/battery-v-50.png" style="width: 20px; height: 20px; display: block; margin: 0; padding: 0;" alt="">
+                                </span>                            
+                            </div>
+                            <div class="mb-0">                  
+                                <h5>Standard Package</h5>
+                                <p> / month</p>
+                            </div>
+                        </div>  
+                        <hr/>
+                        <p> <img src="../assets/icon/device.png" /> 1 device <img src="../assets/icon/user-circle.png" />  10 users</p>
+                    </div>
+                    <div class="card p-3 mb-2" style="box-shadow:none; border-radius:4px;">
+                        <div class="d-flex gap-2 mb-0">
+                            <div class="icon mb-0">
+                                <span class="icon-container" style="display: flex; background-color: #474bc2; border-radius: 50%; width: 50px; height: 50px; justify-content: center; align-items: center; overflow: hidden; margin: 0; padding: 0;">
+                                    <img src="../assets/icon/battery-v-50.png" style="width: 20px; height: 20px; display: block; margin: 0; padding: 0;" alt="">
+                                </span>                            
+                            </div>
+                            <div class="mb-0">                  
+                                <h5>Premium Package</h5>
+                                <p> / month</p>
+                            </div>
+                        </div>  
+                        <hr/>
+                        <p> <img src="../assets/icon/device.png" /> 1 device <img src="../assets/icon/user-circle.png" />  10 users</p>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <button class="btn mt-2" style="background-color: #474bc2; color:white;" id="cancelPackage">
+                            Cancel Package
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    // Function to switch content
+    function showPackageContent() {
+        dashboardContent.style.display = "none"; // Hide dashboard
+        packageContent.style.display = "block"; // Show package
+    }
+
+    // Function to restore dashboard content
+    function restoreDashboard() {
+        packageContent.style.display = "none"; // Hide package
+        dashboardContent.style.display = "block"; // Show dashboard
+    }
+
+    // When the Standard button is clicked, show package content
+    standardButton.addEventListener("click", function () {
+        showPackageContent();
+    });
+
+    // When the cancel button inside the package UI is clicked, restore dashboard
+    document.addEventListener("click", function (event) {
+        if (event.target.id === "cancelPackage") {
+            restoreDashboard();
+        }
+    });
+});
+
+// package checking function
+
+// profile change function 
 document.addEventListener("DOMContentLoaded", function () {
     const profilePhoto = document.querySelector(".profile_photo");
     const dashboardContent = document.querySelector(".dashboard-content");
@@ -464,7 +645,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 });
-
+// profile change function
 
 
 // HR JS 
