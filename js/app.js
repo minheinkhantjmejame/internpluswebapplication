@@ -92,6 +92,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const standardButton = document.querySelector(".gpa-2"); // Standard package button
     const dashboardContent = document.getElementById("dashboardContent");
     const packageContent = document.getElementById("packageContent");
+    const settingsContent = document.getElementById("settingsContent");
 
     // Inject the package UI inside packageContent div
     packageContent.innerHTML = `
@@ -244,7 +245,14 @@ document.addEventListener("DOMContentLoaded", function () {
     function showPackageContent() {
         dashboardContent.style.display = "none"; // Hide dashboard
         packageContent.style.display = "block"; // Show package
+        settingsContent.style.display = "none"; // Show settings page
     }
+
+    settingsButton.addEventListener("click", function () {
+        dashboardContent.style.display = "none"; // Hide dashboard
+        
+        packageContent.style.display = "none";
+    });
 
     // Function to restore dashboard content
     function restoreDashboard() {
@@ -267,92 +275,151 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // package checking function
 
-// profile change function 
+// Setting function
 document.addEventListener("DOMContentLoaded", function () {
-    const profilePhoto = document.querySelector(".profile_photo");
-    const dashboardContent = document.querySelector(".dashboard-content");
+    const settingsButton = document.getElementById("settingsButton");
+    const dashboardContent = document.getElementById("dashboardContent");
+    const settingsContent = document.getElementById("settingsContent");
+    const packageContent = document.getElementById("packageContent");
 
-    profilePhoto.addEventListener("click", function () {
-        // Replace dashboard content with profile details
-        dashboardContent.innerHTML = `
-            <div class="container-fluid" id="profile_details">
-                <h2 class="mb-3">My Profile</h2>
-
-                <!-- Profile Summary -->
-                <div class="card p-4 w-50">
-                    <div class="d-flex align-items-center">
-                        <img src="../assets/img/user_sample_1.png" alt="Profile Photo" class="rounded-circle" width="80" height="80">
-                        <div class="ms-3">
-                            <h4 class="mb-0">Lhing W.</h4>
-                            <span class="badge">HR Manager</span>
-                        </div>
-                        <button class="btn edit ms-auto"><img src="../assets/icon/edit_pen.png" alt="">  Edit</button>
-                    </div>
-                </div>
-
-                <!-- Personal Information -->
-                <div class="card p-4 mt-3 w-50">
-                    <div class="d-flex justify-content-between mb-3">
-                        <h5>Personal Information</h5>
-                        <button class="btn edit"><img src="../assets/icon/edit_pen.png" alt=""> Edit</button>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <span>Full Name</span><p> Lhing Wang</p>
-                            <span>Team</span><p> Project Internplus</p>
-                            <span>Phone Number</span><p> 0898144676</p>
-                        </div>
-                        <div class="col-md-6">
-                            <span>Position</span><p>HR Manager</p>
-                            <span>Email</span><p>wanglhing@vennessplus.com</p>
-                            <span>Line ID</span><p>imlhingw21</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Buttons -->
-                <div class="mt-3">
-                    <button class="btn" id="logout">Logout</button>
-                    <button class="btn ms-2" id="del_account">Delete Account</button>
-                </div>
+    // Inject settings UI only once
+    settingsContent.innerHTML = `
+        <h2 class="mb-4">Settings</h2>
+        <div class="row">
+            <div class="col-md-3">
+                <nav class="nav flex-column">
+                    <a class="nav-link active" href="#">📩 Email & Password</a>
+                    <a class="nav-link" href="#">🔔 Notification</a>
+                    <a class="nav-link" href="#">🌍 Language</a>
+                    <a class="nav-link" href="#">👨‍💼 Supervisor</a>
+                    <a class="nav-link" href="#">💰 Allowance</a>
+                    <a class="nav-link" href="#">📞 Contact</a>
+                    <a class="nav-link" href="#">⭐ Features & Service</a>
+                </nav>
             </div>
-        `;
+
+            <div class="col-md-9 bg-light p-4 rounded">
+                <h3>Email & Password</h3>
+                <p><strong>Email:</strong> wangling@vannessplus.com</p>
+                <button class="btn btn-primary mb-2">Change</button>
+                <p><strong>Password:</strong> **********</p>
+                <button class="btn btn-primary">Change</button>
+                
+                <hr>
+
+                <button class="btn btn-danger mt-3">Logout</button>
+                <button class="btn btn-outline-danger mt-3">Delete Account</button>
+            </div>
+        </div>
+    `;
+
+    // Show settings page when clicking the button
+    settingsButton.addEventListener("click", function () {
+        dashboardContent.style.display = "none"; // Hide dashboard
+        settingsContent.style.display = "block"; // Show settings page
+        packageContent.style.display = "none";
     });
 });
 
+
+// Setting function
+
+// profile change function 
+
 document.addEventListener("DOMContentLoaded", function () {
-    const dashboardContent = document.querySelector(".dashboard-content");
+    // DOM Elements
+    const dashboardContent = document.getElementById("dashboardContent");
+    const packageContent = document.getElementById("packageContent");
+    const settingsContent = document.getElementById("settingsContent");
+    const profileContent = document.getElementById("profileContent");
+    const profilePhoto = document.querySelector(".profile_photo");
+    const standardButton = document.querySelector(".gpa-2");
+    const settingsButton = document.getElementById("settingsButton");
 
-    // ✅ Event delegation: Listen for profile image click (Opens profile details)
-    document.addEventListener("click", function (event) {
-        if (event.target.closest(".profile_photo")) {
-            showProfile();
-        }
-    });
+    // Initialize content visibility
+    dashboardContent.style.display = "block";
+    packageContent.style.display = "none";
+    settingsContent.style.display = "none";
+    profileContent.style.display = "none";
 
-    // ✅ Event delegation: Listen for Edit Profile button click (Opens edit form)
+    // Load saved language from localStorage
+    const savedLanguage = localStorage.getItem("selectedLanguage") || "en";
+    updateLanguage(savedLanguage);
+
+    // Load the profile image from localStorage
+    loadProfileImage();
+
+    // Event Listeners
+    profilePhoto.addEventListener("click", showProfileContent);
+    standardButton.addEventListener("click", showPackageContent);
+    settingsButton.addEventListener("click", showSettingsContent);
+
+    // Event Delegation for Profile Actions
     document.addEventListener("click", function (event) {
         if (event.target.closest(".edit-profile-btn")) {
             showEditProfile();
-        }
-    });
-
-    // ✅ Event delegation: Listen for Back to My Profile button click
-    document.addEventListener("click", function (event) {
-        if (event.target.closest(".back-profile-btn")) {
-            showProfile();
-        }
-    });
-
-    document.addEventListener("click", function (event) {
-        if (event.target.closest(".edit-personal-info-btn")) {
+        } else if (event.target.closest(".edit-personal-info-btn")) {
             event.preventDefault();
             showEditPersonalInfo();
         } else if (event.target.closest(".back-profile-btn")) {
             event.preventDefault();
-            restoreProfile();
+            showProfileContent();
+        } else if (event.target.closest(".save-profile-btn")) {
+            saveProfile();
+        } else if (event.target.closest(".save-personal-info-btn")) {
+            savePersonalInfo();
+        } else if (event.target.id === "cancelPackage") {
+            restoreDashboard();
         }
     });
+
+    // Functions
+    function loadProfileImage() {
+        // Retrieve profile image from localStorage
+        let storedProfileImage = localStorage.getItem("profileImage");
+
+        // If a profile image exists in localStorage, update the navbar profile image
+        if (storedProfileImage) {
+            let navProfileImg = document.getElementById("navProfileImage");
+            if (navProfileImg) {
+                navProfileImg.src = storedProfileImage;
+            }
+        } else {
+            // Set a default image if no profile image is stored
+            let navProfileImg = document.getElementById("navProfileImage");
+            if (navProfileImg) {
+                navProfileImg.src = "../assets/img/user_sample_1.png"; // Default image
+            }
+        }
+    }
+
+    function showProfileContent() {
+        hideAllContent();
+        profileContent.style.display = "block";
+        showProfile();
+    }
+
+    function showPackageContent() {
+        hideAllContent();
+        packageContent.style.display = "block";
+    }
+
+    function showSettingsContent() {
+        hideAllContent();
+        settingsContent.style.display = "block";
+    }
+
+    function hideAllContent() {
+        dashboardContent.style.display = "none";
+        packageContent.style.display = "none";
+        settingsContent.style.display = "none";
+        profileContent.style.display = "none";
+    }
+
+    function restoreDashboard() {
+        hideAllContent();
+        dashboardContent.style.display = "block";
+    }
 
     function showProfile() {
         let profileImage = localStorage.getItem("profileImage") || "../assets/img/user_sample_1.png";
@@ -364,7 +431,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let phone = localStorage.getItem("phone") || "0898144676";
         let lineID = localStorage.getItem("lineID") || "imlhingw21";
 
-        dashboardContent.innerHTML = `
+        profileContent.innerHTML = `
             <div class="container-fluid" id="profile_details">
                 <h2 class="mb-3">My Profile</h2>
 
@@ -410,7 +477,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function showEditProfile() {
-        dashboardContent.innerHTML = `
+        profileContent.innerHTML = `
             <div class="container-fluid d-flex flex-column align-items-start" style="width:auto; margin: auto;">
                 <a href="#" class="back-profile-btn d-flex align-items-center mb-3" style="text-decoration: none; color: black;">
                     <i class="bi bi-arrow-left me-2"></i> Back to My Profile
@@ -482,126 +549,85 @@ document.addEventListener("DOMContentLoaded", function () {
                 reader.readAsDataURL(file);
             }
         });
-
-        document.querySelector(".save-profile-btn").addEventListener("click", function () {
-            let newProfileName = document.getElementById("profileName").value;
-            let newProfileRole = document.getElementById("profileRole").value;
-
-            localStorage.setItem("profileName", newProfileName);
-            localStorage.setItem("position", newProfileRole);
-
-            if (selectedImage) {
-                localStorage.setItem("profileImage", selectedImage);
-
-                // Update the navigation bar profile image
-                let navProfileImg = document.getElementById("navProfileImage");
-                if (navProfileImg) {
-                    navProfileImg.src = selectedImage; // ✅ Updates immediately
-                }
-            }
-
-            showProfile();
-        });
     }
 
-    // document.addEventListener("DOMContentLoaded", function () {
-    //     let storedProfileImage = localStorage.getItem("profileImage");
-    //     if (storedProfileImage) {
-    //         document.getElementById("navProfileImage").src = storedProfileImage;
-    //     }
-    // });
+    function saveProfile() {
+        let newProfileName = document.getElementById("profileName").value;
+        let newProfileRole = document.getElementById("profileRole").value;
+        let selectedImage = document.getElementById("profilePreview").src;
 
-    document.addEventListener("DOMContentLoaded", function () {
-    // Set initial profile image from localStorage or default
-    let storedProfileImage = localStorage.getItem("profileImage") || "../assets/img/user_sample_1.png";
-    let navProfileImage = document.getElementById("navProfileImage");
-    if (navProfileImage) {
-        navProfileImage.src = storedProfileImage;
-    }
+        // Save updated information in localStorage
+        localStorage.setItem("profileName", newProfileName);
+        localStorage.setItem("position", newProfileRole);
+        localStorage.setItem("profileImage", selectedImage);
 
-    // Function to update the profile image in the navigation bar
-    function updateNavProfileImage(newImageSrc) {
-        let navProfileImage = document.getElementById("navProfileImage");
-        if (navProfileImage) {
-            navProfileImage.src = newImageSrc;
+        // Update the navigation bar profile image
+        let navProfileImg = document.getElementById("navProfileImage");
+        if (navProfileImg) {
+            navProfileImg.src = selectedImage; // Update the src of the profile image in the navbar
         }
+
+        // Go back to the profile page
+        showProfileContent();
     }
 
-    // Event listener for saving the profile image
-    document.addEventListener("click", function (event) {
-        if (event.target.closest(".save-profile-btn")) {
-            let newProfileName = document.getElementById("profileName").value;
-            let newProfileRole = document.getElementById("profileRole").value;
+    function showEditPersonalInfo() {
+        profileContent.innerHTML = `
+            <div class="container-fluid edit-personal-info">
+                <div style="margin-bottom:5px;">
+                    <a href="#" class="back-profile-btn" style="text-decoration: none; color: black;">
+                        <i class="bi bi-arrow-left"></i> Back to My Profile
+                    </a>
+                </div>
+                <h2 class="mb-3">Edit Personal Information</h2>
 
-            localStorage.setItem("profileName", newProfileName);
-            localStorage.setItem("position", newProfileRole);
+                <div class="w-50">
+                    <h4>Personal Information</h4>
+                    <div class="mb-3">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" id="fullName" class="form-control" value="${localStorage.getItem("fullName") || 'Lhing Wang'}">
+                    </div>
 
-            let selectedImage = document.getElementById("profilePreview").src;
-            if (selectedImage) {
-                localStorage.setItem("profileImage", selectedImage);
-                updateNavProfileImage(selectedImage); // Update the navigation bar profile image
-            }
+                    <div class="mb-3">
+                        <label class="form-label">Position</label>
+                        <select id="position" class="form-control">
+                            <option ${localStorage.getItem("position") === "HR Manager" ? "selected" : ""}>HR Manager</option>
+                            <option ${localStorage.getItem("position") === "HR" ? "selected" : ""}>HR</option>
+                            <option ${localStorage.getItem("position") === "Supervisor" ? "selected" : ""}>Supervisor</option>
+                        </select>
+                    </div>
 
-            showProfile();
-        }
-    });
-});
+                    <div class="mb-3">
+                        <label class="form-label">Team</label>
+                        <input type="text" id="team" class="form-control" value="${localStorage.getItem("team") || 'Project Internplus'}">
+                    </div>
 
-function showEditPersonalInfo() {
-    const dashboardContent = document.querySelector(".dashboard-content");
+                    <div class="mb-3">
+                        <label class="form-label">Email Address</label>
+                        <input type="email" id="email" class="form-control" value="${localStorage.getItem("email") || 'wanglhing@vennessplus.com'}">
+                    </div>
 
-    dashboardContent.innerHTML = `
-        <div class="container-fluid edit-personal-info">
-            <div style="margin-bottom:5px;">
-                <a href="#" class="back-profile-btn" style="text-decoration: none; color: black;">
-                    <i class="bi bi-arrow-left"></i> Back to My Profile
-                </a>
+                    <div class="mb-3">
+                        <label class="form-label">Phone Number</label>
+                        <input type="text" id="phone" class="form-control" value="${localStorage.getItem("phone") || '0898144676'}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Line ID</label>
+                        <input type="text" id="lineID" class="form-control" value="${localStorage.getItem("lineID") || 'imlhingw21'}">
+                    </div>
+
+                    <button class="btn btn-primary save-personal-info-btn" style="background-color:#474BC2;">Save</button>
+                </div>
             </div>
-            <h2 class="mb-3">Edit Personal Information</h2>
+        `;
 
-            <div class="w-50">
-                <h4>Personal Information</h4>
-                <div class="mb-3">
-                    <label class="form-label">Full Name</label>
-                    <input type="text" id="fullName" class="form-control" value="${localStorage.getItem("fullName") || 'Lhing Wang'}">
-                </div>
+        // Add event listener for the Save button in the personal info form
+        document.querySelector(".save-personal-info-btn").addEventListener("click", savePersonalInfo);
+    }
 
-                <div class="mb-3">
-                    <label class="form-label">Position</label>
-                    <select id="position" class="form-control">
-                        <option ${localStorage.getItem("position") === "HR Manager" ? "selected" : ""}>HR Manager</option>
-                        <option ${localStorage.getItem("position") === "HR" ? "selected" : ""}>HR</option>
-                        <option ${localStorage.getItem("position") === "Supervisor" ? "selected" : ""}>Supervisor</option>
-                    </select>
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label">Team</label>
-                    <input type="text" id="team" class="form-control" value="${localStorage.getItem("team") || 'Project Internplus'}">
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label">Email Address</label>
-                    <input type="email" id="email" class="form-control" value="${localStorage.getItem("email") || 'wanglhing@vennessplus.com'}">
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label">Phone Number</label>
-                    <input type="text" id="phone" class="form-control" value="${localStorage.getItem("phone") || '0898144676'}">
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label">Line ID</label>
-                    <input type="text" id="lineID" class="form-control" value="${localStorage.getItem("lineID") || 'imlhingw21'}">
-                </div>
-
-                <button class="btn btn-primary save-profile-btn" style="background-color:#474BC2;">Save</button>
-            </div>
-        </div>
-    `;
-
-    // ✅ Event listener for Save button
-    document.querySelector(".save-profile-btn").addEventListener("click", function () {
+    function savePersonalInfo() {
+        // Get updated values from the form
         let newFullName = document.getElementById("fullName").value;
         let newPosition = document.getElementById("position").value;
         let newTeam = document.getElementById("team").value;
@@ -609,7 +635,7 @@ function showEditPersonalInfo() {
         let newPhone = document.getElementById("phone").value;
         let newLineID = document.getElementById("lineID").value;
 
-        // ✅ Save updated information in localStorage
+        // Save updated information in localStorage
         localStorage.setItem("fullName", newFullName);
         localStorage.setItem("position", newPosition);
         localStorage.setItem("team", newTeam);
@@ -617,34 +643,12 @@ function showEditPersonalInfo() {
         localStorage.setItem("phone", newPhone);
         localStorage.setItem("lineID", newLineID);
 
-        // ✅ Go back to Profile page
-        showProfile();
-    });
-
-    // ✅ Event listener for Back button
-    document.querySelector(".back-profile-btn").addEventListener("click", function (event) {
-        event.preventDefault();
-        showProfile();
-    });
-}
-
-
-
-
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-    // Retrieve profile image from localStorage
-    let storedProfileImage = localStorage.getItem("profileImage");
-
-    // If a profile image exists in localStorage, update the navbar profile image
-    if (storedProfileImage) {
-        let navProfileImg = document.getElementById("navProfileImage");
-        if (navProfileImg) {
-            navProfileImg.src = storedProfileImage;
-        }
+        // Go back to the profile page
+        showProfileContent();
     }
 });
+
+
 // profile change function
 
 

@@ -187,7 +187,7 @@
                 <button class="btn text-center gpa-2" style="color:#474BC2; border:1px solid #474BC2; background-color:#ffffff; border-radius:40px;">
                     <img src="../assets/icon/battery-v-charging_purple.png" style="margin-right:5px;" alt="">Standard
                 </button>
-                <button class="btn"  style="background-color:#ffffff; border-radius:50%; width:40px; height:40px; display:flex; justify-content:center; align-items:center;">
+                <button class="btn" id="settingsButton"  style="background-color:#ffffff; border-radius:50%; width:40px; height:40px; display:flex; justify-content:center; align-items:center;">
                     <img src="../assets/icon/settings-alt.png" alt="">
                 </button>
                 <button class="btn" style="background-color:#ffffff; border-radius:50%; width:40px; height:40px; display:flex; justify-content:center; align-items:center;">
@@ -228,7 +228,7 @@
 
 
 
-    <div class="col-md-9 dashboard-content">
+    <div class="col-md-9 dashboard-content" id="dashboardContent">
         <!-- heading part  -->
         <div class="d-flex justify-content-between mb-3">
             <h2 class="mb-0">Offboard</h2>
@@ -357,6 +357,15 @@
                     
 
                      <!-- offboard table  -->
+    </div>
+    <div class="col-md-9 dashboard-content" id="packageContent" style="display: none;">
+        <!-- The package UI will be injected here -->
+    </div>
+    <div class="col-md-9 dashboard-content" id="settingsContent" style="display: none;">
+        <!-- The settings UI will be injected here -->
+    </div>
+    <div class="col-md-9 dashboard-content" id="profileContent" style="display: none;">
+        <!-- The profile UI will be injected here -->
     </div>
 </div>
 

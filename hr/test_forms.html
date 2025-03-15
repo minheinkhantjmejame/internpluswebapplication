@@ -104,7 +104,7 @@
                 <button class="btn text-center gpa-2" style="color:#474BC2; border:1px solid #474BC2; background-color:#ffffff; border-radius:40px;">
                     <img src="../assets/icon/battery-v-charging_purple.png" style="margin-right:5px;" alt="">Standard
                 </button>
-                <button class="btn"  style="background-color:#ffffff; border-radius:50%; width:40px; height:40px; display:flex; justify-content:center; align-items:center;">
+                <button class="btn" id="settingsButton"  style="background-color:#ffffff; border-radius:50%; width:40px; height:40px; display:flex; justify-content:center; align-items:center;">
                     <img src="../assets/icon/settings-alt.png" alt="">
                 </button>
                 <button class="btn" style="background-color:#ffffff; border-radius:50%; width:40px; height:40px; display:flex; justify-content:center; align-items:center;">
@@ -145,7 +145,7 @@
 
 
     <!-- main dashboard content  -->
-    <div class="col-md-9 dashboard-content p-3" style="display:block;">
+    <div class="col-md-9 dashboard-content p-3" id="dashboardContent" style="display:block;">
         <div class="d-flex w-100 justify-content-between mb-5">
             <h3>Test & Forms</h3>
             <button class="btn" id="createButton"style="background-color:#474BC2; color:white;border-radius:4px;"> <img src="../assets/icon/feather-add.png" alt=""> Create Test</button>
@@ -170,6 +170,15 @@
         </div>
     </div>
     <!-- main dashboard content  -->
+    <div class="col-md-9 dashboard-content" id="packageContent" style="display: none;">
+        <!-- The package UI will be injected here -->
+    </div>
+    <div class="col-md-9 dashboard-content" id="settingsContent" style="display: none;">
+        <!-- The settings UI will be injected here -->
+    </div>
+    <div class="col-md-9 dashboard-content" id="profileContent" style="display: none;">
+        <!-- The profile UI will be injected here -->
+    </div>>
 
     <!-- creat test   -->
     <div class="col-md-9 create-test-content" style="display: none;">
