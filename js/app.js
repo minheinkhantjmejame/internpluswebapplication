@@ -652,4 +652,105 @@ document.addEventListener("DOMContentLoaded", function () {
 // profile change function
 
 
+// calendar dropdown function 
+document.addEventListener('DOMContentLoaded', function () {
+    const dateButton = document.getElementById('dateButton');
+    const calendarDropdown = document.getElementById('calendarDropdown');
+    const monthYear = document.getElementById('monthYear');
+    const dates = document.getElementById('dates');
+    const prevMonthButton = document.getElementById('prevMonth');
+    const nextMonthButton = document.getElementById('nextMonth');
+    const selectedDate = document.getElementById('selectedDate');
+
+    const today = new Date();
+    let currentMonth = today.getMonth();
+    let currentYear = today.getFullYear();
+
+    // Set the default selected date
+    selectedDate.textContent = formatDate(today);
+
+    // Initialize the calendar when the dropdown is shown
+    dateButton.addEventListener('shown.bs.dropdown', function () {
+        updateCalendar(currentMonth, currentYear);
+    });
+
+    // Update the calendar when navigating months
+    prevMonthButton.addEventListener('click', function (event) {
+        event.stopPropagation(); // Prevent event from bubbling up
+        currentMonth--;
+        if (currentMonth < 0) {
+            currentMonth = 11;
+            currentYear--;
+        }
+        updateCalendar(currentMonth, currentYear);
+    });
+
+    nextMonthButton.addEventListener('click', function (event) {
+        event.stopPropagation(); // Prevent event from bubbling up
+        currentMonth++;
+        if (currentMonth > 11) {
+            currentMonth = 0;
+            currentYear++;
+        }
+        updateCalendar(currentMonth, currentYear);
+    });
+
+    // Update the selected date when a date is clicked
+    dates.addEventListener('click', function (event) {
+        if (event.target.tagName === 'SPAN' && event.target.textContent) {
+            const selectedDay = parseInt(event.target.textContent, 10);
+            const selectedDateObj = new Date(currentYear, currentMonth, selectedDay);
+            selectedDate.textContent = formatDate(selectedDateObj);
+            event.stopPropagation(); // Prevent event from bubbling up
+        }
+    });
+
+    // Prevent the dropdown from closing when interacting with the calendar
+    calendarDropdown.addEventListener('click', function (event) {
+        event.stopPropagation(); // Prevent event from bubbling up
+    });
+
+    // Close the dropdown when clicking outside
+    document.addEventListener('click', function (event) {
+        if (!dateButton.contains(event.target) && !calendarDropdown.contains(event.target)) {
+            const dropdown = new bootstrap.Dropdown(dateButton);
+            dropdown.hide();
+        }
+    });
+
+    // Function to update the calendar
+    function updateCalendar(month, year) {
+        dates.innerHTML = '';
+        monthYear.textContent = `${new Date(year, month).toLocaleString('default', { month: 'long' })} ${year}`;
+
+        const firstDay = new Date(year, month, 1);
+        const lastDay = new Date(year, month + 1, 0);
+        const startDay = firstDay.getDay();
+        const endDate = lastDay.getDate();
+
+        for (let i = 0; i < startDay; i++) {
+            dates.innerHTML += '<span></span>';
+        }
+
+        for (let i = 1; i <= endDate; i++) {
+            const date = new Date(year, month, i);
+            const span = document.createElement('span');
+            span.textContent = i;
+            if (date.toDateString() === today.toDateString()) {
+                span.classList.add('today');
+            }
+            dates.appendChild(span);
+        }
+    }
+
+    function formatDate(date) {
+    const day = date.getDate(); // Get the day (e.g., 15)
+    const month = date.toLocaleString('default', { month: 'long' }); // Get the full month name (e.g., December)
+    const year = date.getFullYear(); // Get the year (e.g., 2024)
+    return `${day} ${month} ${year}`; // Return the formatted date (e.g., 15 December 2024)
+}
+});
+
+// calendar dropdown function 
+
 // HR JS 

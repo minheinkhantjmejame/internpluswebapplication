@@ -291,6 +291,57 @@
             cursor: pointer;
         }
 
+        /* calendar dropdown  */
+        
+.calendar {
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.calendar_btn{
+    border:1px solid black;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.header button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.days, .dates {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.dates span {
+    text-align: center;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.dates span.today {
+    background-color: #D1D1F0;
+    border-radius: 4px;
+}
+
+.dates span:hover {
+    background-color: #ddd;
+}
+
+.show {
+    display: block;
+}
+        /* calendar dropdown */
+
         
     </style>
 
@@ -375,10 +426,31 @@
                         <h2 class="mt-2">Application</h2>
                     </div>
                     <div class="col-md-4">
-                        <div id="datepicker_btn" class="btn position-relative d-flex align-items-center mt-3" style="padding: 0 10px; background-color:#fff;border:1px solid #000;color:#000">
-                            <i class="bi bi-calendar-event me-2"></i>
-                            <span id="selected-date">25 November 2024</span>
-                            <input type="date" id="date-picker" class="position-absolute w-100 h-100" style="opacity: 0; top: 0; left: 0; cursor: pointer; z-index: 2;">
+                        <div class="dropdown">
+                            <button class="btn calendar_btn" type="button" id="dateButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="../assets/icon/calendar.png" alt="">
+                                <span id="selectedDate"></span>
+                                <img src="../assets/icon/down_arrow.png" alt="">
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dateButton" id="calendarDropdown">
+                                <div class="calendar">
+                                    <div class="header">
+                                        <button id="prevMonth" style="background-color: #B1BBE7;border-radius:4px;"><img src="../assets/icon/less_than.png" alt=""></button>
+                                        <span id="monthYear"></span>
+                                        <button id="nextMonth" style="background-color: #B1BBE7;border-radius:4px;"><img src="../assets/icon/greater_than.png" class="fw-bold" alt=""></button>
+                                    </div>
+                                    <div class="days">
+                                        <span>Sun</span>
+                                        <span>Mon</span>
+                                        <span>Tue</span>
+                                        <span>Wed</span>
+                                        <span>Thu</span>
+                                        <span>Fri</span>
+                                        <span>Sat</span>
+                                    </div>
+                                    <div class="dates" id="dates"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
